@@ -40,7 +40,7 @@ public class ExpDropProcedure {
             while (remaining > 0) {
              int orbValue = getOrbSize(remaining);
              remaining -= orbValue;
-             level.addFreshEntity(new ExperienceOrb(level, x, y, z, orbValue));
+             level.addFreshEntity(new ExperienceOrb(level, x+0.5, y+0.5, z+0.5, orbValue));
          }
         }
     }
@@ -61,7 +61,7 @@ public class ExpDropProcedure {
             while (remaining > 0) {
                 int orbValue = getOrbSize(remaining);
                 remaining -= orbValue;
-                level.addFreshEntity(new ExperienceOrb(level, x, y, z, orbValue));
+                level.addFreshEntity(new ExperienceOrb(level, x+0.5, y+0.5, z+0.5, orbValue));
             }
         }
     }
