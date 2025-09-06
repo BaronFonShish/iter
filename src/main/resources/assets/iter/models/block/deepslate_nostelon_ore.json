@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "iter:block/deepslate_nostelon_ore",
+    "particle": "iter:block/deepslate_nostelon_ore"
+  },
+  "render_type": "solid"
+}
