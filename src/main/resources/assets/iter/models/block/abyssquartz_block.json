@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "iter:block/abyssquartz_block",
+    "particle": "iter:block/abyssquartz_block"
+  },
+  "render_type": "solid"
+}

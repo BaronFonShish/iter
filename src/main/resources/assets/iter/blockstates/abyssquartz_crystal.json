@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "iter:block/abyssquartz_crystal",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "iter:block/abyssquartz_crystal",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "iter:block/abyssquartz_crystal",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "iter:block/abyssquartz_crystal",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "iter:block/abyssquartz_crystal"
+    },
+    "facing=west": {
+      "model": "iter:block/abyssquartz_crystal",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

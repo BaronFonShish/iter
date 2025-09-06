@@ -1,0 +1,8 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "iter:block/abyssquartz_crystal",
+    "particle": "iter:block/abyssquartz_crystal"
+  },
+  "render_type": "cutout"
+}

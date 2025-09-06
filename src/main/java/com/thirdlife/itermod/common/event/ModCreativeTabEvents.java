@@ -33,8 +33,9 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.NOSTELON.get()), new ItemStack(ModItems.ROUGH_NOSTELON.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.ROUGH_NOSTELON.get()), new ItemStack(ModItems.NOSTELON_NUGGET.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Blocks.DEEPSLATE_LAPIS_ORE), new ItemStack(ModBlocks.NOSTELON_ORE.get())),
-                new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.NOSTELON_ORE.get()), new ItemStack(ModBlocks.DEEPSLATE_NOSTELON_ORE.get()))
-
+                new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.NOSTELON_ORE.get()), new ItemStack(ModBlocks.DEEPSLATE_NOSTELON_ORE.get())),
+                new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.DEEPSLATE_NOSTELON_ORE.get()), new ItemStack(ModBlocks.ABYSSQUARTZ_BLOCK.get())),
+                new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.ABYSSQUARTZ_BLOCK.get()), new ItemStack(ModBlocks.ABYSSQUARTZ_CRYSTAL.get()))
         );
 
         for (TabInsertion ins : insertions) {
