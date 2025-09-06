@@ -1,6 +1,6 @@
 package com.thirdlife.itermod.block;
 
-import com.thirdlife.itermod.common.procedures.ExpDropProcedure;
+import com.thirdlife.itermod.common.event.ExpDropEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.PickaxeItem;
@@ -33,7 +33,7 @@ public class DeepslateNostelonOreBlock extends Block {
     public boolean onDestroyedByPlayer(BlockState blockstate, Level world, BlockPos pos, Player entity, boolean willHarvest, FluidState fluid) {
         boolean retval = super.onDestroyedByPlayer(blockstate, world, pos, entity, willHarvest, fluid);
         if (canHarvestBlock(blockstate, world, pos, entity)) {
-            ExpDropProcedure.blockBrokenRand(world, pos.getX(), pos.getY(), pos.getZ(), 0, 4, entity);
+            ExpDropEvent.blockBrokenRand(world, pos.getX(), pos.getY(), pos.getZ(), 0, 4, entity);
         }
         return retval;
     }

@@ -1,4 +1,4 @@
-package com.thirdlife.itermod.common.procedures;
+package com.thirdlife.itermod.common.event;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.level.ServerPlayer;
@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 
-public class ExpDropProcedure {
+public class ExpDropEvent {
 
     public static void dropExp(Level level, double x, double y, double z, int totalExperience) {
         if (level.isClientSide()) return;
