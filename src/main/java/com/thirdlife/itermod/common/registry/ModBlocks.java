@@ -21,9 +21,9 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, iterMod.MOD_ID);
 
     public static final RegistryObject<Block> NOSTELON_ORE = registerBlock("nostelon_ore",
-            () -> new NostelonOreBlock();
+            () -> new NostelonOreBlock());
     public static final RegistryObject<Block> DEEPSLATE_NOSTELON_ORE = registerBlock("deepslate_nostelon_ore",
-            () -> new DeepslateNostelonOreBlock();
+            () -> new DeepslateNostelonOreBlock());
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
