@@ -32,7 +32,9 @@ public class NostelonOreBlock extends Block {
     @Override
     public boolean onDestroyedByPlayer(BlockState blockstate, Level world, BlockPos pos, Player entity, boolean willHarvest, FluidState fluid) {
         boolean retval = super.onDestroyedByPlayer(blockstate, world, pos, entity, willHarvest, fluid);
-        ExpDropProcedure.blockBrokenRand(world, pos.getX(), pos.getY(), pos.getZ(), 0, 4, entity);
+        if (canHarvestBlock(blockstate, world, pos, entity)) {
+            ExpDropProcedure.blockBrokenRand(world, pos.getX(), pos.getY(), pos.getZ(), 0, 4, entity);
+        }
         return retval;
     }
 

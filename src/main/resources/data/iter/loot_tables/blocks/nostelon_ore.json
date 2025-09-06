@@ -48,7 +48,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "iter:nostelone_ore",
+          "name": "iter:nostelon_ore",
           "weight": 1,
           "conditions": [
             {
@@ -78,5 +78,5 @@
       ]
     }
   ],
-  "random_sequence": "iter:blocks/nostelone_ore"
+  "random_sequence": "iter:blocks/nostelon_ore"
 }
