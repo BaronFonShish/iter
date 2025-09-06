@@ -1,5 +1,7 @@
 package com.thirdlife.itermod.common.registry;
 
+import com.thirdlife.itermod.block.DeepslateNostelonOreBlock;
+import com.thirdlife.itermod.block.NostelonOreBlock;
 import com.thirdlife.itermod.iterMod;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -19,9 +21,9 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, iterMod.MOD_ID);
 
     public static final RegistryObject<Block> NOSTELON_ORE = registerBlock("nostelon_ore",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE).sound(SoundType.STONE)));
+            () -> new NostelonOreBlock();
     public static final RegistryObject<Block> DEEPSLATE_NOSTELON_ORE = registerBlock("deepslate_nostelon_ore",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE).sound(SoundType.DEEPSLATE)));
+            () -> new DeepslateNostelonOreBlock();
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
