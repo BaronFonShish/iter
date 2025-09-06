@@ -1,5 +1,7 @@
 {
   "item.iter.nostelon": "Ностелон",
   "item.iter.rough_nostelon": "Грубый ностелон",
-  "item.iter.nostelon_nugget": "Кусочек ностелона"
+  "item.iter.nostelon_nugget": "Кусочек ностелона",
+  "item.iter.nostelon_ore": "Ностелоновая руда",
+  "item.iter.deepslate_nostelon_ore": "Глубосланцевая ностелоновая руда"
 }

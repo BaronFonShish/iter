@@ -1,5 +1,7 @@
 {
  "item.iter.nostelon": "Nostelon",
  "item.iter.rough_nostelon": "Rough Nostelon",
- "item.iter.nostelon_nugget": "Nostelon Nugget"
+ "item.iter.nostelon_nugget": "Nostelon Nugget",
+ "item.iter.nostelon_ore": "Nostelon Ore",
+ "item.iter.deepslate_nostelon_ore": "Deepslate Nostelon Ore"
 }
