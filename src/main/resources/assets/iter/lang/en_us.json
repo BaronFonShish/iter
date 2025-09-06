@@ -1,7 +1,16 @@
 {
- "item.iter.nostelon": "Nostelon",
- "item.iter.rough_nostelon": "Rough Nostelon",
- "item.iter.nostelon_nugget": "Nostelon Nugget",
- "block.iter.nostelon_ore": "Nostelon Ore",
- "block.iter.deepslate_nostelon_ore": "Deepslate Nostelon Ore"
+  "item.iter.nostelon": "Nostelon",
+  "item.iter.rough_nostelon": "Rough Nostelon",
+  "item.iter.nostelon_nugget": "Nostelon Nugget",
+  "block.iter.nostelon_ore": "Nostelon Ore",
+  "block.iter.deepslate_nostelon_ore": "Deepslate Nostelon Ore",
+  "item.iter.spider_silk": "Spider Silk",
+  "item.iter.spawner_fragment": "Spawner Fragment",
+  "item.iter.abyssquartz_shard": "Abyssquartz Shard",
+  "item.iter.tankard": "Tankard",
+  "item.iter.copper_coin": "Copper Coin",
+  "item.iter.gold_coin": "Gold Coin",
+  "item.iter.diamond_coin": "Diamond Coin",
+  "item.iter.potsherd": "Potsherd",
+  "item.iter.etherdust": "Etherdust"
 }

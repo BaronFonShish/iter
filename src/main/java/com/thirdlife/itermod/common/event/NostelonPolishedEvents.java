@@ -33,6 +33,8 @@ public class NostelonPolishedEvents {
                         player.drop(normal, false);
                     }
 
+                    ExpDropEvent.dropExp(event.getLevel(), event.getPos().getX()+0.5, event.getPos().getY()+0.5, event.getPos().getZ()+0.5, 1, event.getEntity());
+
                     event.getLevel().playSound(
                             null,
                             event.getPos(),

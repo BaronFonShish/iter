@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "category": "misc",
-  "experience": 3,
+  "experience": 0.8,
   "cookingtime": 100,
   "ingredient": {
     "item": "iter:nostelon_ore"

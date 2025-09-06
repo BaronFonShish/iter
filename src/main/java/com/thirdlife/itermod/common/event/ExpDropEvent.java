@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 
 public class ExpDropEvent {
 
-    public static void dropExp(Level level, double x, double y, double z, int totalExperience) {
+    public static void dropExp(Level level, double x, double y, double z, int totalExperience, Entity entity) {
         if (level.isClientSide()) return;
 
         int remaining = totalExperience;

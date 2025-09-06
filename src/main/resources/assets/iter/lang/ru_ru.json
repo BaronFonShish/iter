@@ -3,5 +3,14 @@
   "item.iter.rough_nostelon": "Грубый ностелон",
   "item.iter.nostelon_nugget": "Кусочек ностелона",
   "block.iter.nostelon_ore": "Ностелоновая руда",
-  "block.iter.deepslate_nostelon_ore": "Глубосланцевая ностелоновая руда"
+  "block.iter.deepslate_nostelon_ore": "Ностелононосный глубинный сланец",
+  "item.iter.spider_silk": "Паучий шёлк",
+  "item.iter.spawner_fragment": "Фрагмент рассадника",
+  "item.iter.abyssquartz_shard": "Осколок безднокварца",
+  "item.iter.tankard": "Кружка",
+  "item.iter.copper_coin": "Медная монета",
+  "item.iter.gold_coin": "Золотая монета",
+  "item.iter.diamond_coin": "Алмазная монета",
+  "item.iter.potsherd": "Черепок",
+  "item.iter.etherdust": "Эфирная пыль"
 }
