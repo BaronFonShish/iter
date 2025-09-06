@@ -23,7 +23,7 @@ public class NostelonPolishedEvents {
 
         ItemStack held = player.getItemInHand(InteractionHand.MAIN_HAND);
 
-        if (held.getItem() == ModItems.RAW_NOSTELON.get()) {
+        if (held.getItem() == ModItems.ROUGH_NOSTELON.get()) {
             // Проверяем, что кликнули по точилу
             if (event.getLevel().getBlockState(event.getPos()).is(Blocks.GRINDSTONE)) {
                 if (!event.getLevel().isClientSide()) {

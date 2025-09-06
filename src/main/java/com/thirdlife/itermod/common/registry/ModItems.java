@@ -12,8 +12,8 @@ public class ModItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, iterMod.MOD_ID);
 
     public static final RegistryObject<Item> NOSTELON = ITEMS.register("nostelon", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> RAW_NOSTELON = ITEMS.register("raw_nostelon", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> NOSTELON_PIECE = ITEMS.register("nostelon_piece", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ROUGH_NOSTELON = ITEMS.register("rough_nostelon", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> NOSTELON_NUGGET = ITEMS.register("nostelon_nugget", () -> new Item(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

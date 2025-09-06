@@ -27,8 +27,8 @@ public class ModCreativeTabEvents {
         List<TabInsertion> insertions = List.of(
 
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.AMETHYST_SHARD), new ItemStack(ModItems.NOSTELON.get())),
-                new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.NOSTELON.get()), new ItemStack(ModItems.NOSTELON_PIECE.get())),
-                new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.RAW_GOLD), new ItemStack(ModItems.RAW_NOSTELON.get())),
+                new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.NOSTELON.get()), new ItemStack(ModItems.NOSTELON_NUGGET.get())),
+                new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.RAW_GOLD), new ItemStack(ModItems.ROUGH_NOSTELON.get()))
 
         );
 
