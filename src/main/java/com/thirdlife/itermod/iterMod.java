@@ -1,6 +1,7 @@
 package com.thirdlife.itermod;
 
 import com.mojang.logging.LogUtils;
+import com.thirdlife.itermod.common.registry.ModBlocks;
 import com.thirdlife.itermod.common.registry.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
@@ -48,6 +49,7 @@ public class iterMod {
         MinecraftForge.EVENT_BUS.register(this);
 
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
