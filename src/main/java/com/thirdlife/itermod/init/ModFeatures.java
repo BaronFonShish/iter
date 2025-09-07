@@ -7,12 +7,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.minecraftforge.registries.RegistryObject;
-
-import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
-public class IterModFeatures {
+public class ModFeatures {
     public static final DeferredRegister<Feature<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.FEATURES, iterMod.MOD_ID);
     public static final RegistryObject<Feature<?>> ABYSSQUARTZ_CRYSTAL_FEATURE = REGISTRY.register("abyssquartz_crystal_feature", AbyssquartzCrystalFeature::new);
 }
