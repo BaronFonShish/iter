@@ -1,9 +1,6 @@
 package com.thirdlife.itermod.common.registry;
 
-import com.thirdlife.itermod.block.AbyssquartzBlock;
-import com.thirdlife.itermod.block.AbyssquartzCrystal;
-import com.thirdlife.itermod.block.DeepslateNostelonOreBlock;
-import com.thirdlife.itermod.block.NostelonOreBlock;
+import com.thirdlife.itermod.block.*;
 import com.thirdlife.itermod.iterMod;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -30,6 +27,8 @@ public class ModBlocks {
             () -> new AbyssquartzBlock());
     public static final RegistryObject<Block> ABYSSQUARTZ_CRYSTAL = registerBlock("abyssquartz_crystal",
             () -> new AbyssquartzCrystal());
+    public static final RegistryObject<Block> SPIDER_EGG = registerBlock("spider_egg",
+            () -> new SpiderEggBlock());
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

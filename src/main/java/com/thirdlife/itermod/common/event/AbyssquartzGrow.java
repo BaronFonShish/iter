@@ -17,8 +17,8 @@ public class AbyssquartzGrow {
     public static void execute(LevelAccessor world, double x, double y, double z) {
         double direction = 0;
         Direction direct = Direction.NORTH;
-        boolean place = false;
-        boolean touchingbedrock = false;
+        boolean place;
+        boolean touchingbedrock;
         if (Math.random() >= 0.95) {
             touchingbedrock = false;
             for (Direction directioniterator : Direction.values()) {
@@ -73,5 +73,4 @@ public class AbyssquartzGrow {
             }
         }
     }
-
 }

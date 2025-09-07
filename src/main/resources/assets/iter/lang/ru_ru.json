@@ -12,5 +12,7 @@
   "item.iter.gold_coin": "Золотая монета",
   "item.iter.diamond_coin": "Алмазная монета",
   "item.iter.potsherd": "Черепок",
-  "item.iter.etherdust": "Эфирная пыль"
+  "item.iter.etherdust": "Эфирная пыль",
+  "block.iter.abyssquartz_crystal": "Кристалл безднокварца",
+  "block.iter.abyssquartz_block": "Блок безднокварца"
 }

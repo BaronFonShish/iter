@@ -1,0 +1,15 @@
+{
+  "type": "iter:abyssquartz_crystal_feature",
+  "config": {
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "iter:abyssquartz_crystal",
+        "Properties": {
+          "waterlogged": "false",
+          "facing": "up"
+        }
+      }
+    }
+  }
+}
