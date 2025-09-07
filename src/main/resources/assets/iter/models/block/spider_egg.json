@@ -1,0 +1,9 @@
+{
+  "parent": "iter:custom/spider_egg",
+  "textures": {
+    "all": "iter:block/spider_egg",
+    "particle": "iter:block/spider_egg",
+    "0": "iter:block/spider_egg"
+  },
+  "render_type": "cutout_mipped"
+}
