@@ -73,6 +73,24 @@ public class AbyssquartzCrystal extends Block implements SimpleWaterloggedBlock 
     }
 
     @Override
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        Direction facing = state.getValue(FACING);
+        BlockPos supportPos = pos.relative(facing.getOpposite());
+        BlockState supportState = level.getBlockState(supportPos);
+
+        return supportState.isFaceSturdy(level, supportPos, facing);
+    }
+
+    @Override
+    public void neighborChanged(BlockState state, Level level, BlockPos pos,
+                                Block block, BlockPos fromPos, boolean isMoving) {
+        if (!canSurvive(state, level, pos)) {
+            level.destroyBlock(pos, true);
+        }
+        super.neighborChanged(state, level, pos, block, fromPos, isMoving);
+    }
+
+    @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         boolean flag = context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER;
         return this.defaultBlockState().setValue(FACING, context.getClickedFace()).setValue(WATERLOGGED, flag);
