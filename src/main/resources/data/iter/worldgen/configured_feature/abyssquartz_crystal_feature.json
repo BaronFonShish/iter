@@ -1,5 +1,5 @@
 {
-  "type": "iter:abyssquartz_crystal",
+  "type": "iter:abyssquartz_crystal_feature",
   "config": {
     "to_place": {
       "type": "minecraft:simple_state_provider",
