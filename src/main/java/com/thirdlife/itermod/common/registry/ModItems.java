@@ -1,5 +1,6 @@
 package com.thirdlife.itermod.common.registry;
 
+import com.thirdlife.itermod.item.TankardItem;
 import com.thirdlife.itermod.iterMod;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -21,7 +22,8 @@ public class ModItems {
     public static final RegistryObject<Item> GOLD_COIN = ITEMS.register("gold_coin", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> COPPER_COIN = ITEMS.register("copper_coin", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> DIAMOND_COIN = ITEMS.register("diamond_coin", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> TANKARD = ITEMS.register("tankard", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> TANKARD = ITEMS.register("tankard",
+            () -> new TankardItem(new Item.Properties()));
     public static final RegistryObject<Item> SPAWNER_FRAGMENT = ITEMS.register("spawner_fragment", () -> new Item(new Item.Properties()));
 
 
