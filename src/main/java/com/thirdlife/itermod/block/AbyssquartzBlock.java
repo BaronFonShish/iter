@@ -35,7 +35,6 @@ public class AbyssquartzBlock extends Block {
     @Override
     public boolean onDestroyedByPlayer(BlockState blockstate, Level world, BlockPos pos, Player entity, boolean willHarvest, FluidState fluid) {
         boolean retval = super.onDestroyedByPlayer(blockstate, world, pos, entity, willHarvest, fluid);
-
         return retval;
     }
 
