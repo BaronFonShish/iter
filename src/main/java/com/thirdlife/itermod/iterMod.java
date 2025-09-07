@@ -3,6 +3,7 @@ package com.thirdlife.itermod;
 import com.mojang.logging.LogUtils;
 import com.thirdlife.itermod.common.registry.ModBlocks;
 import com.thirdlife.itermod.common.registry.ModItems;
+import com.thirdlife.itermod.init.ModFeatures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.food.FoodProperties;
@@ -50,6 +51,7 @@ public class iterMod {
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModFeatures.REGISTRY.register(modEventBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
