@@ -1,4 +1,4 @@
-package com.thirdlife.itermod.block;
+package com.thirdlife.itermod.common.block;
 
 import com.thirdlife.itermod.common.event.ExpDropEvent;
 import net.minecraft.core.BlockPos;
@@ -12,9 +12,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.FluidState;
 
-public class NostelonOreBlock extends Block {
-    public NostelonOreBlock() {
-        super(Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(2f, 6f).requiresCorrectToolForDrops());
+public class DeepslateNostelonOreBlock extends Block {
+    public DeepslateNostelonOreBlock() {
+        super(Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.DEEPSLATE).strength(4f, 6f).requiresCorrectToolForDrops());
     }
 
     @Override
@@ -37,5 +37,4 @@ public class NostelonOreBlock extends Block {
         }
         return retval;
     }
-
 }

@@ -1,4 +1,4 @@
-package com.thirdlife.itermod.block;
+package com.thirdlife.itermod.common.block;
 
 import com.thirdlife.itermod.common.event.BlockPlacementChecks;
 import net.minecraft.core.BlockPos;

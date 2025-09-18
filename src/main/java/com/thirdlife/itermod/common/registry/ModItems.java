@@ -1,6 +1,6 @@
 package com.thirdlife.itermod.common.registry;
 
-import com.thirdlife.itermod.item.TankardItem;
+import com.thirdlife.itermod.common.item.TankardItem;
 import com.thirdlife.itermod.iterMod;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;

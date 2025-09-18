@@ -1,4 +1,4 @@
-package com.thirdlife.itermod.item;
+package com.thirdlife.itermod.common.item;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;

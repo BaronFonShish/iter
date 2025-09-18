@@ -1,7 +1,10 @@
-package com.thirdlife.itermod.block;
+package com.thirdlife.itermod.common.block;
 
+import com.thirdlife.itermod.common.event.AbyssquartzGrow;
 import com.thirdlife.itermod.common.event.ExpDropEvent;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.level.BlockGetter;
@@ -12,9 +15,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.FluidState;
 
-public class DeepslateNostelonOreBlock extends Block {
-    public DeepslateNostelonOreBlock() {
-        super(Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.DEEPSLATE).strength(4f, 6f).requiresCorrectToolForDrops());
+public class AbyssquartzBlock extends Block {
+    public AbyssquartzBlock() {
+        super(Properties.of().instrument(NoteBlockInstrument.CHIME).sound(SoundType.GLASS).strength(6f, 8f).requiresCorrectToolForDrops());
     }
 
     @Override
@@ -32,9 +35,15 @@ public class DeepslateNostelonOreBlock extends Block {
     @Override
     public boolean onDestroyedByPlayer(BlockState blockstate, Level world, BlockPos pos, Player entity, boolean willHarvest, FluidState fluid) {
         boolean retval = super.onDestroyedByPlayer(blockstate, world, pos, entity, willHarvest, fluid);
-        if (canHarvestBlock(blockstate, world, pos, entity)) {
-            ExpDropEvent.blockBrokenRand(world, pos.getX(), pos.getY(), pos.getZ(), 0, 4, entity);
-        }
         return retval;
+    }
+
+    @Override
+    public void tick(BlockState blockstate, ServerLevel world, BlockPos pos, RandomSource random) {
+        super.tick(blockstate, world, pos, random);
+        int x = pos.getX();
+        int y = pos.getY();
+        int z = pos.getZ();
+        AbyssquartzGrow.execute(world, x, y, z);
     }
 }

@@ -6,7 +6,8 @@
   "refmap": "iter.refmap.json",
   "mixins": [
     "CustomArmPoseMixin",
-    "TankardArmPoseMixin"
+    "TankardArmPoseMixin",
+    "TankardItemRotationMixin"
   ],
   "client": [
   ],
