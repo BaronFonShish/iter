@@ -19,15 +19,8 @@ public class ModEntities {
     public static final RegistryObject<EntityType<SpiderlingEntity>> SPIDERLING =
             ENTITY_TYPES.register("spiderling",
                     () -> EntityType.Builder.of(SpiderlingEntity::new, MobCategory.MONSTER)
-                            .sized(0.7f, 0.5f)
+                            .sized(0.6f, 0.5f)
                             .build("spiderling"));
-
-//    public static final RegistryObject<EntityType<GreenPuddleEntity>> GREEN_PUDDLE =
-//            ENTITY_TYPES.register("green_puddle",
-//                    () -> EntityType.Builder.of(GreenPuddleEntity::new, MobCategory.MISC)
-//                            .sized(1f, 0.1f)
-//                            .build("green_puddle"));
-
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

@@ -1,11 +1,17 @@
 package com.thirdlife.itermod.common.block;
 
 import com.thirdlife.itermod.common.event.ExpDropEvent;
+import com.thirdlife.itermod.common.event.SpiderEggHatchEvent;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,6 +23,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class SpiderEggBlock extends Block {
     public SpiderEggBlock() {
         super(Properties.of().sound(SoundType.WOOL).strength(0.15f, 1f).requiresCorrectToolForDrops());
+    }
+
+    @Override
+    public boolean canHarvestBlock(BlockState state, BlockGetter world, BlockPos pos, Player player) {
+        return true;
     }
 
     @Override
@@ -35,9 +46,28 @@ public class SpiderEggBlock extends Block {
     }
 
     @Override
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        BlockPos belowPos = pos.below();
+        BlockState belowState = level.getBlockState(belowPos);
+        return belowState.isFaceSturdy(level, belowPos, Direction.UP);
+    }
+
+    @Override
+    public void neighborChanged(BlockState state, Level level, BlockPos pos,
+                                Block block, BlockPos fromPos, boolean isMoving) {
+        if (!canSurvive(state, level, pos)) {
+            level.destroyBlock(pos, true);
+            SpiderEggHatchEvent.blockBroken(level, pos.getX(), pos.getY(), pos.getZ());
+        }
+        super.neighborChanged(state, level, pos, block, fromPos, isMoving);
+    }
+
+    @Override
     public boolean onDestroyedByPlayer(BlockState blockstate, Level world, BlockPos pos, Player entity, boolean willHarvest, FluidState fluid) {
         boolean retval = super.onDestroyedByPlayer(blockstate, world, pos, entity, willHarvest, fluid);
+
         if (canHarvestBlock(blockstate, world, pos, entity)) {
+            SpiderEggHatchEvent.execute(world, pos.getX(), pos.getY(), pos.getZ(), entity);
             ExpDropEvent.blockBrokenRand(world, pos.getX(), pos.getY(), pos.getZ(), 0, 2, entity);
         }
         return retval;

@@ -26,9 +26,19 @@ public class SpiderlingEntity extends Spider {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 10.0)
+                .add(Attributes.MAX_HEALTH, 2.0)
                 .add(Attributes.ATTACK_DAMAGE, 2.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.3);
+                .add(Attributes.MOVEMENT_SPEED, 0.225);
+    }
+
+    @Override
+    protected float getStandingEyeHeight(Pose pose, EntityDimensions dimensions) {
+        return dimensions.height * 0.7f;
+    }
+
+    @Override
+    public int getExperienceReward() {
+        return 1;
     }
 
     @Override
@@ -45,21 +55,6 @@ public class SpiderlingEntity extends Spider {
     public MobType getMobType() {
         return MobType.ARTHROPOD;
     }
-
-//    @Override
-//    public void die(DamageSource source) {
-//        super.die(source);
-//
-//        if (!this.level().isClientSide) {
-//            GreenPuddleEntity puddle = new GreenPuddleEntity(ModEntities.GREEN_PUDDLE.get(), this.level());
-//
-//            // Ставим жижу на блок под мобом
-//            puddle.moveTo(this.getX(), this.getY() - 0.5D, this.getZ(), this.getYRot(), 0.0F);
-//
-//            this.level().addFreshEntity(puddle);
-//        }
-//    }
-
 
     @Override
     public boolean isClimbing() {

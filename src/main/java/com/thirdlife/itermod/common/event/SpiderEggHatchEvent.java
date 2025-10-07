@@ -1,82 +1,57 @@
 package com.thirdlife.itermod.common.event;
 
+import com.thirdlife.itermod.common.registry.ModEntities;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 
 public class SpiderEggHatchEvent {
-
-    public static void dropExp(Level level, double x, double y, double z, int totalExperience, Entity entity) {
-        if (level.isClientSide()) return;
-
-        int remaining = totalExperience;
-
-        while (remaining > 0) {
-            int orbValue = getOrbSize(remaining);
-            remaining -= orbValue;
-            level.addFreshEntity(new ExperienceOrb(level, x, y, z, orbValue));
-        }
-    }
-
-    public static void blockBrokenRand(Level level, double x, double y, double z, int min, int max, Entity entity) {
-        if (level.isClientSide()) return;
-        boolean survivalmode = false;
-        if (entity == null) return;
-        if (entity instanceof ServerPlayer _serverPlayer) {
-            survivalmode = (_serverPlayer.gameMode.getGameModeForPlayer() == GameType.SURVIVAL);
-        } else if (entity.level().isClientSide() && entity instanceof Player _player) {
-            survivalmode = (Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SURVIVAL);
-        }
-        if (survivalmode) {
-
-          int remaining = Mth.nextInt(RandomSource.create(), min, max);
-
-            while (remaining > 0) {
-             int orbValue = getOrbSize(remaining);
-             remaining -= orbValue;
-             level.addFreshEntity(new ExperienceOrb(level, x+0.5, y+0.5, z+0.5, orbValue));
-         }
-        }
-    }
-
-    public static void blockBrokenSet(Level level, double x, double y, double z, int total, Entity entity) {
-        if (level.isClientSide()) return;
-        boolean survivalmode = false;
-        if (entity == null) return;
-        if (entity instanceof ServerPlayer _serverPlayer) {
-            survivalmode = (_serverPlayer.gameMode.getGameModeForPlayer() == GameType.SURVIVAL);
-        } else if (entity.level().isClientSide() && entity instanceof Player _player) {
-            survivalmode = (Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SURVIVAL);
-        }
-        if (survivalmode) {
-
-            int remaining = total;
-
-            while (remaining > 0) {
-                int orbValue = getOrbSize(remaining);
-                remaining -= orbValue;
-                level.addFreshEntity(new ExperienceOrb(level, x+0.5, y+0.5, z+0.5, orbValue));
+    public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
+        if (entity == null)
+            return;
+        if (new Object() {
+            public boolean checkGamemode(Entity _ent) {
+                if (_ent instanceof ServerPlayer _serverPlayer) {
+                    return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SURVIVAL;
+                } else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
+                    return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SURVIVAL;
+                }
+                return false;
+            }
+        }.checkGamemode(entity) && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY)) == 0) {
+            for (int index0 = 0; index0 < Mth.nextInt(RandomSource.create(), 2, 4); index0++) {
+                if (world instanceof ServerLevel _level) {
+                    Entity entityToSpawn = ModEntities.SPIDERLING.get().spawn(_level,
+                            BlockPos.containing(x + Mth.nextDouble(RandomSource.create(), 0.3, 0.7), y + Mth.nextDouble(RandomSource.create(), 0.2, 0.8), z + Mth.nextDouble(RandomSource.create(), 0.3, 0.7)), MobSpawnType.MOB_SUMMONED);
+                    if (entityToSpawn != null) {
+                        entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
+                    }
+                }
             }
         }
     }
-
-    private static int getOrbSize(int experience) {
-        if (experience >= 2477) return 2477;
-        if (experience >= 1237) return 1237;
-        if (experience >= 617) return 617;
-        if (experience >= 307) return 307;
-        if (experience >= 149) return 149;
-        if (experience >= 73) return 73;
-        if (experience >= 37) return 37;
-        if (experience >= 17) return 17;
-        if (experience >= 7) return 7;
-        if (experience >= 3) return 3;
-        return 1;
+    public static void blockBroken(LevelAccessor world, double x, double y, double z) {
+        for (int index0 = 0; index0 < Mth.nextInt(RandomSource.create(), 2, 4); index0++) {
+            if (world instanceof ServerLevel _level) {
+                Entity entityToSpawn = ModEntities.SPIDERLING.get().spawn(_level,
+                        BlockPos.containing(x + Mth.nextDouble(RandomSource.create(), 0.3, 0.7), y + Mth.nextDouble(RandomSource.create(), 0.2, 0.8), z + Mth.nextDouble(RandomSource.create(), 0.3, 0.7)), MobSpawnType.MOB_SUMMONED);
+                if (entityToSpawn != null) {
+                    entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
+                }
+            }
+        }
     }
 }
