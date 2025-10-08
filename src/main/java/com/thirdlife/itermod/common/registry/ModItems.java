@@ -1,5 +1,6 @@
 package com.thirdlife.itermod.common.registry;
 
+import com.thirdlife.itermod.common.item.RotrootItem;
 import com.thirdlife.itermod.common.item.TankardItem;
 import com.thirdlife.itermod.iterMod;
 import net.minecraft.world.item.Item;
@@ -27,6 +28,7 @@ public class ModItems {
     public static final RegistryObject<Item> TANKARD = ITEMS.register("tankard", () -> new TankardItem(new Item.Properties()));
     public static final RegistryObject<Item> SPAWNER_FRAGMENT = ITEMS.register("spawner_fragment", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ROTROOT_SEEDS = ITEMS.register("rotroot_seeds", () -> new ItemNameBlockItem(ModBlocks.ROTROOT.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ROTROOT = ITEMS.register("rotroot", () -> new RotrootItem(new Item.Properties()));
 
 
     public static void register(IEventBus eventBus) {

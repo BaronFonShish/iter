@@ -3,6 +3,7 @@
   "values": [
     "#minecraft:base_stone_overworld",
     "#minecraft:stone_bricks",
+    "#minecraft:moss_replaceable",
     "minecraft:moss_block",
     "minecraft:cobblestone",
     "minecraft:mossy_cobblestone",

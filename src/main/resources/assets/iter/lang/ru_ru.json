@@ -15,5 +15,8 @@
   "item.iter.etherdust": "Эфирная пыль",
   "block.iter.abyssquartz_crystal": "Кристалл безднокварца",
   "block.iter.abyssquartz_block": "Блок безднокварца",
-  "block.iter.spider_egg": "Паучье яйцо"
+  "block.iter.spider_egg": "Паучье яйцо",
+  "block.iter.rotroot": "Гнилушка",
+  "item.iter.rotroot": "Гнилушка",
+  "item.iter.rotroot_seeds": "Семена гнилушки"
 }

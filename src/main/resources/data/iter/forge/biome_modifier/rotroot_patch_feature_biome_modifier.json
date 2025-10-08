@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "iter:rotroot_patch_feature",
+  "step": "vegetal_decoration"
+}

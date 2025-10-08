@@ -1,0 +1,64 @@
+{
+  "feature": "iter:rotroot_patch_feature",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "min_inclusive": {
+          "absolute": -16
+        },
+        "max_inclusive": {
+          "absolute": 40
+        }
+      }
+    },
+    {
+      "type": "environment_scan",
+      "direction_of_search": "up",
+      "target_condition": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:would_survive",
+            "state": {
+              "Name": "iter:rotroot"
+            }
+          }
+        ]
+      },
+      "max_steps": 5
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 1
+    },
+    {
+      "type": "minecraft:count",
+      "count": 4
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": {
+        "type": "uniform",
+        "value": {
+          "min_inclusive": -3,
+          "max_inclusive": 3
+        }
+      },
+      "y_spread": {
+        "type": "uniform",
+        "value": {
+          "min_inclusive": -2,
+          "max_inclusive": 2
+        }
+      }
+    }
+  ]
+}

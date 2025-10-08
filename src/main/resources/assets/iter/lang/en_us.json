@@ -15,5 +15,8 @@
   "item.iter.etherdust": "Etherdust",
   "block.iter.abyssquartz_crystal": "Abyssquartz Crystal",
   "block.iter.abyssquartz_block": "Abyssquartz Block",
-  "block.iter.spider_egg": "Spider Egg"
+  "block.iter.spider_egg": "Spider Egg",
+  "block.iter.rotroot": "Rotroot",
+  "item.iter.rotroot": "Rotroot",
+  "item.iter.rotroot_seeds": "Rotroot Seeds"
 }

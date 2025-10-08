@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#is_overworld",
+  "biomes": "#minecraft:is_overworld",
   "features": "iter:abyssquartz_crystal_feature",
   "step": "underground_decoration"
 }

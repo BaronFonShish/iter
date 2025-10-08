@@ -1,0 +1,74 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "tries": 32,
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "iter:rotroot",
+                  "Properties": {
+                    "age": "1"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "iter:rotroot",
+                  "Properties": {
+                    "age": "2"
+                  }
+                },
+                "weight": 2
+              },
+              {
+                "data": {
+                  "Name": "iter:rotroot",
+                  "Properties": {
+                    "age": "3"
+                  }
+                },
+                "weight": 1
+              }
+            ]
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate":
+            {
+              "type": "minecraft:all_of",
+              "predicates": [
+                {
+                  "type": "minecraft:would_survive",
+                  "state": {
+                    "Name": "iter:rotroot",
+                    "Properties": {
+                      "age": "0"
+                    }
+                  },
+                  "offset": [
+                    0,
+                    -1,
+                    0
+                  ]
+                },
+                {
+                  "type": "minecraft:matching_blocks",
+                  "blocks": "minecraft:air"
+                }
+              ]
+            }
+        }
+      ]
+    }
+  }
+}
