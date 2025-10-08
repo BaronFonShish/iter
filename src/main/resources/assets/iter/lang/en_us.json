@@ -14,5 +14,6 @@
   "item.iter.potsherd": "Potsherd",
   "item.iter.etherdust": "Etherdust",
   "block.iter.abyssquartz_crystal": "Abyssquartz Crystal",
-  "block.iter.abyssquartz_block": "Abyssquartz Block"
+  "block.iter.abyssquartz_block": "Abyssquartz Block",
+  "block.iter.spider_egg": "Spider Egg"
 }

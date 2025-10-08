@@ -14,5 +14,6 @@
   "item.iter.potsherd": "Черепок",
   "item.iter.etherdust": "Эфирная пыль",
   "block.iter.abyssquartz_crystal": "Кристалл безднокварца",
-  "block.iter.abyssquartz_block": "Блок безднокварца"
+  "block.iter.abyssquartz_block": "Блок безднокварца",
+  "block.iter.spider_egg": "Паучье яйцо"
 }

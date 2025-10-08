@@ -5,6 +5,9 @@ import com.thirdlife.itermod.iterMod;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -26,6 +29,8 @@ public class ModBlocks {
             () -> new AbyssquartzCrystal());
     public static final RegistryObject<Block> SPIDER_EGG = registerBlock("spider_egg",
             () -> new SpiderEggBlock());
+    public static final RegistryObject<Block> ROTROOT = registerBlockItemless("rotroot",
+            () -> new RotrootBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).sound(SoundType.CROP).noOcclusion().noCollission()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
@@ -36,6 +41,12 @@ public class ModBlocks {
     private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
         return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
+
+    private static <T extends Block> RegistryObject<T> registerBlockItemless(String name, Supplier<T> block) {
+        RegistryObject<T> toReturn = BLOCKS.register(name, block);
+        return toReturn;
+    }
+
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);

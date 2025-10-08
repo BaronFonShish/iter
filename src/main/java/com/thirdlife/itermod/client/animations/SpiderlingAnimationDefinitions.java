@@ -153,6 +153,10 @@ public class SpiderlingAnimationDefinitions {
                                     AnimationChannel.Interpolations.CATMULLROM),
                             new Keyframe(2f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM))).build();
+
+
+
+
     public static final AnimationDefinition SPIDERLING_WALK = AnimationDefinition.Builder.withLength(0.5f).looping()
             .addAnimation("body",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
@@ -258,6 +262,10 @@ public class SpiderlingAnimationDefinitions {
                                     AnimationChannel.Interpolations.CATMULLROM),
                             new Keyframe(0.5f, KeyframeAnimations.degreeVec(-0.7f, 1.8f, -2.5f),
                                     AnimationChannel.Interpolations.CATMULLROM))).build();
+
+
+
+
     public static final AnimationDefinition SPIDERLING_ATTACK = AnimationDefinition.Builder.withLength(0.625f)
             .addAnimation("root",
                     new AnimationChannel(AnimationChannel.Targets.POSITION,

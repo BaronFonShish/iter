@@ -1,0 +1,8 @@
+{
+  "parent": "block/crop",
+  "textures": {
+    "crop": "iter:block/rotroot_crop_2",
+    "particle": "iter:block/rotroot_crop_2"
+  },
+  "render_type": "cutout_mipped"
+}

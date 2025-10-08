@@ -1,6 +1,9 @@
 package com.thirdlife.itermod.common.entity;
 
 
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -9,11 +12,17 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.monster.Spider;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.structure.structures.NetherFortressPieces;
+import net.minecraft.world.phys.Vec3;
 
 public class SpiderlingEntity extends Spider {
+    private static final EntityDataAccessor<Byte> DATA_FLAGS_ID = SynchedEntityData.defineId(Spider.class, EntityDataSerializers.BYTE);
 
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
@@ -36,6 +45,7 @@ public class SpiderlingEntity extends Spider {
         return dimensions.height * 0.7f;
     }
 
+
     @Override
     public int getExperienceReward() {
         return 1;
@@ -57,18 +67,40 @@ public class SpiderlingEntity extends Spider {
     }
 
     @Override
-    public boolean isClimbing() {
-        return this.horizontalCollision;
-    }
-
-    @Override
     public void tick() {
         super.tick();
-
+        if (!this.level().isClientSide) {
+            this.setClimbing(this.horizontalCollision);
+        }
         if (this.level().isClientSide()) {
             setupAnimationStates();
         }
     }
+    public boolean onClimbable() {
+        return this.isClimbing();
+    }
+
+    public void makeStuckInBlock(BlockState pState, Vec3 pMotionMultiplier) {
+        if (!pState.is(Blocks.COBWEB)) {
+            super.makeStuckInBlock(pState, pMotionMultiplier);
+        }
+
+    }
+
+    public void setClimbing(boolean pClimbing) {
+        byte b0 = this.entityData.get(DATA_FLAGS_ID);
+        if (pClimbing) {
+            b0 = (byte)(b0 | 1);
+        } else {
+            b0 = (byte)(b0 & -2);
+        }
+        this.entityData.set(DATA_FLAGS_ID, b0);
+    }
+
+    public boolean isClimbing() {
+        return this.horizontalCollision;
+    }
+
 
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
