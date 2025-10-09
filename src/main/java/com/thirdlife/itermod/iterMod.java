@@ -3,6 +3,7 @@ package com.thirdlife.itermod;
 import com.mojang.logging.LogUtils;
 import com.thirdlife.itermod.client.model.SpiderlingModel;
 import com.thirdlife.itermod.common.entity.SpiderlingEntity;
+import com.thirdlife.itermod.common.event.DaggerOffhandStrike;
 import com.thirdlife.itermod.common.registry.ModBlocks;
 import com.thirdlife.itermod.common.registry.ModEntities;
 import com.thirdlife.itermod.common.registry.ModItems;
@@ -77,5 +78,4 @@ public class iterMod {
             );
         }
     }
-
 }
