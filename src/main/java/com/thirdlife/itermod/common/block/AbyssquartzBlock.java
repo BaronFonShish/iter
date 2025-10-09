@@ -17,7 +17,11 @@ import net.minecraft.world.level.material.FluidState;
 
 public class AbyssquartzBlock extends Block {
     public AbyssquartzBlock() {
-        super(Properties.of().instrument(NoteBlockInstrument.CHIME).sound(SoundType.GLASS).strength(6f, 8f).requiresCorrectToolForDrops());
+        super(Properties.of().instrument(NoteBlockInstrument.CHIME)
+                .sound(SoundType.GLASS)
+                .strength(6f, 8f)
+                .requiresCorrectToolForDrops()
+                .randomTicks());
     }
 
     @Override

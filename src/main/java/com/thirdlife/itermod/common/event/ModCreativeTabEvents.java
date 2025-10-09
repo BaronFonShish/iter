@@ -34,9 +34,11 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.ROUGH_NOSTELON.get()), new ItemStack(ModItems.NOSTELON_NUGGET.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Blocks.DEEPSLATE_LAPIS_ORE), new ItemStack(ModBlocks.NOSTELON_ORE.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.NOSTELON_ORE.get()), new ItemStack(ModBlocks.DEEPSLATE_NOSTELON_ORE.get())),
-                new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.DEEPSLATE_NOSTELON_ORE.get()), new ItemStack(ModBlocks.ABYSSQUARTZ_BLOCK.get())),
+                new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Blocks.AMETHYST_CLUSTER), new ItemStack(ModBlocks.ABYSSQUARTZ_BLOCK.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.ABYSSQUARTZ_BLOCK.get()), new ItemStack(ModBlocks.ABYSSQUARTZ_CRYSTAL.get())),
-                new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.ABYSSQUARTZ_CRYSTAL.get()), new ItemStack(ModBlocks.SPIDER_EGG.get()))
+                new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.ABYSSQUARTZ_CRYSTAL.get()), new ItemStack(ModBlocks.SPIDER_EGG.get())),
+                new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Items.BEETROOT_SEEDS), new ItemStack(ModItems.ROTROOT_SEEDS.get())),
+                new TabInsertion(CreativeModeTabs.FOOD_AND_DRINKS, new ItemStack(Items.BEETROOT), new ItemStack(ModItems.ROTROOT.get()))
         );
 
         for (TabInsertion ins : insertions) {

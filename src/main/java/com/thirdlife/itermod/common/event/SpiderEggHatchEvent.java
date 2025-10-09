@@ -1,5 +1,6 @@
 package com.thirdlife.itermod.common.event;
 
+import com.mojang.realmsclient.dto.PlayerInfo;
 import com.thirdlife.itermod.common.registry.ModEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -19,38 +20,56 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 
 public class SpiderEggHatchEvent {
-    public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
-        if (entity == null)
+
+    public static void check(LevelAccessor world, double x, double y, double z, Entity entity) {
+        if (entity == null) {
             return;
-        if (new Object() {
-            public boolean checkGamemode(Entity _ent) {
-                if (_ent instanceof ServerPlayer _serverPlayer) {
-                    return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SURVIVAL;
-                } else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-                    return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SURVIVAL;
-                }
-                return false;
-            }
-        }.checkGamemode(entity) && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY)) == 0) {
-            for (int index0 = 0; index0 < Mth.nextInt(RandomSource.create(), 2, 4); index0++) {
-                if (world instanceof ServerLevel _level) {
-                    Entity entityToSpawn = ModEntities.SPIDERLING.get().spawn(_level,
-                            BlockPos.containing(x + Mth.nextDouble(RandomSource.create(), 0.3, 0.7), y + Mth.nextDouble(RandomSource.create(), 0.2, 0.8), z + Mth.nextDouble(RandomSource.create(), 0.3, 0.7)), MobSpawnType.MOB_SUMMONED);
-                    if (entityToSpawn != null) {
-                        entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
-                    }
-                }
-            }
+        }
+
+        if (isValid(entity)) {
+            spawnSpiderlings(world, x, y, z);
         }
     }
-    public static void blockBroken(LevelAccessor world, double x, double y, double z) {
-        for (int index0 = 0; index0 < Mth.nextInt(RandomSource.create(), 2, 4); index0++) {
-            if (world instanceof ServerLevel _level) {
-                Entity entityToSpawn = ModEntities.SPIDERLING.get().spawn(_level,
-                        BlockPos.containing(x + Mth.nextDouble(RandomSource.create(), 0.3, 0.7), y + Mth.nextDouble(RandomSource.create(), 0.2, 0.8), z + Mth.nextDouble(RandomSource.create(), 0.3, 0.7)), MobSpawnType.MOB_SUMMONED);
-                if (entityToSpawn != null) {
-                    entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
-                }
+
+    public static void force(LevelAccessor world, double x, double y, double z) {
+        spawnSpiderlings(world, x, y, z);
+    }
+
+    private static boolean isValid(Entity entity) {
+        if (entity instanceof ServerPlayer serverPlayer) {
+            ItemStack mainHandItem = getMainHandItem(entity);
+            return (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, mainHandItem) == 0) && (serverPlayer.gameMode.getGameModeForPlayer() == GameType.SURVIVAL);
+        }
+        return false;
+    }
+
+    private static ItemStack getMainHandItem(Entity entity) {
+        if (entity instanceof LivingEntity livingEntity) {
+            return livingEntity.getMainHandItem();
+        }
+        return ItemStack.EMPTY;
+    }
+
+    private static void spawnSpiderlings(LevelAccessor world, double x, double y, double z) {
+        if (!(world instanceof ServerLevel serverLevel)) {
+            return;
+        }
+
+        RandomSource random = world.getRandom();
+        int spiderlingCount = Mth.nextInt(random, 2, 4);
+
+        for (int i = 0; i < spiderlingCount; i++) {
+
+            double spawnX = x + Mth.nextDouble(random, 0.3, 0.7);
+            double spawnY = y + Mth.nextDouble(random, 0.2, 0.8);
+            double spawnZ = z + Mth.nextDouble(random, 0.3, 0.7);
+
+            BlockPos spawnPos = BlockPos.containing(spawnX, spawnY, spawnZ);
+
+            Entity entityToSpawn = ModEntities.SPIDERLING.get().spawn(serverLevel, spawnPos, MobSpawnType.MOB_SUMMONED);
+
+            if (entityToSpawn != null) {
+                entityToSpawn.setYRot(random.nextFloat() * 360.0F);
             }
         }
     }

@@ -4,6 +4,8 @@ import com.thirdlife.itermod.common.event.ExpDropEvent;
 import com.thirdlife.itermod.common.event.SpiderEggHatchEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PickaxeItem;
@@ -17,12 +19,19 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import java.util.List;
+
 public class SpiderEggBlock extends Block {
     public SpiderEggBlock() {
-        super(Properties.of().sound(SoundType.WOOL).strength(0.15f, 1f).requiresCorrectToolForDrops());
+        super(Properties.of()
+                .sound(SoundType.WOOL)
+                .strength(0.15f, 1f)
+                .requiresCorrectToolForDrops()
+                .randomTicks());
     }
 
     @Override
@@ -57,9 +66,23 @@ public class SpiderEggBlock extends Block {
                                 Block block, BlockPos fromPos, boolean isMoving) {
         if (!canSurvive(state, level, pos)) {
             level.destroyBlock(pos, true);
-            SpiderEggHatchEvent.blockBroken(level, pos.getX(), pos.getY(), pos.getZ());
+            SpiderEggHatchEvent.force(level, pos.getX(), pos.getY(), pos.getZ());
         }
         super.neighborChanged(state, level, pos, block, fromPos, isMoving);
+    }
+
+    @Override
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        super.randomTick(state, level, pos, random);
+
+        List<Player> nearbyPlayers = level.getEntitiesOfClass(Player.class,
+                new AABB(pos).inflate(16.0),
+                player -> !player.isCreative() && !player.isSpectator());
+
+        if (!nearbyPlayers.isEmpty() && random.nextDouble() < 0.75) { // 10% chance per random tick
+            level.destroyBlock(pos, true);
+            SpiderEggHatchEvent.force(level, pos.getX(), pos.getY(), pos.getZ());
+        }
     }
 
     @Override
@@ -67,7 +90,7 @@ public class SpiderEggBlock extends Block {
         boolean retval = super.onDestroyedByPlayer(blockstate, world, pos, entity, willHarvest, fluid);
 
         if (canHarvestBlock(blockstate, world, pos, entity)) {
-            SpiderEggHatchEvent.execute(world, pos.getX(), pos.getY(), pos.getZ(), entity);
+            SpiderEggHatchEvent.check(world, pos.getX(), pos.getY(), pos.getZ(), entity);
             ExpDropEvent.blockBrokenRand(world, pos.getX(), pos.getY(), pos.getZ(), 0, 2, entity);
         }
         return retval;
