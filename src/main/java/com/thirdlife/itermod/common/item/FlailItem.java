@@ -22,9 +22,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 import java.util.UUID;
 
-public class DaggerItem extends TieredItem {
+public class FlailItem extends TieredItem {
 
-    public DaggerItem(Tiers tier, Properties properties) {
+    public FlailItem(Tiers tier, Properties properties) {
         super(tier, properties);
     }
 
@@ -44,10 +44,9 @@ public class DaggerItem extends TieredItem {
         if (slot == EquipmentSlot.MAINHAND)
         {
             builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_UUID, "Weapon modifier",
-                    this.getTier().getAttackDamageBonus() * 0.5f + 1,
+                    this.getTier().getAttackDamageBonus() * 2f + 1,
                     AttributeModifier.Operation.ADDITION));
-            builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_UUID, "Weapon modifier", -2d, AttributeModifier.Operation.ADDITION));
-            builder.put(ForgeMod.ENTITY_REACH.get(), new AttributeModifier(UUID.fromString(ReachUUID), "Weapon modifier", -0.5d, AttributeModifier.Operation.ADDITION));
+            builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_UUID, "Weapon modifier", -3.2d, AttributeModifier.Operation.ADDITION));
 
             Map<Enchantment, Integer> itemEnchants = itemStack.getAllEnchantments();
         }

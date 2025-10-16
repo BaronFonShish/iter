@@ -1,6 +1,7 @@
 package com.thirdlife.itermod.common.registry;
 
 import com.thirdlife.itermod.common.item.DaggerItem;
+import com.thirdlife.itermod.common.item.FlailItem;
 import com.thirdlife.itermod.common.item.RotrootItem;
 import com.thirdlife.itermod.common.item.TankardItem;
 import com.thirdlife.itermod.iterMod;
@@ -34,7 +35,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> WOODEN_DAGGER = ITEMS.register("wooden_dagger",
             () -> new DaggerItem(Tiers.WOOD, new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> STIONE_DAGGER = ITEMS.register("stone_dagger",
+    public static final RegistryObject<Item> STONE_DAGGER = ITEMS.register("stone_dagger",
             () -> new DaggerItem(Tiers.STONE, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> IRON_DAGGER = ITEMS.register("iron_dagger",
             () -> new DaggerItem(Tiers.IRON, new Item.Properties().stacksTo(1)));
@@ -44,6 +45,19 @@ public class ModItems {
             () -> new DaggerItem(Tiers.DIAMOND, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> NETHERITE_DAGGER = ITEMS.register("netherite_dagger",
             () -> new DaggerItem(Tiers.NETHERITE, new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> WOODEN_FLAIL = ITEMS.register("wooden_flail",
+            () -> new FlailItem(Tiers.WOOD, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> STONE_FLAIL = ITEMS.register("stone_flail",
+            () -> new FlailItem(Tiers.STONE, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> IRON_FLAIL = ITEMS.register("iron_flail",
+            () -> new FlailItem(Tiers.IRON, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> GOLD_FLAIL = ITEMS.register("gold_flail",
+            () -> new FlailItem(Tiers.GOLD, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> DIAMOND_FLAIL = ITEMS.register("diamond_flail",
+            () -> new FlailItem(Tiers.DIAMOND, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> NETHERITE_FLAIL = ITEMS.register("netherite_flail",
+            () -> new FlailItem(Tiers.NETHERITE, new Item.Properties().stacksTo(1)));
 
 
     public static void register(IEventBus eventBus) {

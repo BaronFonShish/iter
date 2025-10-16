@@ -3,74 +3,62 @@ package com.thirdlife.itermod.common.event;
 import com.thirdlife.itermod.common.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.util.RandomSource;
+
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.WorldGenLevel;
+
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 
 public class AbyssquartzGrow {
-    public static void execute(LevelAccessor world, double x, double y, double z) {
-        double direction = 0;
-        Direction direct = Direction.NORTH;
-        boolean place;
-        boolean touchingbedrock;
-        if (Math.random() >= 0.95) {
-            touchingbedrock = false;
-            for (Direction directioniterator : Direction.values()) {
-                if ((world.getBlockState(BlockPos.containing(x + direct.getStepX(), y + direct.getStepY(), z + direct.getStepZ()))).getBlock() == Blocks.BEDROCK) {
-                    touchingbedrock = true;
-                }
-            }
-            if ((world instanceof Level _lvl ? _lvl.dimension() : (world instanceof WorldGenLevel _wgl ? _wgl.getLevel().dimension() : Level.OVERWORLD)) == Level.OVERWORLD && y <= -58 && touchingbedrock) {
-                place = true;
-                for (int index0 = 0; index0 < 8; index0++) {
-                    if (place) {
-                        direct = Direction.getRandom(RandomSource.create());
-                        if (world.isEmptyBlock(BlockPos.containing(x + direct.getStepX(), y + direct.getStepY(), z + direct.getStepZ()))) {
-                            world.setBlock(BlockPos.containing(x + direct.getStepX(), y + direct.getStepY(), z + direct.getStepZ()), ModBlocks.ABYSSQUARTZ_CRYSTAL.get().defaultBlockState(), 3);
-                            {
-                                Direction _dir = direct;
-                                BlockPos _pos = BlockPos.containing(x + direct.getStepX(), y + direct.getStepY(), z + direct.getStepZ());
-                                BlockState _bs = world.getBlockState(_pos);
-                                Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-                                if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
-                                    world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
-                                } else {
-                                    _property = _bs.getBlock().getStateDefinition().getProperty("axis");
-                                    if (_property instanceof EnumProperty _ap && _ap.getPossibleValues().contains(_dir.getAxis()))
-                                        world.setBlock(_pos, _bs.setValue(_ap, _dir.getAxis()), 3);
-                                }
-                            }
-                            place = false;
-                            break;
-                        }
-                    }
-                }
-                if (place) {
-                    direct = Direction.UP;
-                    if (world.isEmptyBlock(BlockPos.containing(x + direct.getStepX(), y + direct.getStepY(), z + direct.getStepZ()))) {
-                        world.setBlock(BlockPos.containing(x + direct.getStepX(), y + direct.getStepY(), z + direct.getStepZ()), ModBlocks.ABYSSQUARTZ_CRYSTAL.get().defaultBlockState(), 3);
-                        {
-                            Direction _dir = direct;
-                            BlockPos _pos = BlockPos.containing(x + direct.getStepX(), y + direct.getStepY(), z + direct.getStepZ());
-                            BlockState _bs = world.getBlockState(_pos);
-                            Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-                            if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
-                                world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
-                            } else {
-                                _property = _bs.getBlock().getStateDefinition().getProperty("axis");
-                                if (_property instanceof EnumProperty _ap && _ap.getPossibleValues().contains(_dir.getAxis()))
-                                    world.setBlock(_pos, _bs.setValue(_ap, _dir.getAxis()), 3);
-                            }
-                        }
-                    }
-                }
+
+    public static void execute(Level world, BlockPos pos) {
+
+        if ((world.getRandom().nextInt(20) != 0) | !(isTouchingBedrock(world, pos))){
+            return;
+        }
+
+        PlaceCrystal(world, pos);
+    }
+
+    private static boolean isTouchingBedrock(Level level, BlockPos pos) {
+        for (Direction direction : Direction.values()) {
+            BlockPos adjacentPos = pos.relative(direction);
+            if (level.getBlockState(adjacentPos).getBlock() == Blocks.BEDROCK) {
+                return true;
             }
         }
+        return false;
+    }
+
+    private static void PlaceCrystal(Level level, BlockPos pos) {
+        List<Direction> directions = new ArrayList<>(Arrays.asList(Direction.values()));
+        Collections.shuffle(directions);
+
+        for (Direction direction : directions) {
+            BlockPos targetPos = pos.relative(direction);
+            if (level.isEmptyBlock(targetPos) && isValidCrystalPosition(level, targetPos, direction)) {
+
+                BlockState crystalState = ModBlocks.ABYSSQUARTZ_CRYSTAL.get().defaultBlockState();
+                if (crystalState.hasProperty(BlockStateProperties.FACING)) {
+                    crystalState = crystalState.setValue(BlockStateProperties.FACING, direction);
+                }
+
+                level.setBlock(targetPos, crystalState, 3);
+                return;
+            }
+        }
+    }
+
+    private static boolean isValidCrystalPosition(Level level, BlockPos pos, Direction growthDirection) {
+        BlockPos supportPos = pos.relative(growthDirection.getOpposite());
+        return level.getBlockState(supportPos).isSolid();
     }
 }

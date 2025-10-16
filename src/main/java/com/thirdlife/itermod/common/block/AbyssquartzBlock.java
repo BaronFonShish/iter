@@ -48,6 +48,6 @@ public class AbyssquartzBlock extends Block {
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
-        AbyssquartzGrow.execute(world, x, y, z);
+        AbyssquartzGrow.execute(world, pos);
     }
 }

@@ -3,7 +3,6 @@ package com.thirdlife.itermod;
 import com.mojang.logging.LogUtils;
 import com.thirdlife.itermod.client.model.SpiderlingModel;
 import com.thirdlife.itermod.common.entity.SpiderlingEntity;
-import com.thirdlife.itermod.common.event.DaggerOffhandStrike;
 import com.thirdlife.itermod.common.registry.ModBlocks;
 import com.thirdlife.itermod.common.registry.ModEntities;
 import com.thirdlife.itermod.common.registry.ModItems;
@@ -19,8 +18,12 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.util.thread.SidedThreadGroups;
 import org.slf4j.Logger;
 
+import java.util.AbstractMap;
+import java.util.Collection;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 
 @Mod(iterMod.MOD_ID)
