@@ -1,9 +1,6 @@
 package com.thirdlife.itermod.common.registry;
 
-import com.thirdlife.itermod.common.item.DaggerItem;
-import com.thirdlife.itermod.common.item.FlailItem;
-import com.thirdlife.itermod.common.item.RotrootItem;
-import com.thirdlife.itermod.common.item.TankardItem;
+import com.thirdlife.itermod.common.item.*;
 import com.thirdlife.itermod.iterMod;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
@@ -31,6 +28,7 @@ public class ModItems {
     public static final RegistryObject<Item> TANKARD = ITEMS.register("tankard", () -> new TankardItem(new Item.Properties()));
     public static final RegistryObject<Item> SPAWNER_FRAGMENT = ITEMS.register("spawner_fragment", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ROTROOT_SEEDS = ITEMS.register("rotroot_seeds", () -> new ItemNameBlockItem(ModBlocks.ROTROOT.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ETHERBLOOM_SEEDS = ITEMS.register("etherbloom_seeds", () -> new ItemNameBlockItem(ModBlocks.ETHERBLOOM_PLANT.get(), new Item.Properties()));
     public static final RegistryObject<Item> ROTROOT = ITEMS.register("rotroot",() -> new RotrootItem(new Item.Properties()));
 
     public static final RegistryObject<Item> WOODEN_DAGGER = ITEMS.register("wooden_dagger",
@@ -39,7 +37,7 @@ public class ModItems {
             () -> new DaggerItem(Tiers.STONE, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> IRON_DAGGER = ITEMS.register("iron_dagger",
             () -> new DaggerItem(Tiers.IRON, new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GOLD_DAGGER = ITEMS.register("gold_dagger",
+    public static final RegistryObject<Item> GOLDEN_DAGGER = ITEMS.register("golden_dagger",
             () -> new DaggerItem(Tiers.GOLD, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> DIAMOND_DAGGER = ITEMS.register("diamond_dagger",
             () -> new DaggerItem(Tiers.DIAMOND, new Item.Properties().stacksTo(1)));
@@ -52,12 +50,38 @@ public class ModItems {
             () -> new FlailItem(Tiers.STONE, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> IRON_FLAIL = ITEMS.register("iron_flail",
             () -> new FlailItem(Tiers.IRON, new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GOLD_FLAIL = ITEMS.register("gold_flail",
+    public static final RegistryObject<Item> GOLDEN_FLAIL = ITEMS.register("golden_flail",
             () -> new FlailItem(Tiers.GOLD, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> DIAMOND_FLAIL = ITEMS.register("diamond_flail",
             () -> new FlailItem(Tiers.DIAMOND, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> NETHERITE_FLAIL = ITEMS.register("netherite_flail",
             () -> new FlailItem(Tiers.NETHERITE, new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> WOODEN_SCYTHE = ITEMS.register("wooden_scythe",
+            () -> new ScytheItem(Tiers.WOOD, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> STONE_SCYTHE = ITEMS.register("stone_scythe",
+            () -> new ScytheItem(Tiers.STONE, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> IRON_SCYTHE = ITEMS.register("iron_scythe",
+            () -> new ScytheItem(Tiers.IRON, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> GOLDEN_SCYTHE = ITEMS.register("golden_scythe",
+            () -> new ScytheItem(Tiers.GOLD, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> DIAMOND_SCYTHE = ITEMS.register("diamond_scythe",
+            () -> new ScytheItem(Tiers.DIAMOND, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> NETHERITE_SCYTHE = ITEMS.register("netherite_scythe",
+            () -> new ScytheItem(Tiers.NETHERITE, new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> WOODEN_SPEAR = ITEMS.register("wooden_spear",
+            () -> new SpearItem(Tiers.WOOD, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> STONE_SPEAR = ITEMS.register("stone_spear",
+            () -> new SpearItem(Tiers.STONE, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> IRON_SPEAR = ITEMS.register("iron_spear",
+            () -> new SpearItem(Tiers.IRON, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> GOLDEN_SPEAR = ITEMS.register("golden_spear",
+            () -> new SpearItem(Tiers.GOLD, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> DIAMOND_SPEAR = ITEMS.register("diamond_spear",
+            () -> new SpearItem(Tiers.DIAMOND, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> NETHERITE_SPEAR = ITEMS.register("netherite_spear",
+            () -> new SpearItem(Tiers.NETHERITE, new Item.Properties().stacksTo(1)));
 
 
     public static void register(IEventBus eventBus) {

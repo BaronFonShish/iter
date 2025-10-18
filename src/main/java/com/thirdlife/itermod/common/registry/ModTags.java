@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.Block;
 public class ModTags {
     public static class Blocks {
         public static final TagKey<Block> ROTROOT_GROWABLE = tag("rotroot_growable");
+        public static final TagKey<Block> ETHERBLOOM_SOIL = tag("etherbloom_soil");
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(iterMod.MOD_ID, name));

@@ -1,8 +1,5 @@
 package com.thirdlife.itermod.client.model;
 
-import com.thirdlife.itermod.client.model.SpiderlingModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent.RegisterLayerDefinitions;
 import net.minecraftforge.fml.common.Mod;
 

@@ -1,7 +1,9 @@
 package com.thirdlife.itermod.common.registry;
 
+//import com.thirdlife.itermod.common.entity.FlailHeadEntity;
 import com.thirdlife.itermod.iterMod;
 import com.thirdlife.itermod.common.entity.SpiderlingEntity;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;

@@ -1,0 +1,8 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "iter:block/etherbloom",
+    "particle": "iter:block/etherbloom"
+  },
+  "render_type": "cutout_mipped"
+}

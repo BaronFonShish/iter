@@ -22,10 +22,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 import java.util.UUID;
 
-public class DaggerItem extends TieredItem {
+public class SpearItem extends TieredItem {
 
-    public DaggerItem(Tiers tier, Properties properties) {
-        super(tier, properties.durability((int)(tier.getUses() * 0.95)));
+    public SpearItem(Tiers tier, Properties properties) {
+        super(tier, properties.durability((int)(tier.getUses() * 1.25)));
     }
 
     public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
@@ -44,10 +44,10 @@ public class DaggerItem extends TieredItem {
         if (slot == EquipmentSlot.MAINHAND)
         {
             builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_UUID, "Weapon modifier",
-                    this.getTier().getAttackDamageBonus() * 0.5f + 1,
+                    (this.getTier().getAttackDamageBonus() + 3),
                     AttributeModifier.Operation.ADDITION));
-            builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_UUID, "Weapon modifier", -2d, AttributeModifier.Operation.ADDITION));
-            builder.put(ForgeMod.ENTITY_REACH.get(), new AttributeModifier(UUID.fromString(ReachUUID), "Weapon modifier", -0.5d, AttributeModifier.Operation.ADDITION));
+            builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_UUID, "Weapon modifier", -2.7d, AttributeModifier.Operation.ADDITION));
+            builder.put(ForgeMod.ENTITY_REACH.get(), new AttributeModifier(UUID.fromString(ReachUUID), "Weapon modifier", 1.5d, AttributeModifier.Operation.ADDITION));
 
             Map<Enchantment, Integer> itemEnchants = itemStack.getAllEnchantments();
         }

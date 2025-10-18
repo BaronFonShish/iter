@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "textures": {
+    "layer0": "iter:item/golden_spear"
+  },
+  "base": {
+    "parent": "iter:item/golden_spear_large"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "iter:item/golden_spear_normal"
+    },
+    "fixed": {
+      "parent": "iter:item/golden_spear_normal"
+    },
+    "ground": {
+      "parent": "iter:item/golden_spear_normal"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "iter:item/handheld_large",
+  "textures": {
+    "layer0": "iter:item/stone_spear_large"
+  }
+}

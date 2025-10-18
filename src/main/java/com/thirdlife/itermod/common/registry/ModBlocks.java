@@ -30,7 +30,11 @@ public class ModBlocks {
     public static final RegistryObject<Block> SPIDER_EGG = registerBlock("spider_egg",
             () -> new SpiderEggBlock());
     public static final RegistryObject<Block> ROTROOT = registerBlockItemless("rotroot",
-            () -> new RotrootBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).sound(SoundType.CROP).noOcclusion().noCollission()));
+            () -> new RotrootBlock(BlockBehaviour.Properties.copy(Blocks.BEETROOTS).sound(SoundType.CROP).noOcclusion().noCollission()));
+    public static final RegistryObject<Block> ETHERBLOOM = registerBlock("etherbloom",
+            () -> new Etherbloom());
+    public static final RegistryObject<Block> ETHERBLOOM_PLANT = registerBlockItemless("etherbloom_plant",
+            () -> new EtherbloomPlant(BlockBehaviour.Properties.copy(Blocks.POPPY).sound(SoundType.GRASS).noOcclusion().offsetType(BlockBehaviour.OffsetType.NONE).noCollission()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
