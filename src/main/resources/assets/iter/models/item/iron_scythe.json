@@ -1,6 +1,21 @@
 {
-  "parent": "iter:item/handheld_large",
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
   "textures": {
     "layer0": "iter:item/iron_scythe"
+  },
+  "base": {
+    "parent": "iter:item/iron_scythe_large"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "iter:item/iron_scythe_normal"
+    },
+    "fixed": {
+      "parent": "iter:item/iron_scythe_normal"
+    },
+    "ground": {
+      "parent": "iter:item/iron_scythe_normal"
+    }
   }
 }

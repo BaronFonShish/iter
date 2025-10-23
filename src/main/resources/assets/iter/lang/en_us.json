@@ -43,6 +43,10 @@
   "item.iter.etherbloom_seeds": "Etherbloom seeds",
   "block.iter.etherbloom": "Etherbloom",
   "block.iter.etherbloom_plant": "Growing Etherbloom",
+  "enchantment.iter.sowing": "Sowing",
+  "enchantment.iter.flaying": "Flaying",
+  "enchantment.iter.sowing.desc": "Replants the crops upon reaping",
+  "enchantment.iter.flaying.desc": "Consecutive strikes accumulate damage",
   "block.iter.rotroot": "Rotroot",
   "item.iter.rotroot": "Rotroot",
   "item.iter.rotroot_seeds": "Rotroot Seeds"

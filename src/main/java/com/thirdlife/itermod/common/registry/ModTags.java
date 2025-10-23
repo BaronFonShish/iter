@@ -3,7 +3,9 @@ package com.thirdlife.itermod.common.registry;
 import com.thirdlife.itermod.iterMod;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 public class ModTags {
@@ -13,6 +15,25 @@ public class ModTags {
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(iterMod.MOD_ID, name));
+        }
+    }
+    public static class Items {
+        public static final TagKey<Item> SPELLCAST_TIER_PRIMITIVE = tag("spellcast_tier_primitive");
+        public static final TagKey<Item> SPELLCAST_TIER_NOVICE = tag("spellcast_tier_novice");
+        public static final TagKey<Item> SPELLCAST_TIER_ADVANCED = tag("spellcast_tier_advanced");
+        public static final TagKey<Item> SPELLCAST_TIER_EXPERT = tag("spellcast_tier_expert");
+        public static final TagKey<Item> SPELLCAST_TIER_FABLED = tag("spellcast_tier_fabled");
+
+//        public static final TagKey<Item> SPELL_TIER_PRIMITIVE = tag("spell_tier_primitive");
+//        public static final TagKey<Item> SPELL_TIER_NOVICE = tag("spell_tier_novice");
+//        public static final TagKey<Item> SPELL_TIER_ADVANCED = tag("spell_tier_advanced");
+//        public static final TagKey<Item> SPELL_TIER_EXPERT = tag("spell_tier_expert");
+//        public static final TagKey<Item> SPELL_TIER_FABLED = tag("spell_tier_fabled");
+
+        public static final TagKey<Item> SPELL_FOCI = tag("spell_foci");
+
+        private static TagKey<Item> tag(String name) {
+            return ItemTags.create(new ResourceLocation(iterMod.MOD_ID, name));
         }
     }
 }

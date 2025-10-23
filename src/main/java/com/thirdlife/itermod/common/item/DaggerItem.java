@@ -2,6 +2,8 @@ package com.thirdlife.itermod.common.item;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.thirdlife.itermod.common.enchantment.FlayingEnchantment;
+import com.thirdlife.itermod.common.registry.ModEnchantments;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,6 +16,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeMod;
@@ -24,6 +28,13 @@ import java.util.UUID;
 
 public class DaggerItem extends TieredItem {
 
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        return enchantment.category == EnchantmentCategory.WEAPON || super.canApplyAtEnchantingTable(stack, enchantment);
+    }
+
+
     public DaggerItem(Tiers tier, Properties properties) {
         super(tier, properties.durability((int)(tier.getUses() * 0.95)));
     }
@@ -32,6 +43,21 @@ public class DaggerItem extends TieredItem {
         pStack.hurtAndBreak(1, pAttacker, (p_43296_) -> {
             p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
         });
+
+        int Flaying = pStack.getEnchantmentLevel(ModEnchantments.FLAYING.get());
+        if (Flaying > 0){
+            String flayingUUID = pStack.getOrCreateTag().getString("flayingUUID");
+            int flayingStack = pStack.getOrCreateTag().getInt("flayingStack");
+            if (pTarget.getStringUUID().equals(flayingUUID)){
+                pTarget.hurt(pTarget.damageSources().magic(), (float) flayingStack);
+                if ((FlayingEnchantment.getMaxStacks(Flaying)) > flayingStack){
+                    pStack.getOrCreateTag().putInt("flayingStack", flayingStack+1);
+                }
+            } else {
+                pStack.getOrCreateTag().putInt("flayingStack", 0);
+                pStack.getOrCreateTag().putString("flayingUUID", pTarget.getStringUUID());
+            }
+        }
         return true;
     }
 

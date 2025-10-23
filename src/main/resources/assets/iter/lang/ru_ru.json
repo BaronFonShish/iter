@@ -43,6 +43,8 @@
   "item.iter.etherbloom_seeds": "Семена эфироцвета",
   "block.iter.etherbloom": "Эфироцвет",
   "block.iter.etherbloom_plant": "Растущий эфироцвет",
+  "enchantment.iter.sowing": "Посев",
+  "enchantment.iter.flaying": "Свежеватель",
   "block.iter.rotroot": "Гнилушка",
   "item.iter.rotroot": "Гнилушка",
   "item.iter.rotroot_seeds": "Семена гнилушки"

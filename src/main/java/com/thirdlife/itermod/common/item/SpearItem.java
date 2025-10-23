@@ -14,6 +14,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeMod;
@@ -26,6 +28,11 @@ public class SpearItem extends TieredItem {
 
     public SpearItem(Tiers tier, Properties properties) {
         super(tier, properties.durability((int)(tier.getUses() * 1.25)));
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        return (((enchantment.category == EnchantmentCategory.WEAPON) && (enchantment != Enchantments.SWEEPING_EDGE)) || super.canApplyAtEnchantingTable(stack, enchantment));
     }
 
     public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {

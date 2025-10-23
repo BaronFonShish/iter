@@ -1,6 +1,8 @@
 package com.thirdlife.itermod.common.registry;
 
 import com.thirdlife.itermod.common.item.*;
+import com.thirdlife.itermod.common.item.magic.BoneStaff;
+import com.thirdlife.itermod.common.item.magic.SpellBook;
 import com.thirdlife.itermod.iterMod;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
@@ -30,6 +32,7 @@ public class ModItems {
     public static final RegistryObject<Item> ROTROOT_SEEDS = ITEMS.register("rotroot_seeds", () -> new ItemNameBlockItem(ModBlocks.ROTROOT.get(), new Item.Properties()));
     public static final RegistryObject<Item> ETHERBLOOM_SEEDS = ITEMS.register("etherbloom_seeds", () -> new ItemNameBlockItem(ModBlocks.ETHERBLOOM_PLANT.get(), new Item.Properties()));
     public static final RegistryObject<Item> ROTROOT = ITEMS.register("rotroot",() -> new RotrootItem(new Item.Properties()));
+    public static final RegistryObject<Item> SPELL_BOOK = ITEMS.register("spell_book", SpellBook::new);
 
     public static final RegistryObject<Item> WOODEN_DAGGER = ITEMS.register("wooden_dagger",
             () -> new DaggerItem(Tiers.WOOD, new Item.Properties().stacksTo(1)));
@@ -82,6 +85,8 @@ public class ModItems {
             () -> new SpearItem(Tiers.DIAMOND, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> NETHERITE_SPEAR = ITEMS.register("netherite_spear",
             () -> new SpearItem(Tiers.NETHERITE, new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> BONE_STAFF = ITEMS.register("bone_staff",() -> new BoneStaff());
 
 
     public static void register(IEventBus eventBus) {

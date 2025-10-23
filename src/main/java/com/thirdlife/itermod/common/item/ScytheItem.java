@@ -2,7 +2,15 @@ package com.thirdlife.itermod.common.item;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.thirdlife.itermod.common.registry.ModBlocks;
+import com.thirdlife.itermod.common.registry.ModEnchantments;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -13,10 +21,14 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -37,7 +49,8 @@ public class ScytheItem extends TieredItem {
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        if (enchantment == Enchantments.SWEEPING_EDGE) {
+        if ((enchantment == Enchantments.SWEEPING_EDGE)
+        || (enchantment == Enchantments.BLOCK_FORTUNE)){
             return true;
         }
         return enchantment.category == EnchantmentCategory.WEAPON || super.canApplyAtEnchantingTable(stack, enchantment);
@@ -52,7 +65,7 @@ public class ScytheItem extends TieredItem {
             builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_UUID, "Weapon modifier",
                     ((this.getTier().getAttackDamageBonus() + 3) * 0.75f),
                     AttributeModifier.Operation.ADDITION));
-            builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_UUID, "Weapon modifier", -2.6d, AttributeModifier.Operation.ADDITION));
+            builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_UUID, "Weapon modifier", -2.7d, AttributeModifier.Operation.ADDITION));
 
             Map<Enchantment, Integer> itemEnchants = itemStack.getAllEnchantments();
         }
@@ -65,7 +78,11 @@ public class ScytheItem extends TieredItem {
             p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
         });
 
-        float areaDamage = (float) (this.getTier().getAttackDamageBonus() * 0.4);
+        float baseDamage = (float) pAttacker.getAttributeValue(Attributes.ATTACK_DAMAGE);
+
+        float areaDamage = (float) (baseDamage * 0.35);
+        areaDamage *= (1 + ((pStack.getEnchantmentLevel(Enchantments.SWEEPING_EDGE) * 0.15f)));
+
         float radius = (3 + (areaDamage * 0.5f) + (pStack.getEnchantmentLevel(Enchantments.SWEEPING_EDGE) * 0.5f))/2;
         ScytheAreaDamage(pAttacker,pTarget, pTarget.level(), pTarget.getX(), pTarget.getY(), pTarget.getZ(), areaDamage, radius);
 
@@ -80,7 +97,7 @@ public class ScytheItem extends TieredItem {
                                 .inflate((radius)));
 
         for (LivingEntity entity : nearbyEntities) {
-            if ((entity == attacker) || (entity == target)) {
+            if (entity == attacker) {
                 continue;
             }
 
@@ -89,6 +106,13 @@ public class ScytheItem extends TieredItem {
             } else {
                 entity.hurt(level.damageSources().mobAttack(attacker), areaDamage);
             }
+
+            if (level.isClientSide()){
+                level.addParticle(ParticleTypes.SWEEP_ATTACK, false, entity.getX(), (entity.getY()+(entity.getBbHeight()/2f)), entity.getZ(), 0, 0, 0);
+            } else {
+                ServerLevel serverLevel = (ServerLevel) level;
+                serverLevel.sendParticles(ParticleTypes.SWEEP_ATTACK, entity.getX(), (entity.getY()+(entity.getBbHeight()/2f)), entity.getZ(), 1, 0, 0, 0, 0);
+            }
         }
     }
 
@@ -96,5 +120,65 @@ public class ScytheItem extends TieredItem {
     public boolean canAttackBlock (@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player pPlayer)
     {
         return !pPlayer.isCreative();
+    }
+
+    @Override
+    public InteractionResult useOn(UseOnContext context){
+
+        if (context.getLevel().isClientSide()) {
+            return InteractionResult.SUCCESS;
+        }
+
+        boolean harvested = false;
+        int harvestedAmount = 0;
+        boolean hasSowing = (context.getItemInHand().getEnchantmentLevel(ModEnchantments.SOWING.get()) > 0);
+        int seedRemove = 1;
+        int dx;
+        int dz;
+        for (dx = -1; dx <= 1; dx++){
+            for (dz = -1; dz <= 1; dz++){
+                BlockPos targetpos = context.getClickedPos().offset(dx, 0, dz);
+                BlockState blockstate = context.getLevel().getBlockState(targetpos);
+                Block block = blockstate.getBlock();
+
+                if ((block instanceof CropBlock crop) && !(block == ModBlocks.ETHERBLOOM_PLANT.get())){
+                    if (crop.isMaxAge(blockstate)){
+                        harvested = true;
+                        harvestedAmount++;
+
+                        if (hasSowing){
+                            List<ItemStack> drops = Block.getDrops(blockstate, (ServerLevel) context.getLevel(), targetpos, null, context.getPlayer(), context.getPlayer().getMainHandItem());
+                            for (ItemStack drop : drops) {
+                                Block.popResource(context.getLevel(), targetpos, drop);
+                            }
+                            context.getLevel().levelEvent(2001, targetpos, Block.getId(blockstate));
+                            context.getLevel().setBlock(targetpos, crop.getStateForAge(0), 3);
+                        } else {
+                            context.getLevel().destroyBlock(targetpos, true, context.getPlayer());
+                        }
+                    }
+                } else if (block == ModBlocks.ETHERBLOOM.get()){
+                    harvested = true;
+                    harvestedAmount++;
+                    context.getLevel().destroyBlock(targetpos, true, context.getPlayer());
+                }
+            }
+        }
+        if (harvested){
+            if (context.getPlayer() instanceof ServerPlayer serverPlayer) {
+                if ((serverPlayer.gameMode.getGameModeForPlayer() == GameType.SURVIVAL)
+                        ||(serverPlayer.gameMode.getGameModeForPlayer() == GameType.ADVENTURE)) {
+
+                    RandomSource random = context.getLevel().getRandom();
+                    int breakchance = Mth.nextInt(random, 0, 9);
+                    if (harvestedAmount >= breakchance){
+                        context.getItemInHand().hurtAndBreak(1, serverPlayer,
+                                (player) -> player.broadcastBreakEvent(context.getHand()));
+                    }
+                };
+            }
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.FAIL;
     }
 }
