@@ -55,6 +55,7 @@ public class iterMod {
         ModFeatures.REGISTRY.register(modEventBus);
         ModAttributes.ATTRIBUTES.register(modEventBus);
         modEventBus.addListener(ModCapabilities::register);
+        ModMenus.REGISTRY.register(modEventBus);
 
         int id = 0;
         PACKET_HANDLER.registerMessage(id++, EtherBurnoutPacket.class,

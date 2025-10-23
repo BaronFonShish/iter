@@ -50,6 +50,7 @@ public class SpellBookGuiMenu extends AbstractContainerMenu implements Supplier<
             this.z = pos.getZ();
             access = ContainerLevelAccess.create(world, pos);
         }
+
         if (pos != null) {
             if (extraData.readableBytes() == 1) { // bound to item
                 byte hand = extraData.readByte();
