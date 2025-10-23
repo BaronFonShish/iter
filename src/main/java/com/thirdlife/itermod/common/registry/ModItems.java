@@ -1,13 +1,13 @@
 package com.thirdlife.itermod.common.registry;
 
 import com.thirdlife.itermod.common.item.*;
-import com.thirdlife.itermod.common.item.magic.BoneStaff;
-import com.thirdlife.itermod.common.item.magic.SpellBook;
+import com.thirdlife.itermod.common.item.magic.foci.BoneStaff;
+import com.thirdlife.itermod.common.item.magic.defaults.SpellBook;
+import com.thirdlife.itermod.common.item.magic.spells.SpellLesserHeal;
 import com.thirdlife.itermod.iterMod;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.Tiers;
-import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -86,7 +86,9 @@ public class ModItems {
     public static final RegistryObject<Item> NETHERITE_SPEAR = ITEMS.register("netherite_spear",
             () -> new SpearItem(Tiers.NETHERITE, new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> BONE_STAFF = ITEMS.register("bone_staff",() -> new BoneStaff());
+    public static final RegistryObject<Item> BONE_STAFF = ITEMS.register("bone_staff", BoneStaff::new);
+
+    public static final RegistryObject<Item> SPELL_LESSER_HEAL = ITEMS.register("spell_lesser_heal", SpellLesserHeal::new);
 
 
     public static void register(IEventBus eventBus) {

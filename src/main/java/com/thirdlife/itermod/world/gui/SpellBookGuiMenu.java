@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -37,11 +38,12 @@ public class SpellBookGuiMenu extends AbstractContainerMenu implements Supplier<
     private Entity boundEntity = null;
     private BlockEntity boundBlockEntity = null;
 
-    public SpellbookGuiMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
+    public SpellBookGuiMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
+
         super(ModMenus.SPELLBOOK_GUI.get(), id);
         this.entity = inv.player;
         this.world = inv.player.level();
-        this.internal = new ItemStackHandler(55);
+        this.internal = new ItemStackHandler(57);
         BlockPos pos = null;
         if (extraData != null) {
             pos = extraData.readBlockPos();
@@ -56,6 +58,14 @@ public class SpellBookGuiMenu extends AbstractContainerMenu implements Supplier<
                 byte hand = extraData.readByte();
                 ItemStack itemstack = hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem();
                 this.boundItemMatcher = () -> itemstack == (hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem());
+
+                LazyOptional<IItemHandler> capabilityOpt = itemstack.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
+                if (capabilityOpt.isPresent()) {
+                    capabilityOpt.ifPresent(capability -> {
+                        this.internal = capability;
+                        this.bound = true;
+                    });
+                }
                 itemstack.getCapability(ForgeCapabilities.ITEM_HANDLER, null).ifPresent(capability -> {
                     this.internal = capability;
                     this.bound = true;
@@ -108,10 +118,18 @@ public class SpellBookGuiMenu extends AbstractContainerMenu implements Supplier<
             yStart += 18;
             xStart = 34;
         }
+
+        for (int si = 0; si < 3; ++si)
+            for (int sj = 0; sj < 9; ++sj)
+                this.addSlot(new Slot(inv, sj + (si + 1) * 9, 67 + 8 + sj * 18, 85 + 84 + si * 18));
+        for (int si = 0; si < 9; ++si)
+            this.addSlot(new Slot(inv, si, 67 + 8 + si * 18, 85 + 142));
+
     }
 
-    private Slot createSlot(IItemHandler internal, int id, int bottomX, int i1) {
-        return new SlotItemHandler(internal, id, x, y) {
+
+    private Slot createSlot(IItemHandler internal, int id, int x, int y) {
+        Slot slot = new SlotItemHandler(internal, id, x, y) {
             private final int slot = id;
 
             @Override
@@ -119,6 +137,8 @@ public class SpellBookGuiMenu extends AbstractContainerMenu implements Supplier<
                 return SpellbookScrollCheck.check(itemstack);
             }
         };
+        this.addSlot(slot); // Add this line
+        return slot;
     }
 
     @Override

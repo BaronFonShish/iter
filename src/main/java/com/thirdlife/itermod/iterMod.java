@@ -47,6 +47,7 @@ public class iterMod {
 
 
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(ModScreens::clientLoad);
         MinecraftForge.EVENT_BUS.register(this);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);

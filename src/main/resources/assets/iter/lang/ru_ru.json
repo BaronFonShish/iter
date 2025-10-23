@@ -45,6 +45,9 @@
   "block.iter.etherbloom_plant": "Растущий эфироцвет",
   "enchantment.iter.sowing": "Посев",
   "enchantment.iter.flaying": "Свежеватель",
+  "enchantment.iter.sowing.desc": "Сажает растения обратно при жатве",
+  "enchantment.iter.flaying.desc": "Урон увеличивается с каждым ударом по той же цели",
+  "item.iter.spell_book": "Книга заклинаний",
   "block.iter.rotroot": "Гнилушка",
   "item.iter.rotroot": "Гнилушка",
   "item.iter.rotroot_seeds": "Семена гнилушки"

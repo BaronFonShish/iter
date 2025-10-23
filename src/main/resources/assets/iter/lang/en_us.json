@@ -47,7 +47,11 @@
   "enchantment.iter.flaying": "Flaying",
   "enchantment.iter.sowing.desc": "Replants the crops upon reaping",
   "enchantment.iter.flaying.desc": "Consecutive strikes accumulate damage",
+  "item.iter.spell_book": "Spell book",
   "block.iter.rotroot": "Rotroot",
   "item.iter.rotroot": "Rotroot",
-  "item.iter.rotroot_seeds": "Rotroot Seeds"
+  "item.iter.rotroot_seeds": "Rotroot Seeds",
+  "iterpg.spell.mana_cost": "Burnout: ",
+  "iterpg.spell.cast_time": "Casting time: ",
+  "iterpg.spell.cooldown": "Cooldown: "
 }

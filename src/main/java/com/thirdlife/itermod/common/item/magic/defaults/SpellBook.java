@@ -1,6 +1,7 @@
-package com.thirdlife.itermod.common.item.magic;
+package com.thirdlife.itermod.common.item.magic.defaults;
 
 import com.thirdlife.itermod.common.variables.SpellbookCapability;
+import com.thirdlife.itermod.world.gui.SpellBookGuiMenu;
 import io.netty.buffer.Unpooled;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -20,6 +21,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
@@ -35,7 +37,7 @@ public class SpellBook extends Item {
         if (entity instanceof ServerPlayer serverPlayer) {
             NetworkHooks.openScreen(serverPlayer, new MenuProvider() {
                 @Override
-                public Component getDisplayName() {
+                public @NotNull Component getDisplayName() {
                     return Component.literal("Spell Book");
                 }
 
@@ -44,7 +46,10 @@ public class SpellBook extends Item {
                     FriendlyByteBuf packetBuffer = new FriendlyByteBuf(Unpooled.buffer());
                     packetBuffer.writeBlockPos(entity.blockPosition());
                     packetBuffer.writeByte(hand == InteractionHand.MAIN_HAND ? 0 : 1);
-                    return new SpellbookGuiMenu(id, inventory, packetBuffer);
+                    return new SpellBookGuiMenu(id, inventory, packetBuffer);
+                }
+                public boolean stillValid(Player player) {
+                    return true;
                 }
             }, buf -> {
                 buf.writeBlockPos(entity.blockPosition());
