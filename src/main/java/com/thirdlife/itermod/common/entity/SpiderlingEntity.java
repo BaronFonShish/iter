@@ -9,9 +9,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
@@ -62,9 +60,11 @@ public class SpiderlingEntity extends Spider {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0, true));
-        this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 0.8));
-        this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0f));
+        this.goalSelector.addGoal(1, new FloatGoal(this));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0, true));
+        this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.8));
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 8.0F));
 
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
@@ -87,17 +87,28 @@ public class SpiderlingEntity extends Spider {
     }
 
     private void setupAnimationStates() {
-        if (this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = this.random.nextInt(40) + 80;
+
+        if (!this.idleAnimationState.isStarted()) {
             this.idleAnimationState.start(this.tickCount);
-        } else {
-            --this.idleAnimationTimeout;
         }
 
-        if (this.swinging) {
-            if (!this.attackAnimationState.isStarted()) {
-                this.attackAnimationState.start(this.tickCount);
-            }
+
+        if (this.swinging && !this.attackAnimationState.isStarted()) {
+            this.attackAnimationState.start(this.tickCount);
+        } else if (!this.swinging && this.attackAnimationState.isStarted()) {
+            this.attackAnimationState.stop();
         }
     }
+
+    @Override
+    public void onSyncedDataUpdated(EntityDataAccessor<?> data) {
+        super.onSyncedDataUpdated(data);
+
+        if (DATA_ID_ATTACKING.equals(data) && !this.swinging && this.level().isClientSide()) {
+            this.attackAnimationState.stop();
+        }
+    }
+
+    private static final EntityDataAccessor<Boolean> DATA_ID_ATTACKING =
+            SynchedEntityData.defineId(SpiderlingEntity.class, EntityDataSerializers.BOOLEAN);
 }

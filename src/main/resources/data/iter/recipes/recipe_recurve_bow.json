@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "aac",
+    "b c",
+    "aac"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:stick"
+    },
+    "b": {
+      "item": "minecraft:iron_ingot"
+    },
+    "c": {
+      "item": "iter:bowstring"
+    }
+  },
+  "result": {
+    "item": "iter:recurve_bow",
+    "count": 1
+  }
+}

@@ -105,11 +105,8 @@ public abstract class SpellFocus extends Item {
                 int useTime = player.getTicksUsingItem();
                 float castTime = spell.getCastTime(player);
 
-                if (useTime == 10){
 
-                }
-
-                if ((!level.isClientSide()) && ((useTime >= castTime)||(castTime<=1))) {
+                if ((!level.isClientSide()) && ((useTime >= castTime)||(castTime<=2))) {
                     float ether = spell.getManaCost(player);
                     float cooldown = spell.getCooldown(player);
                     float spellpower = spell.getSpellPower(player);

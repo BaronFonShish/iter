@@ -8,6 +8,7 @@ import com.thirdlife.itermod.iterMod;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.Tiers;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,6 +22,7 @@ public class ModItems {
     public static final RegistryObject<Item> ROUGH_NOSTELON = ITEMS.register("rough_nostelon", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> NOSTELON_NUGGET = ITEMS.register("nostelon_nugget", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SPIDER_SILK = ITEMS.register("spider_silk", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> BOWSTRING = ITEMS.register("bowstring", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ABYSSQUARTZ_SHARD = ITEMS.register("abyssquartz_shard", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ETHERDUST = ITEMS.register("etherdust", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> POTSHERD = ITEMS.register("potsherd", () -> new Item(new Item.Properties()));
@@ -34,6 +36,11 @@ public class ModItems {
     public static final RegistryObject<Item> ROTROOT = ITEMS.register("rotroot",() -> new RotrootItem(new Item.Properties()));
     public static final RegistryObject<Item> SPELL_BOOK = ITEMS.register("spell_book", SpellBook::new);
     public static final RegistryObject<Item> RECURVE_BOW = ITEMS.register("recurve_bow", RecurveBowItem::new);
+
+    public static final RegistryObject<Item> SPIDERLING_SPAWN_EGG =
+            ITEMS.register("spiderling_spawn_egg", () ->new ForgeSpawnEggItem
+                    (ModEntities.SPIDERLING, -2372425, -13029294, new Item.Properties()));
+
 
     public static final RegistryObject<Item> WOODEN_DAGGER = ITEMS.register("wooden_dagger",
             () -> new DaggerItem(Tiers.WOOD, new Item.Properties().stacksTo(1)));
