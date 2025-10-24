@@ -49,8 +49,8 @@ public class MageOverlay {
             event.getGuiGraphics().blit(new ResourceLocation("iter:textures/gui/mana_overlay.png"), 6, 5, 0, 0, 99, 50, 99, 50);
 
 
-            int spellNumber = MageUtils.getSpellSlot(entity);
-            event.getGuiGraphics().drawString(Minecraft.getInstance().font, String.valueOf(spellNumber), 11, 42, -16737844, false);
+            String spellNumber = MageOverlayUtils.rahh(entity);
+            event.getGuiGraphics().drawString(Minecraft.getInstance().font, spellNumber, 11, 42, -16737844, false);
           event.getGuiGraphics().drawString(Minecraft.getInstance().font,
                   ((int)MageUtils.getBurnout(entity) + "/" + (int)MageUtils.getThreshold(entity))
                   , 11, 25, -16750900, false);

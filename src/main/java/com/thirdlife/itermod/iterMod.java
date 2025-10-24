@@ -70,7 +70,7 @@ public class iterMod {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-
+        ModItemProperties.RegisterItemProperties();
     }
 
     @Mod.EventBusSubscriber(modid = iterMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -91,13 +91,13 @@ public class iterMod {
 
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-            // Spiderling
+
             event.registerLayerDefinition(SpiderlingModel.LAYER_LOCATION, SpiderlingModel::createBodyLayer);
         }
 
         @SubscribeEvent
         public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-            // Spiderling
+
             event.registerEntityRenderer(ModEntities.SPIDERLING.get(), context ->
                     new SpiderlingRenderer(context)
             );

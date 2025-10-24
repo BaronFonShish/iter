@@ -9,6 +9,7 @@ import com.thirdlife.itermod.common.variables.SpellSlotPacket;
 import com.thirdlife.itermod.iterMod;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.chat.report.ReportEnvironment;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -35,6 +36,8 @@ public class SpellSlotSelectMousewheel {
             return;
         }
 
+        if (!SpellBookUtils.hasSpellbook(player)) return;
+
         if (ModKeyBinds.SPELL_SLOT_SELECT.isDown()) {
             event.setCanceled(true);
 
@@ -57,16 +60,16 @@ public class SpellSlotSelectMousewheel {
 
         int direction = scrollDelta > 0 ? 1 : -1;
 
-        int newSlot = (currentSlot + direction) % 6;
+        int newSlot = (currentSlot + direction) % 8;
         if (newSlot < 1) {
-            newSlot = 6;
+            newSlot = 8;
         }
 
         mageData.setSelectedSpellSlot(newSlot);
+        MageUtils.syncSpellSlotServer(newSlot);
 
         MageUtils.syncSpellSlotClient(player);
-
-        player.playSound(SoundEvents.UI_BUTTON_CLICK.get(), 0.3f, 1.0f);
+        player.playSound(SoundEvents.UI_BUTTON_CLICK.get(), 0.2f, 1.0f);
 
     }
 

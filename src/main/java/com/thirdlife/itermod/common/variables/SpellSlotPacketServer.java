@@ -7,7 +7,6 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-// Client to server packet for spell slot changes
 public class SpellSlotPacketServer {
     private final int newSlot;
 

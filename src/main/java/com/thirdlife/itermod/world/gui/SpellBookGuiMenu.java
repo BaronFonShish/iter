@@ -1,5 +1,6 @@
 package com.thirdlife.itermod.world.gui;
 
+import com.thirdlife.itermod.common.event.SpellBookUtils;
 import com.thirdlife.itermod.common.event.SpellbookScrollCheck;
 import com.thirdlife.itermod.common.registry.ModMenus;
 import net.minecraft.core.BlockPos;
@@ -130,14 +131,14 @@ public class SpellBookGuiMenu extends AbstractContainerMenu implements Supplier<
 
     private Slot createSlot(IItemHandler internal, int id, int x, int y) {
         Slot slot = new SlotItemHandler(internal, id, x, y) {
-            private final int slot = id;
+            private final int slotid = id;
 
             @Override
             public boolean mayPlace(ItemStack itemstack) {
-                return SpellbookScrollCheck.check(itemstack);
+                return SpellBookUtils.isSpellItem(itemstack);
             }
         };
-        this.addSlot(slot); // Add this line
+        this.addSlot(slot);
         return slot;
     }
 

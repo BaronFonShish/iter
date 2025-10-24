@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
 public class SpellBookUtils {
 
     public static ItemStack getSpell(Player player) {
-        ItemStack spellbookStack = findSpellbookInInventory(player);
+        ItemStack spellbookStack = findSpellbook(player);
 
         if (spellbookStack.isEmpty()) {
             return getSpellFromOffhand(player);
@@ -34,17 +34,20 @@ public class SpellBookUtils {
                 }
             }
         }
-
         return getSpellFromOffhand(player);
     }
 
-    /**
-     * Finds the first spellbook in the player's inventory
-     * @param player The player to search
-     * @return The spellbook ItemStack, or ItemStack.EMPTY if not found
-     */
-    private static ItemStack findSpellbookInInventory(Player player) {
-        // Check main inventory (including hotbar)
+
+    public static boolean hasSpellbook(Player player){
+        if (!findSpellbook(player).isEmpty()){
+            return true;
+        }
+        return false;
+    }
+
+
+
+    public static ItemStack findSpellbook(Player player) {
         for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
             ItemStack stack = player.getInventory().getItem(i);
             if (stack.getItem() instanceof SpellBook) {
@@ -62,7 +65,7 @@ public class SpellBookUtils {
         return ItemStack.EMPTY;
     }
 
-    private static boolean isSpellItem(ItemStack stack) {
+    public static boolean isSpellItem(ItemStack stack) {
         if (stack.isEmpty()) {
             return false;
         }
@@ -74,7 +77,7 @@ public class SpellBookUtils {
 
     @Nullable
     public static ItemStack getSpellItemFromSlot(Player player, int slotOverride) {
-        ItemStack spellbookStack = findSpellbookInInventory(player);
+        ItemStack spellbookStack = findSpellbook(player);
 
         if (spellbookStack.isEmpty()) {
             return getSpellFromOffhand(player);

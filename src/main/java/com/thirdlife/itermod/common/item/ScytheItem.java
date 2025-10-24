@@ -56,6 +56,8 @@ public class ScytheItem extends TieredItem {
         return enchantment.category == EnchantmentCategory.WEAPON || super.canApplyAtEnchantingTable(stack, enchantment);
     }
 
+    public static final String ReachUUID = "c38ac4f4-d813-4ba7-a986-07c164f89266";
+
     @Override
     public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers (@NotNull final EquipmentSlot slot, final ItemStack itemStack)
     {
@@ -66,6 +68,7 @@ public class ScytheItem extends TieredItem {
                     ((this.getTier().getAttackDamageBonus() + 3) * 0.75f),
                     AttributeModifier.Operation.ADDITION));
             builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_UUID, "Weapon modifier", -2.7d, AttributeModifier.Operation.ADDITION));
+            builder.put(ForgeMod.ENTITY_REACH.get(), new AttributeModifier(UUID.fromString(ReachUUID), "Weapon modifier", 0.5d, AttributeModifier.Operation.ADDITION));
 
             Map<Enchantment, Integer> itemEnchants = itemStack.getAllEnchantments();
         }

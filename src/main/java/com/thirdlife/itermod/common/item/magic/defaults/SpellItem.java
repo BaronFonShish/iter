@@ -26,7 +26,7 @@ public abstract class SpellItem extends Item{
     private final int etherCost;
 
     public SpellItem(Properties properties, int castTime, int etherCost, int cooldown) {
-        super(properties);
+        super(properties.stacksTo(1));
         this.castTime = castTime;
         this.etherCost = etherCost;
         this.cooldown = cooldown;
@@ -93,36 +93,32 @@ public abstract class SpellItem extends Item{
             LocalPlayer clientPlayer = getClientPlayer();
             if (clientPlayer != null) {
 
-                float dynamicCastTime = getCastTime(clientPlayer);
-                float dynamicCooldown = getCooldown(clientPlayer);
+                float dynamicCastTime = getCastTime(clientPlayer)/20f;
+                float dynamicCooldown = getCooldown(clientPlayer)/20f;
                 float dynamicManaCost = getManaCost(clientPlayer);
 
-                list.add(Component.translatable("iterpg.spell.cast_time", ticksToSeconds(dynamicCastTime)));
+                String castTimeString = String.format("%.1f", dynamicCastTime);
+                String cooldownString = String.format("%.1f", dynamicCooldown);
+                String manaCostString = String.format("%.1f", dynamicManaCost);
+
+                list.add(Component.translatable("iterpg.spell.cast_time", dynamicCastTime));
 
                 list.add(Component.translatable("iterpg.spell.mana_cost", dynamicManaCost));
 
-                list.add(Component.translatable("iterpg.spell.cooldown", ticksToSeconds(dynamicCooldown)));
+                list.add(Component.translatable("iterpg.spell.cooldown", dynamicCooldown));
 
             } else {
-                list.add(Component.translatable("iterpg.spell.cast_time",
-                        ticksToSeconds(castTime)).withStyle(ChatFormatting.GRAY));
+                list.add(Component.translatable("iterpg.spell.cast_time", castTime));
 
-                list.add(Component.translatable("iterpg.spell.mana_cost",
-                                Component.literal(String.valueOf(etherCost)).withStyle(ChatFormatting.AQUA))
-                        .withStyle(ChatFormatting.GRAY));
+                list.add(Component.translatable("iterpg.spell.mana_cost", etherCost));
 
-                list.add(Component.translatable("iterpg.spell.cooldown",
-                        ticksToSeconds(cooldown)).withStyle(ChatFormatting.GRAY));
+                list.add(Component.translatable("iterpg.spell.cooldown", cooldown));
             }
             list.add(Component.literal(""));
             list.add(Component.translatable(baseKey + ".desc"));
         }
     }
 
-    private Component ticksToSeconds(float ticks) {
-        float seconds = ticks / 20f;
-        return Component.literal(String.format("%.1fs", seconds)).withStyle(ChatFormatting.WHITE);
-    }
 
     @OnlyIn(Dist.CLIENT)
     private LocalPlayer getClientPlayer() {

@@ -51,7 +51,7 @@
   "block.iter.rotroot": "Rotroot",
   "item.iter.rotroot": "Rotroot",
   "item.iter.rotroot_seeds": "Rotroot Seeds",
-  "iterpg.spell.mana_cost": "Burnout: ",
-  "iterpg.spell.cast_time": "Casting time: ",
-  "iterpg.spell.cooldown": "Cooldown: "
+  "iterpg.spell.cast_time": "Casting time: %ss",
+  "iterpg.spell.mana_cost": "Burnout: %s",
+  "iterpg.spell.cooldown": "Cooldown: %ss"
 }
