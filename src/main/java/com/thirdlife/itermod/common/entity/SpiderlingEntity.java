@@ -61,7 +61,12 @@ public class SpiderlingEntity extends Spider {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0, true));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0, true){
+            @Override
+            protected double getAttackReachSqr(LivingEntity entity) {
+                return 0.5;
+            }
+        });
         this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.8));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 8.0F));
@@ -92,12 +97,17 @@ public class SpiderlingEntity extends Spider {
             this.idleAnimationState.start(this.tickCount);
         }
 
-
         if (this.swinging && !this.attackAnimationState.isStarted()) {
             this.attackAnimationState.start(this.tickCount);
         } else if (!this.swinging && this.attackAnimationState.isStarted()) {
             this.attackAnimationState.stop();
         }
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_ID_ATTACKING, false);
     }
 
     @Override

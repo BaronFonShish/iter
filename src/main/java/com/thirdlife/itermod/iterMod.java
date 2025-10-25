@@ -1,7 +1,12 @@
 package com.thirdlife.itermod;
 
 import com.mojang.logging.LogUtils;
+import com.thirdlife.itermod.client.model.EtherboltModel;
+import com.thirdlife.itermod.client.model.GoblinWarriorModel;
 import com.thirdlife.itermod.client.model.SpiderlingModel;
+import com.thirdlife.itermod.client.renderer.EtherboltRenderer;
+import com.thirdlife.itermod.client.renderer.GoblinWarriorRenderer;
+import com.thirdlife.itermod.common.entity.GoblinWarriorEntity;
 import com.thirdlife.itermod.common.entity.SpiderlingEntity;
 import com.thirdlife.itermod.common.registry.*;
 import com.thirdlife.itermod.client.renderer.SpiderlingRenderer;
@@ -78,6 +83,7 @@ public class iterMod {
         @SubscribeEvent
         public static void onAttributeCreate(EntityAttributeCreationEvent event) {
             event.put(ModEntities.SPIDERLING.get(), SpiderlingEntity.createAttributes().build());
+            event.put(ModEntities.GOBLIN_WARRIOR.get(), GoblinWarriorEntity.createAttributes().build());
         }
     }
 
@@ -93,14 +99,16 @@ public class iterMod {
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
 
             event.registerLayerDefinition(SpiderlingModel.LAYER_LOCATION, SpiderlingModel::createBodyLayer);
+            event.registerLayerDefinition(SpiderlingModel.LAYER_LOCATION, EtherboltModel::createBodyLayer);
+            event.registerLayerDefinition(GoblinWarriorModel.LAYER_LOCATION, GoblinWarriorModel::createBodyLayer);
         }
 
         @SubscribeEvent
         public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 
-            event.registerEntityRenderer(ModEntities.SPIDERLING.get(), context ->
-                    new SpiderlingRenderer(context)
-            );
+            event.registerEntityRenderer(ModEntities.SPIDERLING.get(), SpiderlingRenderer::new);
+            event.registerEntityRenderer(ModEntities.ETHERBOLT.get(), EtherboltRenderer::new);
+            event.registerEntityRenderer(ModEntities.GOBLIN_WARRIOR.get(), GoblinWarriorRenderer::new);
         }
 
         @SubscribeEvent

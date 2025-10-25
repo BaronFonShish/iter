@@ -40,6 +40,10 @@ public class ModAttributes {
             () -> new RangedAttribute("attribute.iter.ether_burnout_threshold", 50.0, 0.0, 16384.0)
                     .setSyncable(true));
 
+    public static final RegistryObject<Attribute> REGENERATION = ATTRIBUTES.register("regeneration",
+            () -> new RangedAttribute("attribute.regeneration", 0.0, 0.0, 16384.0)
+                    .setSyncable(true));
+
 
 
     @SubscribeEvent
@@ -50,6 +54,8 @@ public class ModAttributes {
 
         event.add(EntityType.PLAYER, ETHER_BURNOUT_DISSIPATION.get());
         event.add(EntityType.PLAYER, ETHER_BURNOUT_THRESHOLD.get());
+
+        event.add(EntityType.PLAYER, REGENERATION.get());
 
     }
 
@@ -65,6 +71,8 @@ public class ModAttributes {
 
             newP.getAttribute(ETHER_BURNOUT_DISSIPATION.get()).setBaseValue(oldP.getAttribute(ETHER_BURNOUT_DISSIPATION.get()).getBaseValue());
             newP.getAttribute(ETHER_BURNOUT_THRESHOLD.get()).setBaseValue(oldP.getAttribute(ETHER_BURNOUT_THRESHOLD.get()).getBaseValue());
+
+            newP.getAttribute(REGENERATION.get()).setBaseValue(oldP.getAttribute(REGENERATION.get()).getBaseValue());
         }
     }
 }

@@ -31,7 +31,7 @@ public class DaggerItem extends TieredItem {
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return enchantment.category == EnchantmentCategory.WEAPON || super.canApplyAtEnchantingTable(stack, enchantment);
+        return ((enchantment.category == EnchantmentCategory.WEAPON) && (enchantment != Enchantments.SWEEPING_EDGE))|| super.canApplyAtEnchantingTable(stack, enchantment);
     }
 
 
