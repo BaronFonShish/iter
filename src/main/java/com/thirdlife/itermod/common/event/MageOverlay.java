@@ -46,7 +46,7 @@ public class MageOverlay {
             float perc = (1f-(MageUtils.getBurnout(entity)/MageUtils.getThreshold(entity)));
             int progress = Math.min(Math.max(0, (int)(perc * 83)), 84);
 
-            event.getGuiGraphics().blit(new ResourceLocation("iter:textures/gui/mana_overlay.png"), 6, 5, 0, 0, 99, 50, 99, 50);
+            event.getGuiGraphics().blit(new ResourceLocation("iter:textures/gui/mana_overlay.png"), 6, 5, 0, 0, 120, 50, 120, 50);
 
 
             String spellNumber = MageOverlayUtils.rahh(entity);
@@ -54,7 +54,7 @@ public class MageOverlay {
           event.getGuiGraphics().drawString(Minecraft.getInstance().font,
                   ((int)MageUtils.getBurnout(entity) + "/" + (int)MageUtils.getThreshold(entity))
                   , 11, 25, -16750900, false);
-//            event.getGuiGraphics().drawString(Minecraft.getInstance().font, ReturnSpellNameProcedure.execute(entity), 23, 42, -3381505, false);
+            event.getGuiGraphics().drawString(Minecraft.getInstance().font, MageOverlayUtils.Grrr(entity), 23, 42, -3381505, false);
             event.getGuiGraphics().blit(new ResourceLocation("iter:textures/gui/etherbar_full.png"), 9, 8, 0, 0, 83 - progress, 9, 83, 9);
 
         }

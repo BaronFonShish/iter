@@ -1,0 +1,73 @@
+{
+"variants": {
+"facing=north,chewing=0": {
+"model": "iter:block/cruncher"
+},
+"facing=east,chewing=0": {
+"model": "iter:block/cruncher",
+"y": 90
+},
+"facing=south,chewing=0": {
+"model": "iter:block/cruncher",
+"y": 180
+},
+"facing=west,chewing=0": {
+"model": "iter:block/cruncher",
+"y": 270
+},
+"facing=up,chewing=0": {
+"model": "iter:block/cruncher",
+"x": 270
+},
+"facing=down,chewing=0": {
+"model": "iter:block/cruncher",
+"x": 90
+},
+"facing=north,chewing=1": {
+"model": "iter:block/cruncher_chew_0"
+},
+"facing=east,chewing=1": {
+"model": "iter:block/cruncher_chew_0",
+"y": 90
+},
+"facing=south,chewing=1": {
+"model": "iter:block/cruncher_chew_0",
+"y": 180
+},
+"facing=west,chewing=1": {
+"model": "iter:block/cruncher_chew_0",
+"y": 270
+},
+"facing=up,chewing=1": {
+"model": "iter:block/cruncher_chew_0",
+"x": 270
+},
+"facing=down,chewing=1": {
+"model": "iter:block/cruncher_chew_0",
+"x": 90
+},
+"facing=north,chewing=2": {
+"model": "iter:block/cruncher_chew_1"
+},
+"facing=east,chewing=2": {
+"model": "iter:block/cruncher_chew_1",
+"y": 90
+},
+"facing=south,chewing=2": {
+"model": "iter:block/cruncher_chew_1",
+"y": 180
+},
+"facing=west,chewing=2": {
+"model": "iter:block/cruncher_chew_1",
+"y": 270
+},
+"facing=up,chewing=2": {
+"model": "iter:block/cruncher_chew_1",
+"x": 270
+},
+"facing=down,chewing=2": {
+"model": "iter:block/cruncher_chew_1",
+"x": 90
+}
+}
+}

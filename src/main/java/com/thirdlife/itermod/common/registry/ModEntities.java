@@ -1,6 +1,7 @@
 package com.thirdlife.itermod.common.registry;
 
 //import com.thirdlife.itermod.common.entity.FlailHeadEntity;
+import com.thirdlife.itermod.common.entity.GoblinEntity;
 import com.thirdlife.itermod.common.entity.GoblinWarriorEntity;
 import com.thirdlife.itermod.common.entity.misc.EtherboltEntity;
 import com.thirdlife.itermod.iterMod;
@@ -42,6 +43,12 @@ public class ModEntities {
                             .sized(0.5f, 1f)
                             .build("goblin_warrior"));
 
+    public static final RegistryObject<EntityType<GoblinEntity>> GOBLIN =
+            ENTITY_TYPES.register("goblin",
+                    () -> EntityType.Builder.<GoblinEntity>of(GoblinEntity::new, MobCategory.MONSTER)
+                            .setTrackingRange(64)
+                            .sized(0.5f, 0.9f)
+                            .build("goblin"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

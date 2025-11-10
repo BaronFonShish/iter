@@ -104,13 +104,6 @@ public class AbyssquartzCrystal extends Block implements SimpleWaterloggedBlock 
         return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
     }
 
-    public boolean canSurvive(BlockState state, Level level, BlockPos pos) {
-        Direction facing = state.getValue(FACING);
-        BlockPos supportingPos = pos.relative(facing.getOpposite());
-
-        return BlockPlacementChecks.isFaceSolid(level, supportingPos, facing);
-    }
-
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
@@ -123,7 +116,6 @@ public class AbyssquartzCrystal extends Block implements SimpleWaterloggedBlock 
         }
         return !state.canSurvive(world, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, world, currentPos, facingPos);
     }
-
 
     @Override
     public boolean canHarvestBlock(BlockState state, BlockGetter world, BlockPos pos, Player player) {

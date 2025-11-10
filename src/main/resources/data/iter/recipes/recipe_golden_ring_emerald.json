@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:emerald"
+    },
+    {
+      "item": "iter:golden_ring"
+    }
+  ],
+  "result": {
+    "item": "iter:golden_ring_emerald",
+    "count": 1
+  }
+}

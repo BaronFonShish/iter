@@ -1,0 +1,9 @@
+{
+  "parent": "iter:custom/vase",
+  "textures": {
+    "all": "iter:block/vase",
+    "particle": "iter:block/vase",
+    "0": "iter:block/vase"
+  },
+  "render_type": "cutout_mipped"
+}

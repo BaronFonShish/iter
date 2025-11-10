@@ -64,7 +64,7 @@ public class SpiderlingEntity extends Spider {
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0, true){
             @Override
             protected double getAttackReachSqr(LivingEntity entity) {
-                return 0.5;
+                return 0.75;
             }
         });
         this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.8));

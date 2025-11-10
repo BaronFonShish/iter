@@ -28,7 +28,6 @@ public class ModCreativeTabEvents {
     @SubscribeEvent
     public static void onCreativeTab(BuildCreativeModeTabContentsEvent event) {
         List<TabInsertion> insertions = List.of(
-
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.AMETHYST_SHARD), new ItemStack(ModItems.NOSTELON.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.NOSTELON.get()), new ItemStack(ModItems.ROUGH_NOSTELON.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.ROUGH_NOSTELON.get()), new ItemStack(ModItems.NOSTELON_NUGGET.get())),
@@ -37,6 +36,7 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.BOWL), new ItemStack(ModItems.POTSHERD.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.STRING), new ItemStack(ModItems.SPIDER_SILK.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.ABYSSQUARTZ_SHARD.get()), new ItemStack(ModItems.ETHERDUST.get())),
+                new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.FLINT), new ItemStack(ModItems.GOBSTEEL_SCRAP.get())),
 
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Blocks.DEEPSLATE_LAPIS_ORE), new ItemStack(ModBlocks.NOSTELON_ORE.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.NOSTELON_ORE.get()), new ItemStack(ModBlocks.DEEPSLATE_NOSTELON_ORE.get())),
@@ -75,11 +75,38 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.STONE_SCYTHE.get()), new ItemStack(ModItems.IRON_SCYTHE.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.IRON_SCYTHE.get()), new ItemStack(ModItems.GOLDEN_SCYTHE.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.GOLDEN_SCYTHE.get()), new ItemStack(ModItems.DIAMOND_SCYTHE.get())),
-                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.DIAMOND_SCYTHE.get()), new ItemStack(ModItems.NETHERITE_SCYTHE.get()))
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.DIAMOND_SCYTHE.get()), new ItemStack(ModItems.NETHERITE_SCYTHE.get())),
 
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(Items.BOW), new ItemStack(ModItems.RECURVE_BOW.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(Items.NETHERITE_SWORD), new ItemStack(ModItems.GOBSTEEL_SWORD.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(Items.NETHERITE_AXE), new ItemStack(ModItems.GOBSTEEL_AXE.get())),
 
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(Items.TURTLE_HELMET), new ItemStack(ModItems.IRON_RING.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.IRON_RING.get()), new ItemStack(ModItems.GOLDEN_RING.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.GOLDEN_RING.get()), new ItemStack(ModItems.NETHERITE_RING.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.NETHERITE_RING.get()), new ItemStack(ModItems.IRON_RING_DIAMOND.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.IRON_RING_DIAMOND.get()), new ItemStack(ModItems.GOLDEN_RING_DIAMOND.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.GOLDEN_RING_DIAMOND.get()), new ItemStack(ModItems.NETHERITE_RING_DIAMOND.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.NETHERITE_RING_DIAMOND.get()), new ItemStack(ModItems.IRON_RING_EMERALD.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.IRON_RING_EMERALD.get()), new ItemStack(ModItems.GOLDEN_RING_EMERALD.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.GOLDEN_RING_EMERALD.get()), new ItemStack(ModItems.NETHERITE_RING_EMERALD.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.NETHERITE_RING_EMERALD.get()), new ItemStack(ModItems.IRON_RING_NOSTELON.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.IRON_RING_NOSTELON.get()), new ItemStack(ModItems.GOLDEN_RING_NOSTELON.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.GOLDEN_RING_NOSTELON.get()), new ItemStack(ModItems.NETHERITE_RING_NOSTELON.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.NETHERITE_RING_NOSTELON.get()), new ItemStack(ModItems.IRON_RING_ABYSSQUARTZ.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.IRON_RING_ABYSSQUARTZ.get()), new ItemStack(ModItems.GOLDEN_RING_ABYSSQUARTZ.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.GOLDEN_RING_ABYSSQUARTZ.get()), new ItemStack(ModItems.NETHERITE_RING_ABYSSQUARTZ.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.NETHERITE_RING_ABYSSQUARTZ.get()), new ItemStack(ModItems.IRON_RING_AMETHYST.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.IRON_RING_AMETHYST.get()), new ItemStack(ModItems.GOLDEN_RING_AMETHYST.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.GOLDEN_RING_AMETHYST.get()), new ItemStack(ModItems.NETHERITE_RING_AMETHYST.get())),
 
+                new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(Items.NETHERITE_HOE), new ItemStack(ModItems.GOBSTEEL_SHOVEL.get())),
+                new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(ModItems.GOBSTEEL_SHOVEL.get()), new ItemStack(ModItems.GOBSTEEL_PICKAXE.get())),
+                new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(ModItems.GOBSTEEL_PICKAXE.get()), new ItemStack(ModItems.GOBSTEEL_AXE.get())),
+                new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(ModItems.GOBSTEEL_AXE.get()), new ItemStack(ModItems.GOBSTEEL_HOE.get()))
         );
+
+
 
         for (TabInsertion ins : insertions) {
             if (event.getTabKey() == ins.tab()) {
@@ -90,5 +117,6 @@ public class ModCreativeTabEvents {
                 );
             }
         }
+
     }
 }

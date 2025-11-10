@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "iter:netherite_ring_flint"
+    }
+  ],
+  "result": {
+    "item": "minecraft:flint",
+    "count": 1
+  }
+}

@@ -1,13 +1,14 @@
 package com.thirdlife.itermod.common.registry;
 
 import com.thirdlife.itermod.common.item.*;
+import com.thirdlife.itermod.common.item.curio.*;
 import com.thirdlife.itermod.common.item.magic.foci.BoneStaff;
 import com.thirdlife.itermod.common.item.magic.defaults.SpellBook;
+import com.thirdlife.itermod.common.item.magic.spells.SpellEtherbolt;
 import com.thirdlife.itermod.common.item.magic.spells.SpellLesserHeal;
+import com.thirdlife.itermod.common.misc.GobsteelTier;
 import com.thirdlife.itermod.iterMod;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -21,6 +22,7 @@ public class ModItems {
     public static final RegistryObject<Item> NOSTELON = ITEMS.register("nostelon", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ROUGH_NOSTELON = ITEMS.register("rough_nostelon", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> NOSTELON_NUGGET = ITEMS.register("nostelon_nugget", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GOBSTEEL_SCRAP = ITEMS.register("gobsteel_scrap", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SPIDER_SILK = ITEMS.register("spider_silk", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> BOWSTRING = ITEMS.register("bowstring", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ABYSSQUARTZ_SHARD = ITEMS.register("abyssquartz_shard", () -> new Item(new Item.Properties()));
@@ -94,9 +96,40 @@ public class ModItems {
     public static final RegistryObject<Item> NETHERITE_SPEAR = ITEMS.register("netherite_spear",
             () -> new SpearItem(Tiers.NETHERITE, new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> GOBSTEEL_SWORD = ITEMS.register("gobsteel_sword",
+            () -> new SwordItem(GobsteelTier.INSTANCE, 3, -2.4F, new Item.Properties()));
+    public static final RegistryObject<Item> GOBSTEEL_PICKAXE = ITEMS.register("gobsteel_pickaxe",
+            () -> new PickaxeItem(GobsteelTier.INSTANCE, 1, -2.8F, new Item.Properties()));
+    public static final RegistryObject<Item> GOBSTEEL_AXE = ITEMS.register("gobsteel_axe",
+            () -> new AxeItem(GobsteelTier.INSTANCE, 6.0F, -3.2F, new Item.Properties()));
+    public static final RegistryObject<Item> GOBSTEEL_SHOVEL = ITEMS.register("gobsteel_shovel",
+            () -> new ShovelItem(GobsteelTier.INSTANCE, 1.5F, -3.0F, new Item.Properties()));
+    public static final RegistryObject<Item> GOBSTEEL_HOE = ITEMS.register("gobsteel_hoe",
+            () -> new HoeItem(GobsteelTier.INSTANCE, -2, -1.0F, new Item.Properties()));
+
+    public static final RegistryObject<Item> IRON_RING = ITEMS.register("iron_ring", IronRing::new);
+    public static final RegistryObject<Item> GOLDEN_RING = ITEMS.register("golden_ring", GoldenRing::new);
+    public static final RegistryObject<Item> NETHERITE_RING = ITEMS.register("netherite_ring", NetheriteRing::new);
+    public static final RegistryObject<Item> IRON_RING_DIAMOND = ITEMS.register("iron_ring_diamond", IronRingDiamond::new);
+    public static final RegistryObject<Item> GOLDEN_RING_DIAMOND = ITEMS.register("golden_ring_diamond", GoldenRingDiamond::new);
+    public static final RegistryObject<Item> NETHERITE_RING_DIAMOND = ITEMS.register("netherite_ring_diamond", NetheriteRingDiamond::new);
+    public static final RegistryObject<Item> IRON_RING_NOSTELON = ITEMS.register("iron_ring_nostelon", IronRingNostelon::new);
+    public static final RegistryObject<Item> GOLDEN_RING_NOSTELON = ITEMS.register("golden_ring_nostelon", GoldenRingNostelon::new);
+    public static final RegistryObject<Item> NETHERITE_RING_NOSTELON = ITEMS.register("netherite_ring_nostelon", NetheriteRingNostelon::new);
+    public static final RegistryObject<Item> IRON_RING_ABYSSQUARTZ = ITEMS.register("iron_ring_abyssquartz", IronRingAbyssquartz::new);
+    public static final RegistryObject<Item> GOLDEN_RING_ABYSSQUARTZ = ITEMS.register("golden_ring_abyssquartz", GoldenRingAbyssquartz::new);
+    public static final RegistryObject<Item> NETHERITE_RING_ABYSSQUARTZ = ITEMS.register("netherite_ring_abyssquartz", NetheriteRingAbyssquartz::new);
+    public static final RegistryObject<Item> IRON_RING_EMERALD = ITEMS.register("iron_ring_emerald", IronRingEmerald::new);
+    public static final RegistryObject<Item> GOLDEN_RING_EMERALD = ITEMS.register("golden_ring_emerald", GoldenRingEmerald::new);
+    public static final RegistryObject<Item> NETHERITE_RING_EMERALD = ITEMS.register("netherite_ring_emerald", NetheriteRingEmerald::new);
+    public static final RegistryObject<Item> IRON_RING_AMETHYST = ITEMS.register("iron_ring_amethyst", IronRingAmethyst::new);
+    public static final RegistryObject<Item> GOLDEN_RING_AMETHYST = ITEMS.register("golden_ring_amethyst", GoldenRingAmethyst::new);
+    public static final RegistryObject<Item> NETHERITE_RING_AMETHYST = ITEMS.register("netherite_ring_amethyst", NetheriteRingAmethyst::new);
+
     public static final RegistryObject<Item> BONE_STAFF = ITEMS.register("bone_staff", BoneStaff::new);
 
     public static final RegistryObject<Item> SPELL_LESSER_HEAL = ITEMS.register("spell_lesser_heal", SpellLesserHeal::new);
+    public static final RegistryObject<Item> SPELL_ETHERBOLT = ITEMS.register("spell_etherbolt", SpellEtherbolt::new);
 
 
     public static void register(IEventBus eventBus) {

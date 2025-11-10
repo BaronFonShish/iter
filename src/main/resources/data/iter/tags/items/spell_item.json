@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "iter:spell_lesser_heal"
+    "iter:spell_lesser_heal",
+    "iter:spell_etherbolt"
+
   ]
 }

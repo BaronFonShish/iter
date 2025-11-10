@@ -19,22 +19,22 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, iterMod.MOD_ID);
 
-    public static final RegistryObject<Block> NOSTELON_ORE = registerBlock("nostelon_ore",
-            () -> new NostelonOreBlock());
-    public static final RegistryObject<Block> DEEPSLATE_NOSTELON_ORE = registerBlock("deepslate_nostelon_ore",
-            () -> new DeepslateNostelonOreBlock());
-    public static final RegistryObject<Block> ABYSSQUARTZ_BLOCK = registerBlock("abyssquartz_block",
-            () -> new AbyssquartzBlock());
-    public static final RegistryObject<Block> ABYSSQUARTZ_CRYSTAL = registerBlock("abyssquartz_crystal",
-            () -> new AbyssquartzCrystal());
-    public static final RegistryObject<Block> SPIDER_EGG = registerBlock("spider_egg",
-            () -> new SpiderEggBlock());
+    public static final RegistryObject<Block> NOSTELON_ORE = registerBlock("nostelon_ore", NostelonOreBlock::new);
+    public static final RegistryObject<Block> DEEPSLATE_NOSTELON_ORE = registerBlock("deepslate_nostelon_ore", DeepslateNostelonOreBlock::new);
+    public static final RegistryObject<Block> ABYSSQUARTZ_BLOCK = registerBlock("abyssquartz_block", AbyssquartzBlock::new);
+    public static final RegistryObject<Block> ABYSSQUARTZ_CRYSTAL = registerBlock("abyssquartz_crystal", AbyssquartzCrystal::new);
+    public static final RegistryObject<Block> SPIDER_EGG = registerBlock("spider_egg", SpiderEggBlock::new);
     public static final RegistryObject<Block> ROTROOT = registerBlockItemless("rotroot",
             () -> new RotrootBlock(BlockBehaviour.Properties.copy(Blocks.BEETROOTS).sound(SoundType.CROP).noOcclusion().noCollission()));
-    public static final RegistryObject<Block> ETHERBLOOM = registerBlock("etherbloom",
-            () -> new Etherbloom());
+    public static final RegistryObject<Block> ETHERBLOOM = registerBlock("etherbloom", Etherbloom::new);
     public static final RegistryObject<Block> ETHERBLOOM_PLANT = registerBlockItemless("etherbloom_plant",
             () -> new EtherbloomPlant(BlockBehaviour.Properties.copy(Blocks.POPPY).sound(SoundType.GRASS).noOcclusion().offsetType(BlockBehaviour.OffsetType.NONE).noCollission()));
+
+    public static final RegistryObject<Block> ANCIENT_VASE = registerBlock("ancient_vase", AncientVaseBlock::new);
+    public static final RegistryObject<Block> ANCIENT_BIG_VASE = registerBlock("ancient_big_vase", AncientBigVaseBlock::new);
+    public static final RegistryObject<Block> ANCIENT_SMALL_VASE = registerBlock("ancient_small_vase", AncientSmallVaseBlock::new);
+
+    public static final RegistryObject<Block> CRUNCHER = registerBlock("cruncher", CruncherBlock::new);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

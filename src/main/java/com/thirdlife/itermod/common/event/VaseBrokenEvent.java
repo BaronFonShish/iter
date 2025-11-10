@@ -40,7 +40,7 @@ public class VaseBrokenEvent {
         RandomSource random = world.getRandom();
         double toSpawn = Mth.nextFloat(random, 0f, 1f);
 
-        if (toSpawn >= 0.95f) {
+        if (toSpawn >= 0.975f) {
 
             double spawnX = x + Mth.nextDouble(random, 0.4f, 0.6f);
             double spawnY = y + Mth.nextDouble(random, 0.4f, 0.6f);
@@ -48,7 +48,7 @@ public class VaseBrokenEvent {
 
             BlockPos spawnPos = BlockPos.containing(spawnX, spawnY, spawnZ);
 
-            Entity entityToSpawn = EntityType.BAT.spawn(serverLevel, spawnPos, MobSpawnType.MOB_SUMMONED);
+            Entity entityToSpawn = null;
 
             toSpawn = Mth.nextFloat(random, 0f, 1f);
 
@@ -61,7 +61,7 @@ public class VaseBrokenEvent {
                 entityToSpawn = EntityType.SILVERFISH.spawn(serverLevel, spawnPos, MobSpawnType.MOB_SUMMONED);
             } else if (toSpawn >= 0.5f){
                 entityToSpawn = ModEntities.SPIDERLING.get().spawn(serverLevel, spawnPos, MobSpawnType.MOB_SUMMONED);
-            }
+            } else entityToSpawn = EntityType.BAT.spawn(serverLevel, spawnPos, MobSpawnType.MOB_SUMMONED);
 
             if (entityToSpawn != null) {
                 entityToSpawn.setYRot(random.nextFloat() * 360.0F);

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "iter:golden_ring_abyssquartz"
+    }
+  ],
+  "result": {
+    "item": "iter:abyssquartz_shard",
+    "count": 1
+  }
+}

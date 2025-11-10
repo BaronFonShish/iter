@@ -15,7 +15,7 @@ import net.minecraft.world.entity.Entity;
 
 public class EtherboltModel<T extends Entity> extends EntityModel<T> {
 
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("iter", "etherbolt"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("itermod", "etherbolt"), "main");
 	private final ModelPart projectile;
 	private final ModelPart base;
 	private final ModelPart trail;
@@ -30,7 +30,7 @@ public class EtherboltModel<T extends Entity> extends EntityModel<T> {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition projectile = partdefinition.addOrReplaceChild("projectile", CubeListBuilder.create(), PartPose.offset(0.0F, 13.5F, 0.0F));
+		PartDefinition projectile = partdefinition.addOrReplaceChild("projectile", CubeListBuilder.create(), PartPose.offset(0.0F, 0.5F, 0.0F));
 
 		PartDefinition base = projectile.addOrReplaceChild("base", CubeListBuilder.create().texOffs(0, 0).addBox(-1.5F, -1.5F, -1.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
@@ -41,7 +41,8 @@ public class EtherboltModel<T extends Entity> extends EntityModel<T> {
 
 	@Override
 	public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
+        this.base.yRot = ageInTicks / 5f;
+        this.trail.yRot = ageInTicks / -5f;
 	}
 
 	@Override

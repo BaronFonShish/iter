@@ -1,0 +1,21 @@
+{
+  "replace": "false",
+  "values": [
+    "minecraft:air",
+    "iter:iron_ring",
+    "iter:golden_ring",
+    "iter:netherite_ring",
+    "iter:iron_ring_diamond",
+    "iter:golden_ring_diamond",
+    "iter:netherite_ring_diamond",
+    "iter:iron_ring_nostelon",
+    "iter:golden_ring_nostelon",
+    "iter:netherite_ring_nostelon",
+    "iter:iron_ring_abyssquartz",
+    "iter:golden_ring_abyssquartz",
+    "iter:netherite_ring_abyssquartz",
+    "iter:iron_ring_emerald",
+    "iter:golden_ring_emerald",
+    "iter:netherite_ring_emerald"
+  ]
+}

@@ -3,9 +3,12 @@ package com.thirdlife.itermod;
 import com.mojang.logging.LogUtils;
 import com.thirdlife.itermod.client.model.EtherboltModel;
 import com.thirdlife.itermod.client.model.GoblinWarriorModel;
+import com.thirdlife.itermod.client.model.ModModelLayers;
 import com.thirdlife.itermod.client.model.SpiderlingModel;
 import com.thirdlife.itermod.client.renderer.EtherboltRenderer;
+import com.thirdlife.itermod.client.renderer.GoblinRenderer;
 import com.thirdlife.itermod.client.renderer.GoblinWarriorRenderer;
+import com.thirdlife.itermod.common.entity.GoblinEntity;
 import com.thirdlife.itermod.common.entity.GoblinWarriorEntity;
 import com.thirdlife.itermod.common.entity.SpiderlingEntity;
 import com.thirdlife.itermod.common.registry.*;
@@ -22,12 +25,16 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.slf4j.Logger;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotTypeMessage;
+import top.theillusivec4.curios.api.SlotTypePreset;
 
 
 @Mod(iterMod.MOD_ID)
@@ -56,12 +63,14 @@ public class iterMod {
         MinecraftForge.EVENT_BUS.register(this);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModBlockEntities.REGISTRY.register(modEventBus);
         ModEnchantments.ENCHANTMENTS.register(modEventBus);
         ModEntities.register(modEventBus);
         ModFeatures.REGISTRY.register(modEventBus);
         ModAttributes.ATTRIBUTES.register(modEventBus);
         modEventBus.addListener(ModCapabilities::register);
         ModMenus.REGISTRY.register(modEventBus);
+
 
         int id = 0;
         PACKET_HANDLER.registerMessage(id++, EtherBurnoutPacket.class,
@@ -76,6 +85,11 @@ public class iterMod {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         ModItemProperties.RegisterItemProperties();
+
+        event.enqueueWork(() -> {
+            ModCuriosSlots.enqueueIMC(event);
+        });
+
     }
 
     @Mod.EventBusSubscriber(modid = iterMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -84,6 +98,7 @@ public class iterMod {
         public static void onAttributeCreate(EntityAttributeCreationEvent event) {
             event.put(ModEntities.SPIDERLING.get(), SpiderlingEntity.createAttributes().build());
             event.put(ModEntities.GOBLIN_WARRIOR.get(), GoblinWarriorEntity.createAttributes().build());
+            event.put(ModEntities.GOBLIN.get(), GoblinEntity.createAttributes().build());
         }
     }
 
@@ -97,10 +112,7 @@ public class iterMod {
 
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-
-            event.registerLayerDefinition(SpiderlingModel.LAYER_LOCATION, SpiderlingModel::createBodyLayer);
-            event.registerLayerDefinition(SpiderlingModel.LAYER_LOCATION, EtherboltModel::createBodyLayer);
-            event.registerLayerDefinition(GoblinWarriorModel.LAYER_LOCATION, GoblinWarriorModel::createBodyLayer);
+            ModModelLayers.registerLayerDefinitions(event);
         }
 
         @SubscribeEvent
@@ -109,6 +121,7 @@ public class iterMod {
             event.registerEntityRenderer(ModEntities.SPIDERLING.get(), SpiderlingRenderer::new);
             event.registerEntityRenderer(ModEntities.ETHERBOLT.get(), EtherboltRenderer::new);
             event.registerEntityRenderer(ModEntities.GOBLIN_WARRIOR.get(), GoblinWarriorRenderer::new);
+            event.registerEntityRenderer(ModEntities.GOBLIN.get(), GoblinRenderer::new);
         }
 
         @SubscribeEvent

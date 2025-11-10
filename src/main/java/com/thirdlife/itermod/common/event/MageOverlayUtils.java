@@ -1,5 +1,7 @@
 package com.thirdlife.itermod.common.event;
 
+import com.thirdlife.itermod.common.item.magic.defaults.SpellItem;
+import com.thirdlife.itermod.common.variables.MageDataProvider;
 import com.thirdlife.itermod.common.variables.MageUtils;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -16,5 +18,13 @@ public class MageOverlayUtils {
             slotdisplay = Integer.toString(spellnumber);
             return  slotdisplay;
         }
+    }
+
+    public static String Grrr(Player player){
+        ItemStack spellitem = SpellBookUtils.getSpell(player);
+        if (spellitem.getItem() instanceof SpellItem spell){
+            return spell.getSpellDisplayName();
+        }
+        return "Empty";
     }
 }

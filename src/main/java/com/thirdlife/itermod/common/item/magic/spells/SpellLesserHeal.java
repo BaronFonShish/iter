@@ -19,26 +19,20 @@ import java.util.List;
 public class SpellLesserHeal extends SpellItem {
 
     public SpellLesserHeal() {
-        super(new Properties(), 40, 10, 40);
+        super(new Properties(), 40, 10, 80);
     }
 
     @Override
     public void castSpell(Level level, Player player, ItemStack wand, ItemStack spellStack, float spellpower) {
 
-        int duration = (int)(100 * spellpower);
+        float healAmount = 4f * spellpower;
+        int duration = (int)(100 + 20 * spellpower);
 
+        player.heal(healAmount);
         player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, duration, 0));
 
         level.playSound(null, player.getX(), player.getY(), player.getZ(),
                 SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 1.0F, 1.0F);
-
-        for (int i = 0; i < 8; i++) {
-            level.addParticle(ParticleTypes.HEART,
-                    player.getX() + (level.random.nextDouble() - 0.5) * 2,
-                    player.getY() + 1 + level.random.nextDouble(),
-                    player.getZ() + (level.random.nextDouble() - 0.5) * 2,
-                    0, 0.1, 0);
-        }
     }
 
 }

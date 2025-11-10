@@ -41,7 +41,7 @@ public class ModAttributes {
                     .setSyncable(true));
 
     public static final RegistryObject<Attribute> REGENERATION = ATTRIBUTES.register("regeneration",
-            () -> new RangedAttribute("attribute.regeneration", 0.0, 0.0, 16384.0)
+            () -> new RangedAttribute("attribute.regeneration", 0.0, 0.0, 128.0)
                     .setSyncable(true));
 
 

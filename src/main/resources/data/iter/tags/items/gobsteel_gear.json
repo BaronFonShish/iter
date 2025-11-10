@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "iter:gobsteel_sword",
+    "iter:gobsteel_pickaxe",
+    "iter:gobsteel_axe",
+    "iter:gobsteel_shovel",
+    "iter:gobsteel_hoe"
+  ]
+}

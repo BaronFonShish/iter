@@ -1,6 +1,7 @@
 package com.thirdlife.itermod.common.item.magic.defaults;
 
 import com.thirdlife.itermod.common.registry.ModAttributes;
+import com.thirdlife.itermod.common.registry.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -18,6 +19,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
+import java.util.Objects;
 
 public abstract class SpellItem extends Item{
 
@@ -30,7 +32,6 @@ public abstract class SpellItem extends Item{
         this.castTime = castTime;
         this.etherCost = etherCost;
         this.cooldown = cooldown;
-
     }
 
     public float getCastTimeBase(){
@@ -43,20 +44,26 @@ public abstract class SpellItem extends Item{
         return this.etherCost;
     }
 
+    public String getSpellDisplayName(){
+        return Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).toString() + ".spellname";
+    }
+
     public float getCastTime(Player player) {
         AttributeInstance CastingSpeedAttribute = player.getAttribute(ModAttributes.CASTING_SPEED.get());
-        float castTimeModifier = CastingSpeedAttribute != null ? (float) CastingSpeedAttribute.getValue() : 0.01f;
-        castTimeModifier = (castTimeModifier + 1) * 0.5f;
-        float castTimeNew = castTime / castTimeModifier;
+        float castTimeModifier = CastingSpeedAttribute != null ? (float) CastingSpeedAttribute.getValue() : 1f;
+        float castTimeNew = castTime / (((castTimeModifier-1)/2f)+1);
+
+        if (castTimeNew <= 0){castTimeNew = 1;}
 
         return castTimeNew;
     }
 
     public float getCooldown(Player player) {
         AttributeInstance CastingSpeedAttribute = player.getAttribute(ModAttributes.CASTING_SPEED.get());
-        float cooldownModifier = CastingSpeedAttribute != null ? (float) CastingSpeedAttribute.getValue() : 0.01f;
-        cooldownModifier = (cooldownModifier + 1) * 0.5f;
+        float cooldownModifier = CastingSpeedAttribute != null ? (float) CastingSpeedAttribute.getValue() : 1f;
         float cooldownNew = cooldown / cooldownModifier;
+
+        if (cooldownNew <= 0){cooldownNew = 1;}
 
         return cooldownNew;
     }
@@ -67,13 +74,17 @@ public abstract class SpellItem extends Item{
         float etherCostModifier = EtherEfficiencyAttribute != null ? (float) EtherEfficiencyAttribute.getValue() : 0f;
         float etherCostNew = etherCost * (1 - etherCostModifier);
 
+        if (etherCostNew < 0) {etherCostNew=0;}
+
         return etherCostNew;
     }
 
     public float getSpellPower(Player player){
         AttributeInstance SpellPowerAttribute = player.getAttribute(ModAttributes.SPELL_POWER.get());
-        float spellpower = SpellPowerAttribute != null ? (float) SpellPowerAttribute.getValue() : 0.01f;
+        float spellpower = SpellPowerAttribute != null ? (float) SpellPowerAttribute.getValue() : 1f;
+        spellpower = spellpower * 0.2f;
 
+        if (spellpower <= 0) {spellpower = 0.01f;}
         return spellpower;
     }
 
@@ -97,18 +108,20 @@ public abstract class SpellItem extends Item{
                 float dynamicCooldown = getCooldown(clientPlayer)/20f;
                 float dynamicManaCost = getManaCost(clientPlayer);
 
-                String castTimeString = String.format("%.1f", dynamicCastTime);
-                String cooldownString = String.format("%.1f", dynamicCooldown);
-                String manaCostString = String.format("%.1f", dynamicManaCost);
+                String castTimeString = String.format("%.2f", dynamicCastTime);
+                String cooldownString = String.format("%.2f", dynamicCooldown);
+                String manaCostString = String.format("%.2f", dynamicManaCost);
 
-                list.add(Component.translatable("iterpg.spell.cast_time", dynamicCastTime));
+                if (dynamicCastTime > 0.05f) {
+                list.add(Component.translatable("iterpg.spell.cast_time", castTimeString));}
 
-                list.add(Component.translatable("iterpg.spell.mana_cost", dynamicManaCost));
+                list.add(Component.translatable("iterpg.spell.mana_cost", manaCostString));
 
-                list.add(Component.translatable("iterpg.spell.cooldown", dynamicCooldown));
+                list.add(Component.translatable("iterpg.spell.cooldown", cooldownString));
 
             } else {
-                list.add(Component.translatable("iterpg.spell.cast_time", castTime));
+                if (this.castTime > 0.05){
+                list.add(Component.translatable("iterpg.spell.cast_time", castTime));}
 
                 list.add(Component.translatable("iterpg.spell.mana_cost", etherCost));
 

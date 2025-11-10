@@ -39,7 +39,7 @@ public class GoblinWarriorEntity extends Monster {
     public GoblinWarriorEntity(EntityType<GoblinWarriorEntity> type, Level world) {
         super(type, world);
         setMaxUpStep(0.6f);
-        xpReward = 2;
+        xpReward = 4;
         setNoAi(false);
     }
 
@@ -58,7 +58,7 @@ public class GoblinWarriorEntity extends Monster {
         builder = builder.add(Attributes.MOVEMENT_SPEED, 0.25);
         builder = builder.add(Attributes.MAX_HEALTH, 16);
         builder = builder.add(Attributes.ARMOR, 6);
-        builder = builder.add(Attributes.ATTACK_DAMAGE, 4);
+        builder = builder.add(Attributes.ATTACK_DAMAGE, 5);
         builder = builder.add(Attributes.FOLLOW_RANGE, 24);
         return builder;
     }
@@ -102,19 +102,19 @@ public class GoblinWarriorEntity extends Monster {
     }
 
     private ItemStack getRandomWeapon(RandomSource random) {
-        int weaponChoice = random.nextInt(4);
+        int weaponChoice = random.nextInt(6);
         return switch (weaponChoice) {
-            case 0 -> new ItemStack(ModItems.IRON_DAGGER.get());
-            case 1 -> new ItemStack(ModItems.STONE_DAGGER.get());
-            case 2 -> new ItemStack(Items.STONE_SWORD);
-            case 3 -> new ItemStack(Items.IRON_SWORD);
-            default -> new ItemStack(Items.IRON_SWORD);
+            case 0,1,2 -> new ItemStack(ModItems.GOBSTEEL_SWORD.get());
+            case 3 -> new ItemStack(ModItems.GOBSTEEL_AXE.get());
+            case 4 -> new ItemStack(ModItems.STONE_DAGGER.get());
+            case 5 -> new ItemStack(ModItems.IRON_DAGGER.get());
+            default -> new ItemStack(ModItems.GOBSTEEL_SWORD.get());
         };
     }
 
     @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions dimensions) {
-        return dimensions.height * 0.9f;
+        return dimensions.height * 0.8f;
     }
 
     @Nullable
@@ -127,5 +127,27 @@ public class GoblinWarriorEntity extends Monster {
         this.populateDefaultEquipmentSlots(this.random, difficulty);
 
         return spawnData;
+    }
+
+    @Override
+    protected void dropCustomDeathLoot(DamageSource source, int lootingModifier, boolean recentlyHit) {
+        super.dropCustomDeathLoot(source, lootingModifier, recentlyHit);
+        float dropChance = 0.10f + (lootingModifier * 0.02f);
+        if (this.random.nextFloat() < dropChance) {
+            ItemStack heldItem = this.getMainHandItem();
+            if (!heldItem.isEmpty() && heldItem.isDamageableItem()) {
+
+                ItemStack toDropItem = heldItem.copy();
+
+                int maxDamage = toDropItem.getMaxDamage();
+                int minDamage = (int) (maxDamage * 0.4f);
+                int maxDamageAmount = (int) (maxDamage * 0.9f);
+                int damageAmount = this.random.nextIntBetweenInclusive(minDamage, maxDamageAmount-1);
+
+                toDropItem.setDamageValue(damageAmount);
+
+                this.spawnAtLocation(toDropItem);
+            }
+        }
     }
 }
