@@ -81,7 +81,6 @@ public abstract class AbstractMagicProjectile extends AbstractArrow {
     @Override
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
-        this.playImpactSound();
         this.discard();
     }
 

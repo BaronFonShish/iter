@@ -83,7 +83,7 @@ public class GoblinModel<T extends Entity> extends EntityModel<T> implements Arm
         PoseStack.scale(0.75f, 0.75f,0.75f);
 
         float handOffset = Side == HumanoidArm.RIGHT ? 1.0F : -1.0F;
-        PoseStack.translate(handOffset * 0.05F, -0.125F, 0.0F);
+        PoseStack.translate(handOffset * 0.05F, -0.1F, 0.0F);
     }
 
 

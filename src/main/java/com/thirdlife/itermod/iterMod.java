@@ -32,9 +32,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.slf4j.Logger;
-import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.SlotTypeMessage;
-import top.theillusivec4.curios.api.SlotTypePreset;
+
 
 
 @Mod(iterMod.MOD_ID)
@@ -68,6 +66,7 @@ public class iterMod {
         ModEntities.register(modEventBus);
         ModFeatures.REGISTRY.register(modEventBus);
         ModAttributes.ATTRIBUTES.register(modEventBus);
+        ModParticleTypes.REGISTRY.register(modEventBus);
         modEventBus.addListener(ModCapabilities::register);
         ModMenus.REGISTRY.register(modEventBus);
 

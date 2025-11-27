@@ -40,6 +40,7 @@ public class ModCreativeTabEvents {
 
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Blocks.DEEPSLATE_LAPIS_ORE), new ItemStack(ModBlocks.NOSTELON_ORE.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.NOSTELON_ORE.get()), new ItemStack(ModBlocks.DEEPSLATE_NOSTELON_ORE.get())),
+                new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.DEEPSLATE_NOSTELON_ORE.get()), new ItemStack(ModBlocks.DEEPSLATE_SANGUARNET_ORE.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Blocks.AMETHYST_CLUSTER), new ItemStack(ModBlocks.ABYSSQUARTZ_BLOCK.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.ABYSSQUARTZ_BLOCK.get()), new ItemStack(ModBlocks.ABYSSQUARTZ_CRYSTAL.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.ABYSSQUARTZ_CRYSTAL.get()), new ItemStack(ModBlocks.SPIDER_EGG.get())),
@@ -99,14 +100,15 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.NETHERITE_RING_ABYSSQUARTZ.get()), new ItemStack(ModItems.IRON_RING_AMETHYST.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.IRON_RING_AMETHYST.get()), new ItemStack(ModItems.GOLDEN_RING_AMETHYST.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.GOLDEN_RING_AMETHYST.get()), new ItemStack(ModItems.NETHERITE_RING_AMETHYST.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.NETHERITE_RING_AMETHYST.get()), new ItemStack(ModItems.IRON_RING_SANGUARNET.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.IRON_RING_SANGUARNET.get()), new ItemStack(ModItems.GOLDEN_RING_SANGUARNET.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.GOLDEN_RING_SANGUARNET.get()), new ItemStack(ModItems.NETHERITE_RING_SANGUARNET.get())),
 
                 new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(Items.NETHERITE_HOE), new ItemStack(ModItems.GOBSTEEL_SHOVEL.get())),
                 new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(ModItems.GOBSTEEL_SHOVEL.get()), new ItemStack(ModItems.GOBSTEEL_PICKAXE.get())),
                 new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(ModItems.GOBSTEEL_PICKAXE.get()), new ItemStack(ModItems.GOBSTEEL_AXE.get())),
                 new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(ModItems.GOBSTEEL_AXE.get()), new ItemStack(ModItems.GOBSTEEL_HOE.get()))
         );
-
-
 
         for (TabInsertion ins : insertions) {
             if (event.getTabKey() == ins.tab()) {
@@ -117,6 +119,5 @@ public class ModCreativeTabEvents {
                 );
             }
         }
-
     }
 }

@@ -16,6 +16,12 @@
     "iter:netherite_ring_abyssquartz",
     "iter:iron_ring_emerald",
     "iter:golden_ring_emerald",
-    "iter:netherite_ring_emerald"
+    "iter:netherite_ring_emerald",
+    "iter:iron_ring_amethyst",
+    "iter:golden_ring_amethyst",
+    "iter:netherite_ring_amethyst",
+    "iter:iron_ring_sanguarnet",
+    "iter:golden_ring_sanguarnet",
+    "iter:netherite_ring_sanguarnet"
   ]
 }

@@ -37,6 +37,7 @@ public class ModItems {
     public static final RegistryObject<Item> ETHERBLOOM_SEEDS = ITEMS.register("etherbloom_seeds", () -> new ItemNameBlockItem(ModBlocks.ETHERBLOOM_PLANT.get(), new Item.Properties()));
     public static final RegistryObject<Item> ROTROOT = ITEMS.register("rotroot",() -> new RotrootItem(new Item.Properties()));
     public static final RegistryObject<Item> SPELL_BOOK = ITEMS.register("spell_book", SpellBook::new);
+    public static final RegistryObject<Item> SANGUARNET = ITEMS.register("sanguarnet",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> RECURVE_BOW = ITEMS.register("recurve_bow", RecurveBowItem::new);
 
     public static final RegistryObject<Item> SPIDERLING_SPAWN_EGG =
@@ -125,6 +126,9 @@ public class ModItems {
     public static final RegistryObject<Item> IRON_RING_AMETHYST = ITEMS.register("iron_ring_amethyst", IronRingAmethyst::new);
     public static final RegistryObject<Item> GOLDEN_RING_AMETHYST = ITEMS.register("golden_ring_amethyst", GoldenRingAmethyst::new);
     public static final RegistryObject<Item> NETHERITE_RING_AMETHYST = ITEMS.register("netherite_ring_amethyst", NetheriteRingAmethyst::new);
+    public static final RegistryObject<Item> IRON_RING_SANGUARNET = ITEMS.register("iron_ring_sanguarnet", IronRingSanguarnet::new);
+    public static final RegistryObject<Item> GOLDEN_RING_SANGUARNET = ITEMS.register("golden_ring_sanguarnet", GoldenRingSanguarnet::new);
+    public static final RegistryObject<Item> NETHERITE_RING_SANGUARNET = ITEMS.register("netherite_ring_sanguarnet", NetheriteRingSanguarnet::new);
 
     public static final RegistryObject<Item> BONE_STAFF = ITEMS.register("bone_staff", BoneStaff::new);
 

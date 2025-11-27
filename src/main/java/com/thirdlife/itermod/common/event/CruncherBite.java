@@ -36,16 +36,15 @@ public class CruncherBite {
             return;
         }
 
-        if ((cruncher.getPersistentData().getInt("chewtimer")) >= 2){
-            if (blockstate.getValue(CruncherBlock.CHEWING) == 1){
-                world.setBlock(pos, blockstate.setValue(CruncherBlock.CHEWING, 2), 3);
-            } else {
+            if (blockstate.getValue(CruncherBlock.CHEWING) != 1){
                 world.setBlock(pos, blockstate.setValue(CruncherBlock.CHEWING, 1), 3);
+            } else {
+                world.setBlock(pos, blockstate.setValue(CruncherBlock.CHEWING, 2), 3);
                 cruncher.getPersistentData().putInt("biteforce", (cruncher.getPersistentData().getInt("biteforce") + 1));
             }
-            cruncher.getPersistentData().putInt("chewtimer", 0);
-            world.sendBlockUpdated(pos, blockstate, blockstate, 3);
-        } else cruncher.getPersistentData().putInt("chewtimer", (cruncher.getPersistentData().getInt("chewtimer")+1));
+
+        ///cruncher.getPersistentData().putInt("chewtimer", 0);
+           /// world.sendBlockUpdated(pos, blockstate, blockstate, 3);
 
         if (targetblock.getBlock() instanceof AirBlock) {
             cruncher.getPersistentData().putInt("biteforce", 0);
@@ -63,7 +62,7 @@ public class CruncherBite {
 
         float blockhardness = targetblock.getDestroySpeed(world, pos);
 
-        if ((cruncher.getPersistentData().getInt("biteforce")) >= (((blockhardness + 0.5f) * 4))){
+        if ((cruncher.getPersistentData().getInt("biteforce")) >= (((blockhardness + 0.5) * 4))){
             Block.dropResources(targetblock, world, BlockPos.containing(targetPos.getX()+0.5f, targetPos.getY()+0.25f, targetPos.getZ()+0.5f),null);
             world.destroyBlock(targetPos, false);
             cruncher.getPersistentData().putInt("biteforce", 0);

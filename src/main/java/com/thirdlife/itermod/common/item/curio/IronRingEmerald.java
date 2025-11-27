@@ -18,13 +18,15 @@ public class IronRingEmerald extends Item implements ICurioItem {
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        RingEffectManager.TieredRingStuff("iter_ring_attack_speed", "Ring Attack Speed", Attributes.ATTACK_SPEED,
-                ModItems.IRON_RING_EMERALD.get(), ModItems.GOLDEN_RING_EMERALD.get(), ModItems.NETHERITE_RING_EMERALD.get(),
-                0.05f, 0.075f, 0.1f, slotContext.entity(), 2);
+        ringSend(slotContext);
     }
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+        ringSend(slotContext);
+    }
+
+    public void ringSend(SlotContext slotContext) {
         RingEffectManager.TieredRingStuff("iter_ring_attack_speed", "Ring Attack Speed", Attributes.ATTACK_SPEED,
                 ModItems.IRON_RING_EMERALD.get(), ModItems.GOLDEN_RING_EMERALD.get(), ModItems.NETHERITE_RING_EMERALD.get(),
                 0.05f, 0.075f, 0.1f, slotContext.entity(), 2);

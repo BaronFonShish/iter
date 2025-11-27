@@ -16,13 +16,15 @@ public class NetheriteRingNostelon extends Item implements ICurioItem {
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        RingEffectManager.TieredRingStuff("iter_ring_burnout_dissipation", "Ring Ether Dissipation", ModAttributes.ETHER_BURNOUT_DISSIPATION.get(),
-                ModItems.IRON_RING_NOSTELON.get(), ModItems.GOLDEN_RING_NOSTELON.get(), ModItems.NETHERITE_RING_NOSTELON.get(),
-                0.025f, 0.0375f, 0.05f, slotContext.entity(), 1);
+        ringSend(slotContext);
     }
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+        ringSend(slotContext);
+    }
+
+    public void ringSend(SlotContext slotContext) {
         RingEffectManager.TieredRingStuff("iter_ring_burnout_dissipation", "Ring Ether Dissipation", ModAttributes.ETHER_BURNOUT_DISSIPATION.get(),
                 ModItems.IRON_RING_NOSTELON.get(), ModItems.GOLDEN_RING_NOSTELON.get(), ModItems.NETHERITE_RING_NOSTELON.get(),
                 0.025f, 0.0375f, 0.05f, slotContext.entity(), 1);

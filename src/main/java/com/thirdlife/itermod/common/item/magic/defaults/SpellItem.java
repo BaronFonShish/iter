@@ -108,9 +108,9 @@ public abstract class SpellItem extends Item{
                 float dynamicCooldown = getCooldown(clientPlayer)/20f;
                 float dynamicManaCost = getManaCost(clientPlayer);
 
-                String castTimeString = String.format("%.2f", dynamicCastTime);
-                String cooldownString = String.format("%.2f", dynamicCooldown);
-                String manaCostString = String.format("%.2f", dynamicManaCost);
+                String castTimeString = String.format("%.1f", dynamicCastTime);
+                String cooldownString = String.format("%.1f", dynamicCooldown);
+                String manaCostString = String.format("%.1f", dynamicManaCost);
 
                 if (dynamicCastTime > 0.05f) {
                 list.add(Component.translatable("iterpg.spell.cast_time", castTimeString));}

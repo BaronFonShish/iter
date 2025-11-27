@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "iter:sanguarnet"
+    },
+    {
+      "item": "iter:iron_ring"
+    }
+  ],
+  "result": {
+    "item": "iter:iron_ring_sanguarnet",
+    "count": 1
+  }
+}

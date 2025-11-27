@@ -16,13 +16,15 @@ public class IronRingAmethyst extends Item implements ICurioItem {
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        RingEffectManager.TieredRingStuff("iter_ring_casting_speed", "Ring Casting Speed", ModAttributes.CASTING_SPEED.get(),
-                ModItems.IRON_RING_AMETHYST.get(), ModItems.GOLDEN_RING_AMETHYST.get(), ModItems.NETHERITE_RING_AMETHYST.get(),
-                0.05f, 0.075f, 0.1f, slotContext.entity(), 1);
+        ringSend(slotContext);
     }
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+        ringSend(slotContext);
+    }
+
+    public void ringSend(SlotContext slotContext) {
         RingEffectManager.TieredRingStuff("iter_ring_casting_speed", "Ring Casting Speed", ModAttributes.CASTING_SPEED.get(),
                 ModItems.IRON_RING_AMETHYST.get(), ModItems.GOLDEN_RING_AMETHYST.get(), ModItems.NETHERITE_RING_AMETHYST.get(),
                 0.05f, 0.075f, 0.1f, slotContext.entity(), 1);
@@ -37,5 +39,6 @@ public class IronRingAmethyst extends Item implements ICurioItem {
     public ItemStack getCraftingRemainingItem(ItemStack itemstack) {
         return new ItemStack(ModItems.IRON_RING.get());
     }
+
 }
 

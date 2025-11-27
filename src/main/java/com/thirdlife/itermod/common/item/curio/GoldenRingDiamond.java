@@ -1,6 +1,7 @@
 package com.thirdlife.itermod.common.item.curio;
 
 import com.thirdlife.itermod.common.event.RingEffectManager;
+import com.thirdlife.itermod.common.registry.ModAttributes;
 import com.thirdlife.itermod.common.registry.ModItems;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
@@ -16,13 +17,15 @@ public class GoldenRingDiamond extends Item implements ICurioItem {
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        RingEffectManager.TieredRingStuff("iter_ring_defense", "Ring Defense", Attributes.ARMOR,
-                ModItems.IRON_RING_DIAMOND.get(), ModItems.GOLDEN_RING_DIAMOND.get(), ModItems.NETHERITE_RING_DIAMOND.get(),
-                2, 3, 4, slotContext.entity(), 1);
+        ringSend(slotContext);
     }
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+        ringSend(slotContext);
+    }
+
+    public void ringSend(SlotContext slotContext) {
         RingEffectManager.TieredRingStuff("iter_ring_defense", "Ring Defense", Attributes.ARMOR,
                 ModItems.IRON_RING_DIAMOND.get(), ModItems.GOLDEN_RING_DIAMOND.get(), ModItems.NETHERITE_RING_DIAMOND.get(),
                 2, 3, 4, slotContext.entity(), 1);

@@ -16,13 +16,15 @@ public class NetheriteRingDiamond extends Item implements ICurioItem {
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        RingEffectManager.TieredRingStuff("iter_ring_defense", "Ring Defense", Attributes.ARMOR,
-                ModItems.IRON_RING_DIAMOND.get(), ModItems.GOLDEN_RING_DIAMOND.get(), ModItems.NETHERITE_RING_DIAMOND.get(),
-                2, 3, 4, slotContext.entity(), 1);
+        ringSend(slotContext);
     }
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+        ringSend(slotContext);
+    }
+
+    public void ringSend(SlotContext slotContext) {
         RingEffectManager.TieredRingStuff("iter_ring_defense", "Ring Defense", Attributes.ARMOR,
                 ModItems.IRON_RING_DIAMOND.get(), ModItems.GOLDEN_RING_DIAMOND.get(), ModItems.NETHERITE_RING_DIAMOND.get(),
                 2, 3, 4, slotContext.entity(), 1);

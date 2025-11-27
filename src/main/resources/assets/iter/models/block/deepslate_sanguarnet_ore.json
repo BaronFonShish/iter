@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "iter:block/sanguarnet_ore_deepslate",
+    "particle": "iter:block/sanguarnet_ore_deepslate"
+  },
+  "render_type": "solid"
+}
