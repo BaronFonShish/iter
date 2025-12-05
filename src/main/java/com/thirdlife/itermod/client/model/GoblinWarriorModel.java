@@ -81,7 +81,7 @@ public class GoblinWarriorModel<T extends Entity> extends EntityModel<T> impleme
         PoseStack.scale(0.75f, 0.75f,0.75f);
 
         float handOffset = Side == HumanoidArm.RIGHT ? 1.0F : -1.0F;
-        PoseStack.translate(handOffset * 0.025F, -0.275F, 0.0F);
+        PoseStack.translate(handOffset * 0.025F, -0.21F, 0.0F);
     }
 
 

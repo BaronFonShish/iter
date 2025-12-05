@@ -28,7 +28,7 @@ public class SpellEtherbolt extends SpellItem {
 
         etherbolt.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
 
-        float velocity = (2f * (1 + spellpower/40));
+        float velocity = (1.25f * (1 + spellpower/50));
         float inaccuracy = 0.25f / spellpower;
         velocity = Math.min(Math.max(0.05f, velocity), 50f);
 

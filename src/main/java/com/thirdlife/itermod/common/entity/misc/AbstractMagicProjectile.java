@@ -5,12 +5,14 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -79,9 +81,15 @@ public abstract class AbstractMagicProjectile extends AbstractArrow {
     }
 
     @Override
-    protected void onHitBlock(BlockHitResult result) {
-        super.onHitBlock(result);
-        this.discard();
+    protected void onHitBlock(BlockHitResult pResult) {
+        BlockState blockstate = this.level().getBlockState(pResult.getBlockPos());
+        blockstate.onProjectileHit(this.level(), blockstate, pResult, this);
+        Vec3 vec3 = pResult.getLocation().subtract(this.getX(), this.getY(), this.getZ());
+        this.setDeltaMovement(vec3);
+        Vec3 vec31 = vec3.normalize().scale((double)0.05F);
+        this.setPosRaw(this.getX() - vec31.x, this.getY() - vec31.y, this.getZ() - vec31.z);
+        this.inGround = true;
+        this.setSoundEvent(SoundEvents.ARROW_HIT);
     }
 
 
@@ -101,7 +109,7 @@ public abstract class AbstractMagicProjectile extends AbstractArrow {
         super.tick();
 
         if (this.level().isClientSide) {
-            this.spawnParticles();
+            this.spawnTrailParticles();
         }
 
         if (this.tickCount > 600) {
@@ -112,7 +120,7 @@ public abstract class AbstractMagicProjectile extends AbstractArrow {
             this.discard();
     }
 
-    protected void spawnParticles() {
+    protected void spawnTrailParticles() {
     }
 
     @Override

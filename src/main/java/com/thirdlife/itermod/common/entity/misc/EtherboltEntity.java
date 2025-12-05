@@ -2,6 +2,8 @@ package com.thirdlife.itermod.common.entity.misc;
 
 import com.thirdlife.itermod.common.registry.ModParticleTypes;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
@@ -37,7 +39,7 @@ public class EtherboltEntity extends AbstractMagicProjectile {
 
     @Override
     protected void hitEffects(LivingEntity target) {
-        // TODO hit effects
+        super.hitEffects(target);
         Level level = target.level();
 
         if (level.isClientSide) {
@@ -46,7 +48,7 @@ public class EtherboltEntity extends AbstractMagicProjectile {
     }
 
     @Override
-    protected void spawnParticles() {
+    protected void spawnTrailParticles() {
         Level level = this.level();
         Vec3 pos = this.position();
             double offsetX = (this.random.nextDouble() - 0.5) * 0.2;
@@ -54,29 +56,26 @@ public class EtherboltEntity extends AbstractMagicProjectile {
             double offsetZ = (this.random.nextDouble() - 0.5) * 0.2;
             level.addParticle(ModParticleTypes.ARCANE_PARTICLE.get(),
                     pos.x + offsetX, pos.y + offsetY, pos.z + offsetZ,
-                    Mth.nextFloat(random, 0f, 0.05f),
-                    Mth.nextFloat(random, 0f, 0.05f),
-                    Mth.nextFloat(random, 0f, 0.05f));
+                    Mth.nextFloat(random, -0.05f, 0.05f),
+                    Mth.nextFloat(random, -0.05f, 0.05f),
+                    Mth.nextFloat(random, -0.05f, 0.05f));
     }
 
     @Override
     public void onHitBlock(BlockHitResult blockHitResult) {
         super.onHitBlock(blockHitResult);
         this.playImpactSound();
-        particleBurst(16);
+        this.particleBurst(16);
     }
 
     public void particleBurst(int k){
-        for (int i=0; i < k; ++i) {
-            this.level().addParticle(ModParticleTypes.ARCANE_PARTICLE.get(), this.getX(), this.getY(), this.getZ(),
-                    Mth.nextFloat(random, 0.025f, 0.5f),
-                    Mth.nextFloat(random, 0.025f, 0.5f),
-                    Mth.nextFloat(random, 0.025f, 0.5f));
+        if (level() instanceof ServerLevel serverLevel){
+            serverLevel.sendParticles(ModParticleTypes.ARCANE_PARTICLE.get(), this.getX(), this.getY(), this.getZ(), k, 0, 0, 0, Mth.nextFloat(random, -0.25f, 0.25f));
         }
     }
 
     @Override
     protected void playImpactSound() {
-        this.playSound(SoundEvents.AMETHYST_CLUSTER_BREAK, 1.0F, 1.5F);
+        this.playSound(SoundEvents.AMETHYST_CLUSTER_BREAK, 0.75F, 1.25F);
     }
 }

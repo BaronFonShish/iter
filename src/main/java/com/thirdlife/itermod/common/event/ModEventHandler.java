@@ -2,6 +2,7 @@ package com.thirdlife.itermod.common.event;
 
 
 import com.thirdlife.itermod.common.item.SpearItem;
+import com.thirdlife.itermod.iterMod;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
@@ -9,7 +10,7 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = "iter", bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = iterMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModEventHandler {
 
     @SubscribeEvent
