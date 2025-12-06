@@ -16,7 +16,7 @@ import net.minecraft.world.level.material.FluidState;
 
 public class ComponentDepositBlock extends DropExperienceBlock {
     public ComponentDepositBlock() {
-        super(Properties.of().instrument(NoteBlockInstrument.BELL).sound(SoundType.METAL).strength(7f, 8f).requiresCorrectToolForDrops(), UniformInt.of(2, 4));
+        super(Properties.of().instrument(NoteBlockInstrument.BELL).sound(SoundType.METAL).strength(7.5f, 8f).requiresCorrectToolForDrops(), UniformInt.of(2, 4));
     }
 
     @Override

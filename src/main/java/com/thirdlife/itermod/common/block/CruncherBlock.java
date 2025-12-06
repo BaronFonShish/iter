@@ -1,12 +1,18 @@
 package com.thirdlife.itermod.common.block;
 
 import com.thirdlife.itermod.common.event.CruncherBite;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -19,6 +25,9 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.List;
 
 public class CruncherBlock extends Block implements EntityBlock {
     public static final IntegerProperty CHEWING = IntegerProperty.create("chewing", 0, 2);
@@ -80,4 +89,8 @@ public class CruncherBlock extends Block implements EntityBlock {
         return new CruncherBlockEntity(pos, state);
     }
 
+    public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
+        super.appendHoverText(itemstack, world, list, flag);
+            list.add(Component.translatable("iter.desc.cruncher"));
+    }
 }

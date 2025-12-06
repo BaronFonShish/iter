@@ -37,6 +37,7 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.STRING), new ItemStack(ModItems.SPIDER_SILK.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.ABYSSQUARTZ_SHARD.get()), new ItemStack(ModItems.ETHERDUST.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.FLINT), new ItemStack(ModItems.GOBSTEEL_SCRAP.get())),
+                new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.GOBSTEEL_SCRAP.get()), new ItemStack(ModItems.DWARVEN_COMPONENTS.get())),
 
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Blocks.DEEPSLATE_LAPIS_ORE), new ItemStack(ModBlocks.NOSTELON_ORE.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.NOSTELON_ORE.get()), new ItemStack(ModBlocks.DEEPSLATE_NOSTELON_ORE.get())),
@@ -46,11 +47,16 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Blocks.AMETHYST_CLUSTER), new ItemStack(ModBlocks.ABYSSQUARTZ_BLOCK.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.ABYSSQUARTZ_BLOCK.get()), new ItemStack(ModBlocks.ABYSSQUARTZ_CRYSTAL.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.ABYSSQUARTZ_CRYSTAL.get()), new ItemStack(ModBlocks.SPIDER_EGG.get())),
+                new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.SPIDER_EGG.get()), new ItemStack(ModBlocks.ANCIENT_SMALL_VASE.get())),
+                new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.ANCIENT_SMALL_VASE.get()), new ItemStack(ModBlocks.ANCIENT_VASE.get())),
+                new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.ANCIENT_VASE.get()), new ItemStack(ModBlocks.ANCIENT_BIG_VASE.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Items.BEETROOT_SEEDS), new ItemStack(ModItems.ROTROOT_SEEDS.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Items.SPORE_BLOSSOM), new ItemStack(ModBlocks.ETHERBLOOM.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Items.SWEET_BERRIES), new ItemStack(ModItems.ETHERBLOOM_SEEDS.get())),
 
                 new TabInsertion(CreativeModeTabs.FOOD_AND_DRINKS, new ItemStack(Items.BEETROOT), new ItemStack(ModItems.ROTROOT.get())),
+
+                new TabInsertion(CreativeModeTabs.REDSTONE_BLOCKS, new ItemStack(Blocks.REDSTONE_ORE), new ItemStack(ModBlocks.CRUNCHER.get())),
 
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(Items.NETHERITE_SWORD), new ItemStack(ModItems.WOODEN_DAGGER.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.WOODEN_DAGGER.get()), new ItemStack(ModItems.STONE_DAGGER.get())),

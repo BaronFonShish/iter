@@ -103,6 +103,7 @@
   "iter.desc.iron_ring_sanguarnet": "§9+0.1 Health Regeneration",
   "iter.desc.golden_ring_sanguarnet": "§9+0.15 Health Regeneration",
   "iter.desc.netherite_ring_sanguarnet": "§9+0.2 Health Regeneration",
+  "iter.desc.cruncher": "Mines blocks when powered",
 
   "entity.iter.spiderling": "Spiderling",
   "entity.iter.goblin": "Goblin",
