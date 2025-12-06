@@ -4,7 +4,7 @@
   "experience": 1,
   "cookingtime": 100,
   "ingredient": {
-    "item": "iter:sanguarnet_ore"
+    "item": "iter:deepslate_sanguarnet_ore"
   },
   "result": "iter:sanguarnet"
 }

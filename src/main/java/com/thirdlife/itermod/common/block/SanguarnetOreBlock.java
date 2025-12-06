@@ -14,9 +14,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.FluidState;
 
-public class DeepslateNostelonOreBlock extends DropExperienceBlock {
-    public DeepslateNostelonOreBlock() {
-        super(Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.DEEPSLATE).strength(4f, 6f).requiresCorrectToolForDrops(), UniformInt.of(2, 5));
+public class SanguarnetOreBlock extends DropExperienceBlock {
+    public SanguarnetOreBlock() {
+        super(Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(2f, 6f).requiresCorrectToolForDrops(), UniformInt.of(1, 4));
     }
 
     @Override

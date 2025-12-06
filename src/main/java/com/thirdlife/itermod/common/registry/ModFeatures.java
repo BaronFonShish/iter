@@ -2,6 +2,7 @@ package com.thirdlife.itermod.common.registry;
 
 import com.thirdlife.itermod.iterMod;
 import com.thirdlife.itermod.world.features.AbyssquartzCrystalFeature;
+import com.thirdlife.itermod.world.features.AncientVaseFeature;
 import com.thirdlife.itermod.world.features.RotrootPatchFeature;
 import com.thirdlife.itermod.world.features.SpiderEggFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -16,4 +17,5 @@ public class ModFeatures {
     public static final RegistryObject<Feature<?>> ABYSSQUARTZ_CRYSTAL_FEATURE = REGISTRY.register("abyssquartz_crystal_feature", AbyssquartzCrystalFeature::new);
     public static final RegistryObject<Feature<?>> SPIDER_EGG_FEATURE = REGISTRY.register("spider_egg_feature", SpiderEggFeature::new);
     public static final RegistryObject<Feature<?>> ROTROOT_PATCH_FEATURE = REGISTRY.register("rotroot_patch_feature", RotrootPatchFeature::new);
+    public static final RegistryObject<Feature<?>> ANCIENT_VASE_FEATURE = REGISTRY.register("ancient_vase_feature", AncientVaseFeature::new);
 }

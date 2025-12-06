@@ -2,19 +2,21 @@ package com.thirdlife.itermod.common.block;
 
 import com.thirdlife.itermod.common.event.ExpDropEvent;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.FluidState;
 
-public class DeepslateSanguarnetOreBlock extends Block {
+public class DeepslateSanguarnetOreBlock extends DropExperienceBlock {
     public DeepslateSanguarnetOreBlock() {
-        super(Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.DEEPSLATE).strength(4f, 6f).requiresCorrectToolForDrops());
+        super(Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.DEEPSLATE).strength(4f, 6f).requiresCorrectToolForDrops(), UniformInt.of(1, 4));
     }
 
     @Override
@@ -27,14 +29,5 @@ public class DeepslateSanguarnetOreBlock extends Block {
         if (player.getInventory().getSelected().getItem() instanceof PickaxeItem tieredItem)
             return tieredItem.getTier().getLevel() >= 2;
         return false;
-    }
-
-    @Override
-    public boolean onDestroyedByPlayer(BlockState blockstate, Level world, BlockPos pos, Player entity, boolean willHarvest, FluidState fluid) {
-        boolean retval = super.onDestroyedByPlayer(blockstate, world, pos, entity, willHarvest, fluid);
-        if (canHarvestBlock(blockstate, world, pos, entity)) {
-            ExpDropEvent.blockBrokenRand(world, pos.getX(), pos.getY(), pos.getZ(), 1, 3, entity);
-        }
-        return retval;
     }
 }

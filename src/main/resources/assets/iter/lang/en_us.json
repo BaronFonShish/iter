@@ -3,11 +3,14 @@
   "block.iter.abyssquartz_block": "Abyssquartz Block",
   "block.iter.nostelon_ore": "Nostelon Ore",
   "block.iter.deepslate_nostelon_ore": "Deepslate Nostelon Ore",
+  "block.iter.sanguarnet_ore": "Sanguarnet Ore",
   "block.iter.deepslate_sanguarnet_ore": "Deepslate Sanguarnet Ore",
+  "block.iter.component_deposit": "Component Deposit",
   "block.iter.spider_egg": "Spider Egg",
   "block.iter.etherbloom": "Etherbloom",
   "block.iter.etherbloom_plant": "Growing Etherbloom",
   "block.iter.rotroot": "Rotroot",
+  "block.iter.cruncher": "Cruncher",
 
   "item.iter.nostelon": "Nostelon",
   "item.iter.rough_nostelon": "Rough Nostelon",
@@ -58,6 +61,7 @@
   "item.iter.gobsteel_shovel": "Gobsteel Shovel",
   "item.iter.gobsteel_hoe": "Gobsteel Hoe",
   "item.iter.gobsteel_scrap": "Gobsteel Scrap",
+  "item.iter.dwarven_components": "Dwarven Components",
 
   "item.iter.iron_ring": "Iron Ring",
   "item.iter.golden_ring": "Golden Ring",

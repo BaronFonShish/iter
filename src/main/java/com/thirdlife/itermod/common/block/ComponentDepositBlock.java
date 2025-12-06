@@ -14,9 +14,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.FluidState;
 
-public class DeepslateNostelonOreBlock extends DropExperienceBlock {
-    public DeepslateNostelonOreBlock() {
-        super(Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.DEEPSLATE).strength(4f, 6f).requiresCorrectToolForDrops(), UniformInt.of(2, 5));
+public class ComponentDepositBlock extends DropExperienceBlock {
+    public ComponentDepositBlock() {
+        super(Properties.of().instrument(NoteBlockInstrument.BELL).sound(SoundType.METAL).strength(7f, 8f).requiresCorrectToolForDrops(), UniformInt.of(2, 4));
     }
 
     @Override
@@ -27,7 +27,7 @@ public class DeepslateNostelonOreBlock extends DropExperienceBlock {
     @Override
     public boolean canHarvestBlock(BlockState state, BlockGetter world, BlockPos pos, Player player) {
         if (player.getInventory().getSelected().getItem() instanceof PickaxeItem tieredItem)
-            return tieredItem.getTier().getLevel() >= 2;
+            return tieredItem.getTier().getLevel() >= 3;
         return false;
     }
 }

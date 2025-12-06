@@ -97,11 +97,11 @@ public class SpiderlingEntity extends Spider {
             this.idleAnimationState.start(this.tickCount);
         }
 
-        if (this.swinging && !this.attackAnimationState.isStarted()) {
-            this.attackAnimationState.start(this.tickCount);
-        } else if (!this.swinging && this.attackAnimationState.isStarted()) {
-            this.attackAnimationState.stop();
-        }
+//        if (this.swinging && !this.attackAnimationState.isStarted()) {
+//            this.attackAnimationState.start(this.tickCount);
+//        } else if (!this.swinging && this.attackAnimationState.isStarted()) {
+//            this.attackAnimationState.stop();
+//        }
     }
 
     @Override

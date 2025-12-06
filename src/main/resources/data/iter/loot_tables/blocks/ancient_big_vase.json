@@ -5,8 +5,8 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "minecraft:reference",
-          "name": "iter:blocks/ancient_vase_common"
+          "type": "minecraft:loot_table",
+          "name": "iter:gameplay/ancient_vase_common"
         }
       ]
     }

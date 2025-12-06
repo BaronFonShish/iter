@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PickaxeItem;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -25,13 +27,14 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.List;
 
-public class SpiderEggBlock extends Block {
+public class SpiderEggBlock extends DropExperienceBlock {
     public SpiderEggBlock() {
         super(Properties.of()
                 .sound(SoundType.WOOL)
                 .strength(0.15f, 1f)
                 .requiresCorrectToolForDrops()
-                .randomTicks());
+                .randomTicks(),
+                UniformInt.of(0, 2));
     }
 
     @Override
@@ -79,21 +82,9 @@ public class SpiderEggBlock extends Block {
                 new AABB(pos).inflate(16.0),
                 player -> !player.isCreative() && !player.isSpectator());
 
-        if (!nearbyPlayers.isEmpty() && random.nextDouble() < 0.75) { // 10% chance per random tick
+        if (!nearbyPlayers.isEmpty() && random.nextDouble() < 0.75) {
             level.destroyBlock(pos, true);
             SpiderEggHatchEvent.force(level, pos.getX(), pos.getY(), pos.getZ());
         }
     }
-
-    @Override
-    public boolean onDestroyedByPlayer(BlockState blockstate, Level world, BlockPos pos, Player entity, boolean willHarvest, FluidState fluid) {
-        boolean retval = super.onDestroyedByPlayer(blockstate, world, pos, entity, willHarvest, fluid);
-
-        if (canHarvestBlock(blockstate, world, pos, entity)) {
-            SpiderEggHatchEvent.check(world, pos.getX(), pos.getY(), pos.getZ(), entity);
-            ExpDropEvent.blockBrokenRand(world, pos.getX(), pos.getY(), pos.getZ(), 0, 2, entity);
-        }
-        return retval;
-    }
-
 }

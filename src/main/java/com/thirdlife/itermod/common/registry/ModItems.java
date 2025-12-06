@@ -25,6 +25,7 @@ public class ModItems {
     public static final RegistryObject<Item> GOBSTEEL_SCRAP = ITEMS.register("gobsteel_scrap", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SPIDER_SILK = ITEMS.register("spider_silk", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> BOWSTRING = ITEMS.register("bowstring", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> DWARVEN_COMPONENTS = ITEMS.register("dwarven_components", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ABYSSQUARTZ_SHARD = ITEMS.register("abyssquartz_shard", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ETHERDUST = ITEMS.register("etherdust", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> POTSHERD = ITEMS.register("potsherd", () -> new Item(new Item.Properties()));

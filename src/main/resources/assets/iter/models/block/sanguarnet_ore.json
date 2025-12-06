@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "iter:block/sanguarnet_ore",
+    "particle": "iter:block/sanguarnet_ore"
+  },
+  "render_type": "solid"
+}

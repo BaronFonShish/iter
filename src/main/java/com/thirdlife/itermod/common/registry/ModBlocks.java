@@ -23,6 +23,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> DEEPSLATE_NOSTELON_ORE = registerBlock("deepslate_nostelon_ore", DeepslateNostelonOreBlock::new);
     public static final RegistryObject<Block> ABYSSQUARTZ_BLOCK = registerBlock("abyssquartz_block", AbyssquartzBlock::new);
     public static final RegistryObject<Block> ABYSSQUARTZ_CRYSTAL = registerBlock("abyssquartz_crystal", AbyssquartzCrystal::new);
+    public static final RegistryObject<Block> SANGUARNET_ORE = registerBlock("sanguarnet_ore", SanguarnetOreBlock::new);
+    public static final RegistryObject<Block> COMPONENT_DEPOSIT = registerBlock("component_deposit", ComponentDepositBlock::new);
     public static final RegistryObject<Block> DEEPSLATE_SANGUARNET_ORE = registerBlock("deepslate_sanguarnet_ore", DeepslateSanguarnetOreBlock::new);
     public static final RegistryObject<Block> SPIDER_EGG = registerBlock("spider_egg", SpiderEggBlock::new);
     public static final RegistryObject<Block> ROTROOT = registerBlockItemless("rotroot",

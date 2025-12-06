@@ -1,4 +1,6 @@
 {
+  "type": "minecraft:generic",
+  "random_sequence": "iter:gameplay/ancient_vase_common",
   "pools": [
     {
       "rolls": {
@@ -14,7 +16,8 @@
             {
               "function": "set_count",
               "count": {
-                "min": 1
+                "min": 1,
+                "max": 4
               }
             }
           ]
@@ -141,7 +144,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:redstone_dust",
+          "name": "minecraft:redstone",
           "weight": 8,
           "functions": [
             {
@@ -185,20 +188,6 @@
           "type": "minecraft:item",
           "name": "minecraft:name_tag",
           "weight": 4,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 1
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:saddle",
-          "weight": 3,
           "functions": [
             {
               "function": "set_count",
@@ -275,6 +264,27 @@
               "count": {
                 "min": 1,
                 "max": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 1,
+        "max": 1
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "iter:potsherd",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 3
               }
             }
           ]

@@ -5,6 +5,7 @@ import com.thirdlife.itermod.common.event.VaseBrokenEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -25,13 +27,14 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class VaseBlockTemplate extends Block {
+public class VaseBlockTemplate extends DropExperienceBlock {
 
     public VaseBlockTemplate() {
         super(Properties.of()
                 .sound(SoundType.STONE)
                 .strength(0.15f, 1f)
-                .noOcclusion());
+                .noOcclusion(),
+                UniformInt.of(0, 2));
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
     }
 
@@ -82,14 +85,6 @@ public class VaseBlockTemplate extends Block {
     @Override
     public BlockPathTypes getBlockPathType(BlockState state, BlockGetter world, BlockPos pos, Mob entity) {
         return BlockPathTypes.BLOCKED;
-    }
-
-    @Override
-    public boolean onDestroyedByPlayer(BlockState blockstate, Level world, BlockPos pos, Player entity, boolean willHarvest, FluidState fluid) {
-        boolean retval = super.onDestroyedByPlayer(blockstate, world, pos, entity, willHarvest, fluid);
-            VaseBrokenEvent.check(world, pos.getX(), pos.getY(), pos.getZ(), entity);
-            ExpDropEvent.blockBrokenRand(world, pos.getX(), pos.getY(), pos.getZ(), 0, 2, entity);
-        return retval;
     }
 
     @Override

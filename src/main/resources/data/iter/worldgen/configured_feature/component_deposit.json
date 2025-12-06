@@ -1,7 +1,7 @@
 {
   "type": "minecraft:ore",
   "config": {
-    "size": 4,
+    "size": 2,
     "discard_chance_on_air_exposure": 0,
     "targets": [
       {
@@ -10,15 +10,16 @@
           "tag": "stone_ore_replaceables"
         },
         "state": {
-          "Name": "iter:sanguarnet_ore"
+          "Name": "iter:component_deposit"
         }
-      },{
+      },
+      {
         "target": {
           "predicate_type": "tag_match",
           "tag": "deepslate_ore_replaceables"
         },
         "state": {
-          "Name": "iter:deepslate_sanguarnet_ore"
+          "Name": "iter:component_deposit"
         }
       }
     ]

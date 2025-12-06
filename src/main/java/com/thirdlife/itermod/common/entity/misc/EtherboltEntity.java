@@ -70,7 +70,7 @@ public class EtherboltEntity extends AbstractMagicProjectile {
 
     public void particleBurst(int k){
         if (level() instanceof ServerLevel serverLevel){
-            serverLevel.sendParticles(ModParticleTypes.ARCANE_PARTICLE.get(), this.getX(), this.getY(), this.getZ(), k, 0, 0, 0, Mth.nextFloat(random, -0.25f, 0.25f));
+            serverLevel.sendParticles(ModParticleTypes.ARCANE_PARTICLE.get(), this.getX(), this.getY(), this.getZ(), k, 0, 0, 0, Mth.nextFloat(random, 0.1f, 0.25f));
         }
     }
 
