@@ -26,12 +26,18 @@ public abstract class SpellItem extends Item{
     private final int castTime;
     private final int cooldown;
     private final int etherCost;
+    private final String domain;
+    private final String method;
+    private final int tier;
 
-    public SpellItem(Properties properties, int castTime, int etherCost, int cooldown) {
+    public SpellItem(Properties properties, String domain, String method, int tier, int castTime, int etherCost, int cooldown) {
         super(properties.stacksTo(1));
         this.castTime = castTime;
         this.etherCost = etherCost;
         this.cooldown = cooldown;
+        this.domain = domain;
+        this.method = method;
+        this.tier = tier;
     }
 
     public float getCastTimeBase(){
@@ -43,6 +49,16 @@ public abstract class SpellItem extends Item{
     public float getEtherCostBase(){
         return this.etherCost;
     }
+    public String getDomain(){
+        return this.domain;
+    }
+    public String getMethod(){
+        return this.method;
+    }
+    public int getTier(){
+        return this.tier;
+    }
+
 
     public String getSpellDisplayName(){
         return Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).toString() + ".spellname";
@@ -95,11 +111,17 @@ public abstract class SpellItem extends Item{
         ResourceLocation registryName = ForgeRegistries.ITEMS.getKey(this);
         if (registryName != null) {
             String baseKey = BuiltInRegistries.ITEM.getKey(this).getNamespace() + "." + BuiltInRegistries.ITEM.getKey(this).getPath();
+            String domainKey = "iterpg.spell.domain." + this.getDomain();
+            String methodKey = "iterpg.spell.method." + this.getMethod();
+            String SpellInfo = Component.translatable(domainKey)
+                    + Component.translatable("iterpg.spell.domain").toString()
+                    + Component.translatable("iterpg.spell.method_of")
+                    + ", " + Component.translatable(methodKey);
 
             list.add(Component.translatable(baseKey + ".spellname"));
+            list.add(Component.translatable("iterpg.spell.tier." + this.getTier()));
+            list.add(Component.nullToEmpty(SpellInfo));
             list.add(Component.literal(""));
-
-
 
             LocalPlayer clientPlayer = getClientPlayer();
             if (clientPlayer != null) {

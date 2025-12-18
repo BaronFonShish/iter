@@ -29,17 +29,19 @@ import java.util.UUID;
 
 public abstract class SpellFocus extends Item {
 
-    private final int castingSpeed;
-    private final int spellpower;
-    private final int etherCost;
+    private final float castingSpeed;
+    private final float spellpower;
+    private final float etherCost;
+    private final int tier;
 
-    public SpellFocus(SpellFocusProperties properties, int spellpower, int castingSpeed, int etherCost) {
+    public SpellFocus(SpellFocusProperties properties, int tier, float spellpower, float castingSpeed, float etherCost) {
         super(properties.toItemProperties());
         this.spellpower = spellpower;
         this.castingSpeed = castingSpeed;
         this.etherCost = etherCost;
-
+        this.tier = tier;
     }
+
 
     public static class SpellFocusProperties {
         private int durability = 250;
@@ -87,6 +89,10 @@ public abstract class SpellFocus extends Item {
         return UseAnim.BOW;
     }
 
+    public int getTier(){
+        return this.tier;
+    }
+
     String spellpowerstring = "iter_foci_spellpower";
     String etherefficinecystring = "iter_foci_ether_efficiency";
     String casttimerstring = "iter_foci_cast_time";
@@ -102,8 +108,8 @@ public abstract class SpellFocus extends Item {
         if (slot == EquipmentSlot.MAINHAND)
         {
             builder.put(ModAttributes.SPELL_POWER.get(), new AttributeModifier(SpellPowerUUID, "Foci modifier", this.spellpower, AttributeModifier.Operation.ADDITION));
-            builder.put(ModAttributes.CASTING_SPEED.get(), new AttributeModifier(CastingSpeedUUID, "Foci modifier", this.castingSpeed, AttributeModifier.Operation.MULTIPLY_BASE));
-            builder.put(ModAttributes.SPELL_POWER.get(), new AttributeModifier(EtherEfficiencyUUID, "Foci modifier", this.etherCost, AttributeModifier.Operation.MULTIPLY_BASE));
+            builder.put(ModAttributes.CASTING_SPEED.get(), new AttributeModifier(CastingSpeedUUID, "Foci modifier", this.castingSpeed, AttributeModifier.Operation.MULTIPLY_TOTAL));
+            builder.put(ModAttributes.ETHER_EFFICIENCY.get(), new AttributeModifier(EtherEfficiencyUUID, "Foci modifier", this.etherCost, AttributeModifier.Operation.MULTIPLY_TOTAL));
             Map<Enchantment, Integer> itemEnchants = itemStack.getAllEnchantments();
         }
 
@@ -118,6 +124,14 @@ public abstract class SpellFocus extends Item {
         ItemStack spellstack = SpellBookUtils.getSpell(player);
         if (spellstack.isEmpty() || !(spellstack.getItem() instanceof SpellItem)) {
             return InteractionResultHolder.fail(stack);
+        }
+
+        if ((spellstack.getItem() instanceof SpellItem spellItem)&&(stack.getItem() instanceof SpellFocus focus)){
+            int spellTier = spellItem.getTier();
+            int focusTier = focus.getTier();
+            if (focusTier < spellTier){
+                return InteractionResultHolder.fail(stack);
+            }
         }
 
         if (player.getCooldowns().isOnCooldown(spellstack.getItem())) {
@@ -197,7 +211,8 @@ public abstract class SpellFocus extends Item {
             });
 
             player.getCooldowns().addCooldown(spell, cooldown);
-            player.getCooldowns().addCooldown(this, cooldown);
+            float wandCooldown = (float) Math.min(cooldown * 0.5f, Math.log(cooldown+20));
+            player.getCooldowns().addCooldown(this, (int)wandCooldown);
         }
     }
 }

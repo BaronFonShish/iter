@@ -2,9 +2,11 @@ package com.thirdlife.itermod.common.registry;
 
 import com.thirdlife.itermod.common.item.*;
 import com.thirdlife.itermod.common.item.curio.*;
+import com.thirdlife.itermod.common.item.magic.foci.AmethystWand;
 import com.thirdlife.itermod.common.item.magic.foci.BoneStaff;
 import com.thirdlife.itermod.common.item.magic.defaults.SpellBook;
 import com.thirdlife.itermod.common.item.magic.spells.SpellEtherbolt;
+import com.thirdlife.itermod.common.item.magic.spells.SpellIgnite;
 import com.thirdlife.itermod.common.item.magic.spells.SpellLesserHeal;
 import com.thirdlife.itermod.common.misc.GobsteelTier;
 import com.thirdlife.itermod.iterMod;
@@ -37,13 +39,19 @@ public class ModItems {
     public static final RegistryObject<Item> ROTROOT_SEEDS = ITEMS.register("rotroot_seeds", () -> new ItemNameBlockItem(ModBlocks.ROTROOT.get(), new Item.Properties()));
     public static final RegistryObject<Item> ETHERBLOOM_SEEDS = ITEMS.register("etherbloom_seeds", () -> new ItemNameBlockItem(ModBlocks.ETHERBLOOM_PLANT.get(), new Item.Properties()));
     public static final RegistryObject<Item> ROTROOT = ITEMS.register("rotroot",() -> new RotrootItem(new Item.Properties()));
-    public static final RegistryObject<Item> SPELL_BOOK = ITEMS.register("spell_book", SpellBook::new);
+
     public static final RegistryObject<Item> SANGUARNET = ITEMS.register("sanguarnet",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> RECURVE_BOW = ITEMS.register("recurve_bow", RecurveBowItem::new);
 
     public static final RegistryObject<Item> SPIDERLING_SPAWN_EGG =
             ITEMS.register("spiderling_spawn_egg", () ->new ForgeSpawnEggItem
                     (ModEntities.SPIDERLING, -2372425, -13029294, new Item.Properties()));
+    public static final RegistryObject<Item> GOBLIN_SPAWN_EGG =
+            ITEMS.register("goblin_spawn_egg", () ->new ForgeSpawnEggItem
+                    (ModEntities.GOBLIN, 0x526133, 0x634F52, new Item.Properties()));
+    public static final RegistryObject<Item> GOBLIN_WARRIOR_SPAWN_EGG =
+            ITEMS.register("goblin_warrior_spawn_egg", () ->new ForgeSpawnEggItem
+                    (ModEntities.GOBLIN_WARRIOR, 0x526133, 0x4B3A43, new Item.Properties()));
 
 
     public static final RegistryObject<Item> WOODEN_DAGGER = ITEMS.register("wooden_dagger",
@@ -131,9 +139,13 @@ public class ModItems {
     public static final RegistryObject<Item> GOLDEN_RING_SANGUARNET = ITEMS.register("golden_ring_sanguarnet", GoldenRingSanguarnet::new);
     public static final RegistryObject<Item> NETHERITE_RING_SANGUARNET = ITEMS.register("netherite_ring_sanguarnet", NetheriteRingSanguarnet::new);
 
+    public static final RegistryObject<Item> SPELL_BOOK = ITEMS.register("spell_book", SpellBook::new);
+
     public static final RegistryObject<Item> BONE_STAFF = ITEMS.register("bone_staff", BoneStaff::new);
+    public static final RegistryObject<Item> AMETHYST_WAND = ITEMS.register("amethyst_wand", AmethystWand::new);
 
     public static final RegistryObject<Item> SPELL_LESSER_HEAL = ITEMS.register("spell_lesser_heal", SpellLesserHeal::new);
+    public static final RegistryObject<Item> SPELL_IGNITE = ITEMS.register("spell_ignite", SpellIgnite::new);
     public static final RegistryObject<Item> SPELL_ETHERBOLT = ITEMS.register("spell_etherbolt", SpellEtherbolt::new);
 
 

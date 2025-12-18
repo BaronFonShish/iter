@@ -106,8 +106,11 @@
   "iter.desc.cruncher": "Mines blocks when powered",
 
   "entity.iter.spiderling": "Spiderling",
+  "item.iter.spiderling_spawn_egg": "Spiderling Spawn Egg",
   "entity.iter.goblin": "Goblin",
+  "item.iter.goblin_spawn_egg": "Goblin Spawn Egg",
   "entity.iter.goblin_warrior": "Goblin Warrior",
+  "item.iter.goblin_warrior_spawn_egg": "Goblin Warrior Spawn Egg",
   "entity.iter.etherbolt": "Etherbolt",
 
   "enchantment.iter.sowing": "Sowing",
@@ -117,5 +120,23 @@
 
   "iterpg.spell.cast_time": "Casting time: %ss",
   "iterpg.spell.mana_cost": "Burnout: %s",
-  "iterpg.spell.cooldown": "Cooldown: %ss"
+  "iterpg.spell.cooldown": "Cooldown: %ss",
+
+  "iterpg.spell.domain.arcane": "Arcane",
+  "iterpg.spell.domain.elemental": "Elemental",
+  "iterpg.spell.domain.occult": "Occult",
+
+  "iterpg.spell.domain": "Domain",
+  "iterpg.spell.method_of": "Method of",
+  "iterpg.spell.method.force": "Force",
+  "iterpg.spell.method.form": "Form",
+  "iterpg.spell.method.body": "Body",
+  "iterpg.spell.method.sight": "Sight",
+
+  "iterpg.spell.tier.0": "Primitive",
+  "iterpg.spell.tier.1": "Novice",
+  "iterpg.spell.tier.2": "Adept",
+  "iterpg.spell.tier.3": "Expert",
+  "iterpg.spell.tier.4": "Fabled",
+  "iterpg.spell.tier.5": "Primeval"
 }

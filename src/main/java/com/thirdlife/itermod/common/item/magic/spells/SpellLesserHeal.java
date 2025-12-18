@@ -19,7 +19,7 @@ import java.util.List;
 public class SpellLesserHeal extends SpellItem {
 
     public SpellLesserHeal() {
-        super(new Properties(), 40, 10, 80);
+        super(new Properties(), "arcane","body",1,40, 10, 80);
     }
 
     @Override

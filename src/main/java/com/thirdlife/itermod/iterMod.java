@@ -64,6 +64,7 @@ public class iterMod {
         ModBlockEntities.REGISTRY.register(modEventBus);
         ModEnchantments.ENCHANTMENTS.register(modEventBus);
         ModEntities.register(modEventBus);
+        ModTabs.REGISTRY.register(modEventBus);
         ModFeatures.REGISTRY.register(modEventBus);
         ModAttributes.ATTRIBUTES.register(modEventBus);
         ModParticleTypes.REGISTRY.register(modEventBus);

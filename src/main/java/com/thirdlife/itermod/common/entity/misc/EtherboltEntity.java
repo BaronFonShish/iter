@@ -40,11 +40,8 @@ public class EtherboltEntity extends AbstractMagicProjectile {
     @Override
     protected void hitEffects(LivingEntity target) {
         super.hitEffects(target);
-        Level level = target.level();
-
-        if (level.isClientSide) {
-            particleBurst(16);
-        }
+        this.playImpactSound();
+        this.particleBurst(10);
     }
 
     @Override
@@ -65,12 +62,13 @@ public class EtherboltEntity extends AbstractMagicProjectile {
     public void onHitBlock(BlockHitResult blockHitResult) {
         super.onHitBlock(blockHitResult);
         this.playImpactSound();
-        this.particleBurst(16);
+        this.particleBurst(10);
     }
 
     public void particleBurst(int k){
         if (level() instanceof ServerLevel serverLevel){
-            serverLevel.sendParticles(ModParticleTypes.ARCANE_PARTICLE.get(), this.getX(), this.getY(), this.getZ(), k, 0, 0, 0, Mth.nextFloat(random, 0.1f, 0.25f));
+            serverLevel.sendParticles(ModParticleTypes.ARCANE_PARTICLE.get(), this.getX(), this.getY(), this.getZ(), k,
+                    0, 0, 0, Mth.nextFloat(random, 0.1f, 0.25f));
         }
     }
 

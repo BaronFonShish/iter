@@ -15,7 +15,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class SpellEtherbolt extends SpellItem {
 
-    public SpellEtherbolt() {super(new Properties(), 1, 3, 12);}
+    public SpellEtherbolt() {super(new Properties(), "arcane", "force", 1, 1, 3, 14);}
 
     @Override
     public void castSpell(Level level, Player player, ItemStack wand, ItemStack spellStack, float spellpower) {

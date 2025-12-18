@@ -4,6 +4,8 @@ import com.thirdlife.itermod.common.registry.ModBlocks;
 import com.thirdlife.itermod.common.registry.ModItems;
 import com.thirdlife.itermod.iterMod;
 import net.minecraft.client.renderer.entity.GuardianRenderer;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -13,6 +15,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 
@@ -23,7 +27,8 @@ public class ModCreativeTabEvents {
             ResourceKey<CreativeModeTab> tab,
             ItemStack reference,
             ItemStack insert
-    ) {}
+    ) {
+    }
 
     @SubscribeEvent
     public static void onCreativeTab(BuildCreativeModeTabContentsEvent event) {
@@ -47,12 +52,13 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Blocks.AMETHYST_CLUSTER), new ItemStack(ModBlocks.ABYSSQUARTZ_BLOCK.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.ABYSSQUARTZ_BLOCK.get()), new ItemStack(ModBlocks.ABYSSQUARTZ_CRYSTAL.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.ABYSSQUARTZ_CRYSTAL.get()), new ItemStack(ModBlocks.SPIDER_EGG.get())),
-                new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.SPIDER_EGG.get()), new ItemStack(ModBlocks.ANCIENT_SMALL_VASE.get())),
-                new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.ANCIENT_SMALL_VASE.get()), new ItemStack(ModBlocks.ANCIENT_VASE.get())),
-                new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.ANCIENT_VASE.get()), new ItemStack(ModBlocks.ANCIENT_BIG_VASE.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Items.BEETROOT_SEEDS), new ItemStack(ModItems.ROTROOT_SEEDS.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Items.SPORE_BLOSSOM), new ItemStack(ModBlocks.ETHERBLOOM.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Items.SWEET_BERRIES), new ItemStack(ModItems.ETHERBLOOM_SEEDS.get())),
+
+                new TabInsertion(CreativeModeTabs.FUNCTIONAL_BLOCKS, new ItemStack(Blocks.SUSPICIOUS_GRAVEL), new ItemStack(ModBlocks.ANCIENT_SMALL_VASE.get())),
+                new TabInsertion(CreativeModeTabs.FUNCTIONAL_BLOCKS, new ItemStack(ModBlocks.ANCIENT_SMALL_VASE.get()), new ItemStack(ModBlocks.ANCIENT_VASE.get())),
+                new TabInsertion(CreativeModeTabs.FUNCTIONAL_BLOCKS, new ItemStack(ModBlocks.ANCIENT_VASE.get()), new ItemStack(ModBlocks.ANCIENT_BIG_VASE.get())),
 
                 new TabInsertion(CreativeModeTabs.FOOD_AND_DRINKS, new ItemStack(Items.BEETROOT), new ItemStack(ModItems.ROTROOT.get())),
 
@@ -115,8 +121,13 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(Items.NETHERITE_HOE), new ItemStack(ModItems.GOBSTEEL_SHOVEL.get())),
                 new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(ModItems.GOBSTEEL_SHOVEL.get()), new ItemStack(ModItems.GOBSTEEL_PICKAXE.get())),
                 new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(ModItems.GOBSTEEL_PICKAXE.get()), new ItemStack(ModItems.GOBSTEEL_AXE.get())),
-                new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(ModItems.GOBSTEEL_AXE.get()), new ItemStack(ModItems.GOBSTEEL_HOE.get()))
+                new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(ModItems.GOBSTEEL_AXE.get()), new ItemStack(ModItems.GOBSTEEL_HOE.get())),
+
+                new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(Items.ZOMBIFIED_PIGLIN_SPAWN_EGG), new ItemStack(ModItems.SPIDERLING_SPAWN_EGG.get())),
+                new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.SPIDERLING_SPAWN_EGG.get()), new ItemStack(ModItems.GOBLIN_SPAWN_EGG.get())),
+                new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.GOBLIN_SPAWN_EGG.get()), new ItemStack(ModItems.GOBLIN_WARRIOR_SPAWN_EGG.get()))
         );
+
 
         for (TabInsertion ins : insertions) {
             if (event.getTabKey() == ins.tab()) {

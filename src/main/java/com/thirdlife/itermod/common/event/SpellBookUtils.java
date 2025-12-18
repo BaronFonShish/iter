@@ -1,6 +1,7 @@
 package com.thirdlife.itermod.common.event;
 
 import com.thirdlife.itermod.common.item.magic.defaults.SpellBook;
+import com.thirdlife.itermod.common.item.magic.defaults.SpellItem;
 import com.thirdlife.itermod.common.variables.MageUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -70,9 +71,7 @@ public class SpellBookUtils {
             return false;
         }
 
-        return stack.getTags().anyMatch(tag ->
-                tag.location().equals(new ResourceLocation("iter", "spell_item"))
-        );
+        return (stack.getItem() instanceof SpellItem);
     }
 
     @Nullable

@@ -87,4 +87,12 @@ public class SpiderEggBlock extends DropExperienceBlock {
             SpiderEggHatchEvent.force(level, pos.getX(), pos.getY(), pos.getZ());
         }
     }
+
+    @Override
+    public boolean onDestroyedByPlayer(BlockState blockstate, Level world, BlockPos pos, Player entity, boolean willHarvest, FluidState fluid) {
+        boolean retval = super.onDestroyedByPlayer(blockstate, world, pos, entity, willHarvest, fluid);
+            SpiderEggHatchEvent.check(world, pos.getX(), pos.getY(), pos.getZ(), entity);
+            ExpDropEvent.blockBrokenRand(world, pos.getX(), pos.getY(), pos.getZ(), 0, 2, entity);
+        return retval;
+    }
 }
