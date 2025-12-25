@@ -2,7 +2,8 @@ package com.thirdlife.itermod.common.event;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.thirdlife.itermod.common.variables.MageUtils;
+import com.thirdlife.itermod.common.item.magic.defaults.SpellFocus;
+import com.thirdlife.itermod.common.variables.IterPlayerDataUtils;
 import com.thirdlife.itermod.common.registry.ModTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
@@ -41,9 +42,9 @@ public class MageOverlay {
         RenderSystem.setShaderColor(1, 1, 1, 1);
         boolean display = false;
 
-        display = (entity.getMainHandItem().is(ModTags.Items.SPELL_FOCI));
+        display = ((entity.getMainHandItem().getItem() instanceof SpellFocus)||(entity.getMainHandItem().is(ModTags.Items.MAGICAL_ITEM)));
         if (display) {
-            float perc = (1f-(MageUtils.getBurnout(entity)/MageUtils.getThreshold(entity)));
+            float perc = (1f-(IterPlayerDataUtils.getBurnout(entity)/ IterPlayerDataUtils.getThreshold(entity)));
             int progress = Math.min(Math.max(0, (int)(perc * 83)), 84);
 
             event.getGuiGraphics().blit(new ResourceLocation("iter:textures/gui/mana_overlay.png"), 6, 5, 0, 0, 120, 50, 120, 50);
@@ -52,7 +53,7 @@ public class MageOverlay {
             String spellNumber = MageOverlayUtils.rahh(entity);
             event.getGuiGraphics().drawString(Minecraft.getInstance().font, spellNumber, 11, 42, -16737844, false);
           event.getGuiGraphics().drawString(Minecraft.getInstance().font,
-                  ((int)MageUtils.getBurnout(entity) + "/" + (int)MageUtils.getThreshold(entity))
+                  ((int) IterPlayerDataUtils.getBurnout(entity) + "/" + (int) IterPlayerDataUtils.getThreshold(entity))
                   , 11, 25, -16750900, false);
             event.getGuiGraphics().drawString(Minecraft.getInstance().font, MageOverlayUtils.Grrr(entity), 23, 42, -3381505, false);
             event.getGuiGraphics().blit(new ResourceLocation("iter:textures/gui/etherbar_full.png"), 9, 8, 0, 0, 83 - progress, 9, 83, 9);

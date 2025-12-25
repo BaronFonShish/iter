@@ -3,82 +3,105 @@ package com.thirdlife.itermod.common.event;
 
 import com.thirdlife.itermod.common.registry.ModAttributes;
 import com.thirdlife.itermod.common.registry.ModCapabilities;
-import com.thirdlife.itermod.common.variables.EtherBurnoutPacket;
-import com.thirdlife.itermod.common.variables.MageData;
-import com.thirdlife.itermod.common.variables.MageDataProvider;
-import com.thirdlife.itermod.common.variables.MageUtils;
-import com.thirdlife.itermod.iterMod;
+import com.thirdlife.itermod.common.variables.IterPlayerDataProvider;
+import com.thirdlife.itermod.common.variables.IterPlayerDataUtils;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.common.util.LazyOptional;
+import net.minecraft.world.level.GameType;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.network.PacketDistributor;
 
 import java.util.Objects;
+
+import static com.thirdlife.itermod.common.variables.IterPlayerDataUtils.syncAll;
+
 
 @Mod.EventBusSubscriber(modid = "iter", bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class PlayerEtherCalc {
 
     @SubscribeEvent
     public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event) {
-        MageDataProvider.attach(event);
+        IterPlayerDataProvider.attach(event);
     }
 
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-        if (!event.getEntity().level().isClientSide()) {
-            MageUtils.syncBurnout((ServerPlayer) event.getEntity());
+        if (!event.getEntity().level().isClientSide() && event.getEntity() instanceof ServerPlayer serverPlayer) {
+            syncAll(serverPlayer);
         }
     }
 
     @SubscribeEvent
     public static void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
-        if (!event.getEntity().level().isClientSide()) {
-            MageUtils.syncBurnout((ServerPlayer) event.getEntity());
+        if (!event.getEntity().level().isClientSide() && event.getEntity() instanceof ServerPlayer serverPlayer) {
+            syncAll(serverPlayer);
         }
     }
 
     @SubscribeEvent
     public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
-        if (!event.getEntity().level().isClientSide()) {
-            MageUtils.syncBurnout((ServerPlayer) event.getEntity());
+        if (!event.getEntity().level().isClientSide() && event.getEntity() instanceof ServerPlayer serverPlayer) {
+            syncAll(serverPlayer);
         }
     }
 
+    @SubscribeEvent
+    public static void onPlayerClone(PlayerEvent.Clone event) {
+        if (event.isWasDeath() && !event.getEntity().level().isClientSide() &&
+                event.getEntity() instanceof ServerPlayer newPlayer) {
+            syncAll(newPlayer);
+        }
+    }
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.END && !event.player.level().isClientSide()) {
-            event.player.getCapability(ModCapabilities.MAGE_DATA).ifPresent(mageData -> {
 
-                AttributeInstance dissipationBase = event.player.getAttribute(ModAttributes.ETHER_BURNOUT_DISSIPATION.get());
-                float dissipation = dissipationBase != null ? (float) dissipationBase.getValue() : 0.01f;
+            float dissipation = IterPlayerDataUtils.getDynamicDissipation(event.player);
+            float burnout = IterPlayerDataUtils.getBurnout(event.player);
 
-                AttributeInstance thresholdBase = event.player.getAttribute(ModAttributes.ETHER_BURNOUT_THRESHOLD.get());
-                float threshold = thresholdBase != null ? (float) thresholdBase.getValue() : 0.01f;
+            if (burnout > 0) {
+                if (dissipation >= burnout) {
+                    IterPlayerDataUtils.setBurnout(event.player, 0);
+                } else {
+                    IterPlayerDataUtils.addBurnout(event.player, -dissipation);
+                }
+            }
 
-                dissipation = (dissipation + (threshold * 0.0005f));
-                dissipation = dissipation * 0.05f;
-                float Burnout = mageData.getEtherBurnout();
+            if (burnout < 0) {
+                IterPlayerDataUtils.setBurnout(event.player, 0);
+            }
 
-                if (Burnout > 0) {
-                    if (dissipation >= Burnout) {
-                        mageData.setEtherBurnout(0);
-                        MageUtils.syncBurnout((ServerPlayer) event.player);}
-                    else {
-                    mageData.subtractEtherBurnout(dissipation);
-                        MageUtils.syncBurnout((ServerPlayer) event.player);
+            if ((event.player.level().getGameTime() % 20 == 0)) {
+                int threshold_1 = (int) IterPlayerDataUtils.getThreshold(event.player);
+                int threshold_2 = (int) (threshold_1 * 1.05f + 3);
+                int threshold_3 = (int) (threshold_2 * 1.025f + 2);
+                if (event.player instanceof ServerPlayer player) {
+                    if (player.gameMode.getGameModeForPlayer() == GameType.SURVIVAL || player.gameMode.getGameModeForPlayer() == GameType.ADVENTURE) {
+                        if (burnout >= threshold_1) {
+                            player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 50, 0, false, true));
+                            player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 25, 0, false, true));
+                            player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 20, 0, false, true));
+                        }
+                        if (burnout >= threshold_2) {
+                            player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 25, 1, false, true));
+                            player.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 40, 0, false, true));
+                            player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 25, 1, false, true));
+                        }
+                        if (burnout >= threshold_3) {
+                            if (!player.hasEffect(MobEffects.WITHER)) {
+                                player.addEffect(new MobEffectInstance(MobEffects.WITHER, 40, 0, false, true));
+                            }
+                        }
                     }
                 }
-                if (Burnout < 0) {mageData.setEtherBurnout(0); MageUtils.syncBurnout((ServerPlayer) event.player);}
-            });
+            }
         }
     }
-
 }

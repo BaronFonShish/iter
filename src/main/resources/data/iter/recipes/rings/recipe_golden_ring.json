@@ -3,7 +3,7 @@
   "category": "misc",
   "pattern": [
     "aba",
-    "bcb",
+    "b b",
     "aba"
   ],
   "key": {
@@ -12,9 +12,6 @@
     },
     "b": {
       "item": "minecraft:gold_ingot"
-    },
-    "c": {
-      "item": "iter:ring_mould"
     }
   },
   "result": {

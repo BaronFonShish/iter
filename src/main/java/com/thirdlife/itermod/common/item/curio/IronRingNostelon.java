@@ -34,7 +34,7 @@ public class IronRingNostelon extends Item implements ICurioItem {
     public void ringSend(SlotContext slotContext) {
         RingEffectManager.TieredRingStuff("iter_ring_burnout_dissipation", "Ring Ether Dissipation", ModAttributes.ETHER_BURNOUT_DISSIPATION.get(),
                 ModItems.IRON_RING_NOSTELON.get(), ModItems.GOLDEN_RING_NOSTELON.get(), ModItems.NETHERITE_RING_NOSTELON.get(),
-                0.025f, 0.0375f, 0.05f, slotContext.entity(), 1);
+                0.05f, 0.075f, 0.1f, slotContext.entity(), 1);
     }
 
     @Override

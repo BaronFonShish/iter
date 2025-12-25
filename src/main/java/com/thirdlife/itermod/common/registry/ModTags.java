@@ -18,11 +18,7 @@ public class ModTags {
         }
     }
     public static class Items {
-        public static final TagKey<Item> SPELLCAST_TIER_PRIMITIVE = tag("spellcast_tier_primitive");
-        public static final TagKey<Item> SPELLCAST_TIER_NOVICE = tag("spellcast_tier_novice");
-        public static final TagKey<Item> SPELLCAST_TIER_ADVANCED = tag("spellcast_tier_advanced");
-        public static final TagKey<Item> SPELLCAST_TIER_EXPERT = tag("spellcast_tier_expert");
-        public static final TagKey<Item> SPELLCAST_TIER_FABLED = tag("spellcast_tier_fabled");
+        public static final TagKey<Item> MAGICAL_ITEM = tag("magical_item");
 
 //        public static final TagKey<Item> SPELL_TIER_PRIMITIVE = tag("spell_tier_primitive");
 //        public static final TagKey<Item> SPELL_TIER_NOVICE = tag("spell_tier_novice");
@@ -30,7 +26,6 @@ public class ModTags {
 //        public static final TagKey<Item> SPELL_TIER_EXPERT = tag("spell_tier_expert");
 //        public static final TagKey<Item> SPELL_TIER_FABLED = tag("spell_tier_fabled");
 
-        public static final TagKey<Item> SPELL_FOCI = tag("spell_foci");
 
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(iterMod.MOD_ID, name));

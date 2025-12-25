@@ -1,13 +1,12 @@
 package com.thirdlife.itermod.common.registry;
 
 import com.thirdlife.itermod.common.item.*;
+import com.thirdlife.itermod.common.item.armor.ApprenticeArmor;
+import com.thirdlife.itermod.common.item.armor.AzureArmor;
 import com.thirdlife.itermod.common.item.curio.*;
-import com.thirdlife.itermod.common.item.magic.foci.AmethystWand;
-import com.thirdlife.itermod.common.item.magic.foci.BoneStaff;
+import com.thirdlife.itermod.common.item.magic.foci.*;
 import com.thirdlife.itermod.common.item.magic.defaults.SpellBook;
-import com.thirdlife.itermod.common.item.magic.spells.SpellEtherbolt;
-import com.thirdlife.itermod.common.item.magic.spells.SpellIgnite;
-import com.thirdlife.itermod.common.item.magic.spells.SpellLesserHeal;
+import com.thirdlife.itermod.common.item.magic.spells.*;
 import com.thirdlife.itermod.common.misc.GobsteelTier;
 import com.thirdlife.itermod.iterMod;
 import net.minecraft.world.item.*;
@@ -39,9 +38,11 @@ public class ModItems {
     public static final RegistryObject<Item> ROTROOT_SEEDS = ITEMS.register("rotroot_seeds", () -> new ItemNameBlockItem(ModBlocks.ROTROOT.get(), new Item.Properties()));
     public static final RegistryObject<Item> ETHERBLOOM_SEEDS = ITEMS.register("etherbloom_seeds", () -> new ItemNameBlockItem(ModBlocks.ETHERBLOOM_PLANT.get(), new Item.Properties()));
     public static final RegistryObject<Item> ROTROOT = ITEMS.register("rotroot",() -> new RotrootItem(new Item.Properties()));
+    public static final RegistryObject<Item> ABSTRUSE_CLOTH = ITEMS.register("abstruse_cloth", () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> SANGUARNET = ITEMS.register("sanguarnet",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> RECURVE_BOW = ITEMS.register("recurve_bow", RecurveBowItem::new);
+    public static final RegistryObject<Item> STINGER = ITEMS.register("stinger", StingerItem::new);
 
     public static final RegistryObject<Item> SPIDERLING_SPAWN_EGG =
             ITEMS.register("spiderling_spawn_egg", () ->new ForgeSpawnEggItem
@@ -139,14 +140,34 @@ public class ModItems {
     public static final RegistryObject<Item> GOLDEN_RING_SANGUARNET = ITEMS.register("golden_ring_sanguarnet", GoldenRingSanguarnet::new);
     public static final RegistryObject<Item> NETHERITE_RING_SANGUARNET = ITEMS.register("netherite_ring_sanguarnet", NetheriteRingSanguarnet::new);
 
+    public static final RegistryObject<Item> APPRENTICE_HOOD = ITEMS.register("apprentice_hood", ApprenticeArmor.Helmet::new);
+    public static final RegistryObject<Item> APPRENTICE_ROBES = ITEMS.register("apprentice_robes", ApprenticeArmor.Chestplate::new);
+    public static final RegistryObject<Item> APPRENTICE_PANTS = ITEMS.register("apprentice_pants", ApprenticeArmor.Leggings::new);
+    public static final RegistryObject<Item> APPRENTICE_BOOTS = ITEMS.register("apprentice_boots", ApprenticeArmor.Boots::new);
+    public static final RegistryObject<Item> AZURE_HOOD = ITEMS.register("azure_hood", AzureArmor.Helmet::new);
+    public static final RegistryObject<Item> AZURE_MANTLE = ITEMS.register("azure_mantle", AzureArmor.Chestplate::new);
+    public static final RegistryObject<Item> AZURE_PANTS = ITEMS.register("azure_pants", AzureArmor.Leggings::new);
+    public static final RegistryObject<Item> AZURE_BOOTS = ITEMS.register("azure_boots", AzureArmor.Boots::new);
+
     public static final RegistryObject<Item> SPELL_BOOK = ITEMS.register("spell_book", SpellBook::new);
 
     public static final RegistryObject<Item> BONE_STAFF = ITEMS.register("bone_staff", BoneStaff::new);
     public static final RegistryObject<Item> AMETHYST_WAND = ITEMS.register("amethyst_wand", AmethystWand::new);
+    public static final RegistryObject<Item> ANCIENT_STAFF = ITEMS.register("ancient_staff", AncientStaff::new);
+    public static final RegistryObject<Item> NOSTELON_STAFF = ITEMS.register("nostelon_staff", NostelonStaff::new);
+    public static final RegistryObject<Item> DIAMOND_STAFF = ITEMS.register("diamond_staff", DiamondStaff::new);
 
-    public static final RegistryObject<Item> SPELL_LESSER_HEAL = ITEMS.register("spell_lesser_heal", SpellLesserHeal::new);
-    public static final RegistryObject<Item> SPELL_IGNITE = ITEMS.register("spell_ignite", SpellIgnite::new);
+
     public static final RegistryObject<Item> SPELL_ETHERBOLT = ITEMS.register("spell_etherbolt", SpellEtherbolt::new);
+    public static final RegistryObject<Item> SPELL_LESSER_HEAL = ITEMS.register("spell_lesser_heal", SpellLesserHeal::new);
+    public static final RegistryObject<Item> SPELL_MEND = ITEMS.register("spell_mend", SpellMend::new);
+    public static final RegistryObject<Item> SPELL_RECALL = ITEMS.register("spell_recall", SpellRecall::new);
+
+    public static final RegistryObject<Item> SPELL_IGNITE = ITEMS.register("spell_ignite", SpellIgnite::new);
+    public static final RegistryObject<Item> SPELL_FROST_SPIKE = ITEMS.register("spell_frost_spike", SpellFrostSpike::new);
+    public static final RegistryObject<Item> SPELL_SPLASHES = ITEMS.register("spell_splashes", SpellSplashes::new);
+
+    public static final RegistryObject<Item> SPELL_WITCH_LASH = ITEMS.register("spell_witch_lash", SpellWitchLash::new);
 
 
     public static void register(IEventBus eventBus) {

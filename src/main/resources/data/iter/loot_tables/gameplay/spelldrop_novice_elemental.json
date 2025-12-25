@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:generic",
+  "random_sequence": "iter:gameplay/spelldrop_novice_elemental",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "iter:spell_ignite",
+          "weight": 10,
+          "quality": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "iter:spell_splashes",
+          "weight": 10,
+          "quality": 1
+        }
+      ]
+    }
+  ]
+}

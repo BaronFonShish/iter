@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "iter:etherdust"
+    },
+    {
+      "tag": "minecraft:wool"
+    },
+    {
+      "item": "minecraft:string"
+    },{
+      "item": "minecraft:string"
+    }
+  ],
+  "result": {
+    "item": "iter:abstruse_cloth",
+    "count": 2
+  }
+}

@@ -1,6 +1,21 @@
 {
   "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
   "textures": {
     "layer0": "iter:item/bone_staff"
+  },
+  "base": {
+    "parent": "iter:item/bone_staff_large"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "iter:item/bone_staff_normal"
+    },
+    "fixed": {
+      "parent": "iter:item/bone_staff_normal"
+    },
+    "ground": {
+      "parent": "iter:item/bone_staff_normal"
+    }
   }
 }

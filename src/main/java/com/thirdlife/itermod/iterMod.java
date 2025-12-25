@@ -1,21 +1,13 @@
 package com.thirdlife.itermod;
 
 import com.mojang.logging.LogUtils;
-import com.thirdlife.itermod.client.model.EtherboltModel;
-import com.thirdlife.itermod.client.model.GoblinWarriorModel;
 import com.thirdlife.itermod.client.model.ModModelLayers;
-import com.thirdlife.itermod.client.model.SpiderlingModel;
-import com.thirdlife.itermod.client.renderer.EtherboltRenderer;
-import com.thirdlife.itermod.client.renderer.GoblinRenderer;
-import com.thirdlife.itermod.client.renderer.GoblinWarriorRenderer;
+import com.thirdlife.itermod.client.renderer.*;
 import com.thirdlife.itermod.common.entity.GoblinEntity;
 import com.thirdlife.itermod.common.entity.GoblinWarriorEntity;
 import com.thirdlife.itermod.common.entity.SpiderlingEntity;
 import com.thirdlife.itermod.common.registry.*;
-import com.thirdlife.itermod.client.renderer.SpiderlingRenderer;
-import com.thirdlife.itermod.common.variables.EtherBurnoutPacket;
-import com.thirdlife.itermod.common.variables.SpellSlotPacket;
-import com.thirdlife.itermod.common.variables.SpellSlotPacketServer;
+import com.thirdlife.itermod.common.variables.IterPlayerDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -25,7 +17,6 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -73,14 +64,9 @@ public class iterMod {
 
 
         int id = 0;
-        PACKET_HANDLER.registerMessage(id++, EtherBurnoutPacket.class,
-                EtherBurnoutPacket::toBytes, EtherBurnoutPacket::new, EtherBurnoutPacket::handle);
-
-        PACKET_HANDLER.registerMessage(id++, SpellSlotPacket.class,
-                SpellSlotPacket::toBytes, SpellSlotPacket::new, SpellSlotPacket::handle);
-
-        PACKET_HANDLER.registerMessage(id++, SpellSlotPacketServer.class,
-                SpellSlotPacketServer::toBytes, SpellSlotPacketServer::new, SpellSlotPacketServer::handle);
+        PACKET_HANDLER.registerMessage(id++, IterPlayerDataPacket.class,
+                IterPlayerDataPacket::encode, IterPlayerDataPacket::decode,
+                IterPlayerDataPacket::handle);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -122,6 +108,7 @@ public class iterMod {
             event.registerEntityRenderer(ModEntities.ETHERBOLT.get(), EtherboltRenderer::new);
             event.registerEntityRenderer(ModEntities.GOBLIN_WARRIOR.get(), GoblinWarriorRenderer::new);
             event.registerEntityRenderer(ModEntities.GOBLIN.get(), GoblinRenderer::new);
+            event.registerEntityRenderer(ModEntities.FROST_SPIKE.get(), FrostSpikeRenderer::new);
         }
 
         @SubscribeEvent

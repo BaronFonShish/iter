@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " dd",
+    " sd",
+    "s  "
+  ],
+  "key": {
+    "d": {
+      "item": "minecraft:diamond"
+    },
+    "s": {
+      "item": "iter:spawner_fragment"
+    }
+  },
+  "result": {
+    "item": "iter:diamond_staff",
+    "count": 1
+  }
+}

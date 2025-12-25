@@ -43,6 +43,7 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.ABYSSQUARTZ_SHARD.get()), new ItemStack(ModItems.ETHERDUST.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.FLINT), new ItemStack(ModItems.GOBSTEEL_SCRAP.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.GOBSTEEL_SCRAP.get()), new ItemStack(ModItems.DWARVEN_COMPONENTS.get())),
+                new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.LEATHER), new ItemStack(ModItems.ABSTRUSE_CLOTH.get())),
 
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Blocks.DEEPSLATE_LAPIS_ORE), new ItemStack(ModBlocks.NOSTELON_ORE.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.NOSTELON_ORE.get()), new ItemStack(ModBlocks.DEEPSLATE_NOSTELON_ORE.get())),
@@ -93,10 +94,20 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.DIAMOND_SCYTHE.get()), new ItemStack(ModItems.NETHERITE_SCYTHE.get())),
 
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(Items.BOW), new ItemStack(ModItems.RECURVE_BOW.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.RECURVE_BOW.get()), new ItemStack(ModItems.STINGER.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(Items.NETHERITE_SWORD), new ItemStack(ModItems.GOBSTEEL_SWORD.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(Items.NETHERITE_AXE), new ItemStack(ModItems.GOBSTEEL_AXE.get())),
 
-                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(Items.TURTLE_HELMET), new ItemStack(ModItems.IRON_RING.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(Items.TURTLE_HELMET), new ItemStack(ModItems.APPRENTICE_HOOD.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.APPRENTICE_HOOD.get()), new ItemStack(ModItems.APPRENTICE_ROBES.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.APPRENTICE_ROBES.get()), new ItemStack(ModItems.APPRENTICE_PANTS.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.APPRENTICE_PANTS.get()), new ItemStack(ModItems.APPRENTICE_BOOTS.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.APPRENTICE_BOOTS.get()), new ItemStack(ModItems.AZURE_HOOD.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.AZURE_HOOD.get()), new ItemStack(ModItems.AZURE_MANTLE.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.AZURE_MANTLE.get()), new ItemStack(ModItems.AZURE_PANTS.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.AZURE_PANTS.get()), new ItemStack(ModItems.AZURE_BOOTS.get())),
+
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.AZURE_BOOTS.get()), new ItemStack(ModItems.IRON_RING.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.IRON_RING.get()), new ItemStack(ModItems.GOLDEN_RING.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.GOLDEN_RING.get()), new ItemStack(ModItems.NETHERITE_RING.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.NETHERITE_RING.get()), new ItemStack(ModItems.IRON_RING_DIAMOND.get())),

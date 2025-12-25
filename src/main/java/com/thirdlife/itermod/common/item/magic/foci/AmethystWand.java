@@ -7,18 +7,13 @@ public class AmethystWand extends SpellFocus {
 
     public AmethystWand() {
         super(new SpellFocusProperties()
-                .durability(192)
+                .durability(250)
                 .rarity(Rarity.COMMON)
-                .enchantability(12),
+                .enchantability(15),
                 1,
-                4.5f,
-                0.05f,
-                0.025f
+                2.5f,
+                0.01f,
+                0
         );
-    }
-
-    @Override
-    public int getEnchantmentValue() {
-        return 15;
     }
 }

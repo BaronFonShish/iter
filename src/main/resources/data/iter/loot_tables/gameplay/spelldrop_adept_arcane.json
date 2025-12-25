@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:generic",
+  "random_sequence": "iter:gameplay/spelldrop_adept_arcane",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "iter:spell_mend",
+          "weight": 10,
+          "quality": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "iter:spell_recall",
+          "weight": 10,
+          "quality": 1
+        }
+      ]
+    }
+  ]
+}

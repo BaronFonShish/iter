@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:generic",
+  "random_sequence": "iter:gameplay/spelldrop_novice",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "iter:gameplay/spelldrop_adept_arcane",
+          "weight": 12,
+          "quality": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "iter:gameplay/spelldrop_adept_elemental",
+          "weight": 12,
+          "quality": 1
+        }
+      ]
+    }
+  ]
+}

@@ -7,19 +7,13 @@ public class BoneStaff extends SpellFocus {
 
     public BoneStaff() {
         super(new SpellFocusProperties()
-                .durability(144)
+                .durability(162)
                 .rarity(Rarity.COMMON)
                 .enchantability(12),
-                0,
-                4,
+                1,
+                2,
                 0,
                 0
         );
     }
-
-    @Override
-    public int getEnchantmentValue() {
-        return 12;
-    }
-
 }

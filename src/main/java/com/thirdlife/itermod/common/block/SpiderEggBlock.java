@@ -79,7 +79,7 @@ public class SpiderEggBlock extends DropExperienceBlock {
         super.randomTick(state, level, pos, random);
 
         List<Player> nearbyPlayers = level.getEntitiesOfClass(Player.class,
-                new AABB(pos).inflate(16.0),
+                new AABB(pos).inflate(5.0),
                 player -> !player.isCreative() && !player.isSpectator());
 
         if (!nearbyPlayers.isEmpty() && random.nextDouble() < 0.75) {

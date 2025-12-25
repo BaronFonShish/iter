@@ -2,8 +2,7 @@ package com.thirdlife.itermod.common.event;
 
 import com.thirdlife.itermod.common.item.magic.defaults.SpellBook;
 import com.thirdlife.itermod.common.item.magic.defaults.SpellItem;
-import com.thirdlife.itermod.common.variables.MageUtils;
-import net.minecraft.resources.ResourceLocation;
+import com.thirdlife.itermod.common.variables.IterPlayerDataUtils;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -21,7 +20,7 @@ public class SpellBookUtils {
             return getSpellFromOffhand(player);
         }
 
-        int selectedSlot = MageUtils.getSpellSlot(player);
+        int selectedSlot = IterPlayerDataUtils.getSpellSlot(player);
 
         LazyOptional<IItemHandler> capability = spellbookStack.getCapability(ForgeCapabilities.ITEM_HANDLER);
         if (capability.isPresent()) {

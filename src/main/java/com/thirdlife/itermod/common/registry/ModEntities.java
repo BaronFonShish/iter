@@ -4,6 +4,7 @@ package com.thirdlife.itermod.common.registry;
 import com.thirdlife.itermod.common.entity.GoblinEntity;
 import com.thirdlife.itermod.common.entity.GoblinWarriorEntity;
 import com.thirdlife.itermod.common.entity.misc.EtherboltEntity;
+import com.thirdlife.itermod.common.entity.misc.FrostSpikeEntity;
 import com.thirdlife.itermod.iterMod;
 import com.thirdlife.itermod.common.entity.SpiderlingEntity;
 import com.thirdlife.itermod.world.gui.SpellBookGuiMenu;
@@ -35,6 +36,14 @@ public class ModEntities {
                     .setTrackingRange(64).setUpdateInterval(1)
                     .sized(0.25f, 0.25f)
                             .build("etherbolt"));
+
+    public static final RegistryObject<EntityType<FrostSpikeEntity>> FROST_SPIKE =
+            ENTITY_TYPES.register("frost_spike",
+                    () -> EntityType.Builder.<FrostSpikeEntity>of(FrostSpikeEntity::new, MobCategory.MISC)
+                            .setShouldReceiveVelocityUpdates(true)
+                            .setTrackingRange(64).setUpdateInterval(1)
+                            .sized(0.25f, 0.25f)
+                            .build("frost_spike"));
 
     public static final RegistryObject<EntityType<GoblinWarriorEntity>> GOBLIN_WARRIOR =
             ENTITY_TYPES.register("goblin_warrior",

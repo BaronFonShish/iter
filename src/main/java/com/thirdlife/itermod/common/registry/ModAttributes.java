@@ -29,15 +29,15 @@ public class ModAttributes {
                     .setSyncable(true));
 
     public static final RegistryObject<Attribute> ETHER_EFFICIENCY = ATTRIBUTES.register("ether_efficiency",
-            () -> new RangedAttribute("attribute.iter.ether_efficiency", 0.0, 0.0, 1.0)
+            () -> new RangedAttribute("attribute.iter.ether_efficiency", 1.0, 0.0, 2.0)
                     .setSyncable(true));
 
     public static final RegistryObject<Attribute> ETHER_BURNOUT_DISSIPATION = ATTRIBUTES.register("ether_burnout_dissipation",
-            () -> new RangedAttribute("attribute.iter.ether_burnout_dissipation", 0.05, 0.0, 1024.0)
+            () -> new RangedAttribute("attribute.iter.ether_burnout_dissipation", 0.2, 0.0, 1024.0)
                     .setSyncable(true));
 
     public static final RegistryObject<Attribute> ETHER_BURNOUT_THRESHOLD = ATTRIBUTES.register("ether_burnout_threshold",
-            () -> new RangedAttribute("attribute.iter.ether_burnout_threshold", 50.0, 0.0, 16384.0)
+            () -> new RangedAttribute("attribute.iter.ether_burnout_threshold", 50.0, 0.0, 250000.0)
                     .setSyncable(true));
 
     public static final RegistryObject<Attribute> REGENERATION = ATTRIBUTES.register("regeneration",

@@ -1,0 +1,96 @@
+package com.thirdlife.itermod.common.item.magic.spells;
+
+import com.thirdlife.itermod.common.item.magic.defaults.SpellItem;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
+import net.minecraft.network.protocol.game.ClientboundLevelEventPacket;
+import net.minecraft.network.protocol.game.ClientboundPlayerAbilitiesPacket;
+import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.WorldGenLevel;
+
+import java.util.Objects;
+
+public class SpellRecall extends SpellItem {
+
+    public SpellRecall() {
+        super(new Properties(), "arcane", "sight", 2, 100, 100, (int) (3600));
+    }
+
+    @Override
+    public void castSpell(Level level, Player player, ItemStack wand, ItemStack spellStack, float spellpower) {
+
+        if (level.isClientSide) return;
+        if (level instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(ParticleTypes.PORTAL,
+                    player.getX(),
+                    player.getEyeY(),
+                    player.getZ(),
+                    30,
+                    0.35, 0.5, 0.35, 0.025);
+            serverLevel.sendParticles(ParticleTypes.REVERSE_PORTAL,
+                    player.getX(),
+                    player.getEyeY(),
+                    player.getZ(),
+                    30,
+                    0.35, 0.5, 0.35, 0.025);
+        }
+        if (player instanceof ServerPlayer serverPlayer && !player.level().isClientSide()) {
+            ResourceKey<Level> destination = serverPlayer.getRespawnDimension();
+
+            BlockPos spawnPos = serverPlayer.getRespawnPosition();
+            if (spawnPos == null){
+                spawnPos = Objects.requireNonNull(serverPlayer.server.getLevel(Level.OVERWORLD)).getSharedSpawnPos();
+                destination = Level.OVERWORLD;
+            }
+
+
+            ServerLevel nextLevel = serverPlayer.server.getLevel(destination);
+            if (nextLevel != null) {
+                assert serverPlayer.getRespawnPosition() != null;
+                serverPlayer.teleportTo(nextLevel,
+                        serverPlayer.getRespawnPosition().getX()+0.5,
+                        serverPlayer.getRespawnPosition().getY()+0.25,
+                        serverPlayer.getRespawnPosition().getZ()+0.5,
+                        serverPlayer.getYRot(),
+                        serverPlayer.getXRot());
+                serverPlayer.fallDistance = 0;
+                serverPlayer.connection.send(new ClientboundPlayerAbilitiesPacket(serverPlayer.getAbilities()));
+                for (MobEffectInstance _effectinstance : serverPlayer.getActiveEffects())
+                    serverPlayer.connection.send(new ClientboundUpdateMobEffectPacket(serverPlayer.getId(), _effectinstance));
+                serverPlayer.connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
+
+                serverPlayer.addEffect(new MobEffectInstance(MobEffects.DARKNESS, (int) (50 + 50/spellpower), 0, false, true));
+                serverPlayer.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, (int) (25 + 25/spellpower), 0, false, true));
+                serverPlayer.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, (int) (50 + 50/spellpower), 1, false, true));
+                serverPlayer.addEffect(new MobEffectInstance(MobEffects.CONFUSION, (int) (25 + 25/spellpower), 0, false, true));
+
+                if (level instanceof ServerLevel serverLevel) {
+                    serverLevel.sendParticles(ParticleTypes.PORTAL,
+                            player.getX(),
+                            player.getEyeY(),
+                            player.getZ(),
+                            30,
+                            0.35, 0.5, 0.35, 0.025);
+                    serverLevel.sendParticles(ParticleTypes.REVERSE_PORTAL,
+                            player.getX(),
+                            player.getEyeY(),
+                            player.getZ(),
+                            30,
+                            0.35, 0.5, 0.35, 0.025);
+                }
+            }
+        }
+    }
+}

@@ -16,7 +16,7 @@ public class RecurveBowItem extends BowItem {
 
     private final double m_Power = 1; // Default: 1
     private final double f_Power = 0.25; // Default: 0
-    private final float m_ChargeTime = 20; // Default: 20
+    public static final int MAX_DRAW_DURATION = 20; // Default: 20
     private final float m_Velocity = 3.25F; // Default: 3
 
     public RecurveBowItem() {
@@ -102,7 +102,7 @@ public class RecurveBowItem extends BowItem {
     }
 
     public float getPowerForTimeSpecial(int pCharge) {
-        float f = (float) pCharge / m_ChargeTime;
+        float f = (float) pCharge / MAX_DRAW_DURATION;
         f = (f * f + f * 2.0F) / 3.0F;
         if (f > 1.0F) {
             f = 1.0F;

@@ -51,11 +51,11 @@ public class EtherboltEntity extends AbstractMagicProjectile {
             double offsetX = (this.random.nextDouble() - 0.5) * 0.2;
             double offsetY = (this.random.nextDouble() - 0.5) * 0.2;
             double offsetZ = (this.random.nextDouble() - 0.5) * 0.2;
-            level.addParticle(ModParticleTypes.ARCANE_PARTICLE.get(),
+            level.addParticle(ModParticleTypes.ETHERBOLT_TRAIL.get(),
                     pos.x + offsetX, pos.y + offsetY, pos.z + offsetZ,
-                    Mth.nextFloat(random, -0.05f, 0.05f),
-                    Mth.nextFloat(random, -0.05f, 0.05f),
-                    Mth.nextFloat(random, -0.05f, 0.05f));
+                    Mth.nextFloat(random, -0.025f, 0.025f),
+                    Mth.nextFloat(random, -0.025f, 0.025f),
+                    Mth.nextFloat(random, -0.025f, 0.025f));
     }
 
     @Override
@@ -67,7 +67,9 @@ public class EtherboltEntity extends AbstractMagicProjectile {
 
     public void particleBurst(int k){
         if (level() instanceof ServerLevel serverLevel){
-            serverLevel.sendParticles(ModParticleTypes.ARCANE_PARTICLE.get(), this.getX(), this.getY(), this.getZ(), k,
+            serverLevel.sendParticles(ModParticleTypes.ETHERBOLT_POOF.get(), this.getX(), this.getY(), this.getZ(), 1,
+                    0, 0, 0, 0);
+            serverLevel.sendParticles(ModParticleTypes.ETHERBOLT_IMPACT.get(), this.getX(), this.getY(), this.getZ(), k,
                     0, 0, 0, Mth.nextFloat(random, 0.1f, 0.25f));
         }
     }

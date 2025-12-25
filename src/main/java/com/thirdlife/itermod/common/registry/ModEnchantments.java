@@ -1,7 +1,6 @@
 package com.thirdlife.itermod.common.registry;
 
-import com.thirdlife.itermod.common.enchantment.FlayingEnchantment;
-import com.thirdlife.itermod.common.enchantment.SowingEnchantment;
+import com.thirdlife.itermod.common.enchantment.*;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.registries.DeferredRegister;
@@ -17,4 +16,16 @@ public class ModEnchantments {
 
     public static final RegistryObject<Enchantment> FLAYING = ENCHANTMENTS.register("flaying",
             () -> new FlayingEnchantment(EquipmentSlot.MAINHAND));
+
+    public static final RegistryObject<Enchantment> AUTOMATIC = ENCHANTMENTS.register("automatic",
+            () -> new AutomaticEnchantment(EquipmentSlot.MAINHAND));
+
+    public static final RegistryObject<Enchantment> ATTUNEMENT = ENCHANTMENTS.register("attunement",
+            () -> new AttunementEnchantment(EquipmentSlot.MAINHAND));
+
+    public static final RegistryObject<Enchantment> DEXTERITY = ENCHANTMENTS.register("dexterity",
+            () -> new DexterityEnchantment(EquipmentSlot.MAINHAND));
+
+    public static final RegistryObject<Enchantment> RIGOUR = ENCHANTMENTS.register("rigour",
+            () -> new RigourEnchantment(EquipmentSlot.MAINHAND));
 }

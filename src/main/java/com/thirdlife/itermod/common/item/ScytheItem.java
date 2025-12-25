@@ -110,12 +110,8 @@ public class ScytheItem extends TieredItem {
                 entity.hurt(level.damageSources().mobAttack(attacker), areaDamage);
             }
 
-            if (level.isClientSide()){
-                level.addParticle(ParticleTypes.SWEEP_ATTACK, false, entity.getX(), (entity.getY()+(entity.getBbHeight()/2f)), entity.getZ(), 0, 0, 0);
-            } else {
                 ServerLevel serverLevel = (ServerLevel) level;
                 serverLevel.sendParticles(ParticleTypes.SWEEP_ATTACK, entity.getX(), (entity.getY()+(entity.getBbHeight()/2f)), entity.getZ(), 1, 0, 0, 0, 0);
-            }
         }
     }
 

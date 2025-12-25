@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:generic",
+  "random_sequence": "iter:gameplay/spelldrop_novice_occult",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "iter:spell_witch_lash",
+          "weight": 10,
+          "quality": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "iter:spell_witch_lash",
+          "weight": 10,
+          "quality": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "parent": "item/bow",
+  "textures": {
+    "layer0": "iter:item/stinger"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "pulling": 1
+      },
+      "model": "iter:item/stinger_0"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.5
+      },
+      "model": "iter:item/stinger_1"
+    }
+  ]
+}

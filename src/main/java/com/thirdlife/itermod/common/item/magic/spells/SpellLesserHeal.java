@@ -19,13 +19,13 @@ import java.util.List;
 public class SpellLesserHeal extends SpellItem {
 
     public SpellLesserHeal() {
-        super(new Properties(), "arcane","body",1,40, 10, 80);
+        super(new Properties(), "arcane","body",1,40, 10, 100);
     }
 
     @Override
     public void castSpell(Level level, Player player, ItemStack wand, ItemStack spellStack, float spellpower) {
 
-        float healAmount = 4f * spellpower;
+        float healAmount = 5f * spellpower;
         int duration = (int)(100 + 20 * spellpower);
 
         player.heal(healAmount);

@@ -9,6 +9,7 @@ public class ModItemProperties {
 
     public static void RegisterItemProperties(){
         registerBowProperties(ModItems.RECURVE_BOW.get());
+        registerBowProperties(ModItems.STINGER.get());
     }
 
 

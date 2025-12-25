@@ -1,17 +1,12 @@
 package com.thirdlife.itermod.common.event;
 
+import com.thirdlife.itermod.common.item.magic.defaults.SpellFocus;
 import com.thirdlife.itermod.common.registry.ModCapabilities;
 import com.thirdlife.itermod.common.registry.ModKeyBinds;
-import com.thirdlife.itermod.common.variables.EtherBurnoutPacket;
-import com.thirdlife.itermod.common.variables.MageData;
-import com.thirdlife.itermod.common.variables.MageUtils;
-import com.thirdlife.itermod.common.variables.SpellSlotPacket;
-import com.thirdlife.itermod.iterMod;
-import net.minecraft.ChatFormatting;
+import com.thirdlife.itermod.common.registry.ModTags;
+import com.thirdlife.itermod.common.variables.IterPlayerData;
+import com.thirdlife.itermod.common.variables.IterPlayerDataUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.chat.report.ReportEnvironment;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
@@ -20,7 +15,6 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.network.PacketDistributor;
 
 @Mod.EventBusSubscriber(modid = "iter", bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class SpellSlotSelectMousewheel {
@@ -38,6 +32,8 @@ public class SpellSlotSelectMousewheel {
 
         if (!SpellBookUtils.hasSpellbook(player)) return;
 
+        if (!(player.getMainHandItem().getItem() instanceof SpellFocus)||(player.getMainHandItem().is(ModTags.Items.MAGICAL_ITEM))) return;
+
         if (ModKeyBinds.SPELL_SLOT_SELECT.isDown()) {
             event.setCanceled(true);
 
@@ -52,11 +48,11 @@ public class SpellSlotSelectMousewheel {
 
     private static void handleSpellSlotScroll(Player player, double scrollDelta) {
 
-        LazyOptional<MageData> mageDataOpt = player.getCapability(ModCapabilities.MAGE_DATA);
+        LazyOptional<IterPlayerData> mageDataOpt = player.getCapability(ModCapabilities.ITER_PLAYER_DATA);
         if (!mageDataOpt.isPresent()) return;
 
-        MageData mageData = mageDataOpt.resolve().get();
-        int currentSlot = mageData.getSelectedSpellSlot();
+        IterPlayerData iterPlayerData = mageDataOpt.resolve().get();
+        int currentSlot = iterPlayerData.getSelectedSpellSlot();
 
         int direction = scrollDelta > 0 ? 1 : -1;
 
@@ -65,10 +61,8 @@ public class SpellSlotSelectMousewheel {
             newSlot = 8;
         }
 
-        mageData.setSelectedSpellSlot(newSlot);
-        MageUtils.syncSpellSlotServer(newSlot);
-
-        MageUtils.syncSpellSlotClient(player);
+        iterPlayerData.setSelectedSpellSlot(newSlot);
+        IterPlayerDataUtils.syncSpellSlot(player, newSlot);
         player.playSound(SoundEvents.UI_BUTTON_CLICK.get(), 0.2f, 1.0f);
 
     }

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " gn",
+    " sg",
+    "s  "
+  ],
+  "key": {
+    "n": {
+      "item": "iter:nostelon"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "g": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "iter:nostelon_staff",
+    "count": 1
+  }
+}

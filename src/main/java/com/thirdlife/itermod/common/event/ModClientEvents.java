@@ -2,11 +2,15 @@ package com.thirdlife.itermod.common.event;
 
 import com.thirdlife.itermod.common.registry.ModItems;
 import com.thirdlife.itermod.iterMod;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ComputeFovModifierEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Objects;
 
 @Mod.EventBusSubscriber(modid = iterMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 
@@ -15,7 +19,8 @@ public class ModClientEvents {
     public static void onComputerFovModifierEvent(ComputeFovModifierEvent event){
         if (event.getPlayer().isUsingItem()){
             Item bow = event.getPlayer().getUseItem().getItem();
-            if (bow == ModItems.RECURVE_BOW.get()){
+
+            if (Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(bow)).getNamespace().equals(iterMod.MOD_ID) && bow instanceof BowItem){
                 float fovModifier = 1f;
                 int ticksUsingItem = event.getPlayer().getTicksUsingItem();
                 float deltaTicks = (float) ticksUsingItem/20f;

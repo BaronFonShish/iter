@@ -20,6 +20,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -34,7 +35,7 @@ import java.util.Objects;
 
 public class SpellIgnite extends SpellItem {
 
-    public SpellIgnite() {super(new Properties(), "elemental", "force", 0, 1, 2, 20);}
+    public SpellIgnite() {super(new Properties(), "elemental", "force", 0, 20, 2, 8);}
 
     @Override
     public void castSpell(Level level, Player player, ItemStack wand, ItemStack spellStack, float spellpower) {
@@ -49,8 +50,8 @@ public class SpellIgnite extends SpellItem {
 
         level.playSound(null, BlockPos.containing(player.position()), Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("item.firecharge.use"))), SoundSource.PLAYERS, (float) 0.5, (float) 1.25);
 
-        for (int i=0; i<iterations; i++){
-
+        for (int i=0; i<iterations; i++) {
+            if (flag) {
                 BlockPos position = BlockPos.containing(
                         player.getX() + xdir * dist,
                         yheight + ydir * dist,
@@ -59,27 +60,38 @@ public class SpellIgnite extends SpellItem {
                 if (blockState.is(BlockTags.create(new ResourceLocation("minecraft:campfires")))
                         || (blockState.is(BlockTags.create(new ResourceLocation("minecraft:candles"))))) {
                     if (blockState.getBlock().getStateDefinition().getProperty("lit") instanceof BooleanProperty lit) {
-                        level.setBlock(position.offset(0, 1, 0), blockState.setValue(lit, true), 3);
-                        break;
+                        level.setBlock(position, blockState.setValue(lit, true), 3);
+                        flag = false;
                     }
                 }
 
-                if ((blockState.isFaceSturdy(level, position, Direction.UP))&&
-                (Blocks.FIRE.defaultBlockState().canSurvive(level, position.offset(0, 1, 0)))){
-                    level.setBlock(position, Blocks.FIRE.defaultBlockState(), 3);
-                    break;
+                if (BaseFireBlock.canBePlacedAt(level, position.offset(0, 1, 0), Direction.UP) &&
+                        level.isEmptyBlock(position.offset(0, 1, 0))) {
+                    level.setBlock(position.offset(0, 1, 0), Blocks.FIRE.defaultBlockState(), 3);
+                    flag = false;
                 }
 
                 final Vec3 center = new Vec3(player.getX() + xdir * dist, yheight + ydir * dist, player.getZ() + zdir * dist);
                 List<Entity> entfound = level.getEntitiesOfClass(Entity.class, new AABB(center, center).inflate(1 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(entcnd -> entcnd.distanceToSqr(center))).toList();
                 for (Entity entityiterator : entfound) {
                     if ((entityiterator instanceof LivingEntity) && !(player == entityiterator)) {
-                        entityiterator.hurt(new DamageSource((Holder<DamageType>) DamageTypes.IN_FIRE), 2);
-                        entityiterator.setRemainingFireTicks((int)(80 * spellpower));
-                        break;
+                        entityiterator.setRemainingFireTicks((int) (80 * spellpower));
+                        flag = false;
                     }
                 }
-            dist = dist + 0.2f;
+                if (!flag){
+                    if (level instanceof ServerLevel serverLevel) {
+                        serverLevel.sendParticles(ParticleTypes.FLAME,
+                                player.getX() + xdir * dist,
+                                yheight + ydir * dist,
+                                player.getZ() + zdir * dist,
+                                8,
+                                0.025, 0.025, 0.025, 0.025);
+                    }
+                    break;
+                }
+                dist = dist + 0.2f;
             }
         }
     }
+}

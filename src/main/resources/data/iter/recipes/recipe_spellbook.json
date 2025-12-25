@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "app",
+    "gpp",
+    "app"
+  ],
+  "key": {
+    "p": {
+      "item": "minecraft:paper"
+    },
+    "a": {
+      "item": "iter:abstruse_cloth"
+    },
+    "n": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "iter:spell_book",
+    "count": 1
+  }
+}

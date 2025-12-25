@@ -5,8 +5,10 @@ import com.google.common.collect.Multimap;
 import com.thirdlife.itermod.common.event.SpellBookUtils;
 import com.thirdlife.itermod.common.registry.ModAttributes;
 import com.thirdlife.itermod.common.registry.ModCapabilities;
-import com.thirdlife.itermod.common.variables.EtherBurnoutPacket;
+import com.thirdlife.itermod.common.registry.ModEnchantments;
+import com.thirdlife.itermod.common.variables.IterPlayerDataUtils;
 import com.thirdlife.itermod.iterMod;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -15,15 +17,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -93,29 +94,45 @@ public abstract class SpellFocus extends Item {
         return this.tier;
     }
 
-    String spellpowerstring = "iter_foci_spellpower";
-    String etherefficinecystring = "iter_foci_ether_efficiency";
-    String casttimerstring = "iter_foci_cast_time";
+    private static final String spellpowerstring = "iter_foci_spellpower";
+    private static final String etherefficinecystring = "iter_foci_ether_efficiency";
+    private static final String casttimerstring = "iter_foci_cast_time";
 
-    final UUID SpellPowerUUID = UUID.nameUUIDFromBytes((spellpowerstring.getBytes()));
-    final UUID CastingSpeedUUID = UUID.nameUUIDFromBytes((casttimerstring.getBytes()));
-    final UUID EtherEfficiencyUUID = UUID.nameUUIDFromBytes((etherefficinecystring.getBytes()));
+    private static final UUID SpellPowerUUID = UUID.nameUUIDFromBytes((spellpowerstring.getBytes()));
+    private static final UUID CastingSpeedUUID = UUID.nameUUIDFromBytes((casttimerstring.getBytes()));
+    private static final UUID EtherEfficiencyUUID = UUID.nameUUIDFromBytes((etherefficinecystring.getBytes()));
 
     @Override
     public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers (@NotNull final EquipmentSlot slot, final ItemStack itemStack)
     {
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = new ImmutableMultimap.Builder<>();
+
+        int attunement_level = (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.ATTUNEMENT.get(), itemStack));
+        int dexterity_level = (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.DEXTERITY.get(), itemStack));
+        int rigour_level = (EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.RIGOUR.get(), itemStack));
+
         if (slot == EquipmentSlot.MAINHAND)
         {
-            builder.put(ModAttributes.SPELL_POWER.get(), new AttributeModifier(SpellPowerUUID, "Foci modifier", this.spellpower, AttributeModifier.Operation.ADDITION));
-            builder.put(ModAttributes.CASTING_SPEED.get(), new AttributeModifier(CastingSpeedUUID, "Foci modifier", this.castingSpeed, AttributeModifier.Operation.MULTIPLY_TOTAL));
-            builder.put(ModAttributes.ETHER_EFFICIENCY.get(), new AttributeModifier(EtherEfficiencyUUID, "Foci modifier", this.etherCost, AttributeModifier.Operation.MULTIPLY_TOTAL));
+            builder.put(ModAttributes.SPELL_POWER.get(), new AttributeModifier(SpellPowerUUID, "Foci modifier",
+                    ((this.spellpower + 1) * (1 + attunement_level * 0.02) -1),
+                    AttributeModifier.Operation.ADDITION));
+            builder.put(ModAttributes.CASTING_SPEED.get(), new AttributeModifier(CastingSpeedUUID, "Foci modifier",
+                    ((this.castingSpeed + 0.5) * (1 + dexterity_level * 0.025) -0.5),
+                    AttributeModifier.Operation.MULTIPLY_TOTAL));
+            builder.put(ModAttributes.ETHER_EFFICIENCY.get(), new AttributeModifier(EtherEfficiencyUUID, "Foci modifier",
+                    ((this.etherCost + 0.5) * (1 + rigour_level * 0.015) -0.5),
+                    AttributeModifier.Operation.MULTIPLY_TOTAL));
             Map<Enchantment, Integer> itemEnchants = itemStack.getAllEnchantments();
         }
 
         return builder.build();
     }
 
+    @Override
+    public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
+        super.appendHoverText(itemstack, world, list, flag);
+        list.add(Component.translatable("iterpg.spell.tier", Component.translatable("iterpg.spell.tier." + this.getTier())));
+    }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
@@ -201,14 +218,7 @@ public abstract class SpellFocus extends Item {
 
             wand.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(p.getUsedItemHand()));
             player.swing(InteractionHand.MAIN_HAND, true);
-
-            player.getCapability(ModCapabilities.MAGE_DATA).ifPresent(mageData -> {
-                mageData.addEtherBurnout(ether);
-                if (player instanceof ServerPlayer serverPlayer) {
-                    iterMod.PACKET_HANDLER.send(PacketDistributor.PLAYER.with(() -> serverPlayer),
-                            new EtherBurnoutPacket(mageData.getEtherBurnout()));
-                }
-            });
+            IterPlayerDataUtils.addBurnout(player, ether);
 
             player.getCooldowns().addCooldown(spell, cooldown);
             float wandCooldown = (float) Math.min(cooldown * 0.5f, Math.log(cooldown+20));

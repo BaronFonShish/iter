@@ -1,11 +1,14 @@
 package com.thirdlife.itermod.common.entity.misc;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -71,12 +74,11 @@ public abstract class AbstractMagicProjectile extends AbstractArrow {
         float damage = getProjectileDamage();
 
         if (target instanceof LivingEntity livingTarget) {
-            if (livingTarget.hurt(this.damageSources().indirectMagic(this, owner), damage)) {
+            if (livingTarget.hurt(new DamageSource(level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC), this.getOwner()), damage)) {
                 this.doPostHurtEffects(livingTarget);
                 this.hitEffects(livingTarget);
             }
         }
-
         this.discard();
     }
 
