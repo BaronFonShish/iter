@@ -50,7 +50,7 @@ public class SpiderEggHatchEvent {
         return ItemStack.EMPTY;
     }
 
-    private static void spawnSpiderlings(LevelAccessor world, double x, double y, double z) {
+    public static void spawnSpiderlings(LevelAccessor world, double x, double y, double z) {
         if (!(world instanceof ServerLevel serverLevel)) {
             return;
         }

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "iter:block/spellweaver_table"
+    },
+    "facing=east": {
+      "model": "iter:block/spellweaver_table",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "iter:block/spellweaver_table",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "iter:block/spellweaver_table",
+      "y": 270
+    }
+  }
+}

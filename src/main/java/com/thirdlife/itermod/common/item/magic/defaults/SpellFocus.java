@@ -96,10 +96,10 @@ public abstract class SpellFocus extends Item {
 
     private static final String spellpowerstring = "iter_foci_spellpower";
     private static final String etherefficinecystring = "iter_foci_ether_efficiency";
-    private static final String casttimerstring = "iter_foci_cast_time";
+    private static final String casttimestring = "iter_foci_cast_time";
 
     private static final UUID SpellPowerUUID = UUID.nameUUIDFromBytes((spellpowerstring.getBytes()));
-    private static final UUID CastingSpeedUUID = UUID.nameUUIDFromBytes((casttimerstring.getBytes()));
+    private static final UUID CastingSpeedUUID = UUID.nameUUIDFromBytes((casttimestring.getBytes()));
     private static final UUID EtherEfficiencyUUID = UUID.nameUUIDFromBytes((etherefficinecystring.getBytes()));
 
     @Override
@@ -157,14 +157,14 @@ public abstract class SpellFocus extends Item {
         }
 
         if (spellstack.getItem() instanceof SpellItem spell) {
-            float castTime = spell.getCastTime(player);
+            float castTime = spell.getCastTime(player, spellstack);
 
 
             if (castTime <= 1) {
                 if (!level.isClientSide()) {
-                    float ether = spell.getManaCost(player);
-                    float cooldown = spell.getCooldown(player);
-                    float spellpower = spell.getSpellPower(player);
+                    float ether = spell.getManaCost(player, spellstack);
+                    float cooldown = spell.getCooldown(player, spellstack);
+                    float spellpower = spell.getSpellPower(player, spellstack);
 
                     this.completeCast(player, (int) cooldown, spellpower, ether, spell, stack, spellstack);
                 }
@@ -197,13 +197,13 @@ public abstract class SpellFocus extends Item {
 
             if (spellstack.getItem() instanceof SpellItem spell){
                 int useTime = player.getTicksUsingItem();
-                float castTime = spell.getCastTime(player);
+                float castTime = spell.getCastTime(player, spellstack);
 
 
                 if ((!level.isClientSide()) && ((useTime >= castTime))) {
-                    float ether = spell.getManaCost(player);
-                    float cooldown = spell.getCooldown(player);
-                    float spellpower = spell.getSpellPower(player);
+                    float ether = spell.getManaCost(player, spellstack);
+                    float cooldown = spell.getCooldown(player, spellstack);
+                    float spellpower = spell.getSpellPower(player, spellstack);
 
                     this.completeCast(player, (int)cooldown, spellpower, ether, spell, stack, spellstack);
                     entity.stopUsingItem();

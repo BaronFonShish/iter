@@ -29,12 +29,14 @@ public class ModItems {
     public static final RegistryObject<Item> DWARVEN_COMPONENTS = ITEMS.register("dwarven_components", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ABYSSQUARTZ_SHARD = ITEMS.register("abyssquartz_shard", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ETHERDUST = ITEMS.register("etherdust", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GIST = ITEMS.register("gist", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> INK_BOTTLE = ITEMS.register("ink_bottle", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> POTSHERD = ITEMS.register("potsherd", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> GOLD_COIN = ITEMS.register("gold_coin", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GOLD_COIN = ITEMS.register("gold_coin", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> COPPER_COIN = ITEMS.register("copper_coin", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> DIAMOND_COIN = ITEMS.register("diamond_coin", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> DIAMOND_COIN = ITEMS.register("diamond_coin", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> TANKARD = ITEMS.register("tankard", () -> new TankardItem(new Item.Properties()));
-    public static final RegistryObject<Item> SPAWNER_FRAGMENT = ITEMS.register("spawner_fragment", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SPAWNER_FRAGMENT = ITEMS.register("spawner_fragment", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> ROTROOT_SEEDS = ITEMS.register("rotroot_seeds", () -> new ItemNameBlockItem(ModBlocks.ROTROOT.get(), new Item.Properties()));
     public static final RegistryObject<Item> ETHERBLOOM_SEEDS = ITEMS.register("etherbloom_seeds", () -> new ItemNameBlockItem(ModBlocks.ETHERBLOOM_PLANT.get(), new Item.Properties()));
     public static final RegistryObject<Item> ROTROOT = ITEMS.register("rotroot",() -> new RotrootItem(new Item.Properties()));
@@ -47,6 +49,9 @@ public class ModItems {
     public static final RegistryObject<Item> SPIDERLING_SPAWN_EGG =
             ITEMS.register("spiderling_spawn_egg", () ->new ForgeSpawnEggItem
                     (ModEntities.SPIDERLING, -2372425, -13029294, new Item.Properties()));
+    public static final RegistryObject<Item> GIANT_SPIDER_SPAWN_EGG =
+            ITEMS.register("giant_spider_spawn_egg", () ->new ForgeSpawnEggItem
+                    (ModEntities.GIANT_SPIDER, 0x526133, 0x4B3A43, new Item.Properties()));
     public static final RegistryObject<Item> GOBLIN_SPAWN_EGG =
             ITEMS.register("goblin_spawn_egg", () ->new ForgeSpawnEggItem
                     (ModEntities.GOBLIN, 0x526133, 0x634F52, new Item.Properties()));

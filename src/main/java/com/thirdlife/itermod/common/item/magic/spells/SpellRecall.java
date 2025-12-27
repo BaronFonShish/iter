@@ -61,7 +61,7 @@ public class SpellRecall extends SpellItem {
                 assert serverPlayer.getRespawnPosition() != null;
                 serverPlayer.teleportTo(nextLevel,
                         serverPlayer.getRespawnPosition().getX()+0.5,
-                        serverPlayer.getRespawnPosition().getY()+0.25,
+                        serverPlayer.getRespawnPosition().getY()+1,
                         serverPlayer.getRespawnPosition().getZ()+0.5,
                         serverPlayer.getYRot(),
                         serverPlayer.getXRot());

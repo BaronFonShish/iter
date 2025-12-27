@@ -63,6 +63,8 @@
   "item.iter.gobsteel_scrap": "Gobsteel Scrap",
   "item.iter.dwarven_components": "Dwarven Components",
   "item.iter.stinger": "Stinger",
+  "item.iter.gist": "Gist",
+  "item.iter.ink_bottle": "Ink Bottle",
 
   "item.iter.apprentice_hood": "Apprentice Hood",
   "item.iter.apprentice_robes": "Apprentice Robes",
@@ -119,6 +121,8 @@
 
   "entity.iter.spiderling": "Spiderling",
   "item.iter.spiderling_spawn_egg": "Spiderling Spawn Egg",
+  "entity.iter.giant_spider": "Giant Spider",
+  "item.iter.giant_spider_spawn_egg": "Giant Spider Spawn Egg",
   "entity.iter.goblin": "Goblin",
   "item.iter.goblin_spawn_egg": "Goblin Spawn Egg",
   "entity.iter.goblin_warrior": "Goblin Warrior",
@@ -171,6 +175,7 @@
   "attribute.iter.casting_speed": "Casting Speed",
   "attribute.iter.ether_efficiency": "Ether Efficiency",
 
+  "iterpg.spell.spellpower": "Spell power: %sx",
   "iterpg.spell.cast_time": "Casting time: %ss",
   "iterpg.spell.mana_cost": "Burnout: %s",
   "iterpg.spell.cooldown": "Cooldown: %ss",
@@ -192,5 +197,19 @@
   "iterpg.spell.tier.2": "Adept",
   "iterpg.spell.tier.3": "Expert",
   "iterpg.spell.tier.4": "Fabled",
-  "iterpg.spell.tier.5": "Primeval"
+  "iterpg.spell.tier.5": "Primeval",
+
+  "gui.iter.spellweaver_table.label": "Spellweaver's Table",
+  "iterpg.spell.quality": "Quality",
+
+  "gui.iter.spellweaver_table.tooltip.intro_1": "Here you can copy spells and upgrade their quality",
+  "gui.iter.spellweaver_table.tooltip.intro_2": "To begin, place a spell item in the first slot",
+
+  "gui.iter.spellweaver_table.tooltip.switch_0": "Mode - Upgrade",
+  "gui.iter.spellweaver_table.tooltip.switch_1": "Mode - Copy",
+
+  "gui.iter.spellweaver_table.tooltip.copy": "Requires to copy:",
+  "gui.iter.spellweaver_table.tooltip.upgrade": "Requires to upgrade:",
+
+  "gui.iter.spellweaver_table.tooltip.itemXofX": "%s: %s/%s"
 }

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "isp",
+    "gwg",
+    "www"
+  ],
+  "key": {
+    "i": {
+      "item": "iter:ink_bottle"
+    },
+    "w": {
+      "tag": "minecraft:planks"
+    },
+    "s": {
+      "item": "iter:gist"
+    },
+    "g": {
+      "item": "minecraft:gold_ingot"
+    },
+    "p": {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "item": "iter:spellweaver_table",
+    "count": 1
+  }
+}

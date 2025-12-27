@@ -38,6 +38,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> ANCIENT_SMALL_VASE = registerBlock("ancient_small_vase", AncientSmallVaseBlock::new);
 
     public static final RegistryObject<Block> CRUNCHER = registerBlock("cruncher", CruncherBlock::new);
+    public static final RegistryObject<Block> SPELLWEAVER_TABLE = registerBlock("spellweaver_table", SpellweaverTableBlock::new);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

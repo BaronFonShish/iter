@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "iter:block/spellweaver_table_bottom",
+    "up": "iter:block/spellweaver_table_top",
+    "north": "iter:block/spellweaver_table_north",
+    "east": "iter:block/spellweaver_table_east",
+    "south": "iter:block/spellweaver_table_south",
+    "west": "iter:block/spellweaver_table_west",
+    "particle": "iter:block/spellweaver_table_top"
+  },
+  "render_type": "solid"
+}

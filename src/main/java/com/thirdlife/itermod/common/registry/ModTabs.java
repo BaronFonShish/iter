@@ -14,7 +14,7 @@ public class ModTabs {
     public static final DeferredRegister<CreativeModeTab> REGISTRY = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, iterMod.MOD_ID);
     public static final RegistryObject<CreativeModeTab> ITER_MAGIC = REGISTRY.register("iter_magic",
             () -> CreativeModeTab.builder().title(Component.translatable("item_group.iter.iter_magic")).icon(() -> new ItemStack(ModItems.SPELL_ETHERBOLT.get())).displayItems((parameters, tabData) -> {
-                        //tabData.accept(IterRpgModBlocks.ARCANIST_TABLE.get().asItem());
+                        tabData.accept(ModBlocks.SPELLWEAVER_TABLE.get().asItem());
                         tabData.accept(ModItems.SPELL_BOOK.get());
                         tabData.accept(ModItems.BONE_STAFF.get());
                         tabData.accept(ModItems.AMETHYST_WAND.get());

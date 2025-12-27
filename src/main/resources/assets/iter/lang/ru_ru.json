@@ -63,6 +63,8 @@
   "item.iter.gobsteel_scrap": "Гобсталевый лом",
   "item.iter.dwarven_components": "Дворфские компоненты",
   "item.iter.stinger": "Стрекатель",
+  "item.iter.gist": "Суть",
+  "item.iter.ink_bottle": "Бутылек чернил",
 
   "item.iter.apprentice_hood": "Капюшон ученика",
   "item.iter.apprentice_robes": "Робы ученика",
@@ -119,6 +121,8 @@
 
   "entity.iter.spiderling": "Паучок",
   "item.iter.spiderling_spawn_egg": "Яйцо призыва паучка",
+  "entity.iter.giant_spider": "Гигантский паук",
+  "item.iter.giant_spider_spawn_egg": "Яйцо призыва гигантского паука",
   "entity.iter.goblin": "Гоблин",
   "item.iter.goblin_spawn_egg": "Яйцо призыва гоблина",
   "entity.iter.goblin_warrior": "Гоблин-воин",
@@ -171,9 +175,10 @@
   "attribute.iter.casting_speed": "Скорость колдовства",
   "attribute.iter.ether_efficiency": "Эфирная эффективность",
 
-  "iterpg.spell.cast_time": "Время каста: %ss",
+  "iterpg.spell.spellpower": "Сила заклинания: %sx",
+  "iterpg.spell.cast_time": "Время каста: %sс",
   "iterpg.spell.mana_cost": "Выгорание: %s",
-  "iterpg.spell.cooldown": "Откат: %ss",
+  "iterpg.spell.cooldown": "Откат: %sс",
 
   "iterpg.spell.domain_and_method": "%s §7домен, метод§r %s",
 
@@ -192,5 +197,19 @@
   "iterpg.spell.tier.2": "Адептный",
   "iterpg.spell.tier.3": "Экспертный",
   "iterpg.spell.tier.4": "Легендарный",
-  "iterpg.spell.tier.5": "Первородный"
+  "iterpg.spell.tier.5": "Первородный",
+
+  "gui.iter.spellweaver_table.label": "Стол заклинателя",
+  "iterpg.spell.quality": "Качество",
+
+  "gui.iter.spellweaver_table.tooltip.intro_1": "Используется для копирования и улучшения заклинаний",
+  "gui.iter.spellweaver_table.tooltip.intro_2": "Чтобы начать, положи свиток заклинания в первый слот",
+
+  "gui.iter.spellweaver_table.tooltip.switch_0": "Режим - улучшение",
+  "gui.iter.spellweaver_table.tooltip.switch_1": "Режим - копирование",
+
+  "gui.iter.spellweaver_table.tooltip.copy": "Требуется для копии:",
+  "gui.iter.spellweaver_table.tooltip.upgrade": "Требуется для улучшения:",
+
+  "gui.iter.spellweaver_table.tooltip.itemXofX": "%s: %s/%s"
 }

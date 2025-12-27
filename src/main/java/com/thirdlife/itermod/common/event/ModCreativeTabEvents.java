@@ -41,6 +41,8 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.BOWL), new ItemStack(ModItems.POTSHERD.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.STRING), new ItemStack(ModItems.SPIDER_SILK.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.ABYSSQUARTZ_SHARD.get()), new ItemStack(ModItems.ETHERDUST.get())),
+                new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.ETHERDUST.get()), new ItemStack(ModItems.GIST.get())),
+                new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.GIST.get()), new ItemStack(ModItems.INK_BOTTLE.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.FLINT), new ItemStack(ModItems.GOBSTEEL_SCRAP.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.GOBSTEEL_SCRAP.get()), new ItemStack(ModItems.DWARVEN_COMPONENTS.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.LEATHER), new ItemStack(ModItems.ABSTRUSE_CLOTH.get())),
@@ -134,7 +136,8 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(ModItems.GOBSTEEL_PICKAXE.get()), new ItemStack(ModItems.GOBSTEEL_AXE.get())),
                 new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(ModItems.GOBSTEEL_AXE.get()), new ItemStack(ModItems.GOBSTEEL_HOE.get())),
 
-                new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(Items.ZOMBIFIED_PIGLIN_SPAWN_EGG), new ItemStack(ModItems.SPIDERLING_SPAWN_EGG.get())),
+                new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(Items.ZOMBIFIED_PIGLIN_SPAWN_EGG), new ItemStack(ModItems.GIANT_SPIDER_SPAWN_EGG.get())),
+                new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.GIANT_SPIDER_SPAWN_EGG.get()), new ItemStack(ModItems.SPIDERLING_SPAWN_EGG.get())),
                 new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.SPIDERLING_SPAWN_EGG.get()), new ItemStack(ModItems.GOBLIN_SPAWN_EGG.get())),
                 new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.GOBLIN_SPAWN_EGG.get()), new ItemStack(ModItems.GOBLIN_WARRIOR_SPAWN_EGG.get()))
         );

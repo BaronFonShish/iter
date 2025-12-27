@@ -3,11 +3,13 @@ package com.thirdlife.itermod;
 import com.mojang.logging.LogUtils;
 import com.thirdlife.itermod.client.model.ModModelLayers;
 import com.thirdlife.itermod.client.renderer.*;
+import com.thirdlife.itermod.common.entity.GiantSpiderEntity;
 import com.thirdlife.itermod.common.entity.GoblinEntity;
 import com.thirdlife.itermod.common.entity.GoblinWarriorEntity;
 import com.thirdlife.itermod.common.entity.SpiderlingEntity;
 import com.thirdlife.itermod.common.registry.*;
 import com.thirdlife.itermod.common.variables.IterPlayerDataPacket;
+import com.thirdlife.itermod.world.gui.SpellweaverTablePacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -24,6 +26,7 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.slf4j.Logger;
 
+import static com.ibm.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 
 @Mod(iterMod.MOD_ID)
@@ -67,7 +70,13 @@ public class iterMod {
         PACKET_HANDLER.registerMessage(id++, IterPlayerDataPacket.class,
                 IterPlayerDataPacket::encode, IterPlayerDataPacket::decode,
                 IterPlayerDataPacket::handle);
-    }
+
+        PACKET_HANDLER.registerMessage(id++, SpellweaverTablePacket.class,
+                SpellweaverTablePacket::encode, SpellweaverTablePacket::decode,
+                SpellweaverTablePacket::handle);
+        }
+
+
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         ModItemProperties.RegisterItemProperties();
@@ -83,6 +92,7 @@ public class iterMod {
         @SubscribeEvent
         public static void onAttributeCreate(EntityAttributeCreationEvent event) {
             event.put(ModEntities.SPIDERLING.get(), SpiderlingEntity.createAttributes().build());
+            event.put(ModEntities.GIANT_SPIDER.get(), GiantSpiderEntity.createAttributes().build());
             event.put(ModEntities.GOBLIN_WARRIOR.get(), GoblinWarriorEntity.createAttributes().build());
             event.put(ModEntities.GOBLIN.get(), GoblinEntity.createAttributes().build());
         }
@@ -105,6 +115,7 @@ public class iterMod {
         public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 
             event.registerEntityRenderer(ModEntities.SPIDERLING.get(), SpiderlingRenderer::new);
+            event.registerEntityRenderer(ModEntities.GIANT_SPIDER.get(), GiantSpiderRenderer::new);
             event.registerEntityRenderer(ModEntities.ETHERBOLT.get(), EtherboltRenderer::new);
             event.registerEntityRenderer(ModEntities.GOBLIN_WARRIOR.get(), GoblinWarriorRenderer::new);
             event.registerEntityRenderer(ModEntities.GOBLIN.get(), GoblinRenderer::new);

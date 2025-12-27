@@ -3,6 +3,7 @@ package com.thirdlife.itermod.common.registry;
 import com.thirdlife.itermod.iterMod;
 import com.thirdlife.itermod.world.gui.SpellBookGuiMenu;
 import com.thirdlife.itermod.world.gui.SpellbookGuiScreen;
+import com.thirdlife.itermod.world.gui.SpellweaverTableGuiScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
@@ -17,6 +18,7 @@ public class ModScreens {
     public static void clientLoad(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             MenuScreens.register(ModMenus.SPELLBOOK_GUI.get(), SpellbookGuiScreen::new);
+            MenuScreens.register(ModMenus.SPELLWEAVER_TABLE_GUI.get(), SpellweaverTableGuiScreen::new);
         });
     }
 }

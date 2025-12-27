@@ -1,5 +1,6 @@
 package com.thirdlife.itermod.common.item.magic.defaults;
 
+import com.thirdlife.itermod.common.event.SpellBookUtils;
 import com.thirdlife.itermod.common.registry.ModAttributes;
 import com.thirdlife.itermod.common.registry.ModItems;
 import net.minecraft.ChatFormatting;
@@ -60,6 +61,22 @@ public abstract class SpellItem extends Item{
     }
 
 
+    public int getQuality(ItemStack stack){
+        if (stack.hasTag()) {
+            assert stack.getTag() != null;
+            if (stack.getTag().contains("IterSpellQuality")) {
+                return stack.getTag().getInt("IterSpellQuality");
+            }
+        }
+        return 0;
+    }
+
+    public ItemStack setQuality(ItemStack stack, int newQuality){
+        stack.getOrCreateTag().putInt("IterSpellQuality", newQuality);
+        return stack;
+    }
+
+
     public String getSpellDisplayName(){
         Component fullname = Component.translatable(this.getDescriptionId());
         Component prefix = Component.translatable("iter.spell.prefix");
@@ -72,45 +89,54 @@ public abstract class SpellItem extends Item{
         return nameOnly;
     }
 
-    public float getCastTime(Player player) {
+    public float getCastTime(Player player, ItemStack spellStack) {
         AttributeInstance CastingSpeedAttribute = player.getAttribute(ModAttributes.CASTING_SPEED.get());
         float castTimeModifier = CastingSpeedAttribute != null ? (float) CastingSpeedAttribute.getValue() : 1f;
-        float castTimeNew = castTime / (((castTimeModifier-1)/2f)+1);
+        float quality = getQuality(spellStack);
+        float castTimeBase = castTime * (1 - quality * 0.025f);
+        float castTimeNew = castTimeBase / (((castTimeModifier-1)/2f)+1);
 
         if (castTimeNew <= 0){castTimeNew = 1;}
 
         return castTimeNew;
     }
 
-    public float getCooldown(Player player) {
+    public float getCooldown(Player player, ItemStack spellStack) {
         AttributeInstance CastingSpeedAttribute = player.getAttribute(ModAttributes.CASTING_SPEED.get());
         float cooldownModifier = CastingSpeedAttribute != null ? (float) CastingSpeedAttribute.getValue() : 1f;
-        float cooldownNew = cooldown / cooldownModifier;
+        float quality = getQuality(spellStack);
+        float cooldownBase = cooldown * (1 - quality * 0.025f);
+        float cooldownNew = cooldownBase / cooldownModifier;
 
         if (cooldownNew <= 0){cooldownNew = 1;}
 
         return cooldownNew;
     }
 
-    public float getManaCost(Player player) {
+    public float getManaCost(Player player, ItemStack spellStack) {
 
         AttributeInstance EtherEfficiencyAttribute = player.getAttribute(ModAttributes.ETHER_EFFICIENCY.get());
         float etherCostModifier = EtherEfficiencyAttribute != null ? (float) EtherEfficiencyAttribute.getValue() : 0f;
-        float etherCostNew = etherCost * (2 - etherCostModifier);
+        float quality = getQuality(spellStack);
+        float costBase = etherCost * (1 - quality * 0.02f);
+        float etherCostNew = costBase * (2 - etherCostModifier);
 
         if (etherCostNew < 0) {etherCostNew=0;}
 
         return etherCostNew;
     }
 
-    public float getSpellPower(Player player){
+    public float getSpellPower(Player player, ItemStack spellStack){
         AttributeInstance SpellPowerAttribute = player.getAttribute(ModAttributes.SPELL_POWER.get());
         float spellpower = SpellPowerAttribute != null ? (float) SpellPowerAttribute.getValue() : 1f;
-        spellpower = spellpower * 0.2f;
+        float quality = getQuality(spellStack);
+        float spellpowerBase = spellpower * (1 + quality * 0.1f);
+        spellpower = spellpowerBase * 0.2f;
 
-        if (spellpower <= 0) {spellpower = 0.01f;}
+        if (spellpower <= 0.05) {spellpower = 0.05f;}
         return spellpower;
     }
+
 
     @Override
     public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
@@ -125,21 +151,30 @@ public abstract class SpellItem extends Item{
                     (Component.translatable(domainKey)),
                     (Component.translatable(methodKey)));
 
+            int quality = getQuality(itemstack);
+            Component qualityText = Component.translatable("iterpg.spell.quality")
+                    .append(Component.literal(": " + quality));
+
             list.add(Component.translatable("iterpg.spell.tier", Component.translatable("iterpg.spell.tier." + this.getTier())));
             list.add(SpellInfo);
+            list.add(qualityText);
             list.add(Component.literal(""));
 
             LocalPlayer clientPlayer = getClientPlayer();
             if (clientPlayer != null) {
 
-                float dynamicCastTime = getCastTime(clientPlayer)/20f;
-                float dynamicCooldown = getCooldown(clientPlayer)/20f;
-                float dynamicManaCost = getManaCost(clientPlayer);
+                float dynamicSpellPower = getSpellPower(clientPlayer, itemstack);
+                float dynamicCastTime = getCastTime(clientPlayer, itemstack)/20f;
+                float dynamicCooldown = getCooldown(clientPlayer, itemstack)/20f;
+                float dynamicManaCost = getManaCost(clientPlayer, itemstack);
 
+                String spellPowerString = String.format("%.2f", dynamicSpellPower);
                 String castTimeString = String.format("%.1f", dynamicCastTime);
                 String cooldownString = String.format("%.1f", dynamicCooldown);
                 String manaCostString = String.format("%.1f", dynamicManaCost);
 
+
+                list.add(Component.translatable("iterpg.spell.spellpower", spellPowerString));
                 if (dynamicCastTime > 0.05f) {
                 list.add(Component.translatable("iterpg.spell.cast_time", castTimeString));}
 
@@ -148,6 +183,7 @@ public abstract class SpellItem extends Item{
                 list.add(Component.translatable("iterpg.spell.cooldown", cooldownString));
 
             } else {
+                list.add(Component.translatable("iterpg.spell.spellpower", 1));
                 if (this.castTime > 0.05){
                 list.add(Component.translatable("iterpg.spell.cast_time", castTime));}
 

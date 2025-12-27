@@ -1,7 +1,13 @@
 {
   "replace": false,
   "values": [
+    "iter:spell_etherbolt",
     "iter:spell_lesser_heal",
-    "iter:spell_etherbolt"
+    "iter:spell_mend",
+    "iter:spell_recall",
+    "iter:spell_ignite",
+    "iter:spell_splashes",
+    "iter:spell_frost_spike",
+    "iter:spell_witch_lash"
   ]
 }

@@ -22,7 +22,11 @@ public class MageOverlayUtils {
     public static String Grrr(Player player){
         ItemStack spellitem = SpellBookUtils.getSpell(player);
         if (spellitem.getItem() instanceof SpellItem spell){
-            return spell.getSpellDisplayName();
+            String spellname = spell.getSpellDisplayName();
+            if (player.getCooldowns().isOnCooldown(spell)){
+                spellname = spellname + " [" + String.format("%.1f", (player.getCooldowns().getCooldownPercent(spell, 0f))*spell.getCooldown(player, spellitem)/20) + "]";
+            }
+            return spellname;
         }
         return "Empty";
     }

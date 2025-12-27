@@ -1,14 +1,12 @@
 package com.thirdlife.itermod.common.registry;
 
-//import com.thirdlife.itermod.common.entity.FlailHeadEntity;
+import com.thirdlife.itermod.common.entity.GiantSpiderEntity;
 import com.thirdlife.itermod.common.entity.GoblinEntity;
 import com.thirdlife.itermod.common.entity.GoblinWarriorEntity;
 import com.thirdlife.itermod.common.entity.misc.EtherboltEntity;
 import com.thirdlife.itermod.common.entity.misc.FrostSpikeEntity;
 import com.thirdlife.itermod.iterMod;
 import com.thirdlife.itermod.common.entity.SpiderlingEntity;
-import com.thirdlife.itermod.world.gui.SpellBookGuiMenu;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -28,6 +26,12 @@ public class ModEntities {
                     () -> EntityType.Builder.of(SpiderlingEntity::new, MobCategory.MONSTER)
                             .sized(0.6f, 0.5f)
                             .build("spiderling"));
+
+    public static final RegistryObject<EntityType<GiantSpiderEntity>> GIANT_SPIDER =
+            ENTITY_TYPES.register("giant_spider",
+                    () -> EntityType.Builder.of(GiantSpiderEntity::new, MobCategory.MONSTER)
+                            .sized(1.5f, 1.4f)
+                            .build("giant_spider"));
 
     public static final RegistryObject<EntityType<EtherboltEntity>> ETHERBOLT =
             ENTITY_TYPES.register("etherbolt",
