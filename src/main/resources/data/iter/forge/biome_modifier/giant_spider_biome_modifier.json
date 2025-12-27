@@ -1,8 +1,6 @@
 {
   "type": "forge:add_spawns",
-  "biomes": {
-    "type": "forge:any"
-  },
+  "biomes": "#forge:is_overworld",
   "spawners": {
     "type": "iter:giant_spider",
     "weight": 2,

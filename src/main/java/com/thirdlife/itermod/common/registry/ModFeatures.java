@@ -1,5 +1,6 @@
 package com.thirdlife.itermod.common.registry;
 
+import com.thirdlife.itermod.common.IterModConfig;
 import com.thirdlife.itermod.iterMod;
 import com.thirdlife.itermod.world.features.AbyssquartzCrystalFeature;
 import com.thirdlife.itermod.world.features.AncientVaseFeature;

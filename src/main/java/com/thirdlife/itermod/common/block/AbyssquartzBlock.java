@@ -1,5 +1,6 @@
 package com.thirdlife.itermod.common.block;
 
+import com.thirdlife.itermod.common.IterModConfig;
 import com.thirdlife.itermod.common.event.AbyssquartzGrow;
 import com.thirdlife.itermod.common.event.ExpDropEvent;
 import net.minecraft.core.BlockPos;
@@ -48,6 +49,7 @@ public class AbyssquartzBlock extends Block {
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
-        AbyssquartzGrow.execute(world, pos);
+
+        if (IterModConfig.COMMON.abyssquartzGrowth.get()) AbyssquartzGrow.execute(world, pos);
     }
 }

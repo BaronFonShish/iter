@@ -1,5 +1,6 @@
 package com.thirdlife.itermod.world.features;
 
+import com.thirdlife.itermod.common.IterModConfig;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.SimpleBlockFeature;
@@ -18,7 +19,8 @@ public class AncientVaseFeature extends SimpleRandomSelectorFeature {
         int x = context.origin().getX();
         int y = context.origin().getY();
         int z = context.origin().getZ();
+
+        if (!IterModConfig.COMMON.ancientVases.get()) return false;
         return super.place(context);
     }
-
 }

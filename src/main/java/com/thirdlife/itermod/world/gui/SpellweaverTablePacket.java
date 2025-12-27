@@ -44,6 +44,7 @@ public class SpellweaverTablePacket {
                     SpellweaverTableFunction.execute(player);
                 } else if (message.action == 1) {
                     IterPlayerDataUtils.setSpellweaverSwitch(player, message.switchState);
+                    IterPlayerDataUtils.syncSpellweaverSwitch(player, message.switchState);
                 }
             }
         });

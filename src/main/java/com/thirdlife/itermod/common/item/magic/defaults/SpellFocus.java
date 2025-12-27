@@ -2,6 +2,7 @@ package com.thirdlife.itermod.common.item.magic.defaults;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.thirdlife.itermod.common.IterModConfig;
 import com.thirdlife.itermod.common.event.SpellBookUtils;
 import com.thirdlife.itermod.common.registry.ModAttributes;
 import com.thirdlife.itermod.common.registry.ModCapabilities;
@@ -216,8 +217,8 @@ public abstract class SpellFocus extends Item {
         if (!player.level().isClientSide()) {
             spell.castSpell(player.level(), player, wand, spellstack, spellpower);
 
-            wand.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(p.getUsedItemHand()));
             player.swing(InteractionHand.MAIN_HAND, true);
+            if (IterModConfig.COMMON.fociDurability.get()) {wand.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(p.getUsedItemHand()));}
             IterPlayerDataUtils.addBurnout(player, ether);
 
             player.getCooldowns().addCooldown(spell, cooldown);

@@ -24,6 +24,7 @@ public class SpellweaverTableGuiScreen extends AbstractContainerScreen<Spellweav
     private final Player player;
     ImageButton imagebutton_switch;
     ImageButton imagebutton_main;
+    private boolean lastSwitchState = false;
 
     public SpellweaverTableGuiScreen(SpellweaverTableGuiMenu container, Inventory inventory, Component text) {
         super(container, inventory, text);
@@ -106,15 +107,20 @@ public class SpellweaverTableGuiScreen extends AbstractContainerScreen<Spellweav
 
             boolean newSwitchState = !currentSwitchState;
             iterMod.PACKET_HANDLER.sendToServer(new SpellweaverTablePacket(1, newSwitchState));
+            this.init();
 
+        });
+
+        imagebutton_main = new ImageButton(this.leftPos + 71, this.topPos + 64, 32, 16,
+                0, 0, 16, new ResourceLocation("iter:textures/gui/atlas/spellweaver_table_write.png"),
+                32, 32, e -> {
+            iterMod.PACKET_HANDLER.sendToServer(new SpellweaverTablePacket(0));
+            this.init();
         });
 
         this.addRenderableWidget(imagebutton_switch);
         this.addRenderableWidget(imagebutton_main);
     }
 
-    public void updateSwitchState(boolean state) {
-        this.clientSwitchState = state;
-    }
 }
 

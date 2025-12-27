@@ -1,8 +1,10 @@
 package com.thirdlife.itermod.common.entity;
 
 
+import com.thirdlife.itermod.common.IterModConfig;
 import com.thirdlife.itermod.common.event.SpiderEggHatchEvent;
 import com.thirdlife.itermod.common.registry.ModEntities;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -27,6 +29,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
+import java.util.Set;
 
 public class GiantSpiderEntity extends Spider {
 
@@ -48,7 +51,7 @@ public class GiantSpiderEntity extends Spider {
 
     @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions dimensions) {
-        return dimensions.height * 0.95f;
+        return dimensions.height * 0.85f;
     }
 
     @Override
@@ -100,13 +103,55 @@ public class GiantSpiderEntity extends Spider {
     public static void init(){
         SpawnPlacements.register(ModEntities.GIANT_SPIDER.get(), SpawnPlacements.Type.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (entityType, level, reason, pos, random) -> {
-            boolean canSpawn = true;
-            if (level.getLevel().dimension() != Level.OVERWORLD) canSpawn = false;
-            if (!level.getEntitiesOfClass(GiantSpiderEntity.class, AABB.ofSize(new Vec3(pos.getX(), pos.getY(), pos.getZ()), 50, 50, 50), e -> true).isEmpty()) canSpawn = false;
-            if (level.getMaxLocalRawBrightness(pos) > 0) canSpawn = false;
-            if (!(pos.getY() <= 32) || !(level.getBiome(pos).is(new ResourceLocation("dark_forest")))) canSpawn = false;
-            return canSpawn;
-        });
+
+            if (!IterModConfig.COMMON.giantSpiders.get()) {
+                        return false;
+                    }
+
+            if (!level.getLevel().dimension().location().getPath().equals("overworld")) {
+                        return false;
+                    }
+
+            if (level.getMaxLocalRawBrightness(pos) > 7) {
+                        return false;
+                    }
+
+            boolean cave = false;
+            boolean rightbiome = false;
+
+            if (pos.getY() <= 32) {cave = true;}
+
+            AABB searchArea = new AABB(pos.getX() - 50, pos.getY() - 20, pos.getZ() - 50,
+                            pos.getX() + 50, pos.getY() + 20, pos.getZ() + 50);
+                    int nearbySpiders = level.getEntitiesOfClass(GiantSpiderEntity.class, searchArea, e -> true).size();
+                    if (nearbySpiders >= 2) {
+                        return false;
+                    }
+
+                    Biome biome = level.getBiome(pos).value();
+                    ResourceLocation biomeId = level.getLevel().registryAccess().registryOrThrow(Registries.BIOME)
+                            .getKey(biome);
+
+                    Set<ResourceLocation> allowedBiomes = Set.of(
+                            new ResourceLocation("minecraft:dark_forest"),
+                            new ResourceLocation("minecraft:old_growth_pine_taiga"),
+                            new ResourceLocation("minecraft:old_growth_spruce_taiga")
+                    );
+
+                    if (allowedBiomes.contains(biomeId)) {
+                        rightbiome = true;
+                    }
+
+                    if (!level.getBlockState(pos.below()).isSolidRender(level, pos.below())) {
+                        return false;
+                    }
+
+                    if (!(cave || rightbiome)){
+                        return false;
+                    }
+
+                    return true;
+                });
     }
 
     @Override
