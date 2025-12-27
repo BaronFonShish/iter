@@ -2,6 +2,7 @@ package com.thirdlife.itermod.world.gui;
 
 import com.thirdlife.itermod.common.item.magic.defaults.SpellItem;
 import com.thirdlife.itermod.common.registry.ModItems;
+import com.thirdlife.itermod.common.variables.IterPlayerDataUtils;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
@@ -17,23 +18,36 @@ import java.util.function.Supplier;
 public class SpellweaverTableFunction {
 
     public static boolean getswitch(Player player){
-        return player.getPersistentData().getBoolean("iter_spellweaver_table_switch");
+        return IterPlayerDataUtils.getSpellweaverSwitch(player);
     }
 
     public static void flipswitch(Player player){
-        player.getPersistentData().putBoolean("iter_spellweaver_table_switch", !getswitch(player));
+        boolean currentState = getswitch(player);
+        IterPlayerDataUtils.setSpellweaverSwitch(player, !currentState);
         player.containerMenu.broadcastChanges();
     }
 
+
     public static ItemStack getItemFromSlot(Player player, int slot){
-        return (player.containerMenu instanceof Supplier _splr && _splr.get() instanceof Map _slt ?
-                ((Slot) _slt.get((int) slot)).getItem() : ItemStack.EMPTY);
+        if (player.containerMenu == null) return ItemStack.EMPTY;
+
+        if (slot >= 0 && slot < player.containerMenu.slots.size()) {
+            Slot menuSlot = player.containerMenu.getSlot(slot);
+            if (menuSlot != null) {
+                return menuSlot.getItem();
+            }
+        }
+        return ItemStack.EMPTY;
     }
 
     public static void RemoveItemFromSlot(Player player, int slot, int amount){
-        if (player.containerMenu instanceof Supplier _current && _current.get() instanceof Map _slots) {
-            ((Slot) _slots.get(slot)).remove(amount);
-            player.containerMenu.broadcastChanges();
+        if (player.containerMenu == null) return;
+
+        if (slot >= 0 && slot < player.containerMenu.slots.size()) {
+            Slot menuSlot = player.containerMenu.getSlot(slot);
+            if (menuSlot != null && menuSlot.hasItem()) {
+                menuSlot.remove(amount);
+            }
         }
     }
 
@@ -83,7 +97,7 @@ public class SpellweaverTableFunction {
             case 5 -> Items.DIAMOND;
             case 6 -> Items.ENDER_EYE;
             case 8 -> Items.ECHO_SHARD;
-            //case 6 -> ModItems.MAGMANUM.get();
+            //case 7 -> ModItems.MAGMANUM.get();
             case 9 -> Items.NETHERITE_INGOT;
             case 10 -> Items.NETHER_STAR;
             //case 11 -> ModItems.STARDUST_ICE.get();

@@ -38,6 +38,11 @@ public class IterPlayerDataUtils {
         return data != null ? data.getSelectedSpellBook() : ItemStack.EMPTY;
     }
 
+    public static boolean getSpellweaverSwitch(Player player) {
+        IterPlayerData data = getPlayerData(player);
+        return data != null ? data.getSpellweaverSwitch() : false;
+    }
+
     public static float getDynamicDissipation(Player player){
         AttributeInstance dissipationBase = player.getAttribute(ModAttributes.ETHER_BURNOUT_DISSIPATION.get());
         float dissipation = dissipationBase != null ? (float) dissipationBase.getValue() : 0.02f;
@@ -75,6 +80,14 @@ public class IterPlayerDataUtils {
         if (data != null) {
             data.setSelectedSpellSlot(slot);
             syncSpellSlot(player, slot);
+        }
+    }
+
+    public static void setSpellweaverSwitch(Player player, boolean state) {
+        IterPlayerData data = getPlayerData(player);
+        if (data != null) {
+            data.setSpellweaverSwitch(state);
+            syncSpellweaverSwitch(player, state);
         }
     }
 
@@ -143,6 +156,27 @@ public class IterPlayerDataUtils {
         }
     }
 
+    // Стейт стола заклинателя
+
+    public static void syncSpellweaverSwitchSC(ServerPlayer player, boolean state) {
+        iterMod.PACKET_HANDLER.send(
+                PacketDistributor.PLAYER.with(() -> player),
+                IterPlayerDataPacket.spellweaverSwitch(state)
+        );
+    }
+
+    public static void syncSpellweaverSwitchCS(boolean state) {
+        iterMod.PACKET_HANDLER.sendToServer(IterPlayerDataPacket.spellweaverSwitch(state));
+    }
+
+    public static void syncSpellweaverSwitch(Player player, boolean state) {
+        if (player.level().isClientSide) {
+            syncSpellweaverSwitchCS(state);
+        } else if (player instanceof ServerPlayer serverPlayer) {
+            syncSpellweaverSwitchSC(serverPlayer, state);
+        }
+    }
+
     // Все
 
     public static void syncAllSC(ServerPlayer player) {
@@ -154,7 +188,8 @@ public class IterPlayerDataUtils {
                             data.getEtherBurnout(),
                             data.getSelectedSpellSlot(),
                             0.0f,
-                            data.getSelectedSpellBook()
+                            data.getSelectedSpellBook(),
+                            data.getSpellweaverSwitch()
                     )
             );
         }

@@ -1,6 +1,7 @@
 package com.thirdlife.itermod.world.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.thirdlife.itermod.common.variables.IterPlayerDataUtils;
 import com.thirdlife.itermod.iterMod;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
@@ -35,6 +36,8 @@ public class SpellweaverTableGuiScreen extends AbstractContainerScreen<Spellweav
         this.imageHeight = 166;
     }
 
+    private boolean clientSwitchState = false;
+
     private static final ResourceLocation texture = new ResourceLocation("iter:textures/gui/spellweaver_table_gui.png");
 
     @Override
@@ -65,9 +68,6 @@ public class SpellweaverTableGuiScreen extends AbstractContainerScreen<Spellweav
         RenderSystem.defaultBlendFunc();
         guiGraphics.blit(texture, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
 
-//        if (Scroll1ConditionProcedure.execute(entity)) {
-//            guiGraphics.blit(new ResourceLocation("iter_rpg:textures/screens/scroll_icon.png"), this.leftPos + 25, this.topPos + 35, 0, 0, 16, 16, 16, 16);
-//        }
         RenderSystem.disableBlend();
     }
 
@@ -95,29 +95,26 @@ public class SpellweaverTableGuiScreen extends AbstractContainerScreen<Spellweav
     public void init() {
         super.init();
 
+        boolean currentSwitchState = IterPlayerDataUtils.getSpellweaverSwitch(this.player);
 
-        clearWidgets();
-
-        ResourceLocation switchbuttonlocation = SpellweaverTableFunction.getswitch(player)
+        ResourceLocation switchbuttonlocation = currentSwitchState
                 ? new ResourceLocation("iter:textures/gui/atlas/spellweaver_table_switch1.png")
                 : new ResourceLocation("iter:textures/gui/atlas/spellweaver_table_switch0.png");
 
         imagebutton_switch = new ImageButton(this.leftPos + 43, this.topPos + 28, 16, 31,
                 0, 0, 31, switchbuttonlocation, 16, 62, e -> {
-            iterMod.PACKET_HANDLER.sendToServer(new SpellweaverTablePacket(1));
-            SpellweaverTableFunction.flipswitch(player);
-            this.init();
-        });
 
-        imagebutton_main = new ImageButton(this.leftPos + 71, this.topPos + 64, 32, 16,
-                0, 0, 16, new ResourceLocation("iter:textures/gui/atlas/spellweaver_table_write.png"),
-                32, 32, e -> {
-            iterMod.PACKET_HANDLER.sendToServer(new SpellweaverTablePacket(0));
-            SpellweaverTableFunction.execute(player);
+            boolean newSwitchState = !currentSwitchState;
+            iterMod.PACKET_HANDLER.sendToServer(new SpellweaverTablePacket(1, newSwitchState));
+
         });
 
         this.addRenderableWidget(imagebutton_switch);
         this.addRenderableWidget(imagebutton_main);
+    }
+
+    public void updateSwitchState(boolean state) {
+        this.clientSwitchState = state;
     }
 }
 
