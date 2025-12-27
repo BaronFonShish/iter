@@ -109,9 +109,9 @@ public class SpellweaverTableGuiScreen extends AbstractContainerScreen<Spellweav
             this.init();
         });
 
-        imagebutton_main = new ImageButton(this.leftPos + 71, this.topPos + 64, 16, 16,
+        imagebutton_main = new ImageButton(this.leftPos + 71, this.topPos + 64, 32, 16,
                 0, 0, 16, new ResourceLocation("iter:textures/gui/atlas/spellweaver_table_write.png"),
-                16, 32, e -> {
+                32, 32, e -> {
             iterMod.PACKET_HANDLER.sendToServer(new SpellweaverTablePacket(0));
             SpellweaverTableFunction.execute(player);
         });
