@@ -26,8 +26,6 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.slf4j.Logger;
 
-import static com.ibm.icu.lang.UCharacter.GraphemeClusterBreak.T;
-
 
 @Mod(iterMod.MOD_ID)
 public class iterMod {

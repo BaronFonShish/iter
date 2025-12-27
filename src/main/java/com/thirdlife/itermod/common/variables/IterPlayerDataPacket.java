@@ -15,7 +15,8 @@ public class IterPlayerDataPacket {
         BURNOUT,
         SPELL_SLOT,
         SPELL_BOOK,
-        SPELL_LUCK,  // Added new type
+        SPELL_LUCK,
+        SPELLWEAVER_SWITCH,
         FULL_SYNC
     }
 
@@ -66,12 +67,20 @@ public class IterPlayerDataPacket {
         return new IterPlayerDataPacket(DataType.SPELL_BOOK, tag);
     }
 
+    public static IterPlayerDataPacket spellweaverSwitch(boolean switchState) {
+        CompoundTag tag = new CompoundTag();
+        tag.putBoolean("value", switchState);
+        return new IterPlayerDataPacket(DataType.SPELLWEAVER_SWITCH, tag);
+    }
+
     public static IterPlayerDataPacket fullSync(float etherBurnout, int spellSlot,
-                                                float spellLuck, ItemStack spellBook) {
+                                                float spellLuck, ItemStack spellBook,
+                                                boolean spellweaverSwitch) {
         CompoundTag tag = new CompoundTag();
         tag.putFloat("burnout", etherBurnout);
         tag.putInt("slot", spellSlot);
         tag.putFloat("luck", spellLuck);
+        tag.putBoolean("switch", spellweaverSwitch);
         if (!spellBook.isEmpty()) {
             CompoundTag bookTag = new CompoundTag();
             spellBook.save(bookTag);
@@ -97,7 +106,9 @@ public class IterPlayerDataPacket {
                             data.setSelectedSpellSlot(this.data.getInt("value"));
                             break;
 
-//                        case SPELL_LUCK:
+                        case SPELLWEAVER_SWITCH:
+                            data.setSpellweaverSwitch(this.data.getBoolean("value"));
+                            break;
 
                         case SPELL_BOOK:
                             if (this.data.contains("value")) {
@@ -110,6 +121,7 @@ public class IterPlayerDataPacket {
                         case FULL_SYNC:
                             data.setEtherBurnout(this.data.getFloat("burnout"));
                             data.setSelectedSpellSlot(this.data.getInt("slot"));
+                            data.setSpellweaverSwitch(this.data.getBoolean("switch")); // Add this
                             if (this.data.contains("book")) {
                                 data.setSelectedSpellBook(ItemStack.of(this.data.getCompound("book")));
                             } else {
