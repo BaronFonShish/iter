@@ -25,7 +25,7 @@ import java.util.Objects;
 public class SpellRecall extends SpellItem {
 
     public SpellRecall() {
-        super(new Properties(), "arcane", "sight", 2, 100, 100, (int) (3600));
+        super(new Properties(), "arcane", "conveyance", "ether",2, 100, 100, (int) (3600));
     }
 
     @Override
@@ -50,19 +50,25 @@ public class SpellRecall extends SpellItem {
             ResourceKey<Level> destination = serverPlayer.getRespawnDimension();
 
             BlockPos spawnPos = serverPlayer.getRespawnPosition();
-            if (spawnPos == null){
-                spawnPos = Objects.requireNonNull(serverPlayer.server.getLevel(Level.OVERWORLD)).getSharedSpawnPos();
-                destination = Level.OVERWORLD;
+
+            if (spawnPos == null) {
+                ServerLevel overworld = serverPlayer.server.getLevel(Level.OVERWORLD);
+                if (overworld == null) {
+                    overworld = (ServerLevel) level;
+                }
+                spawnPos = overworld.getSharedSpawnPos();
+                destination = overworld.dimension();
             }
 
 
             ServerLevel nextLevel = serverPlayer.server.getLevel(destination);
+            if (nextLevel == null) {
+                nextLevel = (ServerLevel) level;
+                spawnPos = nextLevel.getSharedSpawnPos();
+            }
+
             if (nextLevel != null) {
-                assert serverPlayer.getRespawnPosition() != null;
-                serverPlayer.teleportTo(nextLevel,
-                        serverPlayer.getRespawnPosition().getX()+0.5,
-                        serverPlayer.getRespawnPosition().getY()+1,
-                        serverPlayer.getRespawnPosition().getZ()+0.5,
+                serverPlayer.teleportTo(nextLevel, spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(),
                         serverPlayer.getYRot(),
                         serverPlayer.getXRot());
                 serverPlayer.fallDistance = 0;

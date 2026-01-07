@@ -6,11 +6,15 @@
   "block.iter.sanguarnet_ore": "Гемогранатная руда",
   "block.iter.deepslate_sanguarnet_ore": "Гемогранатный глубинный сланец",
   "block.iter.component_deposit": "Залежи компонентов",
+  "block.iter.magmanum_ore": "Магманувая руда",
   "block.iter.spider_egg": "Паучье яйцо",
   "block.iter.etherbloom": "Эфироцвет",
   "block.iter.etherbloom_plant": "Растущий Эфироцвет",
   "block.iter.rotroot": "Гнилушка",
   "block.iter.cruncher": "Крушитель",
+  "block.iter.spellweaver_table": "Стол заклинателя",
+  "block.iter.gnawer": "Обгладыватель",
+  "block.iter.void_maw": "Пасть бездны",
 
   "item.iter.nostelon": "Ностелон",
   "item.iter.rough_nostelon": "Грубый ностелон",
@@ -18,12 +22,14 @@
   "item.iter.spider_silk": "Паучий шёлк",
   "item.iter.spawner_fragment": "Фрагмент рассадника",
   "item.iter.abyssquartz_shard": "Осколок безднокварца",
+  "item.iter.magmanum": "Магманум",
   "item.iter.tankard": "Кружка",
   "item.iter.copper_coin": "Медная монета",
   "item.iter.gold_coin": "Золотая монета",
   "item.iter.diamond_coin": "Алмазная монета",
   "item.iter.potsherd": "Черепок",
   "item.iter.etherdust": "Эфирная пыль",
+  "item.iter.abstruse_cloth": "Чудная ткань",
   "item.iter.sanguarnet": "Гемогранат",
   "item.iter.wooden_dagger": "Деревянный кинжал",
   "item.iter.wooden_flail": "Деревянный цеп",
@@ -63,6 +69,8 @@
   "item.iter.gobsteel_scrap": "Гобсталевый лом",
   "item.iter.dwarven_components": "Дворфские компоненты",
   "item.iter.stinger": "Стрекатель",
+  "item.iter.magmanum_sword": "Магманувый меч",
+  "item.iter.magmanum_pickaxe": "Магманувая кирка",
   "item.iter.gist": "Суть",
   "item.iter.ink_bottle": "Бутылек чернил",
 
@@ -116,8 +124,12 @@
   "iter.desc.iron_ring_sanguarnet": "§9+0.1 Регенерация здоровья",
   "iter.desc.golden_ring_sanguarnet": "§9+0.15 Регенерация здоровья",
   "iter.desc.netherite_ring_sanguarnet": "§9+0.2 Регенерация здоровья",
+
   "iter.desc.cruncher": "Ломает блоки когда включен",
   "iter.desc.stinger": "Кустарный скорострельный арбалет",
+  "iter.desc.hellblaze_bolt": "§7Летит по прямой и взрывается",
+  "iterpg.desc.void_maw" : "Откатывает цену починки предметов",
+  "iterpg.desc.gnawer": "Переносит зачарования с предметов на книги",
 
   "entity.iter.spiderling": "Паучок",
   "item.iter.spiderling_spawn_egg": "Яйцо призыва паучка",
@@ -135,15 +147,19 @@
   "item.iter.ancient_staff": "Древний посох",
   "item.iter.nostelon_staff": "Ностелоновый посох",
   "item.iter.diamond_staff": "Алмазный посох",
+  "item.iter.magmanum_staff": "Магманувый посох",
 
   "item.iter.spell_etherbolt": "Свиток - Эфирный снаряд",
   "item.iter.spell_mend": "Свиток - Починка",
   "item.iter.spell_lesser_heal": "Свиток - Малое лечение",
   "item.iter.spell_recall": "Свиток - Возврат",
+  "item.iter.spell_leap": "Свиток - Прыжок",
   "item.iter.spell_ignite": "Свиток - Поджиг",
   "item.iter.spell_splashes": "Свиток - Брызги",
-  "item.iter.spell_witch_lash": "Свиток - Ведьмина плеть",
   "item.iter.spell_frost_spike": "Свиток - Морозный шип",
+  "item.iter.spell_blaze_barrage": "Свиток - Всполоховый заряд",
+  "item.iter.spell_legacy_fireball": "Свиток - Древний Огненный шар",
+  "item.iter.spell_witch_lash": "Свиток - Ведьмина плеть",
 
   "iter.spell.prefix": "Свиток - ",
 
@@ -151,10 +167,13 @@
   "iter.spell_mend.desc": "§7Ремонтирует вещи в инвентаре заклинателя§r",
   "iter.spell_lesser_heal.desc": "§7Лечит заклинателя§r",
   "iter.spell_recall.desc": "§7Телепортирует игрока в точку возрождения§r",
+  "iter.spell_leap.desc": "§7Совершает рывок в направлении взгляда§r",
   "iter.spell_ignite.desc": "§7Поджигает блок или сущность§r",
   "iter.spell_splashes.desc": "§7Сотворяет воду для тушения блоков и мобов. Каст в присяде, чтобы облить себя§r",
-  "iter.spell_witch_lash.desc": "§7Создает короткий луч гнусной магии§r",
   "iter.spell_frost_spike.desc": "§7Запускает раскалывающийся ледяной осколок§r",
+  "iter.spell_blaze_barrage.desc": "§7Стреляет разбросом из трех огненных зарядов§r",
+  "iter.spell_legacy_fireball.desc": "§7Древнее заклинание. Стреляет огненным шаром гаста§r",
+  "iter.spell_witch_lash.desc": "§7Создает короткий луч гнусной магии§r",
 
   "enchantment.iter.sowing": "Посев",
   "enchantment.iter.flaying": "Свежеватель",
@@ -180,16 +199,27 @@
   "iterpg.spell.mana_cost": "Выгорание: %s",
   "iterpg.spell.cooldown": "Откат: %sс",
 
-  "iterpg.spell.domain_and_method": "%s §7домен, метод§r %s",
+  "iterpg.spell.info": "%s §7домен, метод§r %s, §7аспект§r §s",
 
   "iterpg.spell.domain.arcane": "§9Мистический§r",
-  "iterpg.spell.domain.elemental": "§dЭлементальный§r",
+  "iterpg.spell.domain.primal": "§dПервобытный§r",
   "iterpg.spell.domain.occult": "§4Оккультный§r",
 
   "iterpg.spell.method.force": "§cСилы§r",
   "iterpg.spell.method.form": "§7Формы§r",
   "iterpg.spell.method.body": "§6Тела§r",
-  "iterpg.spell.method.sight": "§bЗнания§r",
+  "iterpg.spell.method.conveyance": "§bСвязи§r",
+
+  "iterpg.spell.aspect.fire": "§cОгня§r",
+  "iterpg.spell.aspect.frost": "§bЛьда§r",
+  "iterpg.spell.aspect.lightning": "§eМолний§r",
+  "iterpg.spell.aspect.earth": "§8Земли§r",
+  "iterpg.spell.aspect.air": "§fВоздуха§r",
+  "iterpg.spell.aspect.water": "§9Воды§r",
+  "iterpg.spell.aspect.venom": "§aЯда§r",
+  "iterpg.spell.aspect.ether": "§dЭфира§r",
+  "iterpg.spell.aspect.life": "§2Жизни§r",
+  "iterpg.spell.aspect.decay": "§0Разложение§r",
 
   "iterpg.spell.tier": "%s §7Уровень§r",
   "iterpg.spell.tier.0": "Примитивный",
@@ -199,8 +229,14 @@
   "iterpg.spell.tier.4": "Легендарный",
   "iterpg.spell.tier.5": "Первородный",
 
-  "gui.iter.spellweaver_table.label": "Стол заклинателя",
   "iterpg.spell.quality": "Качество",
+  "iterpg.spell.shift": "[Shift] - подробнее",
+
+  "item_group.iter.iter_magic": "Iter - Магия",
+
+  "gui.iter.spellweaver_table.label": "Стол заклинателя",
+  "gui.iter.gnawer.label": "Обгладыватель",
+  "gui.iter.void_maw.label": "Пасть бездны",
 
   "gui.iter.spellweaver_table.tooltip.intro_1": "Используется для копирования и улучшения заклинаний",
   "gui.iter.spellweaver_table.tooltip.intro_2": "Чтобы начать, положи свиток заклинания в первый слот",
@@ -211,5 +247,12 @@
   "gui.iter.spellweaver_table.tooltip.copy": "Требуется для копии:",
   "gui.iter.spellweaver_table.tooltip.upgrade": "Требуется для улучшения:",
 
-  "gui.iter.spellweaver_table.tooltip.itemXofX": "%s: %s/%s"
+  "gui.iter.spellweaver_table.tooltip.itemXofX": "%s: %s/%s",
+
+  "gui.iter.void_maw.tooltip.intro": "Используется для снижения стоимости починки/зачарования предметов",
+
+  "gui.iter.void_maw.tooltip.explevel": "Уровни опыта",
+  "gui.iter.void_maw.tooltip.repaircost": "Стоимость починки",
+
+  "gui.iter.void_maw.tooltip.cost": "%s: %s -> %s"
 }

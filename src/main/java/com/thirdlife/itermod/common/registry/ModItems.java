@@ -28,6 +28,7 @@ public class ModItems {
     public static final RegistryObject<Item> BOWSTRING = ITEMS.register("bowstring", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> DWARVEN_COMPONENTS = ITEMS.register("dwarven_components", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ABYSSQUARTZ_SHARD = ITEMS.register("abyssquartz_shard", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> MAGMANUM = ITEMS.register("magmanum", () -> new MagmanumItem(new Item.Properties()));
     public static final RegistryObject<Item> ETHERDUST = ITEMS.register("etherdust", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> GIST = ITEMS.register("gist", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> INK_BOTTLE = ITEMS.register("ink_bottle", () -> new Item(new Item.Properties()));
@@ -45,6 +46,9 @@ public class ModItems {
     public static final RegistryObject<Item> SANGUARNET = ITEMS.register("sanguarnet",() -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> RECURVE_BOW = ITEMS.register("recurve_bow", RecurveBowItem::new);
     public static final RegistryObject<Item> STINGER = ITEMS.register("stinger", StingerItem::new);
+    public static final RegistryObject<Item> MAGMANUM_SWORD = ITEMS.register("magmanum_sword", MagmanumSword::new);
+    public static final RegistryObject<Item> MAGMANUM_PICKAXE = ITEMS.register("magmanum_pickaxe", MagmanumPickaxe::new);
+    public static final RegistryObject<Item> HELLBLAZE_ARROW = ITEMS.register("hellblaze_arrow", () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> SPIDERLING_SPAWN_EGG =
             ITEMS.register("spiderling_spawn_egg", () ->new ForgeSpawnEggItem
@@ -161,16 +165,20 @@ public class ModItems {
     public static final RegistryObject<Item> ANCIENT_STAFF = ITEMS.register("ancient_staff", AncientStaff::new);
     public static final RegistryObject<Item> NOSTELON_STAFF = ITEMS.register("nostelon_staff", NostelonStaff::new);
     public static final RegistryObject<Item> DIAMOND_STAFF = ITEMS.register("diamond_staff", DiamondStaff::new);
+    public static final RegistryObject<Item> MAGMANUM_STAFF = ITEMS.register("magmanum_staff", MagmanumStaff::new);
 
 
     public static final RegistryObject<Item> SPELL_ETHERBOLT = ITEMS.register("spell_etherbolt", SpellEtherbolt::new);
     public static final RegistryObject<Item> SPELL_LESSER_HEAL = ITEMS.register("spell_lesser_heal", SpellLesserHeal::new);
     public static final RegistryObject<Item> SPELL_MEND = ITEMS.register("spell_mend", SpellMend::new);
     public static final RegistryObject<Item> SPELL_RECALL = ITEMS.register("spell_recall", SpellRecall::new);
+    public static final RegistryObject<Item> SPELL_LEAP = ITEMS.register("spell_leap", SpellLeap::new);
 
     public static final RegistryObject<Item> SPELL_IGNITE = ITEMS.register("spell_ignite", SpellIgnite::new);
     public static final RegistryObject<Item> SPELL_FROST_SPIKE = ITEMS.register("spell_frost_spike", SpellFrostSpike::new);
     public static final RegistryObject<Item> SPELL_SPLASHES = ITEMS.register("spell_splashes", SpellSplashes::new);
+    public static final RegistryObject<Item> SPELL_BLAZE_BARRAGE = ITEMS.register("spell_blaze_barrage", SpellBlazeBarrage::new);
+    public static final RegistryObject<Item> SPELL_LEGACY_FIREBALL = ITEMS.register("spell_legacy_fireball", SpellLegacyFireball::new);
 
     public static final RegistryObject<Item> SPELL_WITCH_LASH = ITEMS.register("spell_witch_lash", SpellWitchLash::new);
 

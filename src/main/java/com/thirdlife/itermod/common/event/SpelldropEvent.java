@@ -1,9 +1,12 @@
 package com.thirdlife.itermod.common.event;
 
+import com.thirdlife.itermod.common.variables.IterPlayerDataUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -23,23 +26,35 @@ public class SpelldropEvent {
 
     public static void onEntityDeath(LivingDeathEvent event) {
         if (event != null && event.getEntity() != null && event.getSource().getEntity() != null) {
-            if (event.getSource().getEntity() instanceof Player){
+            if (event.getSource().getEntity() instanceof Player player){
                 Level level = event.getEntity().level();
-
-                if (Math.random()<0.025d){
-                    ResourceLocation lootpath = new ResourceLocation("iter:gameplay/spelldrop_novice");
-                    if (Math.random()<0.25d){lootpath = new ResourceLocation("iter:gameplay/spelldrop_adept");}
-
-                BlockPos lootpos = BlockPos.containing(event.getEntity().getX()+0.5, (event.getEntity().getY() + event.getEntity().getEyeHeight()/2), event.getEntity().getZ()+0.5);
-                for (ItemStack itemstackiterator : level.getServer().getLootData().getLootTable(lootpath)
-                        .getRandomItems(new LootParams.Builder((ServerLevel) level).withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(lootpos)).withParameter(LootContextParams.BLOCK_STATE, level.getBlockState(lootpos))
-                                .withOptionalParameter(LootContextParams.BLOCK_ENTITY, level.getBlockEntity(lootpos)).create(LootContextParamSets.EMPTY))) {
-                    ItemEntity entityToSpawn = new ItemEntity(level, lootpos.getX(), lootpos.getY(), lootpos.getZ(), itemstackiterator);
-                    entityToSpawn.setPickUpDelay(10);
-                    level.addFreshEntity(entityToSpawn);
-                   }
+                LivingEntity victim = event.getEntity();
+                boolean drop = false;
+                float luck = IterPlayerDataUtils.getSpellLuck(player);
+                if (luck >= Math.random()*1000 + 100){
+                    drop = true;
+                }
+                if (drop){spelldrop(victim, level);}
+                else {
+                    float pointstoadd = (victim.getMaxHealth() + 5);
+                    pointstoadd /= 100;
+                    IterPlayerDataUtils.addSpellLuck(player, pointstoadd);
                 }
             }
+        }
+    }
+
+    public static void spelldrop(Entity target, Level level){
+        ResourceLocation lootpath = new ResourceLocation("iter:gameplay/spelldrop_novice");
+        if (Math.random()<0.25d){lootpath = new ResourceLocation("iter:gameplay/spelldrop_adept");}
+
+        BlockPos lootpos = BlockPos.containing(target.getX()+0.5, (target.getY() + target.getEyeHeight()/2), target.getZ()+0.5);
+        for (ItemStack itemstackiterator : level.getServer().getLootData().getLootTable(lootpath)
+                .getRandomItems(new LootParams.Builder((ServerLevel) level).withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(lootpos)).withParameter(LootContextParams.BLOCK_STATE, level.getBlockState(lootpos))
+                        .withOptionalParameter(LootContextParams.BLOCK_ENTITY, level.getBlockEntity(lootpos)).create(LootContextParamSets.EMPTY))) {
+            ItemEntity entityToSpawn = new ItemEntity(level, lootpos.getX(), lootpos.getY(), lootpos.getZ(), itemstackiterator);
+            entityToSpawn.setPickUpDelay(10);
+            level.addFreshEntity(entityToSpawn);
         }
     }
 }

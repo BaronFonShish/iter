@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "iter:block/gnawer_bottom",
+    "up": "iter:block/gnawer_top",
+    "north": "iter:block/gnawer_side",
+    "east": "iter:block/gnawer_side",
+    "south": "iter:block/gnawer_side",
+    "west": "iter:block/gnawer_side",
+    "particle": "iter:block/gnawer_bottom"
+  },
+  "render_type": "solid"
+}

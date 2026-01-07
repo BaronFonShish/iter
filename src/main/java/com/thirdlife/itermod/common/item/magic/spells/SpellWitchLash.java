@@ -35,7 +35,7 @@ import java.util.Objects;
 public class SpellWitchLash extends SpellItem {
 
     public SpellWitchLash() {
-        super(new Properties(), "occult", "force", 0, 8, 1, 8);
+        super(new Properties(), "occult", "force", "decay",0, 8, 1, 8);
     }
 
     @Override

@@ -20,7 +20,7 @@ import java.util.Objects;
 
 public class SpellEtherbolt extends SpellItem {
 
-    public SpellEtherbolt() {super(new Properties(), "arcane", "force", 1, 10, 2, 5);}
+    public SpellEtherbolt() {super(new Properties(), "arcane", "force", "ether", 1, 10, 2, 5);}
 
     @Override
     public void castSpell(Level level, Player player, ItemStack wand, ItemStack spellStack, float spellpower) {

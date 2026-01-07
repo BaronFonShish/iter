@@ -17,7 +17,7 @@ import java.util.List;
 public class SpellMend extends SpellItem {
 
     public SpellMend() {
-        super(new Properties(), "arcane", "form", 2, 50, 75, 1800);
+        super(new Properties(), "arcane", "form","ether", 2, 50, 75, 1800);
     }
 
     @Override

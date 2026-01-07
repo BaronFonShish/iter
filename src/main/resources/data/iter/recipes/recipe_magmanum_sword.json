@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " m ",
+    " m ",
+    " b "
+  ],
+  "key": {
+    "m": {
+      "item": "iter:magmanum"
+    },
+    "b": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "result": {
+    "item": "iter:magmanum_sword",
+    "count": 1
+  }
+}

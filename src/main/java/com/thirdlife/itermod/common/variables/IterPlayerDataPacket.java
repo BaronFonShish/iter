@@ -17,6 +17,8 @@ public class IterPlayerDataPacket {
         SPELL_BOOK,
         SPELL_LUCK,
         SPELLWEAVER_SWITCH,
+        FLIGHT_TIME,
+        FLYING,
         FULL_SYNC
     }
 
@@ -57,6 +59,18 @@ public class IterPlayerDataPacket {
         return new IterPlayerDataPacket(DataType.SPELL_LUCK, tag);
     }
 
+    public static IterPlayerDataPacket flying(boolean flystate) {
+        CompoundTag tag = new CompoundTag();
+        tag.putBoolean("value", flystate);
+        return new IterPlayerDataPacket(DataType.FLYING, tag);
+    }
+
+    public static IterPlayerDataPacket flightTime(float flightTime) {
+        CompoundTag tag = new CompoundTag();
+        tag.putFloat("value", flightTime);
+        return new IterPlayerDataPacket(DataType.FLIGHT_TIME, tag);
+    }
+
     public static IterPlayerDataPacket spellBook(ItemStack spellBook) {
         CompoundTag tag = new CompoundTag();
         if (!spellBook.isEmpty()) {
@@ -75,12 +89,14 @@ public class IterPlayerDataPacket {
 
     public static IterPlayerDataPacket fullSync(float etherBurnout, int spellSlot,
                                                 float spellLuck, ItemStack spellBook,
-                                                boolean spellweaverSwitch) {
+                                                boolean spellweaverSwitch, float flightTime, boolean flying) {
         CompoundTag tag = new CompoundTag();
         tag.putFloat("burnout", etherBurnout);
         tag.putInt("slot", spellSlot);
-        tag.putFloat("luck", spellLuck);
+        tag.putFloat("spellluck", spellLuck);
         tag.putBoolean("switch", spellweaverSwitch);
+        tag.putFloat("flighttime", flightTime);
+        tag.putBoolean("flying", flying);
         if (!spellBook.isEmpty()) {
             CompoundTag bookTag = new CompoundTag();
             spellBook.save(bookTag);
@@ -118,10 +134,24 @@ public class IterPlayerDataPacket {
                             }
                             break;
 
+                        case SPELL_LUCK:
+                            data.setSpellLuck(this.data.getFloat("value"));
+                            break;
+
+                        case FLIGHT_TIME:
+                            data.setFlightTime(this.data.getFloat("value"));
+                            break;
+
+                        case FLYING:
+                            data.setFlying(this.data.getBoolean("value"));
+                            break;
+
                         case FULL_SYNC:
                             data.setEtherBurnout(this.data.getFloat("burnout"));
+                            data.setSpellLuck(this.data.getFloat("spellluck"));
+                            data.setFlightTime(this.data.getFloat("flighttime"));
                             data.setSelectedSpellSlot(this.data.getInt("slot"));
-                            data.setSpellweaverSwitch(this.data.getBoolean("switch")); // Add this
+                            data.setSpellweaverSwitch(this.data.getBoolean("switch"));
                             if (this.data.contains("book")) {
                                 data.setSelectedSpellBook(ItemStack.of(this.data.getCompound("book")));
                             } else {

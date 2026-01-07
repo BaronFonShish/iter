@@ -1,6 +1,7 @@
 package com.thirdlife.itermod.common.item.magic.defaults;
 
 import com.thirdlife.itermod.common.event.SpellBookUtils;
+import com.thirdlife.itermod.common.misc.Pictograms;
 import com.thirdlife.itermod.common.registry.ModAttributes;
 import com.thirdlife.itermod.common.registry.ModItems;
 import net.minecraft.ChatFormatting;
@@ -8,11 +9,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
@@ -29,15 +32,17 @@ public abstract class SpellItem extends Item{
     private final int etherCost;
     private final String domain;
     private final String method;
+    private final String aspect;
     private final int tier;
 
-    public SpellItem(Properties properties, String domain, String method, int tier, int castTime, int etherCost, int cooldown) {
+    public SpellItem(Properties properties, String domain, String method, String aspect, int tier, int castTime, int etherCost, int cooldown) {
         super(properties.stacksTo(1));
         this.castTime = castTime;
         this.etherCost = etherCost;
         this.cooldown = cooldown;
         this.domain = domain;
         this.method = method;
+        this.aspect = aspect;
         this.tier = tier;
     }
 
@@ -55,6 +60,9 @@ public abstract class SpellItem extends Item{
     }
     public String getMethod(){
         return this.method;
+    }
+    public String getAspect(){
+        return this.aspect;
     }
     public int getTier(){
         return this.tier;
@@ -144,58 +152,91 @@ public abstract class SpellItem extends Item{
 
         ResourceLocation registryName = ForgeRegistries.ITEMS.getKey(this);
         if (registryName != null) {
-            String baseKey = BuiltInRegistries.ITEM.getKey(this).getNamespace() + "." + BuiltInRegistries.ITEM.getKey(this).getPath();
-            String domainKey = "iterpg.spell.domain." + this.getDomain();
-            String methodKey = "iterpg.spell.method." + this.getMethod();
-            Component SpellInfo = Component.translatable("iterpg.spell.domain_and_method",
-                    (Component.translatable(domainKey)),
-                    (Component.translatable(methodKey)));
-
-            int quality = getQuality(itemstack);
-            Component qualityText = Component.translatable("iterpg.spell.quality")
-                    .append(Component.literal(": " + quality));
-
-            list.add(Component.translatable("iterpg.spell.tier", Component.translatable("iterpg.spell.tier." + this.getTier())));
-            list.add(SpellInfo);
-            list.add(qualityText);
-            list.add(Component.literal(""));
 
             LocalPlayer clientPlayer = getClientPlayer();
             if (clientPlayer != null) {
+                boolean shiftheld = (Minecraft.getInstance().options.keyShift.isDown());
 
-                float dynamicSpellPower = getSpellPower(clientPlayer, itemstack);
-                float dynamicCastTime = getCastTime(clientPlayer, itemstack)/20f;
-                float dynamicCooldown = getCooldown(clientPlayer, itemstack)/20f;
-                float dynamicManaCost = getManaCost(clientPlayer, itemstack);
+                String baseKey = BuiltInRegistries.ITEM.getKey(this).getNamespace() + "." + BuiltInRegistries.ITEM.getKey(this).getPath();
 
-                String spellPowerString = String.format("%.2f", dynamicSpellPower);
-                String castTimeString = String.format("%.1f", dynamicCastTime);
-                String cooldownString = String.format("%.1f", dynamicCooldown);
-                String manaCostString = String.format("%.1f", dynamicManaCost);
+                    String domainKey = "iterpg.spell.domain." + this.getDomain();
+                    String methodKey = "iterpg.spell.method." + this.getMethod();
+                    String aspectKey = "iterpg.spell.aspect." + this.getAspect();
+                    Component SpellInfo = Component.translatable("iterpg.spell.info",
+                            Component.empty().append(returnSymbol(this.domain)).append(Component.translatable(domainKey)),
+                            Component.empty().append(returnSymbol(this.method)).append(Component.translatable(methodKey)),
+                            Component.empty().append(returnSymbol(this.aspect)).append(Component.translatable(aspectKey)));
 
 
-                list.add(Component.translatable("iterpg.spell.spellpower", spellPowerString));
-                if (dynamicCastTime > 0.05f) {
-                list.add(Component.translatable("iterpg.spell.cast_time", castTimeString));}
+                int quality = getQuality(itemstack);
+                Component qualityText = Component.translatable("iterpg.spell.quality")
+                        .append(Component.literal(": " + quality));
 
-                list.add(Component.translatable("iterpg.spell.mana_cost", manaCostString));
+                list.add(Component.translatable("iterpg.spell.tier", Component.translatable("iterpg.spell.tier." + this.getTier())));
 
-                list.add(Component.translatable("iterpg.spell.cooldown", cooldownString));
+                if (shiftheld){list.add(SpellInfo);}
+                else {
+                    Component SpellPictures = Component.empty().append(returnSymbol(this.domain)).append(returnSymbol(this.method)).append(returnSymbol(this.aspect));
+                    list.add(SpellPictures);
+                }
+                list.add(qualityText);
+                list.add(Component.literal(""));
 
-            } else {
-                list.add(Component.translatable("iterpg.spell.spellpower", 1));
-                if (this.castTime > 0.05){
-                list.add(Component.translatable("iterpg.spell.cast_time", castTime));}
 
-                list.add(Component.translatable("iterpg.spell.mana_cost", etherCost));
+                if (shiftheld) {
+                    float dynamicSpellPower = getSpellPower(clientPlayer, itemstack);
+                    float dynamicCastTime = getCastTime(clientPlayer, itemstack) / 20f;
+                    float dynamicCooldown = getCooldown(clientPlayer, itemstack) / 20f;
+                    float dynamicManaCost = getManaCost(clientPlayer, itemstack);
 
-                list.add(Component.translatable("iterpg.spell.cooldown", cooldown));
+                    String spellPowerString = String.format("%.2f", dynamicSpellPower);
+                    String castTimeString = String.format("%.1f", dynamicCastTime);
+                    String cooldownString = String.format("%.1f", dynamicCooldown);
+                    String manaCostString = String.format("%.1f", dynamicManaCost);
+
+
+                    list.add(Component.translatable("iterpg.spell.spellpower", spellPowerString));
+                    if (dynamicCastTime > 0.05f) {
+                        list.add(Component.translatable("iterpg.spell.cast_time", castTimeString));
+                    }
+
+                    list.add(Component.translatable("iterpg.spell.mana_cost", manaCostString));
+
+                    list.add(Component.translatable("iterpg.spell.cooldown", cooldownString));
+                }
+
+                list.add(Component.literal(""));
+                list.add(Component.translatable(baseKey + ".desc"));
             }
-            list.add(Component.literal(""));
-            list.add(Component.translatable(baseKey + ".desc"));
         }
     }
 
+    private MutableComponent returnSymbol(String type){
+        char icon = switch (type){
+            case "arcane" -> Pictograms.ID_ARCANE;
+            case "primal" -> Pictograms.ID_PRIMAL;
+            case "occult" -> Pictograms.ID_OCCULT;
+
+            case "force" -> Pictograms.IM_FORCE;
+            case "form" -> Pictograms.IM_FORM;
+            case "body" -> Pictograms.IM_BODY;
+            case "conveyance" -> Pictograms.IM_CONVEYANCE;
+
+            case "fire" -> Pictograms.IA_FIRE;
+            case "ice" -> Pictograms.IA_ICE;
+            case "lightning" -> Pictograms.IA_LIGHTNING;
+            case "water" -> Pictograms.IA_WATER;
+            case "air" -> Pictograms.IA_AIR;
+            case "earth" -> Pictograms.IA_EARTH;
+            case "ether" -> Pictograms.IA_ETHER;
+            case "life" -> Pictograms.IA_LIFE;
+            case "decay" -> Pictograms.IA_DECAY;
+
+
+            default -> Pictograms.IA_FIRE;
+        };
+        return Pictograms.getIcon(icon);
+    }
 
     @OnlyIn(Dist.CLIENT)
     private LocalPlayer getClientPlayer() {

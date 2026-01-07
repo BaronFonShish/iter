@@ -5,9 +5,22 @@
     "iter:spell_lesser_heal",
     "iter:spell_mend",
     "iter:spell_recall",
+    "iter:spell_leap",
+    "iter:spell_seeking_charge",
+    "iter:spell_etherblast",
+    "iter:spell_etherlance",
+
     "iter:spell_ignite",
     "iter:spell_splashes",
     "iter:spell_frost_spike",
-    "iter:spell_witch_lash"
+    "iter:spell_blaze_barrage",
+    "iter:spell_flamebolt",
+    "iter:spell_legacy_fireball",
+    "iter:spell_fireball",
+
+    "iter:spell_witch_lash",
+    "iter:spell_raise_skeleton",
+    "iter:spell_raise_zombie",
+    "iter:spell_ravage"
   ]
 }

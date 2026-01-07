@@ -1,0 +1,9 @@
+{
+  "parent": "iter:custom/void_maw",
+  "textures": {
+    "all": "iter:block/void_maw",
+    "particle": "iter:block/void_maw",
+    "0": "iter:block/void_maw"
+  },
+  "render_type": "cutout"
+}

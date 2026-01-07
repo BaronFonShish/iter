@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "nnn",
+    "brb",
+    "bbb"
+  ],
+  "key": {
+    "n": {
+      "item": "iter:nostelon"
+    },
+    "r": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "b": {
+      "item": "minecraft:bone_block"
+    }
+  },
+  "result": {
+    "item": "iter:gnawer",
+    "count": 1
+  }
+}

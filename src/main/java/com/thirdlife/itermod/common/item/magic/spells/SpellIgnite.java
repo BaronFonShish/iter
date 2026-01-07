@@ -35,7 +35,7 @@ import java.util.Objects;
 
 public class SpellIgnite extends SpellItem {
 
-    public SpellIgnite() {super(new Properties(), "elemental", "force", 0, 20, 2, 8);}
+    public SpellIgnite() {super(new Properties(), "primal", "force", "fire",1, 20, 2, 8);}
 
     @Override
     public void castSpell(Level level, Player player, ItemStack wand, ItemStack spellStack, float spellpower) {

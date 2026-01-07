@@ -5,6 +5,7 @@ import com.thirdlife.itermod.common.entity.GoblinEntity;
 import com.thirdlife.itermod.common.entity.GoblinWarriorEntity;
 import com.thirdlife.itermod.common.entity.misc.EtherboltEntity;
 import com.thirdlife.itermod.common.entity.misc.FrostSpikeEntity;
+import com.thirdlife.itermod.common.entity.misc.HellblazeArrowEntity;
 import com.thirdlife.itermod.iterMod;
 import com.thirdlife.itermod.common.entity.SpiderlingEntity;
 import net.minecraft.world.entity.EntityType;
@@ -48,6 +49,14 @@ public class ModEntities {
                             .setTrackingRange(64).setUpdateInterval(1)
                             .sized(0.25f, 0.25f)
                             .build("frost_spike"));
+
+    public static final RegistryObject<EntityType<HellblazeArrowEntity>> HELLBLAZE_ARROW =
+            ENTITY_TYPES.register("hellblaze_arrow",
+                    () -> EntityType.Builder.<HellblazeArrowEntity>of(HellblazeArrowEntity::new, MobCategory.MISC)
+                            .setShouldReceiveVelocityUpdates(true)
+                            .setTrackingRange(64).setUpdateInterval(1)
+                            .sized(0.25f, 0.25f)
+                            .build("hellblaze_arrow"));
 
     public static final RegistryObject<EntityType<GoblinWarriorEntity>> GOBLIN_WARRIOR =
             ENTITY_TYPES.register("goblin_warrior",

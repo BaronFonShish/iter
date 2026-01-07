@@ -48,7 +48,7 @@ public class FrostSpikeEntity extends AbstractMagicProjectile {
         if (target.fireImmune()) {
             power *= 1.25f;
         }
-        target.setTicksFrozen((int) Math.min(target.getTicksFrozen() + power * 80, power * 500)+140);
+        target.setTicksFrozen((int) Math.min(target.getTicksFrozen(), 140 + power * 500));
         areaEffect(power);
     }
 
@@ -89,7 +89,7 @@ public class FrostSpikeEntity extends AbstractMagicProjectile {
 
         final Vec3 center = new Vec3(this.getX(), this.getY(), this.getZ());
         float radius = 2 + power*0.25f;
-        float damage = power/2;
+        float damage = 3 + power * 0.5f;
 
         List<LivingEntity> hitEntities = level().getEntitiesOfClass
                 (LivingEntity.class, new AABB(center, center)
@@ -103,7 +103,7 @@ public class FrostSpikeEntity extends AbstractMagicProjectile {
                 }
 
                 entity.hurt(new DamageSource(level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.FREEZE), this.getOwner()), damage);
-                entity.setTicksFrozen((int) Math.min(entity.getTicksFrozen() + power * 20, power * 500)+140);
+                entity.setTicksFrozen((int) Math.min(entity.getTicksFrozen(), 140 + power * 250));
             }
         }
     }

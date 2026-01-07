@@ -38,7 +38,7 @@ public class SpiderEggHatchEvent {
     private static boolean isValid(Entity entity) {
         if (entity instanceof ServerPlayer serverPlayer) {
             ItemStack mainHandItem = getMainHandItem(entity);
-            return (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, mainHandItem) == 0) && (serverPlayer.gameMode.getGameModeForPlayer() == GameType.SURVIVAL);
+            return (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, mainHandItem) == 0) && (serverPlayer.gameMode.getGameModeForPlayer() != GameType.CREATIVE);
         }
         return false;
     }

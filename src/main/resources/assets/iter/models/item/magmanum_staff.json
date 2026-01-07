@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "textures": {
+    "layer0": "iter:item/magmanum_staff"
+  },
+  "base": {
+    "parent": "iter:item/magmanum_staff_large"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "iter:item/magmanum_staff_normal"
+    },
+    "fixed": {
+      "parent": "iter:item/magmanum_staff_normal"
+    },
+    "ground": {
+      "parent": "iter:item/magmanum_staff_normal"
+    }
+  }
+}

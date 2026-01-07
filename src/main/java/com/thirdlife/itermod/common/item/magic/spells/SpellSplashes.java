@@ -28,7 +28,7 @@ import java.util.Objects;
 
 public class SpellSplashes extends SpellItem {
 
-    public SpellSplashes() {super(new Properties(), "elemental", "form", 0, 10, 2, 16);}
+    public SpellSplashes() {super(new Properties(), "primal", "form", "water",1, 10, 2, 16);}
 
     @Override
     public void castSpell(Level level, Player player, ItemStack wand, ItemStack spellStack, float spellpower) {

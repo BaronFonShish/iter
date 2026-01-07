@@ -9,15 +9,22 @@ public class IterPlayerData {
     private int selectedSpellSlot = 1;
     private ItemStack selectedSpellBook = ItemStack.EMPTY;
     private boolean spellweaverSwitch = false;
+    private float flighttime = 0.0f;
+    private boolean flying = false;
 
     public float getEtherBurnout() { return etherBurnout; }
     public void setEtherBurnout(float burnout) { this.etherBurnout = Math.max(0, burnout); }
     public float getSpellLuck() { return spellLuck; }
     public void resetSpellLuck() { this.spellLuck = 0; }
+    public void setSpellLuck(float luck) {this.spellLuck = luck; }
     public void addEtherBurnout(float amount){this.etherBurnout = Math.max(0, this.etherBurnout + amount);}
     public void subtractEtherBurnout(float amount){this.etherBurnout = Math.min(this.etherBurnout, this.etherBurnout - amount);}
     public boolean getSpellweaverSwitch() { return spellweaverSwitch; }
     public void setSpellweaverSwitch(boolean state) { this.spellweaverSwitch = state; }
+    public float getFlightTime() { return flighttime; }
+    public void setFlightTime(float flighttime) { this.flighttime = Math.max(0, flighttime); }
+    public boolean getFlying() { return flying; }
+    public void setFlying(boolean flying) { this.flying = flying; }
 
 
 
@@ -34,6 +41,8 @@ public class IterPlayerData {
         this.selectedSpellSlot = source.selectedSpellSlot;
         this.selectedSpellBook = source.selectedSpellBook.copy();
         this.spellweaverSwitch = source.spellweaverSwitch;
+        this.flighttime = source.flighttime;
+        this.flying = source.flying;
     }
 
     public void saveNBT(CompoundTag nbt) {
@@ -41,6 +50,8 @@ public class IterPlayerData {
         nbt.putFloat("SpellLuck", spellLuck);
         nbt.putInt("SelectedSpellSlot", selectedSpellSlot);
         nbt.putBoolean("SpellweaverSwitch", spellweaverSwitch);
+        nbt.putFloat("FlightTime", flighttime);
+        nbt.putBoolean("Flying", flying);
 
         if (!selectedSpellBook.isEmpty()) {
             CompoundTag bookTag = new CompoundTag();
@@ -54,6 +65,8 @@ public class IterPlayerData {
         spellLuck = nbt.getFloat("SpellLuck");
         selectedSpellSlot = nbt.getInt("SelectedSpellSlot");
         spellweaverSwitch = nbt.getBoolean("SpellweaverSwitch");
+        flighttime = nbt.getFloat("FlightTime");
+        flying = nbt.getBoolean("Flying");
 
         if (nbt.contains("SelectedSpellBook")) {
             selectedSpellBook = ItemStack.of(nbt.getCompound("SelectedSpellBook"));

@@ -44,6 +44,14 @@ public class ModAttributes {
             () -> new RangedAttribute("attribute.regeneration", 0.0, 0.0, 128.0)
                     .setSyncable(true));
 
+    public static final RegistryObject<Attribute> FLIGHT_TIME = ATTRIBUTES.register("flight_time",
+            () -> new RangedAttribute("attribute.iter.flight_time", 0.0, 0.0, 250000.0)
+                    .setSyncable(true));
+
+    public static final RegistryObject<Attribute> FLIGHT_SPEED = ATTRIBUTES.register("flight_speed",
+            () -> new RangedAttribute("attribute.iter.flight_speed", 1, 0.0, 100)
+                    .setSyncable(true));
+
 
 
     @SubscribeEvent
@@ -56,6 +64,9 @@ public class ModAttributes {
         event.add(EntityType.PLAYER, ETHER_BURNOUT_THRESHOLD.get());
 
         event.add(EntityType.PLAYER, REGENERATION.get());
+
+        event.add(EntityType.PLAYER, FLIGHT_TIME.get());
+        event.add(EntityType.PLAYER, FLIGHT_SPEED.get());
 
     }
 
@@ -73,6 +84,9 @@ public class ModAttributes {
             newP.getAttribute(ETHER_BURNOUT_THRESHOLD.get()).setBaseValue(oldP.getAttribute(ETHER_BURNOUT_THRESHOLD.get()).getBaseValue());
 
             newP.getAttribute(REGENERATION.get()).setBaseValue(oldP.getAttribute(REGENERATION.get()).getBaseValue());
+
+            newP.getAttribute(FLIGHT_TIME.get()).setBaseValue(oldP.getAttribute(FLIGHT_TIME.get()).getBaseValue());
+            newP.getAttribute(FLIGHT_SPEED.get()).setBaseValue(oldP.getAttribute(FLIGHT_SPEED.get()).getBaseValue());
         }
     }
 }

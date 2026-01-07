@@ -10,6 +10,9 @@ import com.thirdlife.itermod.common.entity.GoblinWarriorEntity;
 import com.thirdlife.itermod.common.entity.SpiderlingEntity;
 import com.thirdlife.itermod.common.registry.*;
 import com.thirdlife.itermod.common.variables.IterPlayerDataPacket;
+import com.thirdlife.itermod.common.variables.PlayerFlightPacket;
+import com.thirdlife.itermod.world.gui.GnawerGuiButtonPacket;
+import com.thirdlife.itermod.world.gui.VoidMawPacket;
 import com.thirdlife.itermod.world.gui.SpellweaverTablePacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -20,9 +23,7 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkRegistry;
@@ -35,6 +36,8 @@ public class iterMod {
 
 
     public static final String MOD_ID = "iter";
+
+    public static final ResourceLocation PICTOGRAM_FONT = new ResourceLocation(MOD_ID, "fonts/iter_pictograms.json");
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
@@ -68,6 +71,7 @@ public class iterMod {
         ModMenus.REGISTRY.register(modEventBus);
 
 
+
         int id = 0;
         PACKET_HANDLER.registerMessage(id++, IterPlayerDataPacket.class,
                 IterPlayerDataPacket::encode, IterPlayerDataPacket::decode,
@@ -76,8 +80,22 @@ public class iterMod {
         PACKET_HANDLER.registerMessage(id++, SpellweaverTablePacket.class,
                 SpellweaverTablePacket::encode, SpellweaverTablePacket::decode,
                 SpellweaverTablePacket::handle);
-        }
 
+        PACKET_HANDLER.registerMessage(id++, GnawerGuiButtonPacket.class,
+                GnawerGuiButtonPacket::buffer,
+                GnawerGuiButtonPacket::new,
+                GnawerGuiButtonPacket::handler);
+
+        PACKET_HANDLER.registerMessage(id++, VoidMawPacket.class,
+                VoidMawPacket::buffer,
+                VoidMawPacket::new,
+                VoidMawPacket::handler);
+
+        PACKET_HANDLER.registerMessage(id++, PlayerFlightPacket.class,
+                PlayerFlightPacket::encode, PlayerFlightPacket::decode,
+                PlayerFlightPacket::handle);
+
+        }
 
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -119,9 +137,10 @@ public class iterMod {
             event.registerEntityRenderer(ModEntities.SPIDERLING.get(), SpiderlingRenderer::new);
             event.registerEntityRenderer(ModEntities.GIANT_SPIDER.get(), GiantSpiderRenderer::new);
             event.registerEntityRenderer(ModEntities.ETHERBOLT.get(), EtherboltRenderer::new);
+            event.registerEntityRenderer(ModEntities.FROST_SPIKE.get(), FrostSpikeRenderer::new);
+            event.registerEntityRenderer(ModEntities.HELLBLAZE_ARROW.get(), HellblazeArrowRenderer::new);
             event.registerEntityRenderer(ModEntities.GOBLIN_WARRIOR.get(), GoblinWarriorRenderer::new);
             event.registerEntityRenderer(ModEntities.GOBLIN.get(), GoblinRenderer::new);
-            event.registerEntityRenderer(ModEntities.FROST_SPIKE.get(), FrostSpikeRenderer::new);
         }
 
         @SubscribeEvent

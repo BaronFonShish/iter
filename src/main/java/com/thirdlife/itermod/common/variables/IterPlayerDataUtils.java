@@ -43,6 +43,27 @@ public class IterPlayerDataUtils {
         return data != null ? data.getSpellweaverSwitch() : false;
     }
 
+    public static float getSpellLuck(Player player) {
+        IterPlayerData data = getPlayerData(player);
+        return data != null ? data.getSpellLuck() : 0f;
+    }
+
+    public static float getFlightTime(Player player) {
+        IterPlayerData data = getPlayerData(player);
+        return data != null ? data.getFlightTime() : 0f;
+    }
+
+    public static boolean isFlying(Player player) {
+        IterPlayerData data = getPlayerData(player);
+        return data != null ? data.getFlying(): false;
+    }
+
+    public static boolean ifCanFly(Player player) {
+        AttributeInstance flightTimeAttr = player.getAttribute(ModAttributes.FLIGHT_TIME.get());
+        return flightTimeAttr != null && flightTimeAttr.getValue() > 0;
+    }
+
+
     public static float getDynamicDissipation(Player player){
         AttributeInstance dissipationBase = player.getAttribute(ModAttributes.ETHER_BURNOUT_DISSIPATION.get());
         float dissipation = dissipationBase != null ? (float) dissipationBase.getValue() : 0.02f;
@@ -91,6 +112,31 @@ public class IterPlayerDataUtils {
         }
     }
 
+    public static void addSpellLuck(Player player, float amount) {
+        IterPlayerData data = getPlayerData(player);
+        if (data != null) {
+            float luck = data.getSpellLuck() + amount;
+            data.setSpellLuck(luck);
+            syncSpellLuck(player, luck);
+        }
+    }
+
+    public static void setFlightTime(Player player, float amount) {
+        IterPlayerData data = getPlayerData(player);
+        if (data != null) {
+            data.setFlightTime(amount);
+            syncFlightTime(player, amount);
+        }
+    }
+
+    public static void setFlying(Player player, boolean flystate) {
+        IterPlayerData data = getPlayerData(player);
+        if (data != null) {
+            data.setFlying(flystate);
+            syncFlying(player, flystate);
+        }
+    }
+
     /// Синхронизация. SC = Сервер -> Клиент, CS = Клиент -> Сервер, без - универсальный.
 
     // Выгорание
@@ -111,6 +157,48 @@ public class IterPlayerDataUtils {
             syncBurnoutCS(burnout);
         } else if (player instanceof ServerPlayer serverPlayer) {
             syncBurnoutSC(serverPlayer, burnout);
+        }
+    }
+
+    // Полёт
+
+    public static void syncFlightTimeSC(ServerPlayer player, float flighttime) {
+        iterMod.PACKET_HANDLER.send(
+                PacketDistributor.PLAYER.with(() -> player),
+                IterPlayerDataPacket.flightTime(flighttime)
+        );
+    }
+
+    public static void syncFlightTimeCS(float flighttime) {
+        iterMod.PACKET_HANDLER.sendToServer(IterPlayerDataPacket.flightTime(flighttime));
+    }
+
+    public static void syncFlightTime(Player player, float flighttime) {
+        if (player.level().isClientSide) {
+            syncFlightTimeCS(flighttime);
+        } else if (player instanceof ServerPlayer serverPlayer) {
+            syncFlightTimeSC(serverPlayer, flighttime);
+        }
+    }
+
+    // Состояние полёта
+
+    public static void syncFlyingSC(ServerPlayer player, boolean flystate) {
+        iterMod.PACKET_HANDLER.send(
+                PacketDistributor.PLAYER.with(() -> player),
+                IterPlayerDataPacket.flying(flystate)
+        );
+    }
+
+    public static void syncFlyingCS(boolean flystate) {
+        iterMod.PACKET_HANDLER.sendToServer(IterPlayerDataPacket.flying(flystate));
+    }
+
+    public static void syncFlying(Player player, boolean flystate) {
+        if (player.level().isClientSide) {
+            syncFlyingCS(flystate);
+        } else if (player instanceof ServerPlayer serverPlayer) {
+            syncFlyingSC(serverPlayer, flystate);
         }
     }
 
@@ -177,6 +265,27 @@ public class IterPlayerDataUtils {
         }
     }
 
+    // Удача дропа спелла
+
+    public static void syncSpellLuckSC(ServerPlayer player, float luck) {
+        iterMod.PACKET_HANDLER.send(
+                PacketDistributor.PLAYER.with(() -> player),
+                IterPlayerDataPacket.spellLuck(luck)
+        );
+    }
+
+    public static void syncSpellLuckCS(float luck) {
+        iterMod.PACKET_HANDLER.sendToServer(IterPlayerDataPacket.spellLuck(luck));
+    }
+
+    public static void syncSpellLuck(Player player, float luck) {
+        if (player.level().isClientSide) {
+            syncSpellLuckCS(luck);
+        } else if (player instanceof ServerPlayer serverPlayer) {
+            syncSpellLuckSC(serverPlayer, luck);
+        }
+    }
+
     // Все
 
     public static void syncAllSC(ServerPlayer player) {
@@ -187,9 +296,11 @@ public class IterPlayerDataUtils {
                     IterPlayerDataPacket.fullSync(
                             data.getEtherBurnout(),
                             data.getSelectedSpellSlot(),
-                            0.0f,
+                            data.getSpellLuck(),
                             data.getSelectedSpellBook(),
-                            data.getSpellweaverSwitch()
+                            data.getSpellweaverSwitch(),
+                            data.getFlightTime(),
+                            data.getFlying()
                     )
             );
         }
@@ -202,6 +313,9 @@ public class IterPlayerDataUtils {
                 syncBurnout(player, data.getEtherBurnout());
                 syncSpellSlot(player, data.getSelectedSpellSlot());
                 syncSpellBook(player, data.getSelectedSpellBook());
+                syncSpellLuck(player, data.getSpellLuck());
+                syncFlightTime(player, data.getFlightTime());
+                syncFlying(player, data.getFlying());
             } else if (player instanceof ServerPlayer serverPlayer) {
                 syncAllSC(serverPlayer);
             }

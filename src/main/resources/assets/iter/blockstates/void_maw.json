@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "iter:block/void_maw"
+    },
+    "facing=east": {
+      "model": "iter:block/void_maw",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "iter:block/void_maw",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "iter:block/void_maw",
+      "y": 270
+    }
+  }
+}

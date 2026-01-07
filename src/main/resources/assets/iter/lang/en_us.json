@@ -6,11 +6,15 @@
   "block.iter.sanguarnet_ore": "Sanguarnet Ore",
   "block.iter.deepslate_sanguarnet_ore": "Deepslate Sanguarnet Ore",
   "block.iter.component_deposit": "Component Deposit",
+  "block.iter.magmanum_ore": "Magmanum ore",
   "block.iter.spider_egg": "Spider Egg",
   "block.iter.etherbloom": "Etherbloom",
   "block.iter.etherbloom_plant": "Growing Etherbloom",
   "block.iter.rotroot": "Rotroot",
   "block.iter.cruncher": "Cruncher",
+  "block.iter.spellweaver_table": "Spellweaver Table",
+  "block.iter.gnawer": "Gnawer",
+  "block.iter.void_maw": "Void Maw",
 
   "item.iter.nostelon": "Nostelon",
   "item.iter.rough_nostelon": "Rough Nostelon",
@@ -18,12 +22,14 @@
   "item.iter.spider_silk": "Spider Silk",
   "item.iter.spawner_fragment": "Spawner Fragment",
   "item.iter.abyssquartz_shard": "Abyssquartz Shard",
+  "item.iter.magmanum": "Magmanum",
   "item.iter.tankard": "Tankard",
   "item.iter.copper_coin": "Copper Coin",
   "item.iter.gold_coin": "Gold Coin",
   "item.iter.diamond_coin": "Diamond Coin",
   "item.iter.potsherd": "Potsherd",
   "item.iter.etherdust": "Etherdust",
+  "item.iter.abstruse_cloth": "Abstruse Cloth",
   "item.iter.sanguarnet": "Sanguarnet",
   "item.iter.wooden_dagger": "Wooden Dagger",
   "item.iter.wooden_flail": "Wooden Flail",
@@ -63,6 +69,8 @@
   "item.iter.gobsteel_scrap": "Gobsteel Scrap",
   "item.iter.dwarven_components": "Dwarven Components",
   "item.iter.stinger": "Stinger",
+  "item.iter.magmanum_sword": "Magmanum Sword",
+  "item.iter.magmanum_pickaxe": "Magmanum Pickaxe",
   "item.iter.gist": "Gist",
   "item.iter.ink_bottle": "Ink Bottle",
 
@@ -116,8 +124,12 @@
   "iter.desc.iron_ring_sanguarnet": "§9+0.1 Health Regeneration",
   "iter.desc.golden_ring_sanguarnet": "§9+0.15 Health Regeneration",
   "iter.desc.netherite_ring_sanguarnet": "§9+0.2 Health Regeneration",
+
   "iter.desc.cruncher": "Mines blocks when powered",
   "iter.desc.stinger": "A crude, rapid-firing repeater",
+  "iter.desc.hellblaze_bolt": "§7Travels in a straight line and explodes",
+  "iterpg.desc.void_maw" : "Reverts the repair cost of items",
+  "iterpg.desc.gnawer": "Transfers enchantments from items to books",
 
   "entity.iter.spiderling": "Spiderling",
   "item.iter.spiderling_spawn_egg": "Spiderling Spawn Egg",
@@ -135,14 +147,18 @@
   "item.iter.ancient_staff": "Ancient Staff",
   "item.iter.nostelon_staff": "Nostelon Staff",
   "item.iter.diamond_staff": "Diamond Staff",
+  "item.iter.magmanum_staff": "Magmanum Staff",
 
   "item.iter.spell_etherbolt": "Scroll of Etherbolt",
   "item.iter.spell_mend": "Scroll of Mend",
   "item.iter.spell_lesser_heal": "Scroll of Lesser Heal",
   "item.iter.spell_recall": "Scroll of Recall",
+  "item.iter.spell_leap": "Scroll of Leap",
   "item.iter.spell_ignite": "Scroll of Ignite",
   "item.iter.spell_splashes": "Scroll of Splashes",
   "item.iter.spell_frost_spike": "Scroll of Frost Spike",
+  "item.iter.spell_blaze_barrage": "Scroll of Blaze Barrage",
+  "item.iter.spell_legacy_fireball": "Scroll of Legacy Fireball",
   "item.iter.spell_witch_lash": "Scroll of Witch Lash",
 
   "iter.spell.prefix": "Scroll of ",
@@ -150,10 +166,14 @@
   "iter.spell_etherbolt.desc": "§7Conjures a weak arcane projectile§r",
   "iter.spell_mend.desc": "§7Repairs items in caster's inventory§r",
   "iter.spell_lesser_heal.desc": "§7Heals the caster§r",
-  "iter.spell_recall.desc": "§7Teleports player to the spawn point§r",
+  "iter.spell_recall.desc": "§7Teleports the caster to the spawn point§r",
+  "iter.spell_leap.desc": "§7Propels the caster in the direction of sight§r",
   "iter.spell_ignite.desc": "§7Sets a block or a mob ablaze§r",
   "iter.spell_splashes.desc": "§7Conjures water to extinguish blocks and creatures. Sneak-cast to douse yourself§r",
   "iter.spell_frost_spike.desc": "§7Launches a shattering ice projectile§r",
+  "iter.spell_blaze_barrage.desc": "§7Shoots a spread of three blaze fireballs§r",
+  "iter.spell_legacy_fireball.desc": "§7An ancient spell. Shoots a ghast fireball§r",
+  "iter.spell_ignite.desc": "§7Sets a block or a mob ablaze§r",
   "iter.spell_witch_lash.desc": "§7Casts a short beam of wicked magic§r",
 
   "enchantment.iter.sowing": "Sowing",
@@ -180,16 +200,27 @@
   "iterpg.spell.mana_cost": "Burnout: %s",
   "iterpg.spell.cooldown": "Cooldown: %ss",
 
-  "iterpg.spell.domain_and_method": "%s §7domain, method of§r %s",
+  "iterpg.spell.info": "%s §7domain, method of§r %s, %s §7aspect§r",
 
   "iterpg.spell.domain.arcane": "§9Arcane§r",
-  "iterpg.spell.domain.elemental": "§dElemental§r",
+  "iterpg.spell.domain.primal": "§dPrimal§r",
   "iterpg.spell.domain.occult": "§4Occult§r",
 
   "iterpg.spell.method.force": "§cForce§r",
-  "iterpg.spell.method.form": "§7Form§r",
+  "iterpg.spell.method.form": "§fForm§r",
   "iterpg.spell.method.body": "§6Body§r",
-  "iterpg.spell.method.sight": "§bSight§r",
+  "iterpg.spell.method.conveyance": "§9Conveyance§r",
+
+  "iterpg.spell.aspect.fire": "§cFire§r",
+  "iterpg.spell.aspect.frost": "§bFrost§r",
+  "iterpg.spell.aspect.lightning": "§eLightning§r",
+  "iterpg.spell.aspect.earth": "§8Earth§r",
+  "iterpg.spell.aspect.air": "§fAir§r",
+  "iterpg.spell.aspect.water": "§9Water§r",
+  "iterpg.spell.aspect.venom": "§aVenom§r",
+  "iterpg.spell.aspect.ether": "§dEther§r",
+  "iterpg.spell.aspect.life": "§2Life§r",
+  "iterpg.spell.aspect.decay": "§0Decay§r",
 
   "iterpg.spell.tier": "%s §7Tier§r",
   "iterpg.spell.tier.0": "Primitive",
@@ -199,8 +230,14 @@
   "iterpg.spell.tier.4": "Fabled",
   "iterpg.spell.tier.5": "Primeval",
 
-  "gui.iter.spellweaver_table.label": "Spellweaver's Table",
   "iterpg.spell.quality": "Quality",
+  "iterpg.spell.shift": "Hold [Shift] for details",
+
+  "item_group.iter.iter_magic": "Iter Magic",
+
+  "gui.iter.spellweaver_table.label": "Spellweaver's Table",
+  "gui.iter.gnawer.label": "Gnawer",
+  "gui.iter.void_maw.label": "Void Maw",
 
   "gui.iter.spellweaver_table.tooltip.intro_1": "Here you can copy spells and upgrade their quality",
   "gui.iter.spellweaver_table.tooltip.intro_2": "To begin, place a spell item in the first slot",
@@ -211,5 +248,12 @@
   "gui.iter.spellweaver_table.tooltip.copy": "Requires to copy:",
   "gui.iter.spellweaver_table.tooltip.upgrade": "Requires to upgrade:",
 
-  "gui.iter.spellweaver_table.tooltip.itemXofX": "%s: %s/%s"
+  "gui.iter.spellweaver_table.tooltip.itemXofX": "%s: %s/%s",
+
+  "gui.iter.void_maw.tooltip.intro": "Here you can reduce the repair/enchantment cost of items",
+
+  "gui.iter.void_maw.tooltip.explevel": "Experience levels",
+  "gui.iter.void_maw.tooltip.repaircost": "Repair cost",
+
+  "gui.iter.void_maw.tooltip.cost": "%s: %s -> %s"
 }

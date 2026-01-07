@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:generic",
+  "random_sequence": "iter:gameplay/spelldrop_expert_elemental",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "iter:spell_legacy_fireball",
+          "weight": 2,
+          "quality": 1
+        }
+      ]
+    }
+  ]
+}

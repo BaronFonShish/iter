@@ -11,31 +11,31 @@ import net.minecraft.world.item.Items;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpellweaverTableTooltip {
+public class GuiTooltips {
 
-    public static List<net.minecraft.network.chat.Component> FinalTooltip(Player player){
+    public static List<net.minecraft.network.chat.Component> SpellweaverFinalTooltip(Player player){
         List<net.minecraft.network.chat.Component> list = new ArrayList<>();
 
         if (SpellweaverTableFunction.getItemFromSlot(player, 0).isEmpty()){
-            list.addAll(Introduction(player));
+            list.addAll(SpellweaverIntroduction(player));
             return list;
         }
 
         if (SpellweaverTableFunction.getswitch(player)){
-            list.addAll(Copy(player));
+            list.addAll(SpellweaverCopy(player));
             return list;
-        } else { list.addAll(Upgrade(player));
+        } else { list.addAll(SpellweaverUpgrade(player));
             return list;}
     }
 
-    public static List<net.minecraft.network.chat.Component> Introduction(Player player){
+    public static List<net.minecraft.network.chat.Component> SpellweaverIntroduction(Player player){
         List<net.minecraft.network.chat.Component> list = new ArrayList<>();
         list.add(net.minecraft.network.chat.Component.translatable("gui.iter.spellweaver_table.tooltip.intro_1"));
         list.add(net.minecraft.network.chat.Component.translatable("gui.iter.spellweaver_table.tooltip.intro_2"));
         return list;
     }
 
-    public static List<net.minecraft.network.chat.Component> Copy(Player player){
+    public static List<net.minecraft.network.chat.Component> SpellweaverCopy(Player player){
         List<net.minecraft.network.chat.Component> list = new ArrayList<>();
         list.add(net.minecraft.network.chat.Component.translatable("gui.iter.spellweaver_table.tooltip.copy"));
         list.add(net.minecraft.network.chat.Component.literal(""));
@@ -54,7 +54,7 @@ public class SpellweaverTableTooltip {
         return list;
     }
 
-    public static List<net.minecraft.network.chat.Component> Upgrade(Player player){
+    public static List<net.minecraft.network.chat.Component> SpellweaverUpgrade(Player player){
         List<net.minecraft.network.chat.Component> list = new ArrayList<>();
         list.add(net.minecraft.network.chat.Component.translatable("gui.iter.spellweaver_table.tooltip.upgrade"));
         list.add(net.minecraft.network.chat.Component.literal(""));
@@ -70,5 +70,31 @@ public class SpellweaverTableTooltip {
             list.add(Component.translatable("gui.iter.spellweaver_table.tooltip.itemXofX", itemNeeded.getDefaultInstance().getDisplayName(), getitemNeeded, 1));
         }
         return list;
+    }
+
+    public static List<net.minecraft.network.chat.Component> VoidMaw(Player player){
+        List<net.minecraft.network.chat.Component> list = new ArrayList<>();
+        ItemStack item = SpellweaverTableFunction.getItemFromSlot(player, 0);
+
+        if (item.isEmpty()) {
+            list.add(net.minecraft.network.chat.Component.translatable("gui.iter.void_maw.tooltip.intro"));
+        } else {
+            list.add(net.minecraft.network.chat.Component.translatable("gui.iter.spellweaver_table.tooltip.itemXofX",
+                    net.minecraft.network.chat.Component.translatable("gui.iter.void_maw.tooltip.explevel"), "20",
+                    player.experienceLevel));
+            list.add(net.minecraft.network.chat.Component.translatable("gui.iter.void_maw.tooltip.repaircost",
+                    net.minecraft.network.chat.Component.translatable("gui.iter.void_maw.tooltip.explevel"), item.getBaseRepairCost(),
+                    (int) Math.max(0, (((item.getBaseRepairCost()+1)/2)+1))));
+        };
+        return list;
+    }
+
+    public static boolean VoidMawCondition(Player player){
+        ItemStack item = SpellweaverTableFunction.getItemFromSlot(player, 0);
+        if (item.isEmpty()) return false;
+        if (player.experienceLevel < 20) return false;
+        if (item.getBaseRepairCost() < 7) return false;
+
+        return true;
     }
 }

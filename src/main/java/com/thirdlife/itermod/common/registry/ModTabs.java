@@ -16,18 +16,25 @@ public class ModTabs {
             () -> CreativeModeTab.builder().title(Component.translatable("item_group.iter.iter_magic")).icon(() -> new ItemStack(ModItems.SPELL_ETHERBOLT.get())).displayItems((parameters, tabData) -> {
                         tabData.accept(ModBlocks.SPELLWEAVER_TABLE.get().asItem());
                         tabData.accept(ModItems.SPELL_BOOK.get());
+
                         tabData.accept(ModItems.BONE_STAFF.get());
                         tabData.accept(ModItems.AMETHYST_WAND.get());
                         tabData.accept(ModItems.ANCIENT_STAFF.get());
                         tabData.accept(ModItems.NOSTELON_STAFF.get());
                         tabData.accept(ModItems.DIAMOND_STAFF.get());
+
                         tabData.accept(ModItems.SPELL_ETHERBOLT.get());
                         tabData.accept(ModItems.SPELL_LESSER_HEAL.get());
                         tabData.accept(ModItems.SPELL_MEND.get());
                         tabData.accept(ModItems.SPELL_RECALL.get());
+                        tabData.accept(ModItems.SPELL_LEAP.get());
+
                         tabData.accept(ModItems.SPELL_IGNITE.get());
                         tabData.accept(ModItems.SPELL_SPLASHES.get());
                         tabData.accept(ModItems.SPELL_FROST_SPIKE.get());
+                        tabData.accept(ModItems.SPELL_BLAZE_BARRAGE.get());
+                        tabData.accept(ModItems.SPELL_LEGACY_FIREBALL.get());
+
                         tabData.accept(ModItems.SPELL_WITCH_LASH.get());
                     })
                     .build());

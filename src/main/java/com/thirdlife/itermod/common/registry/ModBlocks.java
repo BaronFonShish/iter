@@ -26,6 +26,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> SANGUARNET_ORE = registerBlock("sanguarnet_ore", SanguarnetOreBlock::new);
     public static final RegistryObject<Block> COMPONENT_DEPOSIT = registerBlock("component_deposit", ComponentDepositBlock::new);
     public static final RegistryObject<Block> DEEPSLATE_SANGUARNET_ORE = registerBlock("deepslate_sanguarnet_ore", DeepslateSanguarnetOreBlock::new);
+    public static final RegistryObject<Block> MAGMANUM_ORE = registerBlock("magmanum_ore", MagmanumOreBlock::new);
     public static final RegistryObject<Block> SPIDER_EGG = registerBlock("spider_egg", SpiderEggBlock::new);
     public static final RegistryObject<Block> ROTROOT = registerBlockItemless("rotroot",
             () -> new RotrootBlock(BlockBehaviour.Properties.copy(Blocks.BEETROOTS).sound(SoundType.CROP).noOcclusion().noCollission()));
@@ -38,6 +39,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> ANCIENT_SMALL_VASE = registerBlock("ancient_small_vase", AncientSmallVaseBlock::new);
 
     public static final RegistryObject<Block> CRUNCHER = registerBlock("cruncher", CruncherBlock::new);
+    public static final RegistryObject<Block> GNAWER = registerBlock("gnawer", GnawerBlock::new);
+    public static final RegistryObject<Block> VOID_MAW = registerBlock("void_maw", VoidMawBlock::new);
     public static final RegistryObject<Block> SPELLWEAVER_TABLE = registerBlock("spellweaver_table", SpellweaverTableBlock::new);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {

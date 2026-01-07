@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "epe",
+    "ece",
+    "aaa"
+  ],
+  "key": {
+    "e": {
+      "item": "minecraft:echo_shard"
+    },
+    "p": {
+      "item": "minecraft:ender_pearl"
+    },
+    "c": {
+      "item": "minecraft:sculk_catalyst"
+    },
+    "a": {
+      "item": "iter:abyssquartz_block"
+    }
+  },
+  "result": {
+    "item": "iter:void_maw",
+    "count": 1
+  }
+}

@@ -1,6 +1,7 @@
 package com.thirdlife.itermod.common.block;
 
 import com.thirdlife.itermod.common.event.ExpDropEvent;
+import com.thirdlife.itermod.common.event.SpiderEggHatchEvent;
 import com.thirdlife.itermod.common.event.VaseBrokenEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -90,6 +91,13 @@ public class VaseBlockTemplate extends DropExperienceBlock {
     @Override
     public void onProjectileHit(Level world, BlockState blockstate, BlockHitResult hit, Projectile entity) {
         world.destroyBlock(hit.getBlockPos(), true);
+    }
+
+    @Override
+    public boolean onDestroyedByPlayer(BlockState blockstate, Level world, BlockPos pos, Player entity, boolean willHarvest, FluidState fluid) {
+        boolean retval = super.onDestroyedByPlayer(blockstate, world, pos, entity, willHarvest, fluid);
+        VaseBrokenEvent.check(world, pos.getX(), pos.getY(), pos.getZ(), entity);
+        return retval;
     }
 
 }

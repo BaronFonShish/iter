@@ -8,9 +8,11 @@
     "iter:component_deposit",
     "iter:abyssquartz_block",
     "iter:abyssquartz_crystal",
+    "iter:magmanum_ore",
     "iter:ancient_vase",
     "iter:ancient_small_vase",
     "iter:ancient_big_vase",
-    "iter:cruncher"
+    "iter:cruncher",
+    "iter:gnawer"
   ]
 }

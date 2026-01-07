@@ -41,7 +41,7 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.BOWL), new ItemStack(ModItems.POTSHERD.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.STRING), new ItemStack(ModItems.SPIDER_SILK.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.ABYSSQUARTZ_SHARD.get()), new ItemStack(ModItems.ETHERDUST.get())),
-                new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.ETHERDUST.get()), new ItemStack(ModItems.GIST.get())),
+                new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.BOOK), new ItemStack(ModItems.GIST.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.GIST.get()), new ItemStack(ModItems.INK_BOTTLE.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(Items.FLINT), new ItemStack(ModItems.GOBSTEEL_SCRAP.get())),
                 new TabInsertion(CreativeModeTabs.INGREDIENTS, new ItemStack(ModItems.GOBSTEEL_SCRAP.get()), new ItemStack(ModItems.DWARVEN_COMPONENTS.get())),
@@ -52,6 +52,7 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.DEEPSLATE_NOSTELON_ORE.get()), new ItemStack(ModBlocks.SANGUARNET_ORE.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.SANGUARNET_ORE.get()), new ItemStack(ModBlocks.DEEPSLATE_SANGUARNET_ORE.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Blocks.DEEPSLATE_DIAMOND_ORE), new ItemStack(ModBlocks.COMPONENT_DEPOSIT.get())),
+                new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Blocks.NETHER_QUARTZ_ORE), new ItemStack(ModBlocks.MAGMANUM_ORE.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(Blocks.AMETHYST_CLUSTER), new ItemStack(ModBlocks.ABYSSQUARTZ_BLOCK.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.ABYSSQUARTZ_BLOCK.get()), new ItemStack(ModBlocks.ABYSSQUARTZ_CRYSTAL.get())),
                 new TabInsertion(CreativeModeTabs.NATURAL_BLOCKS, new ItemStack(ModBlocks.ABYSSQUARTZ_CRYSTAL.get()), new ItemStack(ModBlocks.SPIDER_EGG.get())),
@@ -62,6 +63,8 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.FUNCTIONAL_BLOCKS, new ItemStack(Blocks.SUSPICIOUS_GRAVEL), new ItemStack(ModBlocks.ANCIENT_SMALL_VASE.get())),
                 new TabInsertion(CreativeModeTabs.FUNCTIONAL_BLOCKS, new ItemStack(ModBlocks.ANCIENT_SMALL_VASE.get()), new ItemStack(ModBlocks.ANCIENT_VASE.get())),
                 new TabInsertion(CreativeModeTabs.FUNCTIONAL_BLOCKS, new ItemStack(ModBlocks.ANCIENT_VASE.get()), new ItemStack(ModBlocks.ANCIENT_BIG_VASE.get())),
+                new TabInsertion(CreativeModeTabs.FUNCTIONAL_BLOCKS, new ItemStack(Blocks.DAMAGED_ANVIL), new ItemStack(ModBlocks.GNAWER.get())),
+                new TabInsertion(CreativeModeTabs.FUNCTIONAL_BLOCKS, new ItemStack(ModBlocks.GNAWER.get()), new ItemStack(ModBlocks.VOID_MAW.get())),
 
                 new TabInsertion(CreativeModeTabs.FOOD_AND_DRINKS, new ItemStack(Items.BEETROOT), new ItemStack(ModItems.ROTROOT.get())),
 
@@ -99,6 +102,7 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.RECURVE_BOW.get()), new ItemStack(ModItems.STINGER.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(Items.NETHERITE_SWORD), new ItemStack(ModItems.GOBSTEEL_SWORD.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(Items.NETHERITE_AXE), new ItemStack(ModItems.GOBSTEEL_AXE.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.GOBSTEEL_SWORD.get()), new ItemStack(ModItems.MAGMANUM_SWORD.get())),
 
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(Items.TURTLE_HELMET), new ItemStack(ModItems.APPRENTICE_HOOD.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.APPRENTICE_HOOD.get()), new ItemStack(ModItems.APPRENTICE_ROBES.get())),
@@ -135,6 +139,7 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(ModItems.GOBSTEEL_SHOVEL.get()), new ItemStack(ModItems.GOBSTEEL_PICKAXE.get())),
                 new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(ModItems.GOBSTEEL_PICKAXE.get()), new ItemStack(ModItems.GOBSTEEL_AXE.get())),
                 new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(ModItems.GOBSTEEL_AXE.get()), new ItemStack(ModItems.GOBSTEEL_HOE.get())),
+                new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(ModItems.GOBSTEEL_HOE.get()), new ItemStack(ModItems.MAGMANUM_PICKAXE.get())),
 
                 new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(Items.ZOMBIFIED_PIGLIN_SPAWN_EGG), new ItemStack(ModItems.GIANT_SPIDER_SPAWN_EGG.get())),
                 new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.GIANT_SPIDER_SPAWN_EGG.get()), new ItemStack(ModItems.SPIDERLING_SPAWN_EGG.get())),

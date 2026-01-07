@@ -17,7 +17,7 @@ public class StingerItem extends BowItem {
 
     private final double m_Power = 0.75; // Default: 1
     private final double f_Power = 0; // Default: 0
-    public static final int MAX_DRAW_DURATION = 12; // Default: 20
+    public static final int MAX_DRAW_DURATION = 10; // Default: 20
     private final float m_Velocity = 2F; // Default: 3
 
     public StingerItem() {
