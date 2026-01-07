@@ -44,11 +44,4 @@ public class Pictograms {
         return Component.literal(String.valueOf(icon))
                 .withStyle(Style.EMPTY.withFont(PICTOGRAM_FONT));
     }
-
-    @OnlyIn(Dist.CLIENT)
-    public static class PictogramFontLoader implements ResourceManagerReloadListener {
-        @Override
-        public void onResourceManagerReload(ResourceManager resourceManager) {
-        }
-    }
 }

@@ -130,11 +130,6 @@ public class iterMod {
     public static class ClientModEvents {
 
         @SubscribeEvent
-        public static void onRegisterReloadListener(RegisterClientReloadListenersEvent event) {
-            event.registerReloadListener(new Pictograms.PictogramFontLoader());
-        }
-
-        @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
             ModModelLayers.registerLayerDefinitions(event);
         }

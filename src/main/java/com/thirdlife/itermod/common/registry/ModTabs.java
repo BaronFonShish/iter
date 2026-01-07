@@ -22,6 +22,7 @@ public class ModTabs {
                         tabData.accept(ModItems.ANCIENT_STAFF.get());
                         tabData.accept(ModItems.NOSTELON_STAFF.get());
                         tabData.accept(ModItems.DIAMOND_STAFF.get());
+                        tabData.accept(ModItems.MAGMANUM_STAFF.get());
 
                         tabData.accept(ModItems.SPELL_ETHERBOLT.get());
                         tabData.accept(ModItems.SPELL_LESSER_HEAL.get());
