@@ -155,7 +155,11 @@ public abstract class SpellItem extends Item{
 
             LocalPlayer clientPlayer = getClientPlayer();
             if (clientPlayer != null) {
-                boolean shiftheld = (Minecraft.getInstance().options.keyShift.isDown());
+                Minecraft mc = Minecraft.getInstance();
+                boolean shiftheld = false;
+                if (mc.screen != null) {
+                    shiftheld = mc.screen.hasShiftDown();
+                } else shiftheld = mc.options.keyShift.isDown();
 
                 String baseKey = BuiltInRegistries.ITEM.getKey(this).getNamespace() + "." + BuiltInRegistries.ITEM.getKey(this).getPath();
 
@@ -203,7 +207,8 @@ public abstract class SpellItem extends Item{
                     list.add(Component.translatable("iterpg.spell.mana_cost", manaCostString));
 
                     list.add(Component.translatable("iterpg.spell.cooldown", cooldownString));
-                }
+                } else {
+                    list.add(Component.translatable("iterpg.spell.shift"));}
 
                 list.add(Component.literal(""));
                 list.add(Component.translatable(baseKey + ".desc"));

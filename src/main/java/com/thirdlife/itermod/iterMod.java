@@ -8,15 +8,18 @@ import com.thirdlife.itermod.common.entity.GiantSpiderEntity;
 import com.thirdlife.itermod.common.entity.GoblinEntity;
 import com.thirdlife.itermod.common.entity.GoblinWarriorEntity;
 import com.thirdlife.itermod.common.entity.SpiderlingEntity;
+import com.thirdlife.itermod.common.misc.Pictograms;
 import com.thirdlife.itermod.common.registry.*;
 import com.thirdlife.itermod.common.variables.IterPlayerDataPacket;
 import com.thirdlife.itermod.common.variables.PlayerFlightPacket;
 import com.thirdlife.itermod.world.gui.GnawerGuiButtonPacket;
 import com.thirdlife.itermod.world.gui.VoidMawPacket;
 import com.thirdlife.itermod.world.gui.SpellweaverTablePacket;
+import net.minecraft.client.gui.font.FontManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -125,6 +128,11 @@ public class iterMod {
 
     @Mod.EventBusSubscriber(modid = iterMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
+
+        @SubscribeEvent
+        public static void onRegisterReloadListener(RegisterClientReloadListenersEvent event) {
+            event.registerReloadListener(new Pictograms.PictogramFontLoader());
+        }
 
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {

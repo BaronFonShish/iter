@@ -5,8 +5,17 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
+import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
+import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import org.jetbrains.annotations.NotNull;
 
 import static com.thirdlife.itermod.iterMod.MOD_ID;
 
@@ -28,11 +37,18 @@ public class Pictograms {
     public static final char IA_LIFE = '\uE00e';
     public static final char IA_DECAY = '\uE00f';
 
-    public static final ResourceLocation FONT_LOCATION = new ResourceLocation(MOD_ID, "fonts/iter_pictograms.json");
+    public static final ResourceLocation PICTOGRAM_FONT = iterMod.PICTOGRAM_FONT;
 
 
     public static MutableComponent getIcon(char icon) {
         return Component.literal(String.valueOf(icon))
-                .withStyle(Style.EMPTY.withFont(FONT_LOCATION));
+                .withStyle(Style.EMPTY.withFont(PICTOGRAM_FONT));
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static class PictogramFontLoader implements ResourceManagerReloadListener {
+        @Override
+        public void onResourceManagerReload(ResourceManager resourceManager) {
+        }
     }
 }
