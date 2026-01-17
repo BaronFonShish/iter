@@ -31,9 +31,9 @@ public class GoldenRingAmethyst extends Item implements ICurioItem {
     }
 
     public void ringSend(SlotContext slotContext) {
-        RingEffectManager.TieredRingStuff("iter_ring_casting_speed", "Ring Casting Speed", ModAttributes.CASTING_SPEED.get(),
+        RingEffectManager.TieredRingStuff("iter_ring_spellpower", "Ring Spellpower", ModAttributes.SPELL_POWER.get(),
                 ModItems.IRON_RING_AMETHYST.get(), ModItems.GOLDEN_RING_AMETHYST.get(), ModItems.NETHERITE_RING_AMETHYST.get(),
-                0.05f, 0.075f, 0.1f, slotContext.entity(), 1);
+                0.05f, 0.075f, 0.1f, slotContext.entity(), 2);
     }
 
     @Override

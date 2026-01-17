@@ -1,0 +1,34 @@
+{
+  "etherbolt_impact": {
+    "subtitles": "sounds.iter.etherbolt_impact",
+    "sounds": [
+      "iter:etherbolt_impact_1",
+      "iter:etherbolt_impact_2"
+    ]
+  },
+  "cast_arcane": {
+    "subtitles": "sounds.iter.cast_arcane",
+    "sounds": [
+      "iter:cast_arcane_1",
+      "iter:cast_arcane_2"
+    ]
+  },
+  "goblin_ambient": {
+    "subtitles": "sounds.iter.goblin_ambient",
+    "sounds": [
+      "iter:goblin_ambient_1",
+      "iter:goblin_ambient_2",
+      "iter:goblin_ambient_3",
+      "iter:goblin_ambient_4"
+    ]
+  },
+  "goblin_hurt": {
+    "subtitles": "sounds.iter.goblin_hurt",
+    "sounds": [
+      "iter:goblin_hurt_1",
+      "iter:goblin_hurt_2",
+      "iter:goblin_hurt_3",
+      "iter:goblin_hurt_4"
+    ]
+  }
+}

@@ -1,6 +1,7 @@
 package com.thirdlife.itermod.common.entity.misc;
 
 import com.thirdlife.itermod.common.registry.ModParticleTypes;
+import com.thirdlife.itermod.common.registry.ModSounds;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
@@ -70,12 +71,12 @@ public class EtherboltEntity extends AbstractMagicProjectile {
             serverLevel.sendParticles(ModParticleTypes.ETHERBOLT_POOF.get(), this.getX(), this.getY(), this.getZ(), 1,
                     0, 0, 0, 0);
             serverLevel.sendParticles(ModParticleTypes.ETHERBOLT_IMPACT.get(), this.getX(), this.getY(), this.getZ(), k,
-                    0, 0, 0, Mth.nextFloat(random, 0.1f, 0.25f));
+                    0, 0, 0, Mth.nextFloat(random, 0.025f, 0.15f));
         }
     }
 
     @Override
     protected void playImpactSound() {
-        this.playSound(SoundEvents.AMETHYST_CLUSTER_BREAK, 0.75F, 1.25F);
+        this.playSound(ModSounds.ETHERBOLT_IMPACT.get(), 0.75F, 1F);
     }
 }

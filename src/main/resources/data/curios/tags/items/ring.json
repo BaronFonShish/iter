@@ -22,6 +22,9 @@
     "iter:netherite_ring_amethyst",
     "iter:iron_ring_sanguarnet",
     "iter:golden_ring_sanguarnet",
-    "iter:netherite_ring_sanguarnet"
+    "iter:netherite_ring_sanguarnet",
+    "iter:iron_ring_magmanum",
+    "iter:golden_ring_magmanum",
+    "iter:netherite_ring_magmanum"
   ]
 }

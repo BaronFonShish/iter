@@ -1,15 +1,14 @@
 package com.thirdlife.itermod.common.registry;
 
-import com.thirdlife.itermod.common.entity.GiantSpiderEntity;
-import com.thirdlife.itermod.common.entity.GoblinEntity;
-import com.thirdlife.itermod.common.entity.GoblinWarriorEntity;
+import com.thirdlife.itermod.common.entity.*;
 import com.thirdlife.itermod.common.entity.misc.EtherboltEntity;
 import com.thirdlife.itermod.common.entity.misc.FrostSpikeEntity;
 import com.thirdlife.itermod.common.entity.misc.HellblazeArrowEntity;
+import com.thirdlife.itermod.common.entity.misc.StraightBeam;
 import com.thirdlife.itermod.iterMod;
-import com.thirdlife.itermod.common.entity.SpiderlingEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.MobType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -34,13 +33,44 @@ public class ModEntities {
                             .sized(1.5f, 1.4f)
                             .build("giant_spider"));
 
+    public static final RegistryObject<EntityType<GhoulEntity>> GHOUL =
+            ENTITY_TYPES.register("ghoul",
+                    () -> EntityType.Builder.<GhoulEntity>of(GhoulEntity::new, MobCategory.MONSTER)
+                            .setTrackingRange(64)
+                            .sized(0.5f, 2f)
+                            .build("ghoul"));
+
+    public static final RegistryObject<EntityType<GoblinWarriorEntity>> GOBLIN_WARRIOR =
+            ENTITY_TYPES.register("goblin_warrior",
+                    () -> EntityType.Builder.<GoblinWarriorEntity>of(GoblinWarriorEntity::new, MobCategory.MONSTER)
+                            .setTrackingRange(64)
+                            .sized(0.5f, 1f)
+                            .build("goblin_warrior"));
+
+    public static final RegistryObject<EntityType<GoblinEntity>> GOBLIN =
+            ENTITY_TYPES.register("goblin",
+                    () -> EntityType.Builder.<GoblinEntity>of(GoblinEntity::new, MobCategory.MONSTER)
+                            .setTrackingRange(64)
+                            .sized(0.5f, 0.9f)
+                            .build("goblin"));
+
+/// Снаряды
+
     public static final RegistryObject<EntityType<EtherboltEntity>> ETHERBOLT =
             ENTITY_TYPES.register("etherbolt",
                     () -> EntityType.Builder.<EtherboltEntity>of(EtherboltEntity::new, MobCategory.MISC)
-                    .setShouldReceiveVelocityUpdates(true)
-                    .setTrackingRange(64).setUpdateInterval(1)
-                    .sized(0.25f, 0.25f)
+                            .setShouldReceiveVelocityUpdates(true)
+                            .setTrackingRange(64).setUpdateInterval(1)
+                            .sized(0.25f, 0.25f)
                             .build("etherbolt"));
+
+    public static final RegistryObject<EntityType<StraightBeam>> STRAIGHT_BEAM =
+            ENTITY_TYPES.register("straight_beam",
+                    () -> EntityType.Builder.<StraightBeam>of(StraightBeam::new, MobCategory.MISC)
+                            .sized(1F, 1F)
+                            .clientTrackingRange(256)
+                            .updateInterval(1)
+                            .build("straight_beam"));
 
     public static final RegistryObject<EntityType<FrostSpikeEntity>> FROST_SPIKE =
             ENTITY_TYPES.register("frost_spike",
@@ -57,20 +87,6 @@ public class ModEntities {
                             .setTrackingRange(64).setUpdateInterval(1)
                             .sized(0.25f, 0.25f)
                             .build("hellblaze_arrow"));
-
-    public static final RegistryObject<EntityType<GoblinWarriorEntity>> GOBLIN_WARRIOR =
-            ENTITY_TYPES.register("goblin_warrior",
-                    () -> EntityType.Builder.<GoblinWarriorEntity>of(GoblinWarriorEntity::new, MobCategory.MONSTER)
-                            .setTrackingRange(64)
-                            .sized(0.5f, 1f)
-                            .build("goblin_warrior"));
-
-    public static final RegistryObject<EntityType<GoblinEntity>> GOBLIN =
-            ENTITY_TYPES.register("goblin",
-                    () -> EntityType.Builder.<GoblinEntity>of(GoblinEntity::new, MobCategory.MONSTER)
-                            .setTrackingRange(64)
-                            .sized(0.5f, 0.9f)
-                            .build("goblin"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

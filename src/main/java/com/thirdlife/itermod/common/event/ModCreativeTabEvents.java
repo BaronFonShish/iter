@@ -134,6 +134,9 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.NETHERITE_RING_AMETHYST.get()), new ItemStack(ModItems.IRON_RING_SANGUARNET.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.IRON_RING_SANGUARNET.get()), new ItemStack(ModItems.GOLDEN_RING_SANGUARNET.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.GOLDEN_RING_SANGUARNET.get()), new ItemStack(ModItems.NETHERITE_RING_SANGUARNET.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.NETHERITE_RING_SANGUARNET.get()), new ItemStack(ModItems.IRON_RING_MAGMANUM.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.IRON_RING_MAGMANUM.get()), new ItemStack(ModItems.GOLDEN_RING_MAGMANUM.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.GOLDEN_RING_MAGMANUM.get()), new ItemStack(ModItems.NETHERITE_RING_MAGMANUM.get())),
 
                 new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(Items.NETHERITE_HOE), new ItemStack(ModItems.GOBSTEEL_SHOVEL.get())),
                 new TabInsertion(CreativeModeTabs.TOOLS_AND_UTILITIES, new ItemStack(ModItems.GOBSTEEL_SHOVEL.get()), new ItemStack(ModItems.GOBSTEEL_PICKAXE.get())),

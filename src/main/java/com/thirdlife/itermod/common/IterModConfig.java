@@ -22,6 +22,7 @@ public class IterModConfig {
 //        public final ForgeConfigSpec.IntValue;
         public final ForgeConfigSpec.BooleanValue fociDurability;
         public final ForgeConfigSpec.BooleanValue giantSpiders;
+        public final ForgeConfigSpec.BooleanValue ghouls;
         public final ForgeConfigSpec.BooleanValue abyssQuartz;
         public final ForgeConfigSpec.BooleanValue spiderEggs;
         public final ForgeConfigSpec.BooleanValue ancientVases;
@@ -69,6 +70,9 @@ public class IterModConfig {
 
             giantSpiders = builder.comment("Enable Giant Spiders spawning")
                     .define("giantSpiders", true);
+
+            ghouls = builder.comment("Enable Ghouls spawning")
+                    .define("ghouls", true);
 
             builder.pop();
 /// final

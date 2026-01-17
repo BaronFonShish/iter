@@ -148,6 +148,9 @@ public class ModItems {
     public static final RegistryObject<Item> IRON_RING_SANGUARNET = ITEMS.register("iron_ring_sanguarnet", IronRingSanguarnet::new);
     public static final RegistryObject<Item> GOLDEN_RING_SANGUARNET = ITEMS.register("golden_ring_sanguarnet", GoldenRingSanguarnet::new);
     public static final RegistryObject<Item> NETHERITE_RING_SANGUARNET = ITEMS.register("netherite_ring_sanguarnet", NetheriteRingSanguarnet::new);
+    public static final RegistryObject<Item> IRON_RING_MAGMANUM = ITEMS.register("iron_ring_magmanum", IronRingMagmanum::new);
+    public static final RegistryObject<Item> GOLDEN_RING_MAGMANUM = ITEMS.register("golden_ring_magmanum", GoldenRingMagmanum::new);
+    public static final RegistryObject<Item> NETHERITE_RING_MAGMANUM = ITEMS.register("netherite_ring_magmanum", NetheriteRingMagmanum::new);
 
     public static final RegistryObject<Item> APPRENTICE_HOOD = ITEMS.register("apprentice_hood", ApprenticeArmor.Helmet::new);
     public static final RegistryObject<Item> APPRENTICE_ROBES = ITEMS.register("apprentice_robes", ApprenticeArmor.Chestplate::new);
@@ -179,6 +182,8 @@ public class ModItems {
     public static final RegistryObject<Item> SPELL_SPLASHES = ITEMS.register("spell_splashes", SpellSplashes::new);
     public static final RegistryObject<Item> SPELL_BLAZE_BARRAGE = ITEMS.register("spell_blaze_barrage", SpellBlazeBarrage::new);
     public static final RegistryObject<Item> SPELL_LEGACY_FIREBALL = ITEMS.register("spell_legacy_fireball", SpellLegacyFireball::new);
+
+    public static final RegistryObject<Item> SPELL_BEAM_TEST = ITEMS.register("spell_beam_test", SpellBeamTest::new);
 
     public static final RegistryObject<Item> SPELL_WITCH_LASH = ITEMS.register("spell_witch_lash", SpellWitchLash::new);
 

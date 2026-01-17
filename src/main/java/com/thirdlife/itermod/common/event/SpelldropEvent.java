@@ -1,5 +1,6 @@
 package com.thirdlife.itermod.common.event;
 
+import com.thirdlife.itermod.common.item.magic.defaults.SpellItem;
 import com.thirdlife.itermod.common.variables.IterPlayerDataUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -52,6 +53,11 @@ public class SpelldropEvent {
         for (ItemStack itemstackiterator : level.getServer().getLootData().getLootTable(lootpath)
                 .getRandomItems(new LootParams.Builder((ServerLevel) level).withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(lootpos)).withParameter(LootContextParams.BLOCK_STATE, level.getBlockState(lootpos))
                         .withOptionalParameter(LootContextParams.BLOCK_ENTITY, level.getBlockEntity(lootpos)).create(LootContextParamSets.EMPTY))) {
+            if (itemstackiterator.getItem() instanceof SpellItem spell){
+                if (Math.random()>0.75f){
+                    spell.setQuality(itemstackiterator, 1);
+                } else spell.setQuality(itemstackiterator, 0);
+            }
             ItemEntity entityToSpawn = new ItemEntity(level, lootpos.getX(), lootpos.getY(), lootpos.getZ(), itemstackiterator);
             entityToSpawn.setPickUpDelay(10);
             level.addFreshEntity(entityToSpawn);

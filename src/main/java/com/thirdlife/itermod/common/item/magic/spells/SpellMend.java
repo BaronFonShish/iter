@@ -1,6 +1,7 @@
 package com.thirdlife.itermod.common.item.magic.spells;
 
 import com.thirdlife.itermod.common.item.magic.defaults.SpellItem;
+import com.thirdlife.itermod.common.registry.ModSounds;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -26,6 +27,10 @@ public class SpellMend extends SpellItem {
         if (level.isClientSide) return;
         int repairPoints = (int) (25 * spellpower);
         if (repairPoints == 0) return;
+
+
+        level.playSound(null, player.getX(), player.getY(), player.getZ(),
+                ModSounds.CAST_ARCANE.get(), SoundSource.PLAYERS, 0.8F, 1.0F);
 
         level.playSound(null, player.blockPosition(),
                 SoundEvents.ENCHANTMENT_TABLE_USE,

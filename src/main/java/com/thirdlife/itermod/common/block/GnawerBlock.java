@@ -42,7 +42,7 @@ public class GnawerBlock extends Block implements EntityBlock {
     @Override
     public void appendHoverText(ItemStack itemstack, BlockGetter level, List<Component> list, TooltipFlag flag) {
         super.appendHoverText(itemstack, level, list, flag);
-        list.add(Component.translatable("iterpg.desc.void_maw"));
+        list.add(Component.translatable("iterpg.desc.gnawer"));
     }
 
     @Override

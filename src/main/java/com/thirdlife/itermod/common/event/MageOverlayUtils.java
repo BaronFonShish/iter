@@ -2,6 +2,8 @@ package com.thirdlife.itermod.common.event;
 
 import com.thirdlife.itermod.common.item.magic.defaults.SpellItem;
 import com.thirdlife.itermod.common.variables.IterPlayerDataUtils;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -21,7 +23,7 @@ public class MageOverlayUtils {
 
     public static String Grrr(Player player){
         ItemStack spellitem = SpellBookUtils.getSpell(player);
-        if (spellitem.getItem() instanceof SpellItem spell){
+        if (spellitem != null && spellitem.getItem() instanceof SpellItem spell){
             String spellname = spell.getSpellDisplayName();
             if (player.getCooldowns().isOnCooldown(spell)){
                 spellname = spellname + " [" + String.format("%.1f", (player.getCooldowns().getCooldownPercent(spell, 0f))*spell.getCooldown(player, spellitem)/20) + "]";

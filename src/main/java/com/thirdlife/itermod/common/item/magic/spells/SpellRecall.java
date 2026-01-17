@@ -1,6 +1,7 @@
 package com.thirdlife.itermod.common.item.magic.spells;
 
 import com.thirdlife.itermod.common.item.magic.defaults.SpellItem;
+import com.thirdlife.itermod.common.registry.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
@@ -32,6 +33,10 @@ public class SpellRecall extends SpellItem {
     public void castSpell(Level level, Player player, ItemStack wand, ItemStack spellStack, float spellpower) {
 
         if (level.isClientSide) return;
+
+        level.playSound(null, player.getX(), player.getY(), player.getZ(),
+                ModSounds.CAST_ARCANE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+
         if (level instanceof ServerLevel serverLevel) {
             serverLevel.sendParticles(ParticleTypes.PORTAL,
                     player.getX(),

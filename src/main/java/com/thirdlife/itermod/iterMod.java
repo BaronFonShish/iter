@@ -4,22 +4,17 @@ import com.mojang.logging.LogUtils;
 import com.thirdlife.itermod.client.model.ModModelLayers;
 import com.thirdlife.itermod.client.renderer.*;
 import com.thirdlife.itermod.common.IterModConfig;
-import com.thirdlife.itermod.common.entity.GiantSpiderEntity;
-import com.thirdlife.itermod.common.entity.GoblinEntity;
-import com.thirdlife.itermod.common.entity.GoblinWarriorEntity;
-import com.thirdlife.itermod.common.entity.SpiderlingEntity;
-import com.thirdlife.itermod.common.misc.Pictograms;
+import com.thirdlife.itermod.common.entity.*;
+import com.thirdlife.itermod.common.entity.misc.StraightBeam;
 import com.thirdlife.itermod.common.registry.*;
 import com.thirdlife.itermod.common.variables.IterPlayerDataPacket;
 import com.thirdlife.itermod.common.variables.PlayerFlightPacket;
 import com.thirdlife.itermod.world.gui.GnawerGuiButtonPacket;
 import com.thirdlife.itermod.world.gui.VoidMawPacket;
 import com.thirdlife.itermod.world.gui.SpellweaverTablePacket;
-import net.minecraft.client.gui.font.FontManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -40,7 +35,7 @@ public class iterMod {
 
     public static final String MOD_ID = "iter";
 
-    public static final ResourceLocation PICTOGRAM_FONT = new ResourceLocation(MOD_ID, "fonts/iter_pictograms.json");
+    public static final ResourceLocation PICTOGRAM_FONT = new ResourceLocation(MOD_ID, "font/iter_pictograms.json");
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
@@ -66,6 +61,7 @@ public class iterMod {
         ModBlockEntities.REGISTRY.register(modEventBus);
         ModEnchantments.ENCHANTMENTS.register(modEventBus);
         ModEntities.register(modEventBus);
+        ModSounds.register(modEventBus);
         ModTabs.REGISTRY.register(modEventBus);
         ModFeatures.REGISTRY.register(modEventBus);
         ModAttributes.ATTRIBUTES.register(modEventBus);
@@ -116,6 +112,7 @@ public class iterMod {
         public static void onAttributeCreate(EntityAttributeCreationEvent event) {
             event.put(ModEntities.SPIDERLING.get(), SpiderlingEntity.createAttributes().build());
             event.put(ModEntities.GIANT_SPIDER.get(), GiantSpiderEntity.createAttributes().build());
+            event.put(ModEntities.GHOUL.get(), GhoulEntity.createAttributes().build());
             event.put(ModEntities.GOBLIN_WARRIOR.get(), GoblinWarriorEntity.createAttributes().build());
             event.put(ModEntities.GOBLIN.get(), GoblinEntity.createAttributes().build());
         }
@@ -139,11 +136,14 @@ public class iterMod {
 
             event.registerEntityRenderer(ModEntities.SPIDERLING.get(), SpiderlingRenderer::new);
             event.registerEntityRenderer(ModEntities.GIANT_SPIDER.get(), GiantSpiderRenderer::new);
+            event.registerEntityRenderer(ModEntities.GOBLIN_WARRIOR.get(), GoblinWarriorRenderer::new);
+            event.registerEntityRenderer(ModEntities.GOBLIN.get(), GoblinRenderer::new);
+            event.registerEntityRenderer(ModEntities.GHOUL.get(),GhoulRenderer::new);
+
             event.registerEntityRenderer(ModEntities.ETHERBOLT.get(), EtherboltRenderer::new);
             event.registerEntityRenderer(ModEntities.FROST_SPIKE.get(), FrostSpikeRenderer::new);
             event.registerEntityRenderer(ModEntities.HELLBLAZE_ARROW.get(), HellblazeArrowRenderer::new);
-            event.registerEntityRenderer(ModEntities.GOBLIN_WARRIOR.get(), GoblinWarriorRenderer::new);
-            event.registerEntityRenderer(ModEntities.GOBLIN.get(), GoblinRenderer::new);
+            event.registerEntityRenderer(ModEntities.STRAIGHT_BEAM.get(), StraightBeamRenderer::new);
         }
 
         @SubscribeEvent

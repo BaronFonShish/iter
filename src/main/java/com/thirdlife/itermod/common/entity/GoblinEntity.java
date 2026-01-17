@@ -2,11 +2,13 @@ package com.thirdlife.itermod.common.entity;
 
 import com.thirdlife.itermod.common.registry.ModEntities;
 import com.thirdlife.itermod.common.registry.ModItems;
+import com.thirdlife.itermod.common.registry.ModSounds;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -84,15 +86,22 @@ public class GoblinEntity extends Monster {
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Villager .class, true, false));
     }
 
+
     @Override
-    public SoundEvent getHurtSound(DamageSource ds) {
-        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.hurt"));
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.GOBLIN_AMBIENT.get();
     }
 
     @Override
-    public SoundEvent getDeathSound() {
-        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.death"));
+    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+        return ModSounds.GOBLIN_HURT.get();
     }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.GOBLIN_HURT.get();
+    }
+
 
     @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions dimensions) {

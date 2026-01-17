@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "iter:magmanum"
+    },
+    {
+      "item": "iter:netherite_ring"
+    }
+  ],
+  "result": {
+    "item": "iter:netherite_ring_magmanum",
+    "count": 1
+  }
+}

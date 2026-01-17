@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "iter:magmanum"
+    },
+    {
+      "item": "iter:golden_ring"
+    }
+  ],
+  "result": {
+    "item": "iter:golden_ring_magmanum",
+    "count": 1
+  }
+}

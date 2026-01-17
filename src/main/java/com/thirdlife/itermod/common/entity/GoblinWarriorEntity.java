@@ -2,6 +2,7 @@ package com.thirdlife.itermod.common.entity;
 
 import com.thirdlife.itermod.common.registry.ModEntities;
 import com.thirdlife.itermod.common.registry.ModItems;
+import com.thirdlife.itermod.common.registry.ModSounds;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -84,14 +85,20 @@ public class GoblinWarriorEntity extends Monster {
     }
 
     @Override
-    public SoundEvent getHurtSound(DamageSource ds) {
-        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.hurt"));
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.GOBLIN_AMBIENT.get();
     }
 
     @Override
-    public SoundEvent getDeathSound() {
-        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.death"));
+    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+        return ModSounds.GOBLIN_HURT.get();
     }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.GOBLIN_HURT.get();
+    }
+
 
     @Override
     protected void populateDefaultEquipmentSlots(RandomSource random, DifficultyInstance difficulty) {

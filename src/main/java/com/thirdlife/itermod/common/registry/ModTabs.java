@@ -24,6 +24,8 @@ public class ModTabs {
                         tabData.accept(ModItems.DIAMOND_STAFF.get());
                         tabData.accept(ModItems.MAGMANUM_STAFF.get());
 
+                        ///Спеллы
+
                         tabData.accept(ModItems.SPELL_ETHERBOLT.get());
                         tabData.accept(ModItems.SPELL_LESSER_HEAL.get());
                         tabData.accept(ModItems.SPELL_MEND.get());
@@ -35,6 +37,8 @@ public class ModTabs {
                         tabData.accept(ModItems.SPELL_FROST_SPIKE.get());
                         tabData.accept(ModItems.SPELL_BLAZE_BARRAGE.get());
                         tabData.accept(ModItems.SPELL_LEGACY_FIREBALL.get());
+
+                        tabData.accept(ModItems.SPELL_BEAM_TEST.get());
 
                         tabData.accept(ModItems.SPELL_WITCH_LASH.get());
                     })

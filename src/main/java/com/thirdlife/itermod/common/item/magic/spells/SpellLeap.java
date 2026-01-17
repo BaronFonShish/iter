@@ -3,6 +3,7 @@ package com.thirdlife.itermod.common.item.magic.spells;
 import com.thirdlife.itermod.common.entity.misc.EtherboltEntity;
 import com.thirdlife.itermod.common.item.magic.defaults.SpellItem;
 import com.thirdlife.itermod.common.registry.ModEntities;
+import com.thirdlife.itermod.common.registry.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
@@ -39,6 +40,9 @@ public class SpellLeap extends SpellItem {
         player.setDeltaMovement(motion);
         player.fallDistance = 0;
         player.hurtMarked = true;
+
+        level.playSound(null, player.getX(), player.getY(), player.getZ(),
+                ModSounds.CAST_ARCANE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
 
         level.playSound(null, player.blockPosition(),
                 SoundEvents.PHANTOM_FLAP,

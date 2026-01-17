@@ -216,7 +216,7 @@ public abstract class SpellItem extends Item{
         }
     }
 
-    private MutableComponent returnSymbol(String type){
+    public MutableComponent returnSymbol(String type){
         char icon = switch (type){
             case "arcane" -> Pictograms.ID_ARCANE;
             case "primal" -> Pictograms.ID_PRIMAL;
@@ -228,7 +228,7 @@ public abstract class SpellItem extends Item{
             case "conveyance" -> Pictograms.IM_CONVEYANCE;
 
             case "fire" -> Pictograms.IA_FIRE;
-            case "ice" -> Pictograms.IA_ICE;
+            case "frost" -> Pictograms.IA_FROST;
             case "lightning" -> Pictograms.IA_LIGHTNING;
             case "water" -> Pictograms.IA_WATER;
             case "air" -> Pictograms.IA_AIR;
