@@ -48,6 +48,8 @@ public class HellblazeArrowEntity extends AbstractArrow implements ItemSupplier 
         super(type, entity, world);
     }
 
+
+
     @Override
     public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);

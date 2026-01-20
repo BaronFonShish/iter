@@ -28,7 +28,13 @@ public class HellblazeArrowItem extends ArrowItem {
     }
 
     public AbstractArrow createArrow(Level level, ItemStack itemstack, LivingEntity sourceEntity) {
-        return new HellblazeArrowEntity(ModEntities.HELLBLAZE_ARROW.get(), sourceEntity, level);
+        HellblazeArrowEntity arrow = new HellblazeArrowEntity(ModEntities.HELLBLAZE_ARROW.get(), sourceEntity, level);
+        return arrow;
+    }
+
+    public AbstractArrow createArrow(Level level, ItemStack stack, LivingEntity shooter, ItemStack projectile) {
+        HellblazeArrowEntity arrow = new HellblazeArrowEntity(ModEntities.HELLBLAZE_ARROW.get(), shooter, level);
+        return arrow;
     }
 }
 

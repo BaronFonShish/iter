@@ -59,7 +59,7 @@ public class GuiTooltips {
         list.add(net.minecraft.network.chat.Component.translatable("gui.iter.spellweaver_table.tooltip.upgrade"));
         list.add(net.minecraft.network.chat.Component.literal(""));
         ItemStack SpellStack = SpellweaverTableFunction.getItemFromSlot(player, 0);
-        if (SpellStack.getItem() instanceof SpellItem spell){
+        if (SpellStack.getItem() instanceof SpellItem spell && spell.getQuality(SpellStack) < 10){
             int spongebob = spell.getTier() + spell.getQuality(SpellStack);
             int gistNeeded = Math.max(1, spell.getTier() + spell.getQuality(SpellStack)*2);
             int getGist = SpellweaverTableFunction.skimSlots(player, ModItems.GIST.get().getDefaultInstance());

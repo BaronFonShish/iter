@@ -1,6 +1,6 @@
 {
   "type": "minecraft:generic",
-  "random_sequence": "iter:gameplay/spelldrop_adept_elemental",
+  "random_sequence": "iter:gameplay/spelldrop_adept_primal",
   "pools": [
     {
       "rolls": 1,
@@ -13,7 +13,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "iter:spell_frost_spike",
+          "name": "iter:spell_discharge",
           "weight": 10,
           "quality": 1
         },

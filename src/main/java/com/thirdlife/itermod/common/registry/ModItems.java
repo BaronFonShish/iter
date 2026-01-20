@@ -55,7 +55,7 @@ public class ModItems {
                     (ModEntities.SPIDERLING, -2372425, -13029294, new Item.Properties()));
     public static final RegistryObject<Item> GIANT_SPIDER_SPAWN_EGG =
             ITEMS.register("giant_spider_spawn_egg", () ->new ForgeSpawnEggItem
-                    (ModEntities.GIANT_SPIDER, 0x526133, 0x4B3A43, new Item.Properties()));
+                    (ModEntities.GIANT_SPIDER, 0x23170E, 0x3C0202, new Item.Properties()));
     public static final RegistryObject<Item> GOBLIN_SPAWN_EGG =
             ITEMS.register("goblin_spawn_egg", () ->new ForgeSpawnEggItem
                     (ModEntities.GOBLIN, 0x526133, 0x634F52, new Item.Properties()));
@@ -174,16 +174,17 @@ public class ModItems {
     public static final RegistryObject<Item> SPELL_ETHERBOLT = ITEMS.register("spell_etherbolt", SpellEtherbolt::new);
     public static final RegistryObject<Item> SPELL_LESSER_HEAL = ITEMS.register("spell_lesser_heal", SpellLesserHeal::new);
     public static final RegistryObject<Item> SPELL_MEND = ITEMS.register("spell_mend", SpellMend::new);
-    public static final RegistryObject<Item> SPELL_RECALL = ITEMS.register("spell_recall", SpellRecall::new);
     public static final RegistryObject<Item> SPELL_LEAP = ITEMS.register("spell_leap", SpellLeap::new);
+    public static final RegistryObject<Item> SPELL_RECALL = ITEMS.register("spell_recall", SpellRecall::new);
+    public static final RegistryObject<Item> SPELL_ARCANE_BEAM = ITEMS.register("spell_arcane_beam", SpellArcaneBeam::new);
 
+    public static final RegistryObject<Item> SPELL_SPLASHES = ITEMS.register("spell_splashes", SpellSplashes::new);
     public static final RegistryObject<Item> SPELL_IGNITE = ITEMS.register("spell_ignite", SpellIgnite::new);
     public static final RegistryObject<Item> SPELL_FROST_SPIKE = ITEMS.register("spell_frost_spike", SpellFrostSpike::new);
-    public static final RegistryObject<Item> SPELL_SPLASHES = ITEMS.register("spell_splashes", SpellSplashes::new);
+    public static final RegistryObject<Item> SPELL_DISCHARGE = ITEMS.register("spell_discharge", SpellDischarge::new);
     public static final RegistryObject<Item> SPELL_BLAZE_BARRAGE = ITEMS.register("spell_blaze_barrage", SpellBlazeBarrage::new);
     public static final RegistryObject<Item> SPELL_LEGACY_FIREBALL = ITEMS.register("spell_legacy_fireball", SpellLegacyFireball::new);
 
-    public static final RegistryObject<Item> SPELL_BEAM_TEST = ITEMS.register("spell_beam_test", SpellBeamTest::new);
 
     public static final RegistryObject<Item> SPELL_WITCH_LASH = ITEMS.register("spell_witch_lash", SpellWitchLash::new);
 

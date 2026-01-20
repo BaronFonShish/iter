@@ -1,5 +1,5 @@
 {
-  "parent": "item/bow_pulling_0",
+  "parent": "iter:item/bow_large",
   "textures": {
     "layer0": "iter:item/recurve_bow_0"
   }

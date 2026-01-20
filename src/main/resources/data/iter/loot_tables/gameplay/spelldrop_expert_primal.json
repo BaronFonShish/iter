@@ -1,6 +1,6 @@
 {
   "type": "minecraft:generic",
-  "random_sequence": "iter:gameplay/spelldrop_expert_elemental",
+  "random_sequence": "iter:gameplay/spelldrop_expert_primal",
   "pools": [
     {
       "rolls": 1,

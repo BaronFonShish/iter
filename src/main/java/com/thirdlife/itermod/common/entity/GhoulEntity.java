@@ -66,14 +66,8 @@ public class GhoulEntity extends Monster {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.5f, true) {
-            @Override
-            protected double getAttackReachSqr(LivingEntity entity) {
-                return 2f;
-            }
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.6f, true) {
         });
-
-        this.goalSelector.addGoal(0, new LeapAtTargetGoal(this, 0.35f));
 
         this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 0.8));
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));

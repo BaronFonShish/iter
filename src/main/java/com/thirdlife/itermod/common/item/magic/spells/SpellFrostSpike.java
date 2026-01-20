@@ -18,7 +18,7 @@ import java.util.Objects;
 
 public class SpellFrostSpike extends SpellItem {
 
-    public SpellFrostSpike() {super(new Properties(), "primal", "force", "frost",2, 15, 4, 30);}
+    public SpellFrostSpike() {super(new Properties(), "primal", "force", "frost",2, 15, 4, 27);}
 
     @Override
     public void castSpell(Level level, Player player, ItemStack wand, ItemStack spellStack, float spellpower) {

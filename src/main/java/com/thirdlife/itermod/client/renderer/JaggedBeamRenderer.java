@@ -3,7 +3,6 @@ package com.thirdlife.itermod.client.renderer;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import com.thirdlife.itermod.common.entity.misc.JaggedBeam;
 import com.thirdlife.itermod.common.entity.misc.StraightBeam;
 import com.thirdlife.itermod.iterMod;
@@ -12,7 +11,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -20,23 +18,29 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
+import java.util.List;
+
 @OnlyIn(Dist.CLIENT)
-public class StraightBeamRenderer extends EntityRenderer<StraightBeam> {
+public class JaggedBeamRenderer extends EntityRenderer<JaggedBeam> {
 
     private static final ResourceLocation TEXTURE_BEAM = new ResourceLocation(iterMod.MOD_ID, "textures/entity/beam.png");
     private static final ResourceLocation TEXTURE_LIGHTNING = new ResourceLocation(iterMod.MOD_ID, "textures/entity/lightning.png");
 
-    public StraightBeamRenderer(EntityRendererProvider.Context context) {
+    public JaggedBeamRenderer(EntityRendererProvider.Context context) {
         super(context);
     }
 
     @Override
-    public void render(StraightBeam beam, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+    public void render(JaggedBeam beam, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
         RenderSystem.disableCull();
 
-        Vec3 start = Vec3.ZERO;
-        Vec3 end = start.add(beam.getEndPos().subtract(beam.position()));
+        List <Vec3> points = beam.getPoints();
+        if (points.size() < 2) {
+            poseStack.popPose();
+            RenderSystem.enableCull();
+            return;
+        }
 
         float progress = ((float) beam.tickCount / beam.lifetime);
         float alpha = beam.getAlpha();
@@ -46,10 +50,9 @@ public class StraightBeamRenderer extends EntityRenderer<StraightBeam> {
 
         float width = beam.width;
         if (beam.shrinking){
-            width = width * (1.0f - progress);
+            width *= (1.0f - progress);
         }
 
-        float hw = width/2;
         int light = 15728880;
 
         int textureWidth = 1;
@@ -61,19 +64,23 @@ public class StraightBeamRenderer extends EntityRenderer<StraightBeam> {
         float v0 = (float) texturestep/textureHeight;
         float v1 = v0 + 1f/16f;
 
-        /// main beam
-        renderBeam(start, end, width, alpha, light, v0, v1, buffer, poseStack, beam, 3);
+        Vec3 start = Vec3.ZERO;
+        Vec3 end = Vec3.ZERO;
 
-        /// glow
-        renderBeam(start, end, width*1.5f, alpha*0.25f, light, v0, v1, buffer, poseStack, beam, 2);
+        for (int i = 0; i < points.size()-1; i++){
+            start = points.get(i).subtract(beam.position());
+            end = points.get(i + 1).subtract(beam.position());
+
+            renderSegment(start, end, width, alpha, light, v0, v1, buffer, poseStack, beam, 3);
+
+            renderSegment(start, end, width*1.5f, alpha*0.25f, light, v0, v1, buffer, poseStack, beam, 2);
+        }
 
         RenderSystem.enableCull();
         poseStack.popPose();
     }
 
-
-
-    public void renderBeam(Vec3 start, Vec3 end, float width, float alpha, int light, float v0, float v1, MultiBufferSource buffer, PoseStack poseStack, StraightBeam beam, int rendertype){
+    public void renderSegment(Vec3 start, Vec3 end, float width, float alpha, int light, float v0, float v1, MultiBufferSource buffer, PoseStack poseStack, JaggedBeam beam, int rendertype){
 
         float hw = width/2;
         Vec3 direction = end.subtract(start);
@@ -109,18 +116,22 @@ public class StraightBeamRenderer extends EntityRenderer<StraightBeam> {
 
         VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityTranslucentEmissive(getTextureLocation(beam)));
 
-        /// Rendertype 1 = "outer-only"
-        /// Rendertype 2 = inverse, "negative cubes"
-        /// Rendertype 3 = 1+2, no cull, visible from both inside and outside
-
         if (rendertype != 2){
             vertexConsumer = buffer.getBuffer(RenderType.entitySolid(getTextureLocation(beam)));
         }
 
-        //start
-        renderQuad(vertexConsumer, poseStack,
-                bottom_left_start, bottom_right_start, top_right_start, top_left_start,
-                alpha, light, 0, v0, 1, v1, rendertype);
+
+        if (rendertype != 2) {
+            //start
+            renderQuad(vertexConsumer, poseStack,
+                    bottom_left_start, bottom_right_start, top_right_start, top_left_start,
+                    alpha, light, 0, v0, 1, v1, rendertype);
+
+            //end
+            renderQuad(vertexConsumer, poseStack,
+                    bottom_right_end, bottom_left_end, top_left_end, top_right_end,
+                    alpha, light, 0, v0, 1, v1, rendertype);
+        }
 
         //top
         renderQuad(vertexConsumer, poseStack,
@@ -140,11 +151,6 @@ public class StraightBeamRenderer extends EntityRenderer<StraightBeam> {
         //left
         renderQuad(vertexConsumer, poseStack,
                 bottom_left_end, bottom_left_start, top_left_start, top_left_end,
-                alpha, light, 0, v0, 1, v1, rendertype);
-
-        //end
-        renderQuad(vertexConsumer, poseStack,
-                bottom_right_end, bottom_left_end, top_left_end, top_right_end,
                 alpha, light, 0, v0, 1, v1, rendertype);
 
     }
@@ -188,6 +194,7 @@ public class StraightBeamRenderer extends EntityRenderer<StraightBeam> {
             vertex(consumer, poseStack, p2, u1, v0, alpha, light, faceNormal1);
             vertex(consumer, poseStack, p1, u1, v1, alpha, light, faceNormal1);
         }
+
     }
 
     private void vertex(VertexConsumer consumer, PoseStack poseStack, Vec3 worldPos,
@@ -211,7 +218,7 @@ public class StraightBeamRenderer extends EntityRenderer<StraightBeam> {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(StraightBeam beam) {
+    public ResourceLocation getTextureLocation(JaggedBeam beam) {
         String textureName = beam.getTexture();
         if (textureName == null || textureName.isEmpty()) {
             textureName = "beam";

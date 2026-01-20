@@ -144,6 +144,7 @@ public class iterMod {
             event.registerEntityRenderer(ModEntities.FROST_SPIKE.get(), FrostSpikeRenderer::new);
             event.registerEntityRenderer(ModEntities.HELLBLAZE_ARROW.get(), HellblazeArrowRenderer::new);
             event.registerEntityRenderer(ModEntities.STRAIGHT_BEAM.get(), StraightBeamRenderer::new);
+            event.registerEntityRenderer(ModEntities.JAGGED_BEAM.get(), JaggedBeamRenderer::new);
         }
 
         @SubscribeEvent

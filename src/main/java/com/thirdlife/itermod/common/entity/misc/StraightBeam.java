@@ -1,6 +1,7 @@
 package com.thirdlife.itermod.common.entity.misc;
 
 import com.thirdlife.itermod.common.registry.ModEntities;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -12,15 +13,16 @@ public class StraightBeam extends AbstractBeam {
         super(type, level);
     }
 
-    public StraightBeam(Level level, Vec3 startpos, Vec3 endpos, int lifetime, float width, boolean fading, boolean shrinking, boolean flickering) {
+    public StraightBeam(Level level, Vec3 startpos, Vec3 endpos, int lifetime, float width, float alpha, boolean fading, boolean shrinking, boolean flickering, String texture) {
         super(ModEntities.STRAIGHT_BEAM.get(), level);
         this.setPos(startpos);
         this.setEndPos(endpos);
         this.setLifetime(lifetime);
         this.setWidth(width);
+        this.setAlpha(alpha);
         this.setFading(fading);
         this.setShrinking(shrinking);
         this.setFlickering(flickering);
+        this.setTexture(texture);
     }
-
 }

@@ -26,7 +26,7 @@ import java.util.Objects;
 public class SpellRecall extends SpellItem {
 
     public SpellRecall() {
-        super(new Properties(), "arcane", "conveyance", "ether",2, 100, 100, (int) (3600));
+        super(new Properties(), "arcane", "conveyance", "ether",3, 100, 100, (int) (3600));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.thirdlife.itermod.common.event;
 
+import com.thirdlife.itermod.common.item.AbstractIterBow;
 import com.thirdlife.itermod.common.registry.ModEnchantments;
 import com.thirdlife.itermod.common.registry.ModItems;
 import com.thirdlife.itermod.iterMod;
@@ -25,8 +26,14 @@ public class AutomaticReleaseEvent {
         if (event.phase == TickEvent.Phase.END) {
             Player player = event.player;
             ItemStack bow = player.getUseItem();
-            if ((bow.getItem() instanceof BowItem bowItem) && (EnchantmentHelper.getEnchantmentLevel(ModEnchantments.AUTOMATIC.get(), player) != 0)) {
-                int usetime = bowItem.MAX_DRAW_DURATION + 1;
+            if ((EnchantmentHelper.getEnchantmentLevel(ModEnchantments.AUTOMATIC.get(), player) != 0)) {
+
+                int usetime = 20;
+                if ((bow.getItem() instanceof AbstractIterBow iterBowItem)){
+                    usetime = (iterBowItem.MAX_DRAW_DURATION + 1);
+                } else if ((bow.getItem() instanceof BowItem bowItem)){
+                    usetime = (bowItem.MAX_DRAW_DURATION + 1);
+                }
                 if (player.getTicksUsingItem() >= usetime && !player.isShiftKeyDown()){
                     player.releaseUsingItem();
                 }

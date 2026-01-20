@@ -22,10 +22,13 @@ public abstract class AbstractBeam extends Entity {
     private static final EntityDataAccessor<Float> DATA_TARGET_Z = SynchedEntityData.defineId(AbstractBeam.class, EntityDataSerializers.FLOAT);
 
     private static final EntityDataAccessor<Float> DATA_WIDTH = SynchedEntityData.defineId(AbstractBeam.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> DATA_ALPHA = SynchedEntityData.defineId(AbstractBeam.class, EntityDataSerializers.FLOAT);
 
     private static final EntityDataAccessor<Boolean> DATA_FADING = SynchedEntityData.defineId(AbstractBeam.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_SHRINKING = SynchedEntityData.defineId(AbstractBeam.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_FLICKERING = SynchedEntityData.defineId(AbstractBeam.class, EntityDataSerializers.BOOLEAN);
+
+    private static final EntityDataAccessor<String> DATA_TEXTURE = SynchedEntityData.defineId(AbstractBeam.class, EntityDataSerializers.STRING);
 
     public float targetx;
     public float targety;
@@ -34,12 +37,15 @@ public abstract class AbstractBeam extends Entity {
     public boolean shrinking;
     public boolean flickering;
     public int lifetime;
-    public float width = 0.2f;
+    public float width;
+    public float alpha;
+    public String texture = "beam";
 
     public AbstractBeam(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.noPhysics = true;
         this.noCulling = true;
+        this.texture = this.entityData.get(DATA_TEXTURE);
     }
 
     BlockPos pos = BlockPos.containing(getEndPos().x, getEndPos().y, getEndPos().z);
@@ -55,9 +61,11 @@ public abstract class AbstractBeam extends Entity {
         this.entityData.define(DATA_TARGET_Y, 0f);
         this.entityData.define(DATA_TARGET_Z, 0f);
         this.entityData.define(DATA_WIDTH, 0.1f);
+        this.entityData.define(DATA_ALPHA, 0.75f);
         this.entityData.define(DATA_FADING, false);
         this.entityData.define(DATA_SHRINKING, false);
         this.entityData.define(DATA_FLICKERING, false);
+        this.entityData.define(DATA_TEXTURE, "beam");
     }
 
     @Override
@@ -66,12 +74,15 @@ public abstract class AbstractBeam extends Entity {
         tag.putFloat("TargetY", targety);
         tag.putFloat("TargetZ", targetz);
         tag.putFloat("width", width);
+        tag.putFloat("alpha", alpha);
 
         tag.putBoolean("fading", fading);
         tag.putBoolean("shrinking", shrinking);
         tag.putBoolean("flickering", flickering);
 
         tag.putInt("lifetime", lifetime);
+
+        tag.putString("texture", texture);
     }
 
     @Override
@@ -85,6 +96,8 @@ public abstract class AbstractBeam extends Entity {
 
         this.width = tag.getFloat("width");
         this.entityData.set(DATA_WIDTH, this.width);
+        this.alpha = tag.getFloat("alpha");
+        this.entityData.set(DATA_ALPHA, this.alpha);
         this.lifetime = tag.getInt("lifetime");
         this.entityData.set(DATA_LIFETIME, this.lifetime);
 
@@ -94,6 +107,9 @@ public abstract class AbstractBeam extends Entity {
         this.entityData.set(DATA_SHRINKING, this.shrinking);
         this.flickering = tag.getBoolean("flickering");
         this.entityData.set(DATA_FLICKERING, this.flickering);
+
+        this.texture = tag.getString("texture");
+        this.entityData.set(DATA_TEXTURE, this.texture);
     }
 
     @Override
@@ -112,6 +128,9 @@ public abstract class AbstractBeam extends Entity {
         if (DATA_WIDTH.equals(key)) {
             this.width = this.entityData.get(DATA_WIDTH);
         }
+        if (DATA_ALPHA.equals(key)) {
+            this.alpha = this.entityData.get(DATA_ALPHA);
+        }
         if (DATA_LIFETIME.equals(key)) {
             this.lifetime = this.entityData.get(DATA_LIFETIME);
         }
@@ -124,6 +143,10 @@ public abstract class AbstractBeam extends Entity {
         }
         if (DATA_FLICKERING.equals(key)) {
             this.flickering = this.entityData.get(DATA_FLICKERING);
+        }
+
+        if (DATA_TEXTURE.equals(key)) {
+            this.texture = this.entityData.get(DATA_TEXTURE);
         }
     }
 
@@ -182,6 +205,24 @@ public abstract class AbstractBeam extends Entity {
     public void setShrinking(boolean shrinking) {
         this.shrinking = shrinking;
         this.entityData.set(DATA_SHRINKING, shrinking);
+    }
+
+    public String getTexture() {
+        return this.entityData.get(DATA_TEXTURE);
+    }
+
+    public Float getAlpha() {
+        return this.alpha;
+    }
+
+    public void setTexture(String texture) {
+        this.texture = texture;
+        this.entityData.set(DATA_TEXTURE, texture);
+    }
+
+    public void setAlpha(float alpha) {
+        this.alpha = alpha;
+        this.entityData.set(DATA_ALPHA, alpha);
     }
 
     public void setFlickering(boolean flickering) {

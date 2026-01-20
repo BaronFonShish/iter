@@ -29,16 +29,17 @@ public class ModTabs {
                         tabData.accept(ModItems.SPELL_ETHERBOLT.get());
                         tabData.accept(ModItems.SPELL_LESSER_HEAL.get());
                         tabData.accept(ModItems.SPELL_MEND.get());
-                        tabData.accept(ModItems.SPELL_RECALL.get());
                         tabData.accept(ModItems.SPELL_LEAP.get());
+                        tabData.accept(ModItems.SPELL_RECALL.get());
+                        tabData.accept(ModItems.SPELL_ARCANE_BEAM.get());
 
                         tabData.accept(ModItems.SPELL_IGNITE.get());
                         tabData.accept(ModItems.SPELL_SPLASHES.get());
                         tabData.accept(ModItems.SPELL_FROST_SPIKE.get());
+                        tabData.accept(ModItems.SPELL_DISCHARGE.get());
                         tabData.accept(ModItems.SPELL_BLAZE_BARRAGE.get());
                         tabData.accept(ModItems.SPELL_LEGACY_FIREBALL.get());
 
-                        tabData.accept(ModItems.SPELL_BEAM_TEST.get());
 
                         tabData.accept(ModItems.SPELL_WITCH_LASH.get());
                     })

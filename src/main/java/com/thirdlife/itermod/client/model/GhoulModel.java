@@ -77,8 +77,8 @@ public class GhoulModel<T extends Entity> extends EntityModel<T> implements Arme
         this.body.xRot = ((2.5F * Mth.PI / 180) + (10F * Mth.PI / 180) * limbSwingAmount) - (Mth.sin(attackTime * Mth.PI * 2) * 0.5f);
         this.body.yRot = (netHeadYaw / (180F / (float) Math.PI)) * 0.2f;
 
-        this.arm_right.xRot = Mth.cos(limbSwing * 0.65F) * -0.35f * limbSwingAmount - 2F * Mth.sin(attackTime * Mth.PI) + limbSwingAmount;
-        this.arm_left.xRot = Mth.cos(limbSwing * 0.65F) * 0.35f * limbSwingAmount - 2F * Mth.sin(attackTime * Mth.PI) + limbSwingAmount;
+        this.arm_right.xRot = Mth.cos(limbSwing * 0.65F) * -0.35f * limbSwingAmount - 2F * Mth.sin(attackTime * Mth.PI) - limbSwingAmount * 0.5F;
+        this.arm_left.xRot = Mth.cos(limbSwing * 0.65F) * 0.35f * limbSwingAmount - 2F * Mth.sin(attackTime * Mth.PI) - limbSwingAmount * 0.5F;
 
         this.arm_right.yRot = 0.75F * Mth.sin(attackTime * Mth.PI * 1.5F);
         this.arm_left.yRot = -0.75F * Mth.sin(attackTime * Mth.PI * 1.5F);

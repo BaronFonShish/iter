@@ -1,10 +1,7 @@
 package com.thirdlife.itermod.common.registry;
 
 import com.thirdlife.itermod.common.entity.*;
-import com.thirdlife.itermod.common.entity.misc.EtherboltEntity;
-import com.thirdlife.itermod.common.entity.misc.FrostSpikeEntity;
-import com.thirdlife.itermod.common.entity.misc.HellblazeArrowEntity;
-import com.thirdlife.itermod.common.entity.misc.StraightBeam;
+import com.thirdlife.itermod.common.entity.misc.*;
 import com.thirdlife.itermod.iterMod;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -71,6 +68,14 @@ public class ModEntities {
                             .clientTrackingRange(256)
                             .updateInterval(1)
                             .build("straight_beam"));
+
+    public static final RegistryObject<EntityType<JaggedBeam>> JAGGED_BEAM =
+            ENTITY_TYPES.register("jagged_beam",
+                    () -> EntityType.Builder.<JaggedBeam>of(JaggedBeam::new, MobCategory.MISC)
+                            .sized(1F, 1F)
+                            .clientTrackingRange(256)
+                            .updateInterval(1)
+                            .build("jagged_beam"));
 
     public static final RegistryObject<EntityType<FrostSpikeEntity>> FROST_SPIKE =
             ENTITY_TYPES.register("frost_spike",

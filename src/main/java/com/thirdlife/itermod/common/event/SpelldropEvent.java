@@ -47,7 +47,8 @@ public class SpelldropEvent {
 
     public static void spelldrop(Entity target, Level level){
         ResourceLocation lootpath = new ResourceLocation("iter:gameplay/spelldrop_novice");
-        if (Math.random()<0.25d){lootpath = new ResourceLocation("iter:gameplay/spelldrop_adept");}
+        if (Math.random()<0.3d){lootpath = new ResourceLocation("iter:gameplay/spelldrop_adept");}
+        if (Math.random()<0.05d){lootpath = new ResourceLocation("iter:gameplay/spelldrop_expert");}
 
         BlockPos lootpos = BlockPos.containing(target.getX()+0.5, (target.getY() + target.getEyeHeight()/2), target.getZ()+0.5);
         for (ItemStack itemstackiterator : level.getServer().getLootData().getLootTable(lootpath)
@@ -56,7 +57,7 @@ public class SpelldropEvent {
             if (itemstackiterator.getItem() instanceof SpellItem spell){
                 if (Math.random()>0.75f){
                     spell.setQuality(itemstackiterator, 1);
-                } else spell.setQuality(itemstackiterator, 0);
+                }else spell.setQuality(itemstackiterator, 0);
             }
             ItemEntity entityToSpawn = new ItemEntity(level, lootpos.getX(), lootpos.getY(), lootpos.getZ(), itemstackiterator);
             entityToSpawn.setPickUpDelay(10);
