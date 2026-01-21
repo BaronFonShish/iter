@@ -2,6 +2,7 @@ package com.thirdlife.itermod.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.AnimationUtils;
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -12,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.monster.Monster;
 
 public class GoblinWarriorModel<T extends Entity> extends EntityModel<T> implements ArmedModel {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("itermod", "goblin_warrior"), "main");
@@ -60,15 +62,41 @@ public class GoblinWarriorModel<T extends Entity> extends EntityModel<T> impleme
     @Override
     public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
                           float headPitch) {
-        this.head.yRot = netHeadYaw / (180F / (float) Math.PI);
-        this.head.xRot = headPitch / (180F / (float) Math.PI);
+        this.head.yRot = netHeadYaw * Mth.DEG_TO_RAD;
+        this.head.xRot = headPitch * Mth.DEG_TO_RAD;
+
         this.rightLeg.xRot = Mth.cos(limbSwing * 0.65F) * 1.0F * limbSwingAmount;
-        this.rightArm.xRot = Mth.cos(limbSwing * 0.65F + (float) Math.PI) * limbSwingAmount + -2F * Mth.sin(attackTime * Mth.PI);
-        this.rightArm.yRot = 0.75F * Mth.sin(attackTime * Mth.PI * 1.5F);
-        this.leftArm.xRot = Mth.cos(limbSwing * 0.65F) * limbSwingAmount;
         this.leftLeg.xRot = Mth.cos(limbSwing * 0.65F) * -1.0F * limbSwingAmount;
-        this.leftArm.zRot = (Mth.sin(ageInTicks/16)/-20) - 0.1F;
-        this.rightArm.zRot = (Mth.sin(ageInTicks/16)/20) + 0.1F;
+
+        this.rightArm.xRot = Mth.cos(limbSwing * 0.65F + (float) Math.PI) * limbSwingAmount;
+        this.leftArm.xRot = Mth.cos(limbSwing * 0.65F) * limbSwingAmount;
+
+        this.rightArm.zRot = 0.0F;
+        this.leftArm.zRot = 0.0F;
+
+        if (entity instanceof Monster mob){
+            if (mob.isAggressive()){
+
+                if (mob.getMainArm() == HumanoidArm.RIGHT){
+                    this.rightArm.xRot = -1.75F + (Mth.cos(limbSwing * 0.65F + (float) Math.PI) * limbSwingAmount * 0.15f);
+                    this.rightArm.yRot = 0.15F;
+                }
+                else {
+                    this.leftArm.xRot = -1.75F + (Mth.cos(limbSwing * 0.65F) * limbSwingAmount * 0.15f);
+                    this.leftArm.yRot = 0.15F;
+                }
+            }
+            if (attackTime > 0){
+                if (mob.getMainArm() == HumanoidArm.RIGHT){
+                    AnimationUtils.swingWeaponDown(rightArm, leftArm, mob, attackTime, ageInTicks);
+                }
+                else {
+                    AnimationUtils.swingWeaponDown(leftArm, rightArm, mob, attackTime, ageInTicks);
+                }
+            }
+        }
+
+        AnimationUtils.bobArms(this.rightArm, this.leftArm, ageInTicks);
     }
 
     protected ModelPart getArm(HumanoidArm pSide){

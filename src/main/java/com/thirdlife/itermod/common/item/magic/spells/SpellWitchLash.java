@@ -2,6 +2,7 @@ package com.thirdlife.itermod.common.item.magic.spells;
 
 import com.thirdlife.itermod.common.item.magic.defaults.SpellItem;
 import com.thirdlife.itermod.common.registry.ModParticleTypes;
+import com.thirdlife.itermod.common.registry.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -49,7 +50,8 @@ public class SpellWitchLash extends SpellItem {
         double zdir = player.getLookAngle().z;
         boolean flag = true;
 
-        level.playSound(null, BlockPos.containing(player.position()), Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.experience_orb.pickup"))), SoundSource.PLAYERS, (float) 0.5, (float) 0.85);
+        level.playSound(null, player.getX(), player.getY(), player.getZ(),
+                ModSounds.CAST_OCCULT.get(), SoundSource.PLAYERS, 0.8F, 1.0F);
 
         for (int i = 0; i < iterations; i++) {
             if (flag) {

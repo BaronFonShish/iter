@@ -2,6 +2,7 @@ package com.thirdlife.itermod.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.AnimationUtils;
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -85,6 +86,11 @@ public class GhoulModel<T extends Entity> extends EntityModel<T> implements Arme
 
         this.leg_right.xRot = Mth.cos(limbSwing * 0.65F) * 1.0F * limbSwingAmount;
         this.leg_left.xRot = Mth.cos(limbSwing * 0.65F) * -1.0F * limbSwingAmount;
+
+        this.arm_right.zRot = 0;
+        this.arm_left.zRot = 0;
+
+        AnimationUtils.bobArms(this.arm_right, this.arm_left, ageInTicks);
 	}
 
 	@Override

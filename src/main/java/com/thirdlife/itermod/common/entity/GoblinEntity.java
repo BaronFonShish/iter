@@ -81,9 +81,6 @@ public class GoblinEntity extends Monster {
 
 
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true, false));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true, false));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Villager .class, true, false));
     }
 
 
@@ -99,7 +96,7 @@ public class GoblinEntity extends Monster {
 
     @Override
     protected SoundEvent getDeathSound() {
-        return ModSounds.GOBLIN_HURT.get();
+        return ModSounds.GOBLIN_DEATH.get();
     }
 
 

@@ -88,7 +88,7 @@ public abstract class SpellFocus extends Item {
 
     @Override
     public UseAnim getUseAnimation(ItemStack stack) {
-        return UseAnim.BOW;
+        return UseAnim.CUSTOM;
     }
 
     public int getTier(){
@@ -217,7 +217,7 @@ public abstract class SpellFocus extends Item {
         if (!player.level().isClientSide()) {
             spell.castSpell(player.level(), player, wand, spellstack, spellpower);
 
-            player.swing(InteractionHand.MAIN_HAND, true);
+            player.swing(player.getUsedItemHand(), true);
             if (IterModConfig.COMMON.fociDurability.get()) {wand.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(p.getUsedItemHand()));}
             IterPlayerDataUtils.addBurnout(player, ether);
 

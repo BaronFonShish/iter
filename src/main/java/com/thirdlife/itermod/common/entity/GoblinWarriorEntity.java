@@ -96,7 +96,7 @@ public class GoblinWarriorEntity extends Monster {
 
     @Override
     protected SoundEvent getDeathSound() {
-        return ModSounds.GOBLIN_HURT.get();
+        return ModSounds.GOBLIN_DEATH.get();
     }
 
 

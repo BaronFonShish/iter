@@ -5,6 +5,7 @@ import com.thirdlife.itermod.common.entity.misc.EtherboltEntity;
 import com.thirdlife.itermod.common.entity.misc.FrostSpikeEntity;
 import com.thirdlife.itermod.common.item.magic.defaults.SpellItem;
 import com.thirdlife.itermod.common.registry.ModEntities;
+import com.thirdlife.itermod.common.registry.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
@@ -37,7 +38,8 @@ public class SpellFrostSpike extends SpellItem {
 
         frostSpike.shootWithDamage(player, lookVec, velocity, inaccuracy, damage);
 
-        level.playSound(null, BlockPos.containing(player.position()), Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.experience_orb.pickup"))), SoundSource.PLAYERS, (float) 0.5, (float) 1);
+        level.playSound(null, player.getX(), player.getY(), player.getZ(),
+                ModSounds.CAST_ARCANE.get(), SoundSource.PLAYERS, 0.8F, 1.0F);
 
         level.addFreshEntity(frostSpike);
     }

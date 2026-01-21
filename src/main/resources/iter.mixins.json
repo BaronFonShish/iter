@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "iter.refmap.json",
   "mixins": [
-    "CustomArmPoseMixin",
+    "StaffSpellcastingInHandMixin",
+    "StaffSpellcastingMixin",
     "TankardArmPoseMixin",
     "TankardItemRotationMixin"
   ],

@@ -2,6 +2,7 @@ package com.thirdlife.itermod.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.AnimationUtils;
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -69,8 +70,11 @@ public class GoblinModel<T extends Entity> extends EntityModel<T> implements Arm
         this.rightArm.yRot = 0.75F * Mth.sin(attackTime * Mth.PI * 1.5F);
         this.leftArm.xRot = Mth.cos(limbSwing * 0.65F) * limbSwingAmount;
         this.leftLeg.xRot = Mth.cos(limbSwing * 0.65F) * -1.0F * limbSwingAmount;
-        this.leftArm.zRot = (Mth.sin(ageInTicks/16)/-20) - 0.1F;
-        this.rightArm.zRot = (Mth.sin(ageInTicks/16)/20) + 0.1F;
+
+        this.rightArm.zRot = 0.0F;
+        this.leftArm.zRot = 0.0F;
+
+        AnimationUtils.bobArms(this.rightArm, this.leftArm, ageInTicks);
     }
 
     protected ModelPart getArm(HumanoidArm pSide){

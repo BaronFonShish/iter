@@ -13,13 +13,21 @@
       "iter:cast_arcane_2"
     ]
   },
+  "cast_occult": {
+    "subtitles": "sounds.iter.cast_occult",
+    "sounds": [
+      "iter:cast_occult_1",
+      "iter:cast_occult_2"
+    ]
+  },
   "goblin_ambient": {
     "subtitles": "sounds.iter.goblin_ambient",
     "sounds": [
       "iter:goblin_ambient_1",
       "iter:goblin_ambient_2",
       "iter:goblin_ambient_3",
-      "iter:goblin_ambient_4"
+      "iter:goblin_ambient_4",
+      "iter:goblin_ambient_5"
     ]
   },
   "goblin_hurt": {
@@ -29,6 +37,12 @@
       "iter:goblin_hurt_2",
       "iter:goblin_hurt_3",
       "iter:goblin_hurt_4"
+    ]
+  },
+  "goblin_death": {
+    "subtitles": "sounds.iter.goblin_death",
+    "sounds": [
+      "iter:goblin_death"
     ]
   }
 }

@@ -14,8 +14,10 @@ public class ModSounds {
 
     public static final RegistryObject<SoundEvent> ETHERBOLT_IMPACT = registerSoundEvent("etherbolt_impact");
     public static final RegistryObject<SoundEvent> CAST_ARCANE = registerSoundEvent("cast_arcane");
+    public static final RegistryObject<SoundEvent> CAST_OCCULT = registerSoundEvent("cast_occult");
     public static final RegistryObject<SoundEvent> GOBLIN_AMBIENT = registerSoundEvent("goblin_ambient");
     public static final RegistryObject<SoundEvent> GOBLIN_HURT = registerSoundEvent("goblin_hurt");
+    public static final RegistryObject<SoundEvent> GOBLIN_DEATH = registerSoundEvent("goblin_death");
 
 
     private static RegistryObject<SoundEvent> registerSoundEvent(String name){
