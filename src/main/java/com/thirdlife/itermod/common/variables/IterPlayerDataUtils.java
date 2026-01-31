@@ -72,6 +72,8 @@ public class IterPlayerDataUtils {
         float threshold = thresholdAttr != null ? (float) thresholdAttr.getValue() : 50f;
 
         dissipation = (dissipation + (threshold * 0.0005f));
+        float foodmult = 0.25f + (player.getFoodData().getFoodLevel()/20f) * 0.9f;
+        dissipation *= foodmult;
         dissipation /= 20;
         return dissipation;
     }

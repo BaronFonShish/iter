@@ -7,6 +7,12 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "iter:spell_flamebolt",
+          "weight": 10,
+          "quality": 1
+        },
+        {
+          "type": "minecraft:item",
           "name": "iter:spell_frost_spike",
           "weight": 10,
           "quality": 1

@@ -35,6 +35,7 @@ public class ModTabs {
 
                         tabData.accept(ModItems.SPELL_IGNITE.get());
                         tabData.accept(ModItems.SPELL_SPLASHES.get());
+                        tabData.accept(ModItems.SPELL_FLAMEBOLT.get());
                         tabData.accept(ModItems.SPELL_FROST_SPIKE.get());
                         tabData.accept(ModItems.SPELL_DISCHARGE.get());
                         tabData.accept(ModItems.SPELL_BLAZE_BARRAGE.get());

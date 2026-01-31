@@ -7,33 +7,32 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class EtherboltTrail extends TextureSheetParticle {
-    public static EtherboltTrailProvider provider(SpriteSet spriteSet) {
-        return new EtherboltTrailProvider(spriteSet);
+public class FlameTrail extends TextureSheetParticle {
+    public static FlameTrailProvider provider(SpriteSet spriteSet) {
+        return new FlameTrailProvider(spriteSet);
     }
 
-    public static class EtherboltTrailProvider implements ParticleProvider<SimpleParticleType> {
+    public static class FlameTrailProvider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteSet;
 
-        public EtherboltTrailProvider(SpriteSet spriteSet) {
+        public FlameTrailProvider(SpriteSet spriteSet) {
             this.spriteSet = spriteSet;
         }
 
         public Particle createParticle(SimpleParticleType typeIn, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            return new EtherboltTrail(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, this.spriteSet);
+            return new FlameTrail(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, this.spriteSet);
         }
     }
 
     private final SpriteSet spriteSet;
-
-    int frames = 3;
-    int perframe = 3;
-    protected EtherboltTrail(ClientLevel world, double x, double y, double z, double vx, double vy, double vz, SpriteSet spriteSet) {
+    int frames = 6;
+    int perframe = 4;
+    protected FlameTrail(ClientLevel world, double x, double y, double z, double vx, double vy, double vz, SpriteSet spriteSet) {
         super(world, x, y, z);
         this.spriteSet = spriteSet;
-        this.setSize(0.1f, 0.1f);
-        this.quadSize *= 1.5f;
-        this.lifetime = (int) 8;
+        this.setSize(0.2f, 0.2f);
+        this.quadSize *= 2f;
+        this.lifetime = (int) (frames * perframe)-1;
         this.gravity = 0f;
         this.hasPhysics = false;
         this.xd = vx * 0.5;

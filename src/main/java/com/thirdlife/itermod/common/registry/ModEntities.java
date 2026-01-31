@@ -85,6 +85,14 @@ public class ModEntities {
                             .sized(0.25f, 0.25f)
                             .build("frost_spike"));
 
+    public static final RegistryObject<EntityType<FlameboltEntity>> FLAMEBOLT =
+            ENTITY_TYPES.register("flamebolt",
+                    () -> EntityType.Builder.<FlameboltEntity>of(FlameboltEntity::new, MobCategory.MISC)
+                            .setShouldReceiveVelocityUpdates(true)
+                            .setTrackingRange(64).setUpdateInterval(1)
+                            .sized(0.25f, 0.25f)
+                            .build("flamebolt"));
+
     public static final RegistryObject<EntityType<HellblazeArrowEntity>> HELLBLAZE_ARROW =
             ENTITY_TYPES.register("hellblaze_arrow",
                     () -> EntityType.Builder.<HellblazeArrowEntity>of(HellblazeArrowEntity::new, MobCategory.MISC)

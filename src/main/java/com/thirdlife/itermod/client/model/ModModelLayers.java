@@ -14,6 +14,7 @@ public class ModModelLayers {
         event.registerLayerDefinition(GoblinModel.LAYER_LOCATION, GoblinModel::createBodyLayer);
 
         event.registerLayerDefinition(EtherboltModel.LAYER_LOCATION, EtherboltModel::createBodyLayer);
+        event.registerLayerDefinition(FlameboltModel.LAYER_LOCATION, FlameboltModel::createBodyLayer);
         event.registerLayerDefinition(FrostSpikeModel.LAYER_LOCATION, FrostSpikeModel::createBodyLayer);
         event.registerLayerDefinition(GenericArrowModel.LAYER_LOCATION, GenericArrowModel::createBodyLayer);
     }

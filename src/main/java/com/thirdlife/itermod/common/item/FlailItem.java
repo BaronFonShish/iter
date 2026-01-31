@@ -58,7 +58,7 @@ public class FlailItem extends TieredItem {
             builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_UUID, "Weapon modifier",
                     (((this.getTier().getAttackDamageBonus() + 3) * 2f) + 1f),
                     AttributeModifier.Operation.ADDITION));
-            builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_UUID, "Weapon modifier", -3.5d, AttributeModifier.Operation.ADDITION));
+            builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_UUID, "Weapon modifier", -3.4d, AttributeModifier.Operation.ADDITION));
 
             Map<Enchantment, Integer> itemEnchants = itemStack.getAllEnchantments();
         }

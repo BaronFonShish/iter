@@ -7,44 +7,38 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class EtherboltTrail extends TextureSheetParticle {
-    public static EtherboltTrailProvider provider(SpriteSet spriteSet) {
-        return new EtherboltTrailProvider(spriteSet);
+public class Flame extends TextureSheetParticle {
+    public static FlameProvider provider(SpriteSet spriteSet) {
+        return new FlameProvider(spriteSet);
     }
 
-    public static class EtherboltTrailProvider implements ParticleProvider<SimpleParticleType> {
+    public static class FlameProvider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteSet;
 
-        public EtherboltTrailProvider(SpriteSet spriteSet) {
+        public FlameProvider(SpriteSet spriteSet) {
             this.spriteSet = spriteSet;
         }
 
         public Particle createParticle(SimpleParticleType typeIn, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            return new EtherboltTrail(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, this.spriteSet);
+            return new Flame(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, this.spriteSet);
         }
     }
 
     private final SpriteSet spriteSet;
-
-    int frames = 3;
-    int perframe = 3;
-    protected EtherboltTrail(ClientLevel world, double x, double y, double z, double vx, double vy, double vz, SpriteSet spriteSet) {
+    int frames = 6;
+    int perframe = 5;
+    protected Flame(ClientLevel world, double x, double y, double z, double vx, double vy, double vz, SpriteSet spriteSet) {
         super(world, x, y, z);
         this.spriteSet = spriteSet;
         this.setSize(0.1f, 0.1f);
-        this.quadSize *= 1.5f;
-        this.lifetime = (int) 8;
-        this.gravity = 0f;
-        this.hasPhysics = false;
+        this.quadSize *= 2.5f;
+        this.lifetime = (int) (frames * perframe)-1;
+        this.gravity = -0.05f;
+        this.hasPhysics = true;
         this.xd = vx * 0.5;
         this.yd = vy * 0.5;
         this.zd = vz * 0.5;
         this.setSpriteFromAge(spriteSet);
-    }
-
-    @Override
-    public int getLightColor(float partialTick) {
-        return 15728880;
     }
 
     @Override

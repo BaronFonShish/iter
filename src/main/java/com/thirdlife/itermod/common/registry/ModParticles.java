@@ -14,6 +14,8 @@ public class ModParticles {
         event.registerSpriteSet(ModParticleTypes.ETHERBOLT_TRAIL.get(), EtherboltTrail::provider);
         event.registerSpriteSet(ModParticleTypes.ETHERBOLT_IMPACT.get(), EtherboltImpact::provider);
         event.registerSpriteSet(ModParticleTypes.ETHERBOLT_POOF.get(), EtherboltPoof::provider);
+        event.registerSpriteSet(ModParticleTypes.FLAME.get(), Flame::provider);
+        event.registerSpriteSet(ModParticleTypes.FLAME_TRAIL.get(), FlameTrail::provider);
         event.registerSpriteSet(ModParticleTypes.SNOWFLAKE.get(), Snowflake::provider);
         event.registerSpriteSet(ModParticleTypes.SNOW_POOF.get(), SnowPoof::provider);
     }

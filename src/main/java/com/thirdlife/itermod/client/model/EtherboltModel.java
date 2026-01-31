@@ -1,10 +1,7 @@
-package com.thirdlife.itermod.client.model;// Made with Blockbench 5.0.2
-// Exported for Minecraft version 1.17 or later with Mojang mappings
-// Paste this class into your mod and generate all required imports
-
-
+package com.thirdlife.itermod.client.model;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.thirdlife.itermod.iterMod;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -15,7 +12,7 @@ import net.minecraft.world.entity.Entity;
 
 public class EtherboltModel<T extends Entity> extends EntityModel<T> {
 
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("itermod", "etherbolt"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(iterMod.MOD_ID, "etherbolt"), "main");
 	private final ModelPart projectile;
 	private final ModelPart base;
 	private final ModelPart trail;

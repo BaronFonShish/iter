@@ -42,10 +42,12 @@ public class ModItems {
     public static final RegistryObject<Item> ETHERBLOOM_SEEDS = ITEMS.register("etherbloom_seeds", () -> new ItemNameBlockItem(ModBlocks.ETHERBLOOM_PLANT.get(), new Item.Properties()));
     public static final RegistryObject<Item> ROTROOT = ITEMS.register("rotroot",() -> new RotrootItem(new Item.Properties()));
     public static final RegistryObject<Item> ABSTRUSE_CLOTH = ITEMS.register("abstruse_cloth", () -> new Item(new Item.Properties()));
-
+    public static final RegistryObject<Item> BLOOD_BOTTLE = ITEMS.register("blood_bottle", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SANGUARNET = ITEMS.register("sanguarnet",() -> new Item(new Item.Properties()));
+
     public static final RegistryObject<Item> RECURVE_BOW = ITEMS.register("recurve_bow", RecurveBowItem::new);
     public static final RegistryObject<Item> STINGER = ITEMS.register("stinger", StingerItem::new);
+    public static final RegistryObject<Item> BLOODLETTER = ITEMS.register("bloodletter", () -> new Bloodletter(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> MAGMANUM_SWORD = ITEMS.register("magmanum_sword", MagmanumSword::new);
     public static final RegistryObject<Item> MAGMANUM_PICKAXE = ITEMS.register("magmanum_pickaxe", MagmanumPickaxe::new);
     public static final RegistryObject<Item> HELLBLAZE_ARROW = ITEMS.register("hellblaze_arrow", () -> new Item(new Item.Properties()));
@@ -180,6 +182,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> SPELL_SPLASHES = ITEMS.register("spell_splashes", SpellSplashes::new);
     public static final RegistryObject<Item> SPELL_IGNITE = ITEMS.register("spell_ignite", SpellIgnite::new);
+    public static final RegistryObject<Item> SPELL_FLAMEBOLT = ITEMS.register("spell_flamebolt", SpellFlamebolt::new);
     public static final RegistryObject<Item> SPELL_FROST_SPIKE = ITEMS.register("spell_frost_spike", SpellFrostSpike::new);
     public static final RegistryObject<Item> SPELL_DISCHARGE = ITEMS.register("spell_discharge", SpellDischarge::new);
     public static final RegistryObject<Item> SPELL_BLAZE_BARRAGE = ITEMS.register("spell_blaze_barrage", SpellBlazeBarrage::new);

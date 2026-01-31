@@ -138,9 +138,10 @@ public class iterMod {
             event.registerEntityRenderer(ModEntities.GIANT_SPIDER.get(), GiantSpiderRenderer::new);
             event.registerEntityRenderer(ModEntities.GOBLIN_WARRIOR.get(), GoblinWarriorRenderer::new);
             event.registerEntityRenderer(ModEntities.GOBLIN.get(), GoblinRenderer::new);
-            event.registerEntityRenderer(ModEntities.GHOUL.get(),GhoulRenderer::new);
+            event.registerEntityRenderer(ModEntities.GHOUL.get(), GhoulRenderer::new);
 
             event.registerEntityRenderer(ModEntities.ETHERBOLT.get(), EtherboltRenderer::new);
+            event.registerEntityRenderer(ModEntities.FLAMEBOLT.get(), FlameboltRenderer::new);
             event.registerEntityRenderer(ModEntities.FROST_SPIKE.get(), FrostSpikeRenderer::new);
             event.registerEntityRenderer(ModEntities.HELLBLAZE_ARROW.get(), HellblazeArrowRenderer::new);
             event.registerEntityRenderer(ModEntities.STRAIGHT_BEAM.get(), StraightBeamRenderer::new);

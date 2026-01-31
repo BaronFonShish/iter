@@ -64,7 +64,7 @@ public class SpellDischarge extends SpellItem {
                 for (Entity entityiterator : entfound) {
                     if ((entityiterator instanceof LivingEntity) && !(player == entityiterator)) {
                         entityiterator.hurt(new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC), player),
-                                returnDamage(spellpower, i, iterations) * spellpower);
+                                returnDamage(spellpower, i, iterations));
                         if (level instanceof ServerLevel serverLevel) {
                             serverLevel.sendParticles(ParticleTypes.ELECTRIC_SPARK, currentpos.x, currentpos.y, currentpos.z,
                                     1, 0, 0, 0, 0.025);
@@ -101,9 +101,9 @@ public class SpellDischarge extends SpellItem {
     }
 
     public float returnDamage(float spellpower, int i, int iterations){
-        float base = 4f * spellpower;
+        float base = 3f * spellpower;
         float falloff = 1f - (float) (i/iterations);
-        falloff *= 4f * spellpower;
+        falloff *= 6f * spellpower;
         return base + falloff;
     }
 }
