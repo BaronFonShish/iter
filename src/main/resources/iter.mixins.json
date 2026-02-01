@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.thirdlife.itermod.mixin",
+  "package": "com.malignant.itermod.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "iter.refmap.json",
   "mixins": [

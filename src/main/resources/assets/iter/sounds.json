@@ -6,6 +6,12 @@
       "iter:etherbolt_impact_2"
     ]
   },
+  "start_casting": {
+    "subtitles": "sounds.iter.start_casting",
+    "sounds": [
+      "iter:start_casting"
+    ]
+  },
   "cast_arcane": {
     "subtitles": "sounds.iter.cast_arcane",
     "sounds": [
