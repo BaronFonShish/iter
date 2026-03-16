@@ -1,6 +1,21 @@
 {
   "parent": "iter:item/bow_large",
+  "loader": "forge:separate_transforms",
   "textures": {
-    "layer0": "iter:item/recurve_bow_1"
+    "layer0": "iter:item/recurve_bow_big_1"
+  },
+  "base": {
+    "parent": "iter:item/recurve_bow_big_1"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "iter:item/recurve_bow_normal_1"
+    },
+    "fixed": {
+      "parent": "iter:item/recurve_bow_normal_1"
+    },
+    "ground": {
+      "parent": "iter:item/recurve_bow_normal_1"
+    }
   }
 }

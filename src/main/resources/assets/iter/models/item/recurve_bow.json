@@ -1,7 +1,22 @@
 {
-  "parent": "item/handheld",
+  "parent": "iter:item/bow_large",
+  "loader": "forge:separate_transforms",
   "textures": {
     "layer0": "iter:item/recurve_bow"
+  },
+  "base": {
+    "parent": "iter:item/recurve_bow_big"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "iter:item/recurve_bow_normal"
+    },
+    "fixed": {
+      "parent": "iter:item/recurve_bow_normal"
+    },
+    "ground": {
+      "parent": "iter:item/recurve_bow_normal"
+    }
   },
   "overrides": [
     {
