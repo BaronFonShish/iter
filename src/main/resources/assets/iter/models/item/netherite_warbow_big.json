@@ -1,0 +1,6 @@
+{
+  "parent": "iter:item/bow_large",
+  "textures": {
+    "layer0": "iter:item/netherite_warbow_big"
+  }
+}

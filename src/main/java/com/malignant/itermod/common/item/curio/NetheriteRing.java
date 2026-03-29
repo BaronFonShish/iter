@@ -8,4 +8,8 @@ public class NetheriteRing extends Item implements ICurioItem {
     public NetheriteRing() {
         super(new Properties().stacksTo(1).fireResistant().rarity(Rarity.COMMON));
     }
+
+    public boolean isFireResistant() {
+        return true;
+    }
 }

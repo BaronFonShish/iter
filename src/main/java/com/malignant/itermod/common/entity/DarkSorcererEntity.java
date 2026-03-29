@@ -171,17 +171,17 @@ public class DarkSorcererEntity extends Monster {
         switch (spelltype){
             case 1 -> {
                 EtherboltEntity etherbolt = new EtherboltEntity(ModEntities.ETHERBOLT.get(), this.level(), this, 4);
-                etherbolt.shootWithDamage(this, shootvec, 0.75f, 1f, 4);
+                etherbolt.shootWithDamage(this, shootvec, 1f, 1f, 4);
                 this.level().addFreshEntity(etherbolt);
             }
             case 2 ->{
                 FlameboltEntity flamebolt = new FlameboltEntity(ModEntities.FLAMEBOLT.get(), this.level(), this, 6);
-                flamebolt.shootWithDamage(this, shootvec, 1.15f, 1f, 6);
+                flamebolt.shootWithDamage(this, shootvec, 1.25f, 1f, 6);
                 this.level().addFreshEntity(flamebolt);
             }
             case 3 ->{
                 FrostSpikeEntity frostSpike = new FrostSpikeEntity(ModEntities.FROST_SPIKE.get(), this.level(), this, 5);
-                frostSpike.shootWithDamage(this, shootvec, 1.15f, 1f, 5);
+                frostSpike.shootWithDamage(this, shootvec, 1.25f, 1f, 5);
                 this.level().addFreshEntity(frostSpike);
             }
         }

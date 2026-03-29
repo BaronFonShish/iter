@@ -32,9 +32,9 @@ public class EtherbloomPlant extends CropBlock {
 
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
             Block.box(7.0D, 0.0D, 7.0D, 9.0D, 2.0D, 9.0D),
-            Block.box(7.0D, 0.0D, 7.0D, 9.0D, 2.0D, 9.0D),
             Block.box(6.5D, 0.0D, 6.5D, 9.5D, 4.0D, 9.5D),
             Block.box(6.5D, 0.0D, 6.5D, 9.5D, 4.0D, 9.5D),
+            Block.box(6.0D, 0.0D, 6.0D, 10.0D, 6.0D, 10.0D),
             Block.box(6.0D, 0.0D, 6.0D, 10.0D, 6.0D, 10.0D),
             Block.box(6.0D, 0.0D, 6.0D, 10.0D, 6.0D, 10.0D)};
 

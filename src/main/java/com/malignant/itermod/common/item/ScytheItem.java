@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.malignant.itermod.common.registry.ModBlocks;
 import com.malignant.itermod.common.registry.ModEnchantments;
+import com.malignant.itermod.common.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -158,10 +159,22 @@ public class ScytheItem extends TieredItem {
                 } else if (block == ModBlocks.ETHERBLOOM.get()){
                     harvested = true;
                     harvestedAmount++;
-                    context.getLevel().destroyBlock(targetpos, true, context.getPlayer());
+                    if (hasSowing){
+                        List<ItemStack> drops = Block.getDrops(blockstate, (ServerLevel) context.getLevel(), targetpos, null, context.getPlayer(), context.getPlayer().getMainHandItem());
+                        for (ItemStack drop : drops) {
+                            Block.popResource(context.getLevel(), targetpos, drop);
+                        }
+                        context.getLevel().levelEvent(2001, targetpos, Block.getId(blockstate));
+
+                        BlockState blocksoil = context.getLevel().getBlockState(targetpos.below());
+                        if (blocksoil.is(ModTags.Blocks.ETHERBLOOM_SOIL)){
+                            context.getLevel().setBlock(targetpos, ModBlocks.ETHERBLOOM_PLANT.get().defaultBlockState(), 3);
+                        }
+                    } else {context.getLevel().destroyBlock(targetpos, true, context.getPlayer());}
                 }
             }
         }
+
         if (harvested){
             if (context.getPlayer() instanceof ServerPlayer serverPlayer) {
                 if ((serverPlayer.gameMode.getGameModeForPlayer() == GameType.SURVIVAL)

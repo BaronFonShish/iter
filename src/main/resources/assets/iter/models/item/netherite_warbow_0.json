@@ -1,0 +1,21 @@
+{
+  "parent": "iter:item/bow_large",
+  "loader": "forge:separate_transforms",
+  "textures": {
+    "layer0": "iter:item/netherite_warbow_big_0"
+  },
+  "base": {
+    "parent": "iter:item/netherite_warbow_big_0"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "iter:item/netherite_warbow_normal_0"
+    },
+    "fixed": {
+      "parent": "iter:item/netherite_warbow_normal_0"
+    },
+    "ground": {
+      "parent": "iter:item/netherite_warbow_normal_0"
+    }
+  }
+}

@@ -13,7 +13,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "iter:spell_etherbolt",
+          "name": "iter:spell_lesser_heal",
           "weight": 10,
           "quality": 1
         }

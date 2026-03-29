@@ -20,6 +20,10 @@ public class NetheriteRingAmethyst extends Item implements ICurioItem {
         super(new Properties().stacksTo(1).fireResistant().rarity(Rarity.COMMON));
     }
 
+    public boolean isFireResistant() {
+        return true;
+    }
+
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         ringSend(slotContext);

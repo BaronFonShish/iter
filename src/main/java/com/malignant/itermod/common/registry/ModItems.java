@@ -47,6 +47,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> RECURVE_BOW = ITEMS.register("recurve_bow", RecurveBowItem::new);
     public static final RegistryObject<Item> STINGER = ITEMS.register("stinger", StingerItem::new);
+    public static final RegistryObject<Item> NETHERITE_WARBOW = ITEMS.register("netherite_warbow", NetheriteWarbowItem::new);
     public static final RegistryObject<Item> BLOODLETTER = ITEMS.register("bloodletter", () -> new Bloodletter(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> MAGMANUM_SWORD = ITEMS.register("magmanum_sword", MagmanumSword::new);
     public static final RegistryObject<Item> MAGMANUM_PICKAXE = ITEMS.register("magmanum_pickaxe", MagmanumPickaxe::new);
@@ -58,6 +59,12 @@ public class ModItems {
     public static final RegistryObject<Item> GIANT_SPIDER_SPAWN_EGG =
             ITEMS.register("giant_spider_spawn_egg", () ->new ForgeSpawnEggItem
                     (ModEntities.GIANT_SPIDER, 0x23170E, 0x3C0202, new Item.Properties()));
+    public static final RegistryObject<Item> GHOUL_SPAWN_EGG =
+            ITEMS.register("ghoul_spawn_egg", () ->new ForgeSpawnEggItem
+                    (ModEntities.GHOUL, 0x84888E, 0x950909, new Item.Properties()));
+    public static final RegistryObject<Item> DARK_SORCERER_SPAWN_EGG =
+            ITEMS.register("dark_sorcerer_spawn_egg", () ->new ForgeSpawnEggItem
+                    (ModEntities.DARK_SORCERER, 0x2C2637, 0x372E63, new Item.Properties()));
     public static final RegistryObject<Item> GOBLIN_SPAWN_EGG =
             ITEMS.register("goblin_spawn_egg", () ->new ForgeSpawnEggItem
                     (ModEntities.GOBLIN, 0x526133, 0x634F52, new Item.Properties()));
@@ -77,7 +84,7 @@ public class ModItems {
     public static final RegistryObject<Item> DIAMOND_DAGGER = ITEMS.register("diamond_dagger",
             () -> new DaggerItem(Tiers.DIAMOND, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> NETHERITE_DAGGER = ITEMS.register("netherite_dagger",
-            () -> new DaggerItem(Tiers.NETHERITE, new Item.Properties().stacksTo(1)));
+            () -> new DaggerItem(Tiers.NETHERITE, new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> WOODEN_FLAIL = ITEMS.register("wooden_flail",
             () -> new FlailItem(Tiers.WOOD, new Item.Properties().stacksTo(1)));
@@ -90,7 +97,7 @@ public class ModItems {
     public static final RegistryObject<Item> DIAMOND_FLAIL = ITEMS.register("diamond_flail",
             () -> new FlailItem(Tiers.DIAMOND, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> NETHERITE_FLAIL = ITEMS.register("netherite_flail",
-            () -> new FlailItem(Tiers.NETHERITE, new Item.Properties().stacksTo(1)));
+            () -> new FlailItem(Tiers.NETHERITE, new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> WOODEN_SCYTHE = ITEMS.register("wooden_scythe",
             () -> new ScytheItem(Tiers.WOOD, new Item.Properties().stacksTo(1)));
@@ -103,7 +110,7 @@ public class ModItems {
     public static final RegistryObject<Item> DIAMOND_SCYTHE = ITEMS.register("diamond_scythe",
             () -> new ScytheItem(Tiers.DIAMOND, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> NETHERITE_SCYTHE = ITEMS.register("netherite_scythe",
-            () -> new ScytheItem(Tiers.NETHERITE, new Item.Properties().stacksTo(1)));
+            () -> new ScytheItem(Tiers.NETHERITE, new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> WOODEN_SPEAR = ITEMS.register("wooden_spear",
             () -> new SpearItem(Tiers.WOOD, new Item.Properties().stacksTo(1)));
@@ -116,7 +123,7 @@ public class ModItems {
     public static final RegistryObject<Item> DIAMOND_SPEAR = ITEMS.register("diamond_spear",
             () -> new SpearItem(Tiers.DIAMOND, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> NETHERITE_SPEAR = ITEMS.register("netherite_spear",
-            () -> new SpearItem(Tiers.NETHERITE, new Item.Properties().stacksTo(1)));
+            () -> new SpearItem(Tiers.NETHERITE, new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> GOBSTEEL_SWORD = ITEMS.register("gobsteel_sword",
             () -> new SwordItem(GobsteelTier.INSTANCE, 3, -2.4F, new Item.Properties()));

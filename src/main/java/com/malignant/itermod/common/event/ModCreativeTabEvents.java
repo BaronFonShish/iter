@@ -95,6 +95,7 @@ public class ModCreativeTabEvents {
 
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(Items.BOW), new ItemStack(ModItems.RECURVE_BOW.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.RECURVE_BOW.get()), new ItemStack(ModItems.STINGER.get())),
+                new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.STINGER.get()), new ItemStack(ModItems.NETHERITE_WARBOW.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(Items.NETHERITE_SWORD), new ItemStack(ModItems.GOBSTEEL_SWORD.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(Items.NETHERITE_AXE), new ItemStack(ModItems.GOBSTEEL_AXE.get())),
                 new TabInsertion(CreativeModeTabs.COMBAT, new ItemStack(ModItems.GOBSTEEL_SWORD.get()), new ItemStack(ModItems.MAGMANUM_SWORD.get())),
@@ -141,7 +142,9 @@ public class ModCreativeTabEvents {
 
                 new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(Items.ZOMBIFIED_PIGLIN_SPAWN_EGG), new ItemStack(ModItems.GIANT_SPIDER_SPAWN_EGG.get())),
                 new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.GIANT_SPIDER_SPAWN_EGG.get()), new ItemStack(ModItems.SPIDERLING_SPAWN_EGG.get())),
-                new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.SPIDERLING_SPAWN_EGG.get()), new ItemStack(ModItems.GOBLIN_SPAWN_EGG.get())),
+                new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.SPIDERLING_SPAWN_EGG.get()), new ItemStack(ModItems.GHOUL_SPAWN_EGG.get())),
+                new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.GHOUL_SPAWN_EGG.get()), new ItemStack(ModItems.DARK_SORCERER_SPAWN_EGG.get())),
+                new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.DARK_SORCERER_SPAWN_EGG.get()), new ItemStack(ModItems.GOBLIN_SPAWN_EGG.get())),
                 new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.GOBLIN_SPAWN_EGG.get()), new ItemStack(ModItems.GOBLIN_WARRIOR_SPAWN_EGG.get()))
         );
 
