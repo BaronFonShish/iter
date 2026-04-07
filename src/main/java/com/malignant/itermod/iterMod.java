@@ -116,6 +116,7 @@ public class iterMod {
             event.put(ModEntities.GIANT_SPIDER.get(), GiantSpiderEntity.createAttributes().build());
             event.put(ModEntities.GHOUL.get(), GhoulEntity.createAttributes().build());
             event.put(ModEntities.DARK_SORCERER.get(), DarkSorcererEntity.createAttributes().build());
+            event.put(ModEntities.BEREFT.get(), BereftEntity.createAttributes().build());
             event.put(ModEntities.GOBLIN_WARRIOR.get(), GoblinWarriorEntity.createAttributes().build());
             event.put(ModEntities.GOBLIN.get(), GoblinEntity.createAttributes().build());
         }
@@ -143,6 +144,7 @@ public class iterMod {
             event.registerEntityRenderer(ModEntities.GOBLIN.get(), GoblinRenderer::new);
             event.registerEntityRenderer(ModEntities.GHOUL.get(), GhoulRenderer::new);
             event.registerEntityRenderer(ModEntities.DARK_SORCERER.get(), DarkSorcererRenderer::new);
+            event.registerEntityRenderer(ModEntities.BEREFT.get(), BereftRenderer::new);
 
             event.registerEntityRenderer(ModEntities.ETHERBOLT.get(), EtherboltRenderer::new);
             event.registerEntityRenderer(ModEntities.FLAMEBOLT.get(), FlameboltRenderer::new);

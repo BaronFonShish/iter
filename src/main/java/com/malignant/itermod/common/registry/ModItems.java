@@ -71,6 +71,9 @@ public class ModItems {
     public static final RegistryObject<Item> GOBLIN_WARRIOR_SPAWN_EGG =
             ITEMS.register("goblin_warrior_spawn_egg", () ->new ForgeSpawnEggItem
                     (ModEntities.GOBLIN_WARRIOR, 0x526133, 0x4B3A43, new Item.Properties()));
+    public static final RegistryObject<Item> BEREFT_SPAWN_EGG =
+            ITEMS.register("bereft_spawn_egg", () ->new ForgeSpawnEggItem
+                    (ModEntities.BEREFT, 0x69252F, 0x5B2649, new Item.Properties()));
 
 
     public static final RegistryObject<Item> WOODEN_DAGGER = ITEMS.register("wooden_dagger",

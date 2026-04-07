@@ -1,10 +1,11 @@
 {
   "type": "forge:add_spawns",
-  "biomes": "#forge:is_overworld",
+  "biomes": "#minecraft:is_overworld",
   "spawners": {
     "type": "iter:giant_spider",
     "weight": 2,
     "minCount": 1,
     "maxCount": 1
-  }
+  },
+  "category": "monster"
 }

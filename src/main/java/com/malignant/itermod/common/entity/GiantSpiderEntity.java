@@ -104,7 +104,7 @@ public class GiantSpiderEntity extends Spider {
                         return false;
                     }
 
-            if (!level.getLevel().dimension().location().getPath().equals("overworld")) {
+            if (!(level.getLevel().dimension() == Level.OVERWORLD)) {
                         return false;
                     }
 

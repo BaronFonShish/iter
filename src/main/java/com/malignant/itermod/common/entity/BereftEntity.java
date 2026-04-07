@@ -1,39 +1,44 @@
 package com.malignant.itermod.common.entity;
 
 import com.malignant.itermod.common.registry.ModEntities;
+import com.malignant.itermod.common.registry.ModItems;
+import com.malignant.itermod.common.registry.ModTags;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.FleeSunGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.phys.AABB;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.network.PlayMessages;
 
 import javax.annotation.Nullable;
 
-public class GhoulEntity extends Monster {
+public class BereftEntity extends Monster {
 
-    public GhoulEntity(PlayMessages.SpawnEntity packet, Level world) {
-        this(ModEntities.GHOUL.get(), world);
+    public BereftEntity(PlayMessages.SpawnEntity packet, Level world) {
+        this(ModEntities.BEREFT.get(), world);
     }
 
-    public GhoulEntity(EntityType<GhoulEntity> type, Level world) {
+    public BereftEntity(EntityType<BereftEntity> type, Level world) {
         super(type, world);
         setMaxUpStep(0.6f);
         xpReward = 3;
@@ -52,10 +57,10 @@ public class GhoulEntity extends Monster {
 
     public static AttributeSupplier.Builder createAttributes() {
         AttributeSupplier.Builder builder = Mob.createMobAttributes();
-        builder = builder.add(Attributes.MOVEMENT_SPEED, 0.225f);
-        builder = builder.add(Attributes.MAX_HEALTH, 20);
+        builder = builder.add(Attributes.MOVEMENT_SPEED, 0.2f);
+        builder = builder.add(Attributes.MAX_HEALTH, 30);
         builder = builder.add(Attributes.ARMOR, 0);
-        builder = builder.add(Attributes.ATTACK_DAMAGE, 7);
+        builder = builder.add(Attributes.ATTACK_DAMAGE, 4);
         builder = builder.add(Attributes.FOLLOW_RANGE, 32);
         return builder;
     }
@@ -63,10 +68,10 @@ public class GhoulEntity extends Monster {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 1.6f, true) {
+        this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 1.25f, true) {
             @Override
             protected double getAttackReachSqr(LivingEntity attackTarget) {
-                return super.getAttackReachSqr(attackTarget) + 1.0;
+                return super.getAttackReachSqr(attackTarget) + 1f;
             }
         });
 
@@ -97,36 +102,12 @@ public class GhoulEntity extends Monster {
         return SoundEvents.ZOMBIE_DEATH;
     }
 
+
     @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions dimensions) {
-        return dimensions.height * 0.8f;
+        return dimensions.height * 0.9f;
     }
 
-    public void aiStep() {
-        if (this.isAlive()) {
-            boolean flag = this.isSunBurnTick();
-            if (flag) {
-                ItemStack itemstack = this.getItemBySlot(EquipmentSlot.HEAD);
-                if (!itemstack.isEmpty()) {
-                    if (itemstack.isDamageableItem()) {
-                        itemstack.setDamageValue(itemstack.getDamageValue() + this.random.nextInt(2));
-                        if (itemstack.getDamageValue() >= itemstack.getMaxDamage()) {
-                            this.broadcastBreakEvent(EquipmentSlot.HEAD);
-                            this.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
-                        }
-                    }
-
-                    flag = false;
-                }
-
-                if (flag) {
-                    this.setSecondsOnFire(8);
-                }
-            }
-        }
-
-        super.aiStep();
-    }
 
     @Nullable
     @Override
@@ -134,32 +115,41 @@ public class GhoulEntity extends Monster {
                                         MobSpawnType reason, @Nullable SpawnGroupData spawnData,
                                         @Nullable CompoundTag dataTag) {
         spawnData = super.finalizeSpawn(world, difficulty, reason, spawnData, dataTag);
+
+        this.populateDefaultEquipmentSlots(this.random, difficulty);
+
         return spawnData;
     }
 
-    public static void init(){
-        SpawnPlacements.register(ModEntities.DARK_SORCERER.get(), SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (entityType, level, reason, pos, random) -> {
-                    if (!(level.getLevel().dimension() == Level.OVERWORLD)) {
-                        return false;
-                    }
+    @Override
+    protected void populateDefaultEquipmentSlots(RandomSource random, DifficultyInstance difficulty) {
+        super.populateDefaultEquipmentSlots(random, difficulty);
 
-                    if (level.getMaxLocalRawBrightness(pos) > 7) {
-                        return false;
-                    }
+        ItemStack weapon = getRandomWeapon(random);
+        if (weapon.isDamageableItem()) {
 
-                    AABB searchArea = new AABB(pos.getX() - 50, pos.getY() - 20, pos.getZ() - 50,
-                            pos.getX() + 50, pos.getY() + 20, pos.getZ() + 50);
-                    int nearbySorcerers = level.getEntitiesOfClass(DarkSorcererEntity.class, searchArea, e -> true).size();
-                    if (nearbySorcerers >= 1) {
-                        return false;
-                    }
 
-                    if (!level.getBlockState(pos.below()).isSolidRender(level, pos.below())) {
-                        return false;
-                    }
+            int maxDamage = weapon.getMaxDamage();
+            int minDamage = (int) (maxDamage * 0.4f);
+            int maxDamageAmount = (int) (maxDamage * 0.9f);
+            int damageAmount = this.random.nextIntBetweenInclusive(minDamage, maxDamageAmount-1);
 
-                    return true;
-                });
+            weapon.setDamageValue(damageAmount);
+        }
+
+        this.setItemSlot(EquipmentSlot.MAINHAND, weapon);
+        this.armorDropChances[EquipmentSlot.MAINHAND.getIndex()] = 0.125F;
     }
+
+    private ItemStack getRandomWeapon(RandomSource random) {
+        int weaponChoice = random.nextInt(10);
+        return switch (weaponChoice) {
+            case 0,1,2 -> new ItemStack(Items.IRON_SWORD);
+            case 3 -> new ItemStack(Items.IRON_AXE);
+            case 4 -> new ItemStack(ModItems.IRON_SPEAR.get());
+            case 5 -> new ItemStack(ModItems.IRON_DAGGER.get());
+            default -> new ItemStack(Items.AIR);
+        };
+    }
+
 }

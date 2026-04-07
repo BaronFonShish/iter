@@ -144,7 +144,8 @@ public class ModCreativeTabEvents {
                 new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.GIANT_SPIDER_SPAWN_EGG.get()), new ItemStack(ModItems.SPIDERLING_SPAWN_EGG.get())),
                 new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.SPIDERLING_SPAWN_EGG.get()), new ItemStack(ModItems.GHOUL_SPAWN_EGG.get())),
                 new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.GHOUL_SPAWN_EGG.get()), new ItemStack(ModItems.DARK_SORCERER_SPAWN_EGG.get())),
-                new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.DARK_SORCERER_SPAWN_EGG.get()), new ItemStack(ModItems.GOBLIN_SPAWN_EGG.get())),
+                new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.DARK_SORCERER_SPAWN_EGG.get()), new ItemStack(ModItems.BEREFT_SPAWN_EGG.get())),
+                new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.BEREFT_SPAWN_EGG.get()), new ItemStack(ModItems.GOBLIN_SPAWN_EGG.get())),
                 new TabInsertion(CreativeModeTabs.SPAWN_EGGS, new ItemStack(ModItems.GOBLIN_SPAWN_EGG.get()), new ItemStack(ModItems.GOBLIN_WARRIOR_SPAWN_EGG.get()))
         );
 

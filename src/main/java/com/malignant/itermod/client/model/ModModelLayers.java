@@ -11,6 +11,7 @@ public class ModModelLayers {
         event.registerLayerDefinition(GiantSpiderModel.LAYER_LOCATION, GiantSpiderModel::createBodyLayer);
         event.registerLayerDefinition(GhoulModel.LAYER_LOCATION, GhoulModel::createBodyLayer);
         event.registerLayerDefinition(DarkSorcererModel.LAYER_LOCATION, DarkSorcererModel::createBodyLayer);
+        event.registerLayerDefinition(BereftModel.LAYER_LOCATION, BereftModel::createBodyLayer);
         event.registerLayerDefinition(GoblinWarriorModel.LAYER_LOCATION, GoblinWarriorModel::createBodyLayer);
         event.registerLayerDefinition(GoblinModel.LAYER_LOCATION, GoblinModel::createBodyLayer);
 

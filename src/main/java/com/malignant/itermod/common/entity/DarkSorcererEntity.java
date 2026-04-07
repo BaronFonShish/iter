@@ -1,5 +1,6 @@
 package com.malignant.itermod.common.entity;
 
+import com.malignant.itermod.common.IterModConfig;
 import com.malignant.itermod.common.entity.misc.EtherboltEntity;
 import com.malignant.itermod.common.entity.misc.FlameboltEntity;
 import com.malignant.itermod.common.entity.misc.FrostSpikeEntity;
@@ -8,12 +9,14 @@ import com.malignant.itermod.common.misc.StrafeMovementGoal;
 import com.malignant.itermod.common.registry.ModEntities;
 import com.malignant.itermod.common.registry.ModItems;
 import com.malignant.itermod.common.registry.ModSounds;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -34,11 +37,15 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.network.PlayMessages;
 
 import javax.annotation.Nullable;
+import java.util.Set;
 
 public class DarkSorcererEntity extends Monster {
 
@@ -310,5 +317,57 @@ public class DarkSorcererEntity extends Monster {
         compound.putInt("SpellType", this.getSpelltype());
         compound.putBoolean("Casting", this.isCasting());
         compound.putInt("CastTime", this.getCastTime());
+    }
+
+    public static void init(){
+        SpawnPlacements.register(ModEntities.DARK_SORCERER.get(), SpawnPlacements.Type.ON_GROUND,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (entityType, level, reason, pos, random) -> {
+                    if (!(level.getLevel().dimension() == Level.OVERWORLD)) {
+                        return false;
+                    }
+
+                    if (level.getMaxLocalRawBrightness(pos) > 7) {
+                        return false;
+                    }
+
+                    AABB searchArea = new AABB(pos.getX() - 50, pos.getY() - 20, pos.getZ() - 50,
+                            pos.getX() + 50, pos.getY() + 20, pos.getZ() + 50);
+                    int nearbySorcerers = level.getEntitiesOfClass(DarkSorcererEntity.class, searchArea, e -> true).size();
+                    if (nearbySorcerers >= 1) {
+                        return false;
+                    }
+
+                    if (!level.getBlockState(pos.below()).isSolidRender(level, pos.below())) {
+                        return false;
+                    }
+
+                    return true;
+                });
+    }
+
+    public void aiStep() {
+        if (this.isAlive()) {
+            boolean flag = this.isSunBurnTick();
+            if (flag) {
+                ItemStack itemstack = this.getItemBySlot(EquipmentSlot.HEAD);
+                if (!itemstack.isEmpty()) {
+                    if (itemstack.isDamageableItem()) {
+                        itemstack.setDamageValue(itemstack.getDamageValue() + this.random.nextInt(2));
+                        if (itemstack.getDamageValue() >= itemstack.getMaxDamage()) {
+                            this.broadcastBreakEvent(EquipmentSlot.HEAD);
+                            this.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
+                        }
+                    }
+
+                    flag = false;
+                }
+
+                if (flag) {
+                    this.setSecondsOnFire(8);
+                }
+            }
+        }
+
+        super.aiStep();
     }
 }

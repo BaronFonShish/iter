@@ -146,6 +146,12 @@
   "item.iter.goblin_spawn_egg": "Goblin Spawn Egg",
   "entity.iter.goblin_warrior": "Goblin Warrior",
   "item.iter.goblin_warrior_spawn_egg": "Goblin Warrior Spawn Egg",
+  "entity.iter.ghoul": "Ghoul",
+  "item.iter.ghoul_spawn_egg": "Ghoul Spawn Egg",
+  "entity.iter.dark_sorcerer": "Dark Sorcerer",
+  "item.iter.dark_sorcerer_spawn_egg": "Dark Sorcerer Spawn Egg",
+  "entity.iter.bereft": "Bereft",
+  "item.iter.bereft_spawn_egg": "Bereft Spawn Egg",
   "entity.iter.etherbolt": "Etherbolt",
   "entity.iter.frost_spike": "Frost Spike",
 

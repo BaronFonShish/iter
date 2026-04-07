@@ -43,6 +43,13 @@ public class ModEntities {
                             .sized(0.5f, 1.975f)
                             .build("dark_sorcerer"));
 
+    public static final RegistryObject<EntityType<BereftEntity>> BEREFT =
+            ENTITY_TYPES.register("bereft",
+                    () -> EntityType.Builder.<BereftEntity>of(BereftEntity::new, MobCategory.MONSTER)
+                            .setTrackingRange(64)
+                            .sized(0.5f, 2.05f)
+                            .build("bereft"));
+
     public static final RegistryObject<EntityType<GoblinWarriorEntity>> GOBLIN_WARRIOR =
             ENTITY_TYPES.register("goblin_warrior",
                     () -> EntityType.Builder.<GoblinWarriorEntity>of(GoblinWarriorEntity::new, MobCategory.MONSTER)

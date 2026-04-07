@@ -146,6 +146,12 @@
   "item.iter.goblin_spawn_egg": "Яйцо призыва гоблина",
   "entity.iter.goblin_warrior": "Гоблин-воин",
   "item.iter.goblin_warrior_spawn_egg": "Яйцо призыва гоблина-воина",
+  "entity.iter.ghoul": "Упырь",
+  "item.iter.ghoul_spawn_egg": "Яйцо призыва упыря",
+  "entity.iter.dark_sorcerer": "Тёмный колдун",
+  "item.iter.dark_sorcerer_spawn_egg": "Яйцо призыва тёмного колдуна",
+  "entity.iter.bereft": "Лишённый",
+  "item.iter.bereft_spawn_egg": "Яйцо призыва лишённого",
   "entity.iter.etherbolt": "Эфирный снаряд",
   "entity.iter.frost_spike": "Морозный шип",
 
