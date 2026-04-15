@@ -50,5 +50,25 @@
     "sounds": [
       "iter:goblin_death"
     ]
+  },
+  "bereft_ambient": {
+    "subtitles": "sounds.iter.bereft_ambient",
+    "sounds": [
+      "iter:bereft_ambient_1",
+      "iter:bereft_ambient_2",
+      "iter:bereft_ambient_3",
+      "iter:bereft_ambient_4",
+      "iter:bereft_ambient_5",
+      "iter:bereft_ambient_6"
+    ]
+  },
+  "bereft_hurt": {
+    "subtitles": "sounds.iter.bereft_hurt",
+    "sounds": [
+      "iter:bereft_hurt_1",
+      "iter:bereft_hurt_2",
+      "iter:bereft_hurt_3",
+      "iter:bereft_hurt_4"
+    ]
   }
 }

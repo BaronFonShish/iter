@@ -1,12 +1,13 @@
 package com.malignant.itermod.common.entity;
 
 
-import com.malignant.itermod.common.IterModConfig;
 import com.malignant.itermod.common.event.SpiderEggHatchEvent;
-import com.malignant.itermod.common.registry.ModEntities;
+import com.malignant.itermod.common.registry.ModSpawnRestrictions;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -21,7 +22,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
 
 import javax.annotation.Nullable;
@@ -95,59 +95,55 @@ public class GiantSpiderEntity extends Spider {
         SpiderEggHatchEvent.spawnSpiderlings(this.level(), this.getX(), this.getY(), this.getZ());
     }
 
+    public static boolean GiantSpiderSpawnRules(
+            EntityType<GiantSpiderEntity> entityType,
+            ServerLevelAccessor level,
+            MobSpawnType spawnType,
+            BlockPos pos,
+            RandomSource random) {
 
-    public static void init(){
-        SpawnPlacements.register(ModEntities.GIANT_SPIDER.get(), SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (entityType, level, reason, pos, random) -> {
+        if (!(level.getLevel().dimension() == Level.OVERWORLD)) {
+            return false;
+        }
 
-            if (!IterModConfig.COMMON.giantSpiders.get()) {
-                        return false;
-                    }
+        if (!ModSpawnRestrictions.defaultMonsterCheck(level, pos)) {
+            return false;
+        }
 
-            if (!(level.getLevel().dimension() == Level.OVERWORLD)) {
-                        return false;
-                    }
+        int width = 100;
+        int height = 50;
+        AABB searchArea = new AABB(pos.getX() - width, pos.getY() - height, pos.getZ() - width,
+                pos.getX() + width, pos.getY() + height, pos.getZ() + width);
+        int nearbySames = level.getEntitiesOfClass(GiantSpiderEntity.class, searchArea, e -> true).size();
 
-            if (level.getMaxLocalRawBrightness(pos) > 7) {
-                        return false;
-                    }
+        if (nearbySames >= 2) {
+            return false;
+        }
 
-            boolean cave = false;
-            boolean rightbiome = false;
+        boolean cave = false;
+        boolean rightbiome = false;
 
-            if (pos.getY() <= 32) {cave = true;}
+        if (pos.getY() <= 32) {cave = true;}
 
-            AABB searchArea = new AABB(pos.getX() - 50, pos.getY() - 20, pos.getZ() - 50,
-                            pos.getX() + 50, pos.getY() + 20, pos.getZ() + 50);
-                    int nearbySpiders = level.getEntitiesOfClass(GiantSpiderEntity.class, searchArea, e -> true).size();
-                    if (nearbySpiders >= 2) {
-                        return false;
-                    }
+        Biome biome = level.getBiome(pos).value();
+        ResourceLocation biomeId = level.getLevel().registryAccess().registryOrThrow(Registries.BIOME)
+                .getKey(biome);
 
-                    Biome biome = level.getBiome(pos).value();
-                    ResourceLocation biomeId = level.getLevel().registryAccess().registryOrThrow(Registries.BIOME)
-                            .getKey(biome);
+        Set<ResourceLocation> allowedBiomes = Set.of(
+                new ResourceLocation("minecraft:dark_forest"),
+                new ResourceLocation("minecraft:old_growth_pine_taiga"),
+                new ResourceLocation("minecraft:old_growth_spruce_taiga")
+        );
 
-                    Set<ResourceLocation> allowedBiomes = Set.of(
-                            new ResourceLocation("minecraft:dark_forest"),
-                            new ResourceLocation("minecraft:old_growth_pine_taiga"),
-                            new ResourceLocation("minecraft:old_growth_spruce_taiga")
-                    );
+        if (allowedBiomes.contains(biomeId)) {
+            rightbiome = true;
+        }
 
-                    if (allowedBiomes.contains(biomeId)) {
-                        rightbiome = true;
-                    }
+        if (!(cave || rightbiome)){
+            return false;
+        }
 
-                    if (!level.getBlockState(pos.below()).isSolidRender(level, pos.below())) {
-                        return false;
-                    }
-
-                    if (!(cave || rightbiome)){
-                        return false;
-                    }
-
-                    return true;
-                });
+        return true;
     }
 
     @Override

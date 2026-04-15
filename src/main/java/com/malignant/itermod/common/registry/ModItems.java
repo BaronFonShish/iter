@@ -190,7 +190,9 @@ public class ModItems {
     public static final RegistryObject<Item> SPELL_RECALL = ITEMS.register("spell_recall", SpellRecall::new);
     public static final RegistryObject<Item> SPELL_ARCANE_BEAM = ITEMS.register("spell_arcane_beam", SpellArcaneBeam::new);
 
+    public static final RegistryObject<Item> SPELL_GEOSENSE = ITEMS.register("spell_geosense", SpellGeosense::new);
     public static final RegistryObject<Item> SPELL_SPLASHES = ITEMS.register("spell_splashes", SpellSplashes::new);
+    public static final RegistryObject<Item> SPELL_GUST = ITEMS.register("spell_gust", SpellGust::new);
     public static final RegistryObject<Item> SPELL_IGNITE = ITEMS.register("spell_ignite", SpellIgnite::new);
     public static final RegistryObject<Item> SPELL_FLAMEBOLT = ITEMS.register("spell_flamebolt", SpellFlamebolt::new);
     public static final RegistryObject<Item> SPELL_FROST_SPIKE = ITEMS.register("spell_frost_spike", SpellFrostSpike::new);

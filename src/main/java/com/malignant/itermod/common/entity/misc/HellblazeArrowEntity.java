@@ -34,6 +34,7 @@ public class HellblazeArrowEntity extends AbstractArrow implements ItemSupplier 
         super(ModEntities.HELLBLAZE_ARROW.get(), world);
     }
 
+
     public HellblazeArrowEntity(EntityType<? extends HellblazeArrowEntity> type, Level world) {
         super(type, world);
     }
@@ -45,8 +46,6 @@ public class HellblazeArrowEntity extends AbstractArrow implements ItemSupplier 
     public HellblazeArrowEntity(EntityType<? extends HellblazeArrowEntity> type, LivingEntity entity, Level world) {
         super(type, entity, world);
     }
-
-
 
     @Override
     public Packet<ClientGamePacketListener> getAddEntityPacket() {

@@ -1,11 +1,8 @@
 package com.malignant.itermod;
 
-import com.malignant.itermod.client.renderer.*;
 import com.malignant.itermod.common.entity.*;
 import com.malignant.itermod.common.registry.*;
 import com.mojang.logging.LogUtils;
-import com.malignant.itermod.client.model.ModModelLayers;
-import com.malignant.itermod.client.renderer.*;
 import com.malignant.itermod.common.IterModConfig;
 import com.malignant.itermod.common.entity.*;
 import com.malignant.itermod.common.registry.*;
@@ -132,26 +129,52 @@ public class iterMod {
 
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-            ModModelLayers.registerLayerDefinitions(event);
+            com.malignant.itermod.client.model.ModModelLayers.registerLayerDefinitions(event);
         }
 
         @SubscribeEvent
         public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 
-            event.registerEntityRenderer(ModEntities.SPIDERLING.get(), SpiderlingRenderer::new);
-            event.registerEntityRenderer(ModEntities.GIANT_SPIDER.get(), GiantSpiderRenderer::new);
-            event.registerEntityRenderer(ModEntities.GOBLIN_WARRIOR.get(), GoblinWarriorRenderer::new);
-            event.registerEntityRenderer(ModEntities.GOBLIN.get(), GoblinRenderer::new);
-            event.registerEntityRenderer(ModEntities.GHOUL.get(), GhoulRenderer::new);
-            event.registerEntityRenderer(ModEntities.DARK_SORCERER.get(), DarkSorcererRenderer::new);
-            event.registerEntityRenderer(ModEntities.BEREFT.get(), BereftRenderer::new);
+            event.registerEntityRenderer(ModEntities.SPIDERLING.get(),
+                    com.malignant.itermod.client.renderer.SpiderlingRenderer::new);
 
-            event.registerEntityRenderer(ModEntities.ETHERBOLT.get(), EtherboltRenderer::new);
-            event.registerEntityRenderer(ModEntities.FLAMEBOLT.get(), FlameboltRenderer::new);
-            event.registerEntityRenderer(ModEntities.FROST_SPIKE.get(), FrostSpikeRenderer::new);
-            event.registerEntityRenderer(ModEntities.HELLBLAZE_ARROW.get(), HellblazeArrowRenderer::new);
-            event.registerEntityRenderer(ModEntities.STRAIGHT_BEAM.get(), StraightBeamRenderer::new);
-            event.registerEntityRenderer(ModEntities.JAGGED_BEAM.get(), JaggedBeamRenderer::new);
+            event.registerEntityRenderer(ModEntities.GIANT_SPIDER.get(),
+                    com.malignant.itermod.client.renderer.GiantSpiderRenderer::new);
+
+            event.registerEntityRenderer(ModEntities.GOBLIN_WARRIOR.get(),
+                    com.malignant.itermod.client.renderer.GoblinWarriorRenderer::new);
+
+            event.registerEntityRenderer(ModEntities.GOBLIN.get(),
+                    com.malignant.itermod.client.renderer.GoblinRenderer::new);
+
+            event.registerEntityRenderer(ModEntities.GHOUL.get(),
+                    com.malignant.itermod.client.renderer.GhoulRenderer::new);
+
+            event.registerEntityRenderer(ModEntities.DARK_SORCERER.get(),
+                    com.malignant.itermod.client.renderer.DarkSorcererRenderer::new);
+
+            event.registerEntityRenderer(ModEntities.BEREFT.get(),
+                    com.malignant.itermod.client.renderer.BereftRenderer::new);
+
+
+
+            event.registerEntityRenderer(ModEntities.ETHERBOLT.get(),
+                    com.malignant.itermod.client.renderer.EtherboltRenderer::new);
+
+            event.registerEntityRenderer(ModEntities.FLAMEBOLT.get(),
+                    com.malignant.itermod.client.renderer.FlameboltRenderer::new);
+
+            event.registerEntityRenderer(ModEntities.FROST_SPIKE.get(),
+                    com.malignant.itermod.client.renderer.FrostSpikeRenderer::new);
+
+            event.registerEntityRenderer(ModEntities.HELLBLAZE_ARROW.get(),
+                    com.malignant.itermod.client.renderer.HellblazeArrowRenderer::new);
+
+            event.registerEntityRenderer(ModEntities.STRAIGHT_BEAM.get(),
+                    com.malignant.itermod.client.renderer.StraightBeamRenderer::new);
+
+            event.registerEntityRenderer(ModEntities.JAGGED_BEAM.get(),
+                    com.malignant.itermod.client.renderer.JaggedBeamRenderer::new);
         }
 
         @SubscribeEvent

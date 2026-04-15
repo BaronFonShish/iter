@@ -27,14 +27,15 @@ public class HellblazeArrowItem extends ArrowItem {
         list.add(Component.translatable("iter.desc.hellblaze_arrow"));
     }
 
-    public AbstractArrow createArrow(Level level, ItemStack itemstack, LivingEntity sourceEntity) {
-        HellblazeArrowEntity arrow = new HellblazeArrowEntity(ModEntities.HELLBLAZE_ARROW.get(), sourceEntity, level);
+    @Override
+    public AbstractArrow createArrow(Level level, ItemStack stack, LivingEntity shooter) {
+        HellblazeArrowEntity arrow = new HellblazeArrowEntity(ModEntities.HELLBLAZE_ARROW.get(), shooter, level);
         return arrow;
     }
 
-    public AbstractArrow createArrow(Level level, ItemStack stack, LivingEntity shooter, ItemStack projectile) {
-        HellblazeArrowEntity arrow = new HellblazeArrowEntity(ModEntities.HELLBLAZE_ARROW.get(), shooter, level);
-        return arrow;
+    @Override
+    public boolean isInfinite(ItemStack stack, ItemStack bow, net.minecraft.world.entity.player.Player player) {
+        return super.isInfinite(stack, bow, player);
     }
 }
 

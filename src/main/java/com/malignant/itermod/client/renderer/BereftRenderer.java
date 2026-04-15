@@ -2,6 +2,7 @@ package com.malignant.itermod.client.renderer;
 
 import com.malignant.itermod.client.model.BereftModel;
 import com.malignant.itermod.client.model.DarkSorcererModel;
+import com.malignant.itermod.client.renderer.BereftArmorLayer;
 import com.malignant.itermod.common.entity.BereftEntity;
 import com.malignant.itermod.common.entity.DarkSorcererEntity;
 import com.malignant.itermod.iterMod;
@@ -23,7 +24,15 @@ public class BereftRenderer extends MobRenderer<BereftEntity, BereftModel<Bereft
     public BereftRenderer(EntityRendererProvider.Context context) {
         super(context, new BereftModel<>(context.bakeLayer(BereftModel.LAYER_LOCATION)), 0.5f);
         this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
+
+        // Create humanoid armor models
+        HumanoidModel<BereftEntity> innerArmor = new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER_INNER_ARMOR));
+        HumanoidModel<BereftEntity> outerArmor = new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR));
+
+        // Add custom armor layer
+        this.addLayer(new BereftArmorLayer(this, innerArmor, outerArmor));
     }
+
 
     @Override
     public ResourceLocation getTextureLocation(BereftEntity entity) {
@@ -37,4 +46,6 @@ public class BereftRenderer extends MobRenderer<BereftEntity, BereftModel<Bereft
         super.render(entity, entityYaw, partialTicks, poseStack, bufferIn, packedLightIn);
         poseStack.popPose();
     }
+
+
 }

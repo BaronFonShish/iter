@@ -3,7 +3,6 @@ package com.malignant.itermod.common.item.magic.defaults;
 import com.malignant.itermod.common.misc.Pictograms;
 import com.malignant.itermod.common.registry.ModAttributes;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -140,7 +139,6 @@ public abstract class SpellItem extends Item{
         return spellpower;
     }
 
-
     @Override
     public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
         super.appendHoverText(itemstack, world, list, flag);
@@ -148,67 +146,103 @@ public abstract class SpellItem extends Item{
         ResourceLocation registryName = ForgeRegistries.ITEMS.getKey(this);
         if (registryName != null) {
 
-            LocalPlayer clientPlayer = getClientPlayer();
-            if (clientPlayer != null) {
-                Minecraft mc = Minecraft.getInstance();
-                boolean shiftheld = false;
-                if (mc.screen != null) {
-                    shiftheld = mc.screen.hasShiftDown();
-                } else shiftheld = mc.options.keyShift.isDown();
+            String baseKey = BuiltInRegistries.ITEM.getKey(this).getNamespace() + "." + BuiltInRegistries.ITEM.getKey(this).getPath();
 
-                String baseKey = BuiltInRegistries.ITEM.getKey(this).getNamespace() + "." + BuiltInRegistries.ITEM.getKey(this).getPath();
+            String domainKey = "iterpg.spell.domain." + this.getDomain();
+            String methodKey = "iterpg.spell.method." + this.getMethod();
+            String aspectKey = "iterpg.spell.aspect." + this.getAspect();
+            Component SpellInfo = Component.translatable("iterpg.spell.info",
+                    Component.empty().append(returnSymbol(this.domain)).append(Component.translatable(domainKey)),
+                    Component.empty().append(returnSymbol(this.method)).append(Component.translatable(methodKey)),
+                    Component.empty().append(returnSymbol(this.aspect)).append(Component.translatable(aspectKey)));
 
-                    String domainKey = "iterpg.spell.domain." + this.getDomain();
-                    String methodKey = "iterpg.spell.method." + this.getMethod();
-                    String aspectKey = "iterpg.spell.aspect." + this.getAspect();
-                    Component SpellInfo = Component.translatable("iterpg.spell.info",
-                            Component.empty().append(returnSymbol(this.domain)).append(Component.translatable(domainKey)),
-                            Component.empty().append(returnSymbol(this.method)).append(Component.translatable(methodKey)),
-                            Component.empty().append(returnSymbol(this.aspect)).append(Component.translatable(aspectKey)));
+            int quality = getQuality(itemstack);
+            Component qualityText = Component.translatable("iterpg.spell.quality")
+                    .append(Component.literal(": " + quality));
 
+            list.add(Component.translatable("iterpg.spell.tier", Component.translatable("iterpg.spell.tier." + this.getTier())));
 
-                int quality = getQuality(itemstack);
-                Component qualityText = Component.translatable("iterpg.spell.quality")
-                        .append(Component.literal(": " + quality));
+            if (world != null && world.isClientSide) {
+                boolean shiftheld = isShiftHeld();
 
-                list.add(Component.translatable("iterpg.spell.tier", Component.translatable("iterpg.spell.tier." + this.getTier())));
-
-                if (shiftheld){list.add(SpellInfo);}
-                else {
+                if (shiftheld) {
+                    list.add(SpellInfo);
+                } else {
                     Component SpellPictures = Component.empty().append(returnSymbol(this.domain)).append(returnSymbol(this.method)).append(returnSymbol(this.aspect));
                     list.add(SpellPictures);
                 }
                 list.add(qualityText);
                 list.add(Component.literal(""));
 
-
                 if (shiftheld) {
-                    float dynamicSpellPower = getSpellPower(clientPlayer, itemstack);
-                    float dynamicCastTime = getCastTime(clientPlayer, itemstack) / 20f;
-                    float dynamicCooldown = getCooldown(clientPlayer, itemstack) / 20f;
-                    float dynamicManaCost = getManaCost(clientPlayer, itemstack);
-
-                    String spellPowerString = String.format("%.2f", dynamicSpellPower);
-                    String castTimeString = String.format("%.1f", dynamicCastTime);
-                    String cooldownString = String.format("%.1f", dynamicCooldown);
-                    String manaCostString = String.format("%.1f", dynamicManaCost);
-
-
-                    list.add(Component.translatable("iterpg.spell.spellpower", spellPowerString));
-                    if (dynamicCastTime > 0.05f) {
-                        list.add(Component.translatable("iterpg.spell.cast_time", castTimeString));
+                    Player clientPlayer = Minecraft.getInstance().player;
+                    if (clientPlayer != null) {
+                        addDynamicStats(list, clientPlayer, itemstack);
+                    } else {
+                        addBaseStats(list);
                     }
-
-                    list.add(Component.translatable("iterpg.spell.mana_cost", manaCostString));
-
-                    list.add(Component.translatable("iterpg.spell.cooldown", cooldownString));
                 } else {
-                    list.add(Component.translatable("iterpg.spell.shift"));}
+                    list.add(Component.translatable("iterpg.spell.shift"));
+                }
 
+                list.add(Component.literal(""));
+                list.add(Component.translatable(baseKey + ".desc"));
+            } else {
+                list.add(qualityText);
+                list.add(Component.literal(""));
+                addBaseStats(list);
                 list.add(Component.literal(""));
                 list.add(Component.translatable(baseKey + ".desc"));
             }
         }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private boolean isShiftHeld() {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.screen != null) {
+            return mc.screen.hasShiftDown();
+        }
+        return mc.options.keyShift.isDown();
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private void addDynamicStats(List<Component> list, Player player, ItemStack spellStack) {
+        float dynamicSpellPower = getSpellPower(player, spellStack);
+        float dynamicCastTime = getCastTime(player, spellStack) / 20f;
+        float dynamicCooldown = getCooldown(player, spellStack) / 20f;
+        float dynamicManaCost = getManaCost(player, spellStack);
+
+        String spellPowerString = String.format("%.2f", dynamicSpellPower);
+        String castTimeString = String.format("%.1f", dynamicCastTime);
+        String cooldownString = String.format("%.1f", dynamicCooldown);
+        String manaCostString = String.format("%.1f", dynamicManaCost);
+
+        list.add(Component.translatable("iterpg.spell.spellpower", spellPowerString));
+        if (dynamicCastTime > 0.05f) {
+            list.add(Component.translatable("iterpg.spell.cast_time", castTimeString));
+        }
+        list.add(Component.translatable("iterpg.spell.mana_cost", manaCostString));
+        list.add(Component.translatable("iterpg.spell.cooldown", cooldownString));
+    }
+
+    private void addBaseStats(List<Component> list) {
+        float baseSpellPower = 0.2f;
+        float baseCastTime = this.castTime / 20f;
+        float baseCooldown = this.cooldown / 20f;
+        float baseManaCost = this.etherCost;
+
+        String spellPowerString = String.format("%.2f", baseSpellPower);
+        String castTimeString = String.format("%.1f", baseCastTime);
+        String cooldownString = String.format("%.1f", baseCooldown);
+        String manaCostString = String.format("%.1f", baseManaCost);
+
+        list.add(Component.translatable("iterpg.spell.spellpower", spellPowerString));
+        if (baseCastTime > 0.05f) {
+            list.add(Component.translatable("iterpg.spell.cast_time", castTimeString));
+        }
+        list.add(Component.translatable("iterpg.spell.mana_cost", manaCostString));
+        list.add(Component.translatable("iterpg.spell.cooldown", cooldownString));
     }
 
     public MutableComponent returnSymbol(String type){
@@ -236,11 +270,6 @@ public abstract class SpellItem extends Item{
             default -> Pictograms.IA_FIRE;
         };
         return Pictograms.getIcon(icon);
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    private LocalPlayer getClientPlayer() {
-        return Minecraft.getInstance().player;
     }
 
     public abstract void castSpell(Level level, Player player, ItemStack wand, ItemStack spellStack, float spellpower);

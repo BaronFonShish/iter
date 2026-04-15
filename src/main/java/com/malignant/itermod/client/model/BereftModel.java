@@ -17,6 +17,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.ItemStack;
 
 public class BereftModel<T extends LivingEntity> extends EntityModel<T> implements ArmedModel {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(iterMod.MOD_ID, "bereft"), "main");
@@ -37,6 +39,15 @@ public class BereftModel<T extends LivingEntity> extends EntityModel<T> implemen
 		this.leftLeg = this.wholemob.getChild("leftLeg");
 		this.rightLeg = this.wholemob.getChild("rightLeg");
 	}
+
+    public ModelPart getHead() { return head; }
+    public ModelPart getBody() { return body; }
+    public ModelPart getLeftArm() { return leftArm; }
+    public ModelPart getRightArm() { return rightArm; }
+    public ModelPart getLeftLeg() { return leftLeg; }
+    public ModelPart getRightLeg() { return rightLeg; }
+    public float getRootZRot() {return wholemob.zRot;}
+    public float getRootYOffset() {return wholemob.y;}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
@@ -75,6 +86,8 @@ public class BereftModel<T extends LivingEntity> extends EntityModel<T> implemen
         this.leftLeg.zRot = 0;
         this.rightLeg.yRot = 0;
         this.leftLeg.yRot = 0;
+        this.rightArm.yRot = 0;
+        this.leftArm.yRot = 0;
 
         this.head.yRot = netHeadYaw * Mth.DEG_TO_RAD;
         this.head.xRot = headPitch * Mth.DEG_TO_RAD;
@@ -82,7 +95,7 @@ public class BereftModel<T extends LivingEntity> extends EntityModel<T> implemen
         this.rightLeg.xRot = Mth.cos(limbSwing * 0.65F) * 1.0F * limbSwingAmount;
         this.leftLeg.xRot = Mth.cos(limbSwing * 0.65F) * -1.0F * limbSwingAmount;
 
-        this.wholemob.zRot = Mth.cos(limbSwing * 0.65f) * 0.05f * limbSwingAmount;
+        this.wholemob.zRot = Mth.cos(limbSwing * 0.65f) * 0.075f * limbSwingAmount;
 
         this.rightArm.xRot = Mth.cos(limbSwing * 0.65F + (float) Math.PI) * limbSwingAmount;
         this.leftArm.xRot = Mth.cos(limbSwing * 0.65F) * limbSwingAmount;
@@ -90,9 +103,18 @@ public class BereftModel<T extends LivingEntity> extends EntityModel<T> implemen
         if (entity instanceof Monster mob) {
             boolean aggro = mob.isAggressive();
 
-            if (!(mob.getItemInHand(InteractionHand.MAIN_HAND).isEmpty())) {
+            ItemStack mainHand = mob.getMainHandItem();
+
+            boolean isUsingBow = mob.isUsingItem() && mainHand.getItem() instanceof BowItem;
+
+            if (mainHand.getItem() instanceof BowItem) {
+                AnimUtils.BowHold(mob, rightArm, leftArm,
+                        ageInTicks, isUsingBow, netHeadYaw, headPitch);
+            } else if (!mainHand.isEmpty()) {
                 AnimUtils.MeleeWeaponHold(mob, rightArm, leftArm, limbSwing, limbSwingAmount, attackTime, ageInTicks);
-            } else {AnimUtils.ZombieArmHold(mob,rightArm, leftArm, attackTime, ageInTicks, aggro);}
+            } else {
+                AnimUtils.ZombieArmHold(mob, rightArm, leftArm, attackTime, ageInTicks, aggro);
+            }
         }
 
         AnimUtils.LegSit(entity,rightLeg, leftLeg, rightArm, leftArm, wholemob);

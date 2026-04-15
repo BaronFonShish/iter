@@ -1,11 +1,14 @@
 package com.malignant.itermod.common.entity;
 
 import com.malignant.itermod.common.registry.ModEntities;
+import com.malignant.itermod.common.registry.ModSpawnRestrictions;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -20,7 +23,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.network.PlayMessages;
@@ -137,29 +139,20 @@ public class GhoulEntity extends Monster {
         return spawnData;
     }
 
-    public static void init(){
-        SpawnPlacements.register(ModEntities.DARK_SORCERER.get(), SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (entityType, level, reason, pos, random) -> {
-                    if (!(level.getLevel().dimension() == Level.OVERWORLD)) {
-                        return false;
-                    }
+    public static boolean GhoulSpawnRules(
+            EntityType<GhoulEntity> entityType,
+            ServerLevelAccessor level,
+            MobSpawnType spawnType,
+            BlockPos pos,
+            RandomSource random) {
+        if (!(level.getLevel().dimension() == Level.OVERWORLD)) {
+            return false;
+        }
 
-                    if (level.getMaxLocalRawBrightness(pos) > 7) {
-                        return false;
-                    }
+        if (!ModSpawnRestrictions.defaultMonsterCheck(level, pos)) {
+            return false;
+        }
 
-                    AABB searchArea = new AABB(pos.getX() - 50, pos.getY() - 20, pos.getZ() - 50,
-                            pos.getX() + 50, pos.getY() + 20, pos.getZ() + 50);
-                    int nearbySorcerers = level.getEntitiesOfClass(DarkSorcererEntity.class, searchArea, e -> true).size();
-                    if (nearbySorcerers >= 1) {
-                        return false;
-                    }
-
-                    if (!level.getBlockState(pos.below()).isSolidRender(level, pos.below())) {
-                        return false;
-                    }
-
-                    return true;
-                });
+        return true;
     }
 }

@@ -8,7 +8,9 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -16,32 +18,6 @@ import static net.minecraft.client.model.AnimationUtils.bobArms;
 
 @OnlyIn(Dist.CLIENT)
 public class AnimUtils {
-
-    public void translateToHandOffset(HumanoidArm side, PoseStack poseStack, ModelPart arm) {
-        float storedXRot = arm.xRot;
-        float storedYRot = arm.yRot;
-        float storedZRot = arm.zRot;
-
-        arm.xRot = 0;
-        arm.yRot = 0;
-        arm.zRot = 0;
-
-        arm.translateAndRotate(poseStack);
-
-        float xOffset = side == HumanoidArm.RIGHT ? -0.25F : 0.25F;
-        float yOffset = -0.35F;
-        float zOffset = 0.1F;
-
-        poseStack.translate(xOffset, yOffset, zOffset);
-
-        poseStack.mulPose(com.mojang.math.Axis.XP.rotation(storedXRot));
-        poseStack.mulPose(com.mojang.math.Axis.YP.rotation(storedYRot));
-        poseStack.mulPose(com.mojang.math.Axis.ZP.rotation(storedZRot));
-
-        arm.xRot = storedXRot;
-        arm.yRot = storedYRot;
-        arm.zRot = storedZRot;
-    }
 
     public static void LegSit(Entity entity, ModelPart rightLeg, ModelPart leftLeg, ModelPart rightArm, ModelPart leftArm, ModelPart root) {
         if (entity.isPassenger()) {
@@ -91,5 +67,32 @@ public class AnimUtils {
         leftArm.xRot += f * 1.2F - f1 * 0.4F;
     }
 
-    public static void BowHold(){}
+    public static void BowHold(LivingEntity entity, ModelPart rightArm, ModelPart leftArm,
+                               float ageInTicks, boolean isUsingBow, float yaw, float pitch) {
+
+        ItemStack mainHand = entity.getMainHandItem();
+        boolean hasBow = mainHand.getItem() instanceof BowItem;
+
+        if (hasBow && isUsingBow) {
+            float mainhandX = (-90+pitch/2) * Mth.DEG_TO_RAD;
+            float mainhandY = -(yaw/2) * Mth.DEG_TO_RAD;
+
+            float offhandX = (-90+pitch/2) * Mth.DEG_TO_RAD;
+            float offhandY = -(yaw/2) * Mth.DEG_TO_RAD;
+
+            if (entity.getMainArm() == HumanoidArm.RIGHT) {
+                rightArm.xRot = mainhandX;
+                rightArm.yRot = mainhandY;
+
+                leftArm.xRot = offhandX;
+                leftArm.yRot = offhandY + (25 * Mth.DEG_TO_RAD);
+            } else {
+                leftArm.xRot = mainhandX;
+                leftArm.yRot = mainhandY;
+
+                rightArm.xRot = offhandX;
+                rightArm.yRot = offhandY - (25 * Mth.DEG_TO_RAD);
+            }
+        }
+    }
 }

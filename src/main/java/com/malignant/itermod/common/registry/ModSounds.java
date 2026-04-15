@@ -19,6 +19,8 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> GOBLIN_AMBIENT = registerSoundEvent("goblin_ambient");
     public static final RegistryObject<SoundEvent> GOBLIN_HURT = registerSoundEvent("goblin_hurt");
     public static final RegistryObject<SoundEvent> GOBLIN_DEATH = registerSoundEvent("goblin_death");
+    public static final RegistryObject<SoundEvent> BEREFT_AMBIENT = registerSoundEvent("bereft_ambient");
+    public static final RegistryObject<SoundEvent> BEREFT_HURT = registerSoundEvent("bereft_hurt");
 
 
     private static RegistryObject<SoundEvent> registerSoundEvent(String name){

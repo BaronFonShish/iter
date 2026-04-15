@@ -33,21 +33,21 @@ public class ModEntities {
             ENTITY_TYPES.register("ghoul",
                     () -> EntityType.Builder.<GhoulEntity>of(GhoulEntity::new, MobCategory.MONSTER)
                             .setTrackingRange(64)
-                            .sized(0.5f, 1.975f)
+                            .sized(0.6f, 1.975f)
                             .build("ghoul"));
 
     public static final RegistryObject<EntityType<DarkSorcererEntity>> DARK_SORCERER =
             ENTITY_TYPES.register("dark_sorcerer",
                     () -> EntityType.Builder.<DarkSorcererEntity>of(DarkSorcererEntity::new, MobCategory.MONSTER)
                             .setTrackingRange(64)
-                            .sized(0.5f, 1.975f)
+                            .sized(0.6f, 1.975f)
                             .build("dark_sorcerer"));
 
     public static final RegistryObject<EntityType<BereftEntity>> BEREFT =
             ENTITY_TYPES.register("bereft",
                     () -> EntityType.Builder.<BereftEntity>of(BereftEntity::new, MobCategory.MONSTER)
                             .setTrackingRange(64)
-                            .sized(0.5f, 2.05f)
+                            .sized(0.6f, 2.05f)
                             .build("bereft"));
 
     public static final RegistryObject<EntityType<GoblinWarriorEntity>> GOBLIN_WARRIOR =
