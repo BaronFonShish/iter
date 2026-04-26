@@ -1,0 +1,23 @@
+{
+  "name": "iter:simple_monster_room/spawners",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:mossifier",
+      "location": "iter:simple_monster_room/spawnertype1"}},
+
+    {"weight": 2, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:mossifier",
+      "location": "iter:simple_monster_room/spawnertype2"}},
+
+    {"weight": 2, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:mossifier",
+      "location": "iter:simple_monster_room/spawnertype3"}}
+  ]
+}

@@ -23,6 +23,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.slf4j.Logger;
@@ -36,7 +37,7 @@ public class iterMod {
 
     public static final ResourceLocation PICTOGRAM_FONT = new ResourceLocation(MOD_ID, "font/iter_pictograms.json");
 
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     private static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(
@@ -50,9 +51,11 @@ public class iterMod {
     public iterMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            modEventBus.addListener(ModScreens::clientLoad);
+        }
 
         modEventBus.addListener(this::commonSetup);
-        modEventBus.addListener(ModScreens::clientLoad);
         MinecraftForge.EVENT_BUS.register(this);
         IterModConfig.register();
         ModItems.register(modEventBus);
@@ -63,6 +66,9 @@ public class iterMod {
         ModSounds.register(modEventBus);
         ModTabs.REGISTRY.register(modEventBus);
         ModFeatures.REGISTRY.register(modEventBus);
+        ModProcessors.PROCESSORS.register(modEventBus);
+        ModRuleTests.RULE_TEST_TYPES.register(modEventBus);
+        ModStructures.STRUCTURE_TYPES.register(modEventBus);
         ModAttributes.ATTRIBUTES.register(modEventBus);
         ModParticleTypes.REGISTRY.register(modEventBus);
         modEventBus.addListener(ModCapabilities::register);
@@ -97,8 +103,10 @@ public class iterMod {
 
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        ModItemProperties.RegisterItemProperties();
 
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            ModItemProperties.RegisterItemProperties();
+        }
         event.enqueueWork(() -> {
             ModCuriosSlots.enqueueIMC(event);
         });

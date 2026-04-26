@@ -1,0 +1,35 @@
+{
+  "name": "iter:simple_monster_room/misc",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {"weight": 15, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:mossifier",
+      "location": "iter:simple_monster_room/wall1"}},
+
+    {"weight": 10, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:mossifier",
+      "location": "iter:simple_monster_room/wall2"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:mossifier",
+      "location": "iter:simple_monster_room/wall3"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:mossifier",
+      "location": "iter:simple_monster_room/wall4"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:mossifier",
+      "location": "iter:simple_monster_room/wall5"}}
+  ]
+}

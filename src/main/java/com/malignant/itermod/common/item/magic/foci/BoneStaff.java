@@ -11,8 +11,11 @@ public class BoneStaff extends SpellFocus {
                 .rarity(Rarity.COMMON)
                 .enchantability(12),
                 1,
-                2,
+                3,
                 0,
+                -0.2f,
+                0,
+                0.05f,
                 0
         );
     }

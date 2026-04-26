@@ -31,13 +31,20 @@ public abstract class SpellFocus extends Item {
     private final float spellpower;
     private final float etherCost;
     private final int tier;
+    private final float arcaneMod;
+    private final float occultMod;
+    private final float primalMod;
 
-    public SpellFocus(SpellFocusProperties properties, int tier, float spellpower, float castingSpeed, float etherCost) {
+    public SpellFocus(SpellFocusProperties properties, int tier, float spellpower, float castingSpeed, float etherCost, float arcaneMod, float occultMod, float primalMod) {
         super(properties.toItemProperties());
         this.spellpower = spellpower;
         this.castingSpeed = castingSpeed;
         this.etherCost = etherCost;
         this.tier = tier;
+
+        this.arcaneMod = arcaneMod;
+        this.occultMod = occultMod;
+        this.primalMod = primalMod;
     }
 
 
@@ -95,9 +102,17 @@ public abstract class SpellFocus extends Item {
     private static final String etherefficinecystring = "iter_foci_ether_efficiency";
     private static final String casttimestring = "iter_foci_cast_time";
 
+    private static final String arcanepowerstring = "iter_foci_arcane_modifier";
+    private static final String occultpowerstring = "iter_foci_occult_modifier";
+    private static final String primalpowerstring = "iter_foci_primal_modifier";
+
     private static final UUID SpellPowerUUID = UUID.nameUUIDFromBytes((spellpowerstring.getBytes()));
     private static final UUID CastingSpeedUUID = UUID.nameUUIDFromBytes((casttimestring.getBytes()));
     private static final UUID EtherEfficiencyUUID = UUID.nameUUIDFromBytes((etherefficinecystring.getBytes()));
+
+    private static final UUID ArcanePowerUUID = UUID.nameUUIDFromBytes((arcanepowerstring.getBytes()));
+    private static final UUID OccultPowerUUID = UUID.nameUUIDFromBytes((occultpowerstring.getBytes()));
+    private static final UUID PrimalPowerUUID = UUID.nameUUIDFromBytes((primalpowerstring.getBytes()));
 
     @Override
     public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers (@NotNull final EquipmentSlot slot, final ItemStack itemStack)
@@ -119,6 +134,14 @@ public abstract class SpellFocus extends Item {
             builder.put(ModAttributes.ETHER_EFFICIENCY.get(), new AttributeModifier(EtherEfficiencyUUID, "Foci modifier",
                     ((this.etherCost + 0.5) * (1 + rigour_level * 0.015) -0.5),
                     AttributeModifier.Operation.MULTIPLY_TOTAL));
+
+            builder.put(ModAttributes.ARCANE_POWER.get(), new AttributeModifier(ArcanePowerUUID, "Foci modifier",
+                    (this.arcaneMod), AttributeModifier.Operation.MULTIPLY_BASE));
+            builder.put(ModAttributes.OCCULT_POWER.get(), new AttributeModifier(OccultPowerUUID, "Foci modifier",
+                    (this.occultMod), AttributeModifier.Operation.MULTIPLY_BASE));
+            builder.put(ModAttributes.PRIMAL_POWER.get(), new AttributeModifier(PrimalPowerUUID, "Foci modifier",
+                    (this.primalMod), AttributeModifier.Operation.MULTIPLY_BASE));
+
             Map<Enchantment, Integer> itemEnchants = itemStack.getAllEnchantments();
         }
 

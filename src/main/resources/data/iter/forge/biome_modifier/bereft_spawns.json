@@ -3,7 +3,7 @@
   "biomes": "#minecraft:is_overworld",
   "spawners": {
     "type": "iter:bereft",
-    "weight": 20,
+    "weight": 4,
     "minCount": 3,
     "maxCount": 5
   },

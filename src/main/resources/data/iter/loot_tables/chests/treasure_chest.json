@@ -1,0 +1,66 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 2,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "iter:presets/monster_loot",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 2,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "iter:presets/basic_ores",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "iter:presets/shinies",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "iter:presets/gear",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "iter:presets/veggies",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "iter:presets/magic",
+          "weight": 2
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "iter:presets/discs",
+          "weight": 1
+        }
+      ]
+    }
+  ],
+  "random_sequence": "iter:chests/treasure_chest"
+}

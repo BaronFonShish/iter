@@ -11,9 +11,12 @@ public class DiamondStaff extends SpellFocus {
                 .rarity(Rarity.COMMON)
                 .enchantability(16),
                 3,
-                4.5f,
+                5,
+                0.1f,
                 0.05f,
-                0.025f
+                0,
+                0,
+                0
         );
     }
 }

@@ -8,14 +8,12 @@
         {
           "type": "minecraft:loot_table",
           "name": "iter:gameplay/spelldrop_expert_arcane",
-          "weight": 12,
-          "quality": 1
+          "weight": 12
         },
         {
           "type": "minecraft:loot_table",
           "name": "iter:gameplay/spelldrop_expert_elemental",
-          "weight": 12,
-          "quality": 1
+          "weight": 12
         }
       ]
     }

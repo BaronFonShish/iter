@@ -4,6 +4,8 @@ import com.malignant.itermod.common.registry.ModItems;
 import com.malignant.itermod.iterMod;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.event.level.BlockEvent;
@@ -16,7 +18,10 @@ public class SpawnerDropBreak {
     public static void onBlockHarvestDrops(BlockEvent.BreakEvent event) {
         if (event.getState().getBlock() == Blocks.SPAWNER) {
             if (event.getPlayer() == null) return;
-            if (!SpiderEggHatchEvent.isValid(event.getPlayer())) return;
+            ItemStack mainHandItem = event.getPlayer().getMainHandItem();
+            if (event.getPlayer().isCreative()) return;
+            if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, mainHandItem) != 0) return;
+
             Level level = (Level) event.getLevel();
 
             int amount = level.random.nextInt(2) + 1;
@@ -30,8 +35,7 @@ public class SpawnerDropBreak {
                     event.getPos().getZ() + 0.5,
                     fragmentStack
             );
-
             level.addFreshEntity(itemEntity);
         }
+        }
     }
-}

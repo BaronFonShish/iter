@@ -13,7 +13,10 @@ public class MagmanumStaff extends SpellFocus {
                 3,
                 5f,
                 0.05f,
-                0.03f
+                0.03f,
+                0,
+                0.25f,
+                0
         );
     }
 }

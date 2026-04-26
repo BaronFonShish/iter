@@ -5,11 +5,15 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.Optional;
+import java.util.UUID;
 
 
 public abstract class AbstractBeam extends Entity {
@@ -19,6 +23,8 @@ public abstract class AbstractBeam extends Entity {
     private static final EntityDataAccessor<Float> DATA_TARGET_X = SynchedEntityData.defineId(AbstractBeam.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> DATA_TARGET_Y = SynchedEntityData.defineId(AbstractBeam.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> DATA_TARGET_Z = SynchedEntityData.defineId(AbstractBeam.class, EntityDataSerializers.FLOAT);
+
+    private static final EntityDataAccessor<Optional<UUID>> DATA_TARGET_ENTITY = SynchedEntityData.defineId(AbstractBeam.class, EntityDataSerializers.OPTIONAL_UUID);
 
     private static final EntityDataAccessor<Float> DATA_WIDTH = SynchedEntityData.defineId(AbstractBeam.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> DATA_ALPHA = SynchedEntityData.defineId(AbstractBeam.class, EntityDataSerializers.FLOAT);
@@ -33,6 +39,7 @@ public abstract class AbstractBeam extends Entity {
     public float targetx;
     public float targety;
     public float targetz;
+    public Optional<UUID> targetEntityUuid = Optional.empty();
     public boolean fading;
     public boolean shrinking;
     public boolean flickering;
@@ -61,6 +68,7 @@ public abstract class AbstractBeam extends Entity {
         this.entityData.define(DATA_TARGET_X, 0f);
         this.entityData.define(DATA_TARGET_Y, 0f);
         this.entityData.define(DATA_TARGET_Z, 0f);
+        this.entityData.define(DATA_TARGET_ENTITY, Optional.empty());
         this.entityData.define(DATA_WIDTH, 0.1f);
         this.entityData.define(DATA_ALPHA, 0.75f);
         this.entityData.define(DATA_FADING, false);
@@ -83,6 +91,10 @@ public abstract class AbstractBeam extends Entity {
         tag.putBoolean("flickering", flickering);
         tag.putBoolean("scrolling", scrolling);
 
+        if (targetEntityUuid.isPresent()) {
+            tag.putUUID("TargetEntity", targetEntityUuid.get());
+        }
+
         tag.putInt("lifetime", lifetime);
 
         tag.putString("texture", texture);
@@ -96,6 +108,15 @@ public abstract class AbstractBeam extends Entity {
         this.entityData.set(DATA_TARGET_Y, this.targety);
         this.targetz = tag.getFloat("TargetZ");
         this.entityData.set(DATA_TARGET_Z, this.targetz);
+
+        if (tag.contains("TargetEntity")) {
+            UUID uuid = tag.getUUID("TargetEntity");
+            this.targetEntityUuid = Optional.of(uuid);
+            this.entityData.set(DATA_TARGET_ENTITY, this.targetEntityUuid);
+        } else {
+            this.targetEntityUuid = Optional.empty();
+            this.entityData.set(DATA_TARGET_ENTITY, Optional.empty());
+        }
 
         this.width = tag.getFloat("width");
         this.entityData.set(DATA_WIDTH, this.width);
@@ -130,6 +151,10 @@ public abstract class AbstractBeam extends Entity {
             this.targetz = this.entityData.get(DATA_TARGET_Z);
         }
 
+        if (DATA_TARGET_ENTITY.equals(key)) {
+            this.targetEntityUuid = this.entityData.get(DATA_TARGET_ENTITY);
+        }
+
         if (DATA_WIDTH.equals(key)) {
             this.width = this.entityData.get(DATA_WIDTH);
         }
@@ -161,7 +186,60 @@ public abstract class AbstractBeam extends Entity {
     @Override
     public void tick(){
         super.tick();
+
+        if (hasTargetEntity()) {
+            Optional<Entity> target = getTargetEntity();
+            if (target.isPresent() && target.get().isAlive()) {
+                Vec3 entityPos = target.get().position();
+                entityPos = entityPos.add(0, target.get().getBbHeight() / 2, 0);
+                setEndPos(entityPos);
+            }
+        }
+
         if (this.tickCount > lifetime) discard();
+    }
+
+    public void setTargetEntity(Entity entity) {
+        if (entity != null) {
+            this.targetEntityUuid = Optional.of(entity.getUUID());
+            this.entityData.set(DATA_TARGET_ENTITY, this.targetEntityUuid);
+        } else {
+            clearTargetEntity();
+        }
+    }
+
+    public void clearTargetEntity() {
+        this.targetEntityUuid = Optional.empty();
+        this.entityData.set(DATA_TARGET_ENTITY, Optional.empty());
+    }
+
+    public Optional<Entity> getTargetEntity() {
+        if (!targetEntityUuid.isPresent()) {
+            return Optional.empty();
+        }
+
+        Entity entity = this.level().getPlayerByUUID(targetEntityUuid.get());
+        if (entity != null) {
+            return Optional.of(entity);
+        }
+
+        if (this.level() instanceof ServerLevel serverLevel) {
+            entity = serverLevel.getEntity(targetEntityUuid.get());
+            return Optional.ofNullable(entity);
+        }
+
+        return Optional.empty();
+    }
+
+    public boolean hasTargetEntity() {
+        return targetEntityUuid.isPresent();
+    }
+
+    public Vec3 getTargetEntityPosition() {
+        return getTargetEntity()
+                .filter(Entity::isAlive)
+                .map(Entity::position)
+                .orElse(getEndPos());
     }
 
     public void setEndPos(Vec3 pos){
@@ -185,13 +263,23 @@ public abstract class AbstractBeam extends Entity {
     }
 
     public Vec3 getEndPos() {
-        if (this.level().isClientSide) {
-            return new Vec3(
-                    this.entityData.get(DATA_TARGET_X),
-                    this.entityData.get(DATA_TARGET_Y),
-                    this.entityData.get(DATA_TARGET_Z)
-            );
+        if (hasTargetEntity()) {
+            Optional<Entity> target = getTargetEntity();
+            if (target.isPresent() && target.get().isAlive()) {
+                Vec3 entityPos = new Vec3(
+                        target.get().getX(),
+                        target.get().getY() + target.get().getBbHeight() / 3,
+                        target.get().getZ()
+                );
+                if (this.level().isClientSide) {
+                    this.targetx = (float) entityPos.x;
+                    this.targety = (float) entityPos.y;
+                    this.targetz = (float) entityPos.z;
+                }
+                return entityPos;
+            }
         }
+
         return new Vec3(targetx, targety, targetz);
     }
 

@@ -67,7 +67,6 @@ public class SpellSlotSelectMousewheel {
 
     }
 
-    // Reset the debounce flag every tick
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {

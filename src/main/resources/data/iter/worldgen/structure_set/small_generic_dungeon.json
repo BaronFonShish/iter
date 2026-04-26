@@ -1,0 +1,15 @@
+{
+  "structures": [
+    {
+      "structure": "iter:small_generic_dungeon",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 329642571,
+    "spacing": 24,
+    "separation": 16,
+    "spread_type": "linear"
+  }
+}

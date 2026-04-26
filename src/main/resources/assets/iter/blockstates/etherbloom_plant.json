@@ -7,16 +7,7 @@
       "model": "iter:block/etherbloom_plant_1"
     },
     "age=2": {
-      "model": "iter:block/etherbloom_plant_1"
-    },
-    "age=3": {
       "model": "iter:block/etherbloom_plant_2"
-    },
-    "age=4": {
-      "model": "iter:block/etherbloom_plant_2"
-    },
-    "age=5": {
-      "model": "iter:block/etherbloom"
     }
   }
 }

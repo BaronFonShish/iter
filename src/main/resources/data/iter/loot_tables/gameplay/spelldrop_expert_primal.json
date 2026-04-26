@@ -8,8 +8,7 @@
         {
           "type": "minecraft:item",
           "name": "iter:spell_legacy_fireball",
-          "weight": 2,
-          "quality": 1
+          "weight": 2
         }
       ]
     }

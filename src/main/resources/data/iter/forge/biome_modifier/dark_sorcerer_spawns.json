@@ -3,7 +3,7 @@
   "biomes": "#minecraft:is_overworld",
   "spawners": {
     "type": "iter:dark_sorcerer",
-    "weight": 30,
+    "weight": 5,
     "minCount": 1,
     "maxCount": 1
   },

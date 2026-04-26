@@ -1,7 +1,7 @@
 package com.malignant.itermod.common.variables;
 
+import com.malignant.itermod.common.misc.ClientPlayerGetter;
 import com.malignant.itermod.common.registry.ModCapabilities;
-import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
@@ -87,29 +87,13 @@ public class IterPlayerDataPacket {
         return new IterPlayerDataPacket(DataType.SPELLWEAVER_SWITCH, tag);
     }
 
-    public static IterPlayerDataPacket fullSync(float etherBurnout, int spellSlot,
-                                                float spellLuck, ItemStack spellBook,
-                                                boolean spellweaverSwitch, float flightTime, boolean flying) {
-        CompoundTag tag = new CompoundTag();
-        tag.putFloat("burnout", etherBurnout);
-        tag.putInt("slot", spellSlot);
-        tag.putFloat("spellluck", spellLuck);
-        tag.putBoolean("switch", spellweaverSwitch);
-        tag.putFloat("flighttime", flightTime);
-        tag.putBoolean("flying", flying);
-        if (!spellBook.isEmpty()) {
-            CompoundTag bookTag = new CompoundTag();
-            spellBook.save(bookTag);
-            tag.put("book", bookTag);
-        }
-        return new IterPlayerDataPacket(DataType.FULL_SYNC, tag);
-    }
-
     public void handle(Supplier<NetworkEvent.Context> context) {
         context.get().enqueueWork(() -> {
-            Player player = context.get().getDirection().getReceptionSide().isClient()
-                    ? Minecraft.getInstance().player
-                    : context.get().getSender();
+            Player player = context.get().getSender();
+
+            if (player == null && context.get().getDirection().getReceptionSide().isClient()) {
+                player = ClientPlayerGetter.getClientPlayer();
+            }
 
             if (player != null) {
                 player.getCapability(ModCapabilities.ITER_PLAYER_DATA).ifPresent(data -> {

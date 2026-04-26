@@ -293,18 +293,13 @@ public class IterPlayerDataUtils {
     public static void syncAllSC(ServerPlayer player) {
         IterPlayerData data = getPlayerData(player);
         if (data != null) {
-            iterMod.PACKET_HANDLER.send(
-                    PacketDistributor.PLAYER.with(() -> player),
-                    IterPlayerDataPacket.fullSync(
-                            data.getEtherBurnout(),
-                            data.getSelectedSpellSlot(),
-                            data.getSpellLuck(),
-                            data.getSelectedSpellBook(),
-                            data.getSpellweaverSwitch(),
-                            data.getFlightTime(),
-                            data.getFlying()
-                    )
-            );
+            syncBurnoutSC(player, data.getEtherBurnout());
+            syncSpellSlotSC(player, data.getSelectedSpellSlot());
+            syncSpellBookSC(player, data.getSelectedSpellBook());
+            syncSpellLuckSC(player, data.getSpellLuck());
+            syncSpellweaverSwitchSC(player, data.getSpellweaverSwitch());
+            syncFlightTimeSC(player, data.getFlightTime());
+            syncFlyingSC(player, data.getFlying());
         }
     }
 

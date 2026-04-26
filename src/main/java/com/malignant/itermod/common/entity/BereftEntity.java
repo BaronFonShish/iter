@@ -406,7 +406,7 @@ public class BereftEntity extends Monster implements RangedAttackMob {
             weapon.setDamageValue(damageAmount);
         }
         this.setItemSlot(EquipmentSlot.MAINHAND, weapon);
-        this.armorDropChances[EquipmentSlot.MAINHAND.getIndex()] = 0.15F;
+        this.armorDropChances[EquipmentSlot.MAINHAND.getIndex()] = 0.2F;
 
         ItemStack helmetItem = helmets[random.nextInt(helmets.length)];
         ItemStack chestplateItem = chestplates[random.nextInt(chestplates.length)];
@@ -418,10 +418,10 @@ public class BereftEntity extends Monster implements RangedAttackMob {
         if (!leggingsItem.isEmpty()) this.setItemSlot(EquipmentSlot.LEGS, leggingsItem);
         if (!bootsItem.isEmpty()) this.setItemSlot(EquipmentSlot.FEET, bootsItem);
 
-        this.armorDropChances[EquipmentSlot.HEAD.getIndex()] = 0.08F;
-        this.armorDropChances[EquipmentSlot.CHEST.getIndex()] = 0.08F;
-        this.armorDropChances[EquipmentSlot.LEGS.getIndex()] = 0.08F;
-        this.armorDropChances[EquipmentSlot.FEET.getIndex()] = 0.08F;
+        this.armorDropChances[EquipmentSlot.HEAD.getIndex()] = 0.2F;
+        this.armorDropChances[EquipmentSlot.CHEST.getIndex()] = 0.2F;
+        this.armorDropChances[EquipmentSlot.LEGS.getIndex()] = 0.2F;
+        this.armorDropChances[EquipmentSlot.FEET.getIndex()] = 0.2F;
     }
 
     public static boolean BereftSpawnRules(

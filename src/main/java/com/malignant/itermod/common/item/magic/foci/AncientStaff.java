@@ -11,9 +11,12 @@ public class AncientStaff extends SpellFocus {
                 .rarity(Rarity.UNCOMMON)
                 .enchantability(14),
                 2,
-                3,
-                -0.2f,
-                -0.05f
+                4.5f,
+                -0.1f,
+                -0.05f,
+                0,
+                0.15f,
+                0
         );
     }
 }

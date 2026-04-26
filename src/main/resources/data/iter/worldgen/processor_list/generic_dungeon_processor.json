@@ -1,0 +1,176 @@
+[
+  {
+    "processor_type": "minecraft:rule",
+    "rules": [
+      {
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:cobblestone",
+          "probability": 0.35
+        },
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "output_state": {
+          "Name": "minecraft:mossy_cobblestone"
+        }
+      },
+      {
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:stone_bricks",
+          "probability": 0.25
+        },
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "output_state": {
+          "Name": "minecraft:mossy_stone_bricks"
+        }
+      },
+      {
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:stone_bricks",
+          "probability": 0.15
+        },
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "output_state": {
+          "Name": "minecraft:cracked_stone_bricks"
+        }
+      },
+      {
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:stone_bricks",
+          "probability": 0.05
+        },
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "output_state": {
+          "Name": "minecraft:stone"
+        }
+      },
+      {
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:cobblestone",
+          "probability": 0.05
+        },
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "output_state": {
+          "Name": "minecraft:stone"
+        }
+      },
+      {
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:stone_bricks",
+          "probability": 0.025
+        },
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "output_state": {
+          "Name": "minecraft:andesite"
+        }
+      },
+      {
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:stone_bricks",
+          "probability": 0.025
+        },
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "output_state": {
+          "Name": "minecraft:tuff"
+        }
+      },
+      {
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:chiseled_bookshelf",
+          "probability": 0.85
+        },
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "output_state": {
+          "Name": "minecraft:bookshelf"
+        }
+      },
+      {
+        "input_predicate": {
+          "predicate_type": "iter:tag_with_chance",
+          "tag": "minecraft:wool_carpets",
+          "probability": 0.2
+        },
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "output_state": {
+          "Name": "minecraft:air"
+        }
+      },
+      {
+        "input_predicate": {
+          "predicate_type": "iter:tag_with_chance",
+          "tag": "minecraft:banners",
+          "probability": 0.2
+        },
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "output_state": {
+          "Name": "minecraft:air"
+        }
+      }
+    ]
+  },
+  {
+    "processor_type": "iter:spawner_populator",
+    "possible_mobs": [
+      "minecraft:zombie",
+      "minecraft:zombie",
+      "minecraft:zombie",
+      "minecraft:zombie",
+      "minecraft:zombie",
+      "minecraft:zombie",
+      "minecraft:skeleton",
+      "minecraft:skeleton",
+      "minecraft:skeleton",
+      "minecraft:skeleton",
+      "minecraft:spider",
+      "minecraft:spider",
+      "minecraft:spider",
+      "minecraft:spider"
+    ]
+  },
+  {
+    "processor_type": "iter:flower_pot_processor",
+    "chance": 0.9,
+    "potted_plants": [
+      "minecraft:potted_poppy",
+      "minecraft:potted_dandelion",
+      "minecraft:potted_blue_orchid",
+      "minecraft:potted_allium",
+      "minecraft:potted_azure_bluet",
+      "minecraft:potted_red_tulip",
+      "minecraft:potted_orange_tulip",
+      "minecraft:potted_white_tulip",
+      "minecraft:potted_pink_tulip",
+      "minecraft:potted_oxeye_daisy",
+      "minecraft:potted_cornflower",
+      "minecraft:potted_lily_of_the_valley",
+      "minecraft:potted_fern",
+      "minecraft:potted_dead_bush"
+    ]
+  }
+]

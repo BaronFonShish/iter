@@ -54,10 +54,8 @@ public class SpellGeosense extends SpellItem {
                     flag = false;
                     int distance = (int) dist;
                     String blockName = targetBlock == Blocks.AIR ? "Air" : targetBlock.getName().getString();
-                    Component message = Component.literal(
-                            String.format("§aFound §e%s §a%d blocks away.",
-                                    blockName, distance)
-                    );
+                    Component message = Component.translatable("iter.output.geosense",
+                                    blockName, distance);
                     player.sendSystemMessage(message);
                 }
 

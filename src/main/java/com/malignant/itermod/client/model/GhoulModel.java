@@ -39,10 +39,11 @@ public class GhoulModel<T extends Entity> extends EntityModel<T> implements Arme
 		PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(24, 16).addBox(-3.0F, -6.0F, -1.0F, 6.0F, 6.0F, 3.0F, new CubeDeformation(0.0F))
 		.texOffs(0, 16).addBox(-4.0F, -12.0F, -2.0F, 8.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 12.0F, 0.0F));
 
-		PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F))
-		.texOffs(52, 37).addBox(-3.0F, 0.0F, -4.0F, 6.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
-		.texOffs(32, 6).addBox(-8.0F, -12.0F, 0.0F, 16.0F, 10.0F, 0.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 41).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 12.0F, 8.0F, new CubeDeformation(0.25F)), PartPose.offset(0.0F, -12.0F, 0.0F));
+        PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F))
+                .texOffs(48, 37).addBox(-4.0F, 0.0F, -4.0F, 8.0F, 2.0F, 0.0F, new CubeDeformation(0.0F))
+                .texOffs(32, 6).addBox(-8.0F, -12.0F, 0.0F, 16.0F, 10.0F, 0.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 41).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 12.0F, 8.0F, new CubeDeformation(0.25F)), PartPose.offset(0.0F, -12.0F, 0.0F));
+
 
 		PartDefinition arm_right = body.addOrReplaceChild("arm_right", CubeListBuilder.create().texOffs(12, 26).addBox(-3.0F, -1.0F, -1.0F, 3.0F, 12.0F, 3.0F, new CubeDeformation(0.0F))
 		.texOffs(34, 26).addBox(-3.0F, 11.0F, -1.0F, 2.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-4.0F, -11.0F, 0.0F));

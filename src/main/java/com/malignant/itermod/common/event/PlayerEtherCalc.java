@@ -15,6 +15,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import static com.malignant.itermod.common.variables.IterPlayerDataUtils.syncAll;
+import static com.malignant.itermod.common.variables.IterPlayerDataUtils.syncAllSC;
 
 
 @Mod.EventBusSubscriber(modid = "iter", bus = Mod.EventBusSubscriber.Bus.FORGE)

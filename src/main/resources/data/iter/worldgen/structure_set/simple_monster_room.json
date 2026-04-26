@@ -1,0 +1,15 @@
+{
+  "structures": [
+    {
+      "structure": "iter:simple_monster_room",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 451238415,
+    "spacing": 20,
+    "separation": 12,
+    "spread_type": "linear"
+  }
+}

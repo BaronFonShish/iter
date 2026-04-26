@@ -44,6 +44,22 @@ public class ModAttributes {
             () -> new RangedAttribute("attribute.regeneration", 0.0, 0.0, 128.0)
                     .setSyncable(true));
 
+    public static final RegistryObject<Attribute> RANGED_DAMAGE = ATTRIBUTES.register("ranged_damage",
+            () -> new RangedAttribute("attribute.ranged_damage", 1.0, 0.0, 128.0)
+                    .setSyncable(true));
+
+    public static final RegistryObject<Attribute> ARCANE_POWER = ATTRIBUTES.register("arcane_power",
+            () -> new RangedAttribute("attribute.arcane_power", 1.0, 0.0, 128.0)
+                    .setSyncable(true));
+
+    public static final RegistryObject<Attribute> OCCULT_POWER = ATTRIBUTES.register("occult_power",
+            () -> new RangedAttribute("attribute.occult_power", 1.0, 0.0, 128.0)
+                    .setSyncable(true));
+
+    public static final RegistryObject<Attribute> PRIMAL_POWER = ATTRIBUTES.register("primal_power",
+            () -> new RangedAttribute("attribute.primal_power", 1.0, 0.0, 128.0)
+                    .setSyncable(true));
+
     public static final RegistryObject<Attribute> FLIGHT_TIME = ATTRIBUTES.register("flight_time",
             () -> new RangedAttribute("attribute.iter.flight_time", 0.0, 0.0, 250000.0)
                     .setSyncable(true));
@@ -63,7 +79,12 @@ public class ModAttributes {
         event.add(EntityType.PLAYER, ETHER_BURNOUT_DISSIPATION.get());
         event.add(EntityType.PLAYER, ETHER_BURNOUT_THRESHOLD.get());
 
+        event.add(EntityType.PLAYER, ARCANE_POWER.get());
+        event.add(EntityType.PLAYER, OCCULT_POWER.get());
+        event.add(EntityType.PLAYER, PRIMAL_POWER.get());
+
         event.add(EntityType.PLAYER, REGENERATION.get());
+        event.add(EntityType.PLAYER, RANGED_DAMAGE.get());
 
         event.add(EntityType.PLAYER, FLIGHT_TIME.get());
         event.add(EntityType.PLAYER, FLIGHT_SPEED.get());
@@ -83,7 +104,12 @@ public class ModAttributes {
             newP.getAttribute(ETHER_BURNOUT_DISSIPATION.get()).setBaseValue(oldP.getAttribute(ETHER_BURNOUT_DISSIPATION.get()).getBaseValue());
             newP.getAttribute(ETHER_BURNOUT_THRESHOLD.get()).setBaseValue(oldP.getAttribute(ETHER_BURNOUT_THRESHOLD.get()).getBaseValue());
 
+            newP.getAttribute(ARCANE_POWER.get()).setBaseValue(oldP.getAttribute(ARCANE_POWER.get()).getBaseValue());
+            newP.getAttribute(OCCULT_POWER.get()).setBaseValue(oldP.getAttribute(OCCULT_POWER.get()).getBaseValue());
+            newP.getAttribute(PRIMAL_POWER.get()).setBaseValue(oldP.getAttribute(PRIMAL_POWER.get()).getBaseValue());
+
             newP.getAttribute(REGENERATION.get()).setBaseValue(oldP.getAttribute(REGENERATION.get()).getBaseValue());
+            newP.getAttribute(RANGED_DAMAGE.get()).setBaseValue(oldP.getAttribute(RANGED_DAMAGE.get()).getBaseValue());
 
             newP.getAttribute(FLIGHT_TIME.get()).setBaseValue(oldP.getAttribute(FLIGHT_TIME.get()).getBaseValue());
             newP.getAttribute(FLIGHT_SPEED.get()).setBaseValue(oldP.getAttribute(FLIGHT_SPEED.get()).getBaseValue());

@@ -33,17 +33,10 @@ public class SpiderEggHatchEvent {
 
     public static boolean isValid(Entity entity) {
         if (entity instanceof ServerPlayer serverPlayer) {
-            ItemStack mainHandItem = getMainHandItem(entity);
-            return (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, mainHandItem) == 0) && (serverPlayer.gameMode.getGameModeForPlayer() != GameType.CREATIVE);
+            ItemStack mainHandItem = serverPlayer.getMainHandItem();
+            return (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, mainHandItem) == 0) && (!serverPlayer.isCreative());
         }
         return false;
-    }
-
-    private static ItemStack getMainHandItem(Entity entity) {
-        if (entity instanceof LivingEntity livingEntity) {
-            return livingEntity.getMainHandItem();
-        }
-        return ItemStack.EMPTY;
     }
 
     public static void spawnSpiderlings(LevelAccessor world, double x, double y, double z) {

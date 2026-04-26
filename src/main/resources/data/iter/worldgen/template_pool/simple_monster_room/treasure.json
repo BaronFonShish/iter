@@ -1,0 +1,41 @@
+{
+  "name": "iter:simple_monster_room/treasure",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {"weight": 10, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:mossifier",
+      "location": "iter:simple_monster_room/treasure1"}},
+
+    {"weight": 10, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:mossifier",
+      "location": "iter:simple_monster_room/treasure2"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:mossifier",
+      "location": "iter:simple_monster_room/treasure3"}},
+
+    {"weight": 10, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:mossifier",
+      "location": "iter:simple_monster_room/treasure4"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:mossifier",
+      "location": "iter:simple_monster_room/treasure5"}},
+
+    {"weight": 10, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:mossifier",
+      "location": "iter:simple_monster_room/treasure6"}}
+  ]
+}

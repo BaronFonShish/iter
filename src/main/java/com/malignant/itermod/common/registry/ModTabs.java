@@ -17,11 +17,15 @@ public class ModTabs {
                         tabData.accept(ModBlocks.SPELLWEAVER_TABLE.get().asItem());
                         tabData.accept(ModItems.SPELL_BOOK.get());
 
+                        tabData.accept(ModItems.HEDGEMAGE_STAFF.get());
                         tabData.accept(ModItems.BONE_STAFF.get());
-                        tabData.accept(ModItems.AMETHYST_WAND.get());
-                        tabData.accept(ModItems.ANCIENT_STAFF.get());
+
+                        tabData.accept(ModItems.AMETHYST_STAFF.get());
                         tabData.accept(ModItems.NOSTELON_STAFF.get());
+                        tabData.accept(ModItems.ANCIENT_STAFF.get());
+
                         tabData.accept(ModItems.DIAMOND_STAFF.get());
+
                         tabData.accept(ModItems.MAGMANUM_STAFF.get());
 
                         ///Спеллы

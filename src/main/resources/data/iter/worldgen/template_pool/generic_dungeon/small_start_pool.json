@@ -1,0 +1,15 @@
+{
+  "name": "iter:generic_dungeon/small_start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "iter:generic_dungeon/hallway_narrow_t",
+        "processors": "iter:generic_dungeon_processor"
+      }
+    }
+  ]
+}

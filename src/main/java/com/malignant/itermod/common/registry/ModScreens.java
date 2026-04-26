@@ -5,9 +5,12 @@ import com.malignant.itermod.world.gui.SpellbookGuiScreen;
 import com.malignant.itermod.world.gui.SpellweaverTableGuiScreen;
 import com.malignant.itermod.world.gui.VoidMawGuiScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
+@OnlyIn(Dist.CLIENT)
 public class ModScreens {
     @SubscribeEvent
     public static void clientLoad(FMLClientSetupEvent event) {

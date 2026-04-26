@@ -1,4 +1,7 @@
 {
+  "block.iter.ancient_vase": "Ancient Vase",
+  "block.iter.ancient_big_vase": "Ancient Big Vase",
+  "block.iter.ancient_small_vase": "Ancient Small Vase",
   "block.iter.abyssquartz_crystal": "Abyssquartz Crystal",
   "block.iter.abyssquartz_block": "Abyssquartz Block",
   "block.iter.nostelon_ore": "Nostelon Ore",
@@ -132,11 +135,12 @@
   "iter.desc.golden_ring_magmanum": "§9+7.5% Melee Damage",
   "iter.desc.netherite_ring_magmanum": "§9+10% Melee Damage",
 
-  "iter.desc.cruncher": "Mines blocks when powered",
-  "iter.desc.stinger": "A crude, rapid-firing repeater",
+  "iter.desc.cruncher": "§7Mines blocks when powered",
+  "iter.desc.stinger": "§7A crude, rapid-firing repeater",
   "iter.desc.hellblaze_bolt": "§7Travels in a straight line and explodes",
-  "iterpg.desc.void_maw" : "Reverts the repair cost of items",
-  "iterpg.desc.gnawer": "Transfers enchantments from items to books",
+  "iterpg.desc.void_maw" : "§7Reverts the repair cost of items",
+  "iterpg.desc.gnawer": "§7Transfers enchantments from items to books",
+  "iter.output.geosense": "Found §e%s §a%d blocks away.",
 
   "entity.iter.spiderling": "Spiderling",
   "item.iter.spiderling_spawn_egg": "Spiderling Spawn Egg",
@@ -155,8 +159,9 @@
   "entity.iter.etherbolt": "Etherbolt",
   "entity.iter.frost_spike": "Frost Spike",
 
+  "item.iter.hedgemage_staff": "Hedgemage Staff",
   "item.iter.bone_staff": "Bone Staff",
-  "item.iter.amethyst_wand": "Amethyst Wand",
+  "item.iter.amethyst_staff": "Amethyst Staff",
   "item.iter.ancient_staff": "Ancient Staff",
   "item.iter.nostelon_staff": "Nostelon Staff",
   "item.iter.diamond_staff": "Diamond Staff",
@@ -216,6 +221,10 @@
   "attribute.iter.spell_power": "Spell Power",
   "attribute.iter.casting_speed": "Casting Speed",
   "attribute.iter.ether_efficiency": "Ether Efficiency",
+  "attribute.iter.ranged_damage": "Ranged Damage",
+  "attribute.iter.arcane_power": "Arcane Power",
+  "attribute.iter.primal_power": "Primal Power",
+  "attribute.iter.occult_power": "Occult Power",
 
   "iterpg.spell.spellpower": "§7Spell power:§r %sx",
   "iterpg.spell.cast_time": "§7Casting time:§r %ss",

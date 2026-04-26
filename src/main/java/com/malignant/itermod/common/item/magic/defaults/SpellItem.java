@@ -85,8 +85,8 @@ public abstract class SpellItem extends Item{
         String prefix_trim = prefix.getString();
         String nameOnly = fullname.getString();
         if (nameOnly.startsWith(prefix_trim)){
-        nameOnly = nameOnly.substring(prefix_trim.length()).trim();
-        return nameOnly;
+            nameOnly = nameOnly.substring(prefix_trim.length()).trim();
+            return nameOnly;
         }
         return nameOnly;
     }
@@ -163,30 +163,7 @@ public abstract class SpellItem extends Item{
             list.add(Component.translatable("iterpg.spell.tier", Component.translatable("iterpg.spell.tier." + this.getTier())));
 
             if (world != null && world.isClientSide) {
-                boolean shiftheld = isShiftHeld();
-
-                if (shiftheld) {
-                    list.add(SpellInfo);
-                } else {
-                    Component SpellPictures = Component.empty().append(returnSymbol(this.domain)).append(returnSymbol(this.method)).append(returnSymbol(this.aspect));
-                    list.add(SpellPictures);
-                }
-                list.add(qualityText);
-                list.add(Component.literal(""));
-
-                if (shiftheld) {
-                    Player clientPlayer = Minecraft.getInstance().player;
-                    if (clientPlayer != null) {
-                        addDynamicStats(list, clientPlayer, itemstack);
-                    } else {
-                        addBaseStats(list);
-                    }
-                } else {
-                    list.add(Component.translatable("iterpg.spell.shift"));
-                }
-
-                list.add(Component.literal(""));
-                list.add(Component.translatable(baseKey + ".desc"));
+                addClientTooltipDetails(itemstack, world, list, SpellInfo, qualityText, baseKey);
             } else {
                 list.add(qualityText);
                 list.add(Component.literal(""));
@@ -198,6 +175,34 @@ public abstract class SpellItem extends Item{
     }
 
     @OnlyIn(Dist.CLIENT)
+    private void addClientTooltipDetails(ItemStack itemstack, Level world, List<Component> list, Component SpellInfo, Component qualityText, String baseKey) {
+        boolean shiftheld = isShiftHeld();
+
+        if (shiftheld) {
+            list.add(SpellInfo);
+        } else {
+            Component SpellPictures = Component.empty().append(returnSymbol(this.domain)).append(returnSymbol(this.method)).append(returnSymbol(this.aspect));
+            list.add(SpellPictures);
+        }
+        list.add(qualityText);
+        list.add(Component.literal(""));
+
+        if (shiftheld) {
+            Player clientPlayer = Minecraft.getInstance().player;
+            if (clientPlayer != null) {
+                addDynamicStats(list, clientPlayer, itemstack);
+            } else {
+                addBaseStats(list);
+            }
+        } else {
+            list.add(Component.translatable("iterpg.spell.shift"));
+        }
+
+        list.add(Component.literal(""));
+        list.add(Component.translatable(baseKey + ".desc"));
+    }
+
+    @OnlyIn(Dist.CLIENT)
     private boolean isShiftHeld() {
         Minecraft mc = Minecraft.getInstance();
         if (mc.screen != null) {
@@ -206,7 +211,6 @@ public abstract class SpellItem extends Item{
         return mc.options.keyShift.isDown();
     }
 
-    @OnlyIn(Dist.CLIENT)
     private void addDynamicStats(List<Component> list, Player player, ItemStack spellStack) {
         float dynamicSpellPower = getSpellPower(player, spellStack);
         float dynamicCastTime = getCastTime(player, spellStack) / 20f;

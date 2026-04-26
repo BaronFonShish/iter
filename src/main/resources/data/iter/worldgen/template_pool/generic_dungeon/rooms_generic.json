@@ -1,0 +1,198 @@
+{
+  "name": "iter:generic_dungeon/hallways",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 10, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/small_room"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/small_room_spawner"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/small_room_carpet"}},
+
+    {"weight": 10, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/legacy_room"}},
+
+    {"weight": 10, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/cozy_room"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/mossy_room"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/prisons"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/sarcophagus_room"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/flower_room"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/campfire_room"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/library_room"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/benches_room"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/lectern_room"}},
+
+    {"weight": 10, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/spawner_room1"}},
+
+    {"weight": 10, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/spawner_room2"}},
+
+    {"weight": 10, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/spawner_room3"}},
+
+    {"weight": 10, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/hallway_narrow_short"}},
+
+    {"weight": 10, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/hallway_narrow_long"}},
+
+    {"weight": 2, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/dead_end"}},
+
+    {"weight": 10, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/hallway_narrow_t"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/hallway_narrow_long_rooms"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/prisons"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/hallway_narrow_turn_right"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/hallway_narrow_turn_left"}},
+
+    {"weight": 2, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/scary_passage"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/hallway_wall"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/big_arena"}},
+
+    {"weight": 5, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/big_arena_all_stairs"}},
+
+    {"weight": 2, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/torture_chamber"}},
+
+    {"weight": 2, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/warehouse_room"}},
+
+    {"weight": 2, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/chest_trap"}},
+
+    {"weight": 2, "element": {
+      "element_type": "minecraft:single_pool_element",
+      "projection": "rigid",
+      "processors": "iter:generic_dungeon_processor",
+      "location": "iter:generic_dungeon/etherbloom_room"}}
+  ]
+}

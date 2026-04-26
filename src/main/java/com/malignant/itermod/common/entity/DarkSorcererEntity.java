@@ -283,8 +283,14 @@ public class DarkSorcererEntity extends Monster {
         super.populateDefaultEquipmentSlots(random, difficulty);
 
         ItemStack weapon = new ItemStack(ModItems.ANCIENT_STAFF.get());
+
+        switch (random.nextIntBetweenInclusive(1, 5)){
+            case 1,2 -> weapon = new ItemStack(ModItems.BONE_STAFF.get());
+            case 3,4,5 -> weapon = new ItemStack(ModItems.ANCIENT_STAFF.get());
+        };
+
         this.setItemSlot(EquipmentSlot.MAINHAND, weapon);
-        this.armorDropChances[EquipmentSlot.MAINHAND.getIndex()] = 0.125F;
+        this.armorDropChances[EquipmentSlot.MAINHAND.getIndex()] = 0.25F;
     }
 
     @Override

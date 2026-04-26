@@ -175,10 +175,11 @@ public class ModItems {
 
     public static final RegistryObject<Item> SPELL_BOOK = ITEMS.register("spell_book", SpellBook::new);
 
+    public static final RegistryObject<Item> AMETHYST_STAFF = ITEMS.register("amethyst_staff", AmethystStaff::new);
+    public static final RegistryObject<Item> HEDGEMAGE_STAFF = ITEMS.register("hedgemage_staff", HedgemageStaff::new);
     public static final RegistryObject<Item> BONE_STAFF = ITEMS.register("bone_staff", BoneStaff::new);
-    public static final RegistryObject<Item> AMETHYST_WAND = ITEMS.register("amethyst_wand", AmethystWand::new);
-    public static final RegistryObject<Item> ANCIENT_STAFF = ITEMS.register("ancient_staff", AncientStaff::new);
     public static final RegistryObject<Item> NOSTELON_STAFF = ITEMS.register("nostelon_staff", NostelonStaff::new);
+    public static final RegistryObject<Item> ANCIENT_STAFF = ITEMS.register("ancient_staff", AncientStaff::new);
     public static final RegistryObject<Item> DIAMOND_STAFF = ITEMS.register("diamond_staff", DiamondStaff::new);
     public static final RegistryObject<Item> MAGMANUM_STAFF = ITEMS.register("magmanum_staff", MagmanumStaff::new);
 
