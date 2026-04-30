@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.malignant.itermod.mixin",
+  "package": "com.malignant.iter.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "iter.refmap.json",
   "mixins": [

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "iter:wooden_scythe",
+    "iter:stone_scythe",
+    "iter:iron_scythe",
+    "iter:golden_scythe",
+    "iter:diamond_scythe",
+    "iter:netherite_scythe"
+  ]
+}

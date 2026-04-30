@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "experience": 0.8,
+  "cookingtime": 100,
+  "ingredient": {
+    "item": "iter:deepslate_nostelon_ore"
+  },
+  "result": {
+    "id": "iter:nostelon"
+  }
+}

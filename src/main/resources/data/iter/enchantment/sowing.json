@@ -1,0 +1,23 @@
+{
+  "anvil_cost": 2,
+  "description": {
+    "translate": "enchantment.iter.sowing"
+  },
+  "effects": {},
+  "exclusive_set": [],
+  "max_cost": {
+    "base": 40,
+    "per_level_above_first": 10
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 15,
+    "per_level_above_first": 0
+  },
+  "primary_items": "#iter:scythes",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#iter:scythes",
+  "weight": 10
+}

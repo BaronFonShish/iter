@@ -1,0 +1,65 @@
+package com.malignant.iter.common.event;
+
+import com.malignant.iter.common.registry.ModEntities;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.LevelAccessor;
+
+public class SpiderEggHatchEvent {
+
+    public static void check(LevelAccessor world, double x, double y, double z, Entity entity) {
+        if (entity == null) {
+            return;
+        }
+
+        if (isValid(entity)) {
+            spawnSpiderlings(world, x, y, z);
+        }
+    }
+
+    public static void force(LevelAccessor world, double x, double y, double z) {
+        spawnSpiderlings(world, x, y, z);
+    }
+
+    public static boolean isValid(Entity entity) {
+        if (entity instanceof ServerPlayer serverPlayer) {
+            ItemStack mainHandItem = serverPlayer.getMainHandItem();
+            return (EnchantmentHelper.getItemEnchantmentLevel((Holder<Enchantment>) Enchantments.SILK_TOUCH, mainHandItem) == 0) && (!serverPlayer.isCreative());
+        }
+        return false;
+    }
+
+    public static void spawnSpiderlings(LevelAccessor world, double x, double y, double z) {
+        if (!(world instanceof ServerLevel serverLevel)) {
+            return;
+        }
+
+        RandomSource random = world.getRandom();
+        int spiderlingCount = Mth.nextInt(random, 2, 4);
+
+        for (int i = 0; i < spiderlingCount; i++) {
+
+            double spawnX = x + Mth.nextDouble(random, 0.3, 0.7);
+            double spawnY = y + Mth.nextDouble(random, 0.2, 0.8);
+            double spawnZ = z + Mth.nextDouble(random, 0.3, 0.7);
+
+            BlockPos spawnPos = BlockPos.containing(spawnX, spawnY, spawnZ);
+
+            Entity entityToSpawn = ModEntities.SPIDERLING.get().spawn(serverLevel, spawnPos, MobSpawnType.MOB_SUMMONED);
+
+            if (entityToSpawn != null) {
+                entityToSpawn.setYRot(random.nextFloat() * 360.0F);
+            }
+        }
+    }
+}

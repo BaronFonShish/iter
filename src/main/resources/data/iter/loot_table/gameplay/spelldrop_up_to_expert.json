@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:generic",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "iter:gameplay/spelldrop_novice",
+          "weight": 12
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "iter:gameplay/spelldrop_adept",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "iter:gameplay/spelldrop_expert",
+          "weight": 8
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "iter:wooden_flail",
+    "iter:stone_flail",
+    "iter:iron_flail",
+    "iter:golden_flail",
+    "iter:diamond_flail",
+    "iter:netherite_flail"
+  ]
+}

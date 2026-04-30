@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "iter:hedgemage_staff",
+    "iter:bone_staff",
+
+    "iter:amethyst_staff",
+    "iter:ancient_staff",
+    "iter:nostelon_staff",
+
+    "iter:diamond_staff",
+    "iter:magmanum_staff"
+  ]
+}

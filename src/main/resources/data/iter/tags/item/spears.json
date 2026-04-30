@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "iter:wooden_spear",
+    "iter:stone_spear",
+    "iter:iron_spear",
+    "iter:golden_spear",
+    "iter:diamond_spear",
+    "iter:netherite_spear"
+  ]
+}

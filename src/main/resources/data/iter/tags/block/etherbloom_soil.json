@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:amethyst_block",
+    "minecraft:budding_amethyst",
+    "iter:nostelon_ore",
+    "iter:deepslate_nostelon_ore"
+  ]
+}

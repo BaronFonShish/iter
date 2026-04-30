@@ -1,0 +1,289 @@
+package com.malignant.iter.common.item.magic.defaults;
+
+import com.malignant.iter.common.misc.Pictograms;
+import com.malignant.iter.common.registry.ModAttributes;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+
+import java.util.List;
+
+public abstract class SpellItem extends Item{
+
+    private final int castTime;
+    private final int cooldown;
+    private final int etherCost;
+    private final String domain;
+    private final String method;
+    private final String aspect;
+    private final int tier;
+
+    public SpellItem(Properties properties, String domain, String method, String aspect, int tier, int castTime, int etherCost, int cooldown) {
+        super(properties.stacksTo(1));
+        this.castTime = castTime;
+        this.etherCost = etherCost;
+        this.cooldown = cooldown;
+        this.domain = domain;
+        this.method = method;
+        this.aspect = aspect;
+        this.tier = tier;
+    }
+
+    public float getCastTimeBase(){
+        return this.castTime;
+    }
+    public float getCooldownBase(){
+        return this.cooldown;
+    }
+    public float getEtherCostBase(){
+        return this.etherCost;
+    }
+    public String getDomain(){
+        return this.domain;
+    }
+    public String getMethod(){
+        return this.method;
+    }
+    public String getAspect(){
+        return this.aspect;
+    }
+    public int getTier(){
+        return this.tier;
+    }
+
+
+    public int getQuality(ItemStack stack){
+        if (stack.has(net.minecraft.core.component.DataComponents.CUSTOM_DATA)) {
+            assert stack.getOrDefault(net.minecraft.core.component.DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.EMPTY).copyTag() != null;
+            if (stack.getOrDefault(net.minecraft.core.component.DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.EMPTY).copyTag().contains("IterSpellQuality")) {
+                return stack.getOrDefault(net.minecraft.core.component.DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.EMPTY).copyTag().getInt("IterSpellQuality");
+            }
+        }
+        return 0;
+    }
+
+    public ItemStack setQuality(ItemStack stack, int newQuality){
+        stack.getOrDefault(net.minecraft.core.component.DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.EMPTY).copyTag().putInt("IterSpellQuality", newQuality);
+        return stack;
+    }
+
+
+    public String getSpellDisplayName(){
+        Component fullname = Component.translatable(this.getDescriptionId());
+        Component prefix = Component.translatable("iter.spell.prefix");
+        String prefix_trim = prefix.getString();
+        String nameOnly = fullname.getString();
+        if (nameOnly.startsWith(prefix_trim)){
+            nameOnly = nameOnly.substring(prefix_trim.length()).trim();
+            return nameOnly;
+        }
+        return nameOnly;
+    }
+
+    public float getCastTime(Player player, ItemStack spellStack) {
+        AttributeInstance CastingSpeedAttribute = player.getAttribute(ModAttributes.CASTING_SPEED);
+        float castTimeModifier = CastingSpeedAttribute != null ? (float) CastingSpeedAttribute.getValue() : 1f;
+        float quality = getQuality(spellStack);
+        float castTimeBase = castTime * (1 - quality * 0.025f);
+        float castTimeNew = castTimeBase / (((castTimeModifier-1)/2f)+1);
+
+        if (castTimeNew <= 0){castTimeNew = 1;}
+
+        return castTimeNew;
+    }
+
+    public float getCooldown(Player player, ItemStack spellStack) {
+        AttributeInstance CastingSpeedAttribute = player.getAttribute(ModAttributes.CASTING_SPEED);
+        float cooldownModifier = CastingSpeedAttribute != null ? (float) CastingSpeedAttribute.getValue() : 1f;
+        float quality = getQuality(spellStack);
+        float cooldownBase = cooldown * (1 - quality * 0.025f);
+        float cooldownNew = cooldownBase / cooldownModifier;
+
+        if (cooldownNew <= 0){cooldownNew = 1;}
+
+        return cooldownNew;
+    }
+
+    public float getManaCost(Player player, ItemStack spellStack) {
+
+        AttributeInstance EtherEfficiencyAttribute = player.getAttribute(ModAttributes.ETHER_EFFICIENCY);
+        float etherCostModifier = EtherEfficiencyAttribute != null ? (float) EtherEfficiencyAttribute.getValue() : 0f;
+        float quality = getQuality(spellStack);
+        float costBase = etherCost * (1 - quality * 0.02f);
+        float etherCostNew = costBase * (2 - etherCostModifier);
+
+        if (etherCostNew < 0) {etherCostNew=0;}
+
+        return etherCostNew;
+    }
+
+    public float getSpellPower(Player player, ItemStack spellStack){
+        AttributeInstance SpellPowerAttribute = player.getAttribute(ModAttributes.SPELL_POWER);
+        float spellpower = SpellPowerAttribute != null ? (float) SpellPowerAttribute.getValue() : 1f;
+        float quality = getQuality(spellStack);
+        float spellpowerBase = spellpower * (1 + quality * 0.1f);
+        spellpower = spellpowerBase * 0.2f;
+
+        if (spellpower <= 0.05) {spellpower = 0.05f;}
+        return spellpower;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, List<Component> list, TooltipFlag flag) {
+        super.appendHoverText(itemstack, world, list, flag);
+
+        ResourceLocation registryName = BuiltInRegistries.ITEM.getKey(this);
+        if (registryName != null) {
+
+            String baseKey = BuiltInRegistries.ITEM.getKey(this).getNamespace() + "." + BuiltInRegistries.ITEM.getKey(this).getPath();
+
+            String domainKey = "iterpg.spell.domain." + this.getDomain();
+            String methodKey = "iterpg.spell.method." + this.getMethod();
+            String aspectKey = "iterpg.spell.aspect." + this.getAspect();
+            Component SpellInfo = Component.translatable("iterpg.spell.info",
+                    Component.empty().append(returnSymbol(this.domain)).append(Component.translatable(domainKey)),
+                    Component.empty().append(returnSymbol(this.method)).append(Component.translatable(methodKey)),
+                    Component.empty().append(returnSymbol(this.aspect)).append(Component.translatable(aspectKey)));
+
+            int quality = getQuality(itemstack);
+            Component qualityText = Component.translatable("iterpg.spell.quality")
+                    .append(Component.literal(": " + quality));
+
+            list.add(Component.translatable("iterpg.spell.tier", Component.translatable("iterpg.spell.tier." + this.getTier())));
+
+            if (world != null && world.level().isClientSide) {
+                addClientTooltipDetails(itemstack, (Level) world, list, SpellInfo, qualityText, baseKey);
+            } else {
+                list.add(qualityText);
+                list.add(Component.literal(""));
+                addBaseStats(list);
+                list.add(Component.literal(""));
+                list.add(Component.translatable(baseKey + ".desc"));
+            }
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private void addClientTooltipDetails(ItemStack itemstack, Level world, List<Component> list, Component SpellInfo, Component qualityText, String baseKey) {
+        boolean shiftheld = isShiftHeld();
+
+        if (shiftheld) {
+            list.add(SpellInfo);
+        } else {
+            Component SpellPictures = Component.empty().append(returnSymbol(this.domain)).append(returnSymbol(this.method)).append(returnSymbol(this.aspect));
+            list.add(SpellPictures);
+        }
+        list.add(qualityText);
+        list.add(Component.literal(""));
+
+        if (shiftheld) {
+            Player clientPlayer = Minecraft.getInstance().player;
+            if (clientPlayer != null) {
+                addDynamicStats(list, clientPlayer, itemstack);
+            } else {
+                addBaseStats(list);
+            }
+        } else {
+            list.add(Component.translatable("iterpg.spell.shift"));
+        }
+
+        list.add(Component.literal(""));
+        list.add(Component.translatable(baseKey + ".desc"));
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private boolean isShiftHeld() {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.screen != null) {
+            return mc.screen.hasShiftDown();
+        }
+        return mc.options.keyShift.isDown();
+    }
+
+    private void addDynamicStats(List<Component> list, Player player, ItemStack spellStack) {
+        float dynamicSpellPower = getSpellPower(player, spellStack);
+        float dynamicCastTime = getCastTime(player, spellStack) / 20f;
+        float dynamicCooldown = getCooldown(player, spellStack) / 20f;
+        float dynamicManaCost = getManaCost(player, spellStack);
+
+        String spellPowerString = String.format("%.2f", dynamicSpellPower);
+        String castTimeString = String.format("%.1f", dynamicCastTime);
+        String cooldownString = String.format("%.1f", dynamicCooldown);
+        String manaCostString = String.format("%.1f", dynamicManaCost);
+
+        list.add(Component.translatable("iterpg.spell.spellpower", spellPowerString));
+        if (dynamicCastTime > 0.05f) {
+            list.add(Component.translatable("iterpg.spell.cast_time", castTimeString));
+        }
+        list.add(Component.translatable("iterpg.spell.mana_cost", manaCostString));
+        list.add(Component.translatable("iterpg.spell.cooldown", cooldownString));
+    }
+
+    private void addBaseStats(List<Component> list) {
+        float baseSpellPower = 0.2f;
+        float baseCastTime = this.castTime / 20f;
+        float baseCooldown = this.cooldown / 20f;
+        float baseManaCost = this.etherCost;
+
+        String spellPowerString = String.format("%.2f", baseSpellPower);
+        String castTimeString = String.format("%.1f", baseCastTime);
+        String cooldownString = String.format("%.1f", baseCooldown);
+        String manaCostString = String.format("%.1f", baseManaCost);
+
+        list.add(Component.translatable("iterpg.spell.spellpower", spellPowerString));
+        if (baseCastTime > 0.05f) {
+            list.add(Component.translatable("iterpg.spell.cast_time", castTimeString));
+        }
+        list.add(Component.translatable("iterpg.spell.mana_cost", manaCostString));
+        list.add(Component.translatable("iterpg.spell.cooldown", cooldownString));
+    }
+
+    public MutableComponent returnSymbol(String type){
+        char icon = switch (type){
+            case "arcane" -> Pictograms.ID_ARCANE;
+            case "primal" -> Pictograms.ID_PRIMAL;
+            case "occult" -> Pictograms.ID_OCCULT;
+
+            case "force" -> Pictograms.IM_FORCE;
+            case "form" -> Pictograms.IM_FORM;
+            case "body" -> Pictograms.IM_BODY;
+            case "conveyance" -> Pictograms.IM_CONVEYANCE;
+
+            case "fire" -> Pictograms.IA_FIRE;
+            case "frost" -> Pictograms.IA_FROST;
+            case "lightning" -> Pictograms.IA_LIGHTNING;
+            case "water" -> Pictograms.IA_WATER;
+            case "air" -> Pictograms.IA_AIR;
+            case "earth" -> Pictograms.IA_EARTH;
+            case "ether" -> Pictograms.IA_ETHER;
+            case "life" -> Pictograms.IA_LIFE;
+            case "decay" -> Pictograms.IA_DECAY;
+
+
+            default -> Pictograms.IA_FIRE;
+        };
+        return Pictograms.getIcon(icon);
+    }
+
+    public abstract void castSpell(Level level, Player player, ItemStack wand, ItemStack spellStack, float spellpower);
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return false;
+    }
+
+    @Override
+    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+        return false;
+    }
+}

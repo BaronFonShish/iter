@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "iter:wooden_dagger",
+    "iter:stone_dagger",
+    "iter:iron_dagger",
+    "iter:golden_dagger",
+    "iter:diamond_dagger",
+    "iter:netherite_dagger"
+  ]
+}

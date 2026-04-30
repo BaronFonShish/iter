@@ -1,0 +1,46 @@
+package com.malignant.iter.client.renderer;
+
+import com.malignant.iter.IterMod;
+import com.malignant.iter.client.model.BereftModel;
+import com.malignant.iter.common.entity.BereftEntity;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
+import net.minecraft.resources.ResourceLocation;
+
+public class BereftRenderer extends MobRenderer<BereftEntity, BereftModel<BereftEntity>> {
+
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(IterMod.MOD_ID, "textures/entity/bereft.png");
+
+    public BereftRenderer(EntityRendererProvider.Context context) {
+        super(context, new BereftModel<>(context.bakeLayer(BereftModel.LAYER_LOCATION)), 0.5f);
+        this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
+
+        // Create humanoid armor models
+        HumanoidModel<BereftEntity> innerArmor = new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER_INNER_ARMOR));
+        HumanoidModel<BereftEntity> outerArmor = new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR));
+
+        // Add custom armor layer
+        this.addLayer(new BereftArmorLayer(this, innerArmor, outerArmor));
+    }
+
+
+    @Override
+    public ResourceLocation getTextureLocation(BereftEntity entity) {
+        return TEXTURE;
+    }
+
+    @Override
+    public void render(BereftEntity entity, float entityYaw, float partialTicks, PoseStack poseStack,
+                       MultiBufferSource bufferIn, int packedLightIn) {
+        poseStack.pushPose();
+        super.render(entity, entityYaw, partialTicks, poseStack, bufferIn, packedLightIn);
+        poseStack.popPose();
+    }
+
+
+}

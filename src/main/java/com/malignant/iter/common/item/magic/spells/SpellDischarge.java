@@ -1,0 +1,107 @@
+package com.malignant.iter.common.item.magic.spells;
+
+import com.malignant.iter.common.entity.misc.JaggedBeam;
+import com.malignant.iter.common.item.magic.defaults.SpellItem;
+import com.malignant.iter.common.registry.ModSounds;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.BlockHitResult;
+
+import java.util.List;
+import java.util.Optional;
+
+public class SpellDischarge extends SpellItem {
+
+    public SpellDischarge() {super(new Properties(), "primal", "force", "lightning", 2, 10, 4, 27);}
+
+    @Override
+    public void castSpell(Level level, Player player, ItemStack wand, ItemStack spellStack, float spellpower) {
+
+        Vec3 lookDirection = player.getLookAngle();
+        double range = (15 + (10 * spellpower));
+        double closestDist = range;
+
+        Entity target = null;
+
+        Vec3 startPos = player.getEyePosition();
+        Vec3 endPos = startPos.add(lookDirection.scale(range));
+        Vec3 hitPos = endPos;
+
+        double distance = 0;
+
+        level.playSound(null, player.getX(), player.getY(), player.getZ(),
+                ModSounds.CAST_ARCANE.get(), SoundSource.PLAYERS, 0.8F, 1.0F);
+
+
+        boolean foundEntity = false;
+
+        AABB searchBox = new AABB(startPos, endPos).inflate(2.0);
+        List<Entity> candidates = level.getEntities(player, searchBox,
+                e -> e instanceof LivingEntity && e.isAlive()
+        );
+
+        for (Entity entity : candidates) {
+            AABB entityBox = entity.getBoundingBox();
+
+            Optional<Vec3> hitPoint = entityBox.clip(startPos, endPos);
+
+            if (hitPoint.isPresent()) {
+                distance = startPos.distanceTo(hitPoint.get());
+                if (distance < closestDist) {
+                    closestDist = distance;
+                    hitPos = hitPoint.get();
+                    target = entity;
+                    foundEntity = true;
+                }
+            }
+        }
+
+        if (foundEntity) {
+            target.hurt(new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC), player),
+                    returnDamage(spellpower, closestDist, range));
+
+        } else {
+            ClipContext context = new ClipContext(startPos, endPos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, (Entity) null);
+            BlockHitResult blockHit = level.clip(context);
+            hitPos = blockHit.getLocation();
+        }
+
+        Vec3 up = new Vec3(0, 1, 0);
+        Vec3 side = up.cross(lookDirection).normalize();
+
+        float up_offset = 0.3f;
+        float side_offset = 0.25f;
+        if (player.getMainArm() == HumanoidArm.RIGHT){
+            side_offset *= -1;
+        }
+
+        startPos = startPos
+                .add(side.scale(side_offset)
+                .add(0, up_offset, 0));
+
+        JaggedBeam beam = new JaggedBeam(level, startPos, hitPos, 12, 0.1f * spellpower + 0.001f, 1f, 0.5f,0.5f,
+                            false, true, true, true, true,"lightning");
+        if (foundEntity) {
+            beam.setTargetEntity(target);
+        }
+                    level.addFreshEntity(beam);
+    }
+
+    public float returnDamage(float spellpower, double distance, double range){
+        float base = 3f * spellpower;
+        float falloff = 1f - (float) (distance/range);
+        falloff *= 6f * spellpower;
+        return base + falloff;
+    }
+}

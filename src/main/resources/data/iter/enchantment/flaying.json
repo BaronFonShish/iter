@@ -1,0 +1,23 @@
+{
+  "anvil_cost": 4,
+  "description": {
+    "translate": "enchantment.iter.flaying"
+  },
+  "effects": {},
+  "exclusive_set": [],
+  "max_cost": {
+    "base": 50,
+    "per_level_above_first": 15
+  },
+  "max_level": 3,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 8
+  },
+  "primary_items": "#iter:daggers",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#iter:daggers",
+  "weight": 5
+}

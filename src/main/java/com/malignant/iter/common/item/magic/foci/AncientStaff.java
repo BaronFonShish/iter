@@ -1,0 +1,22 @@
+package com.malignant.iter.common.item.magic.foci;
+import com.malignant.iter.common.item.magic.defaults.SpellFocus;
+import net.minecraft.world.item.Rarity;
+
+
+public class AncientStaff extends SpellFocus {
+
+    public AncientStaff() {
+        super(new SpellFocusProperties()
+                .durability(400)
+                .rarity(Rarity.UNCOMMON)
+                .enchantability(14),
+                2,
+                4.5f,
+                -0.1f,
+                -0.05f,
+                0,
+                0.15f,
+                0
+        );
+    }
+}

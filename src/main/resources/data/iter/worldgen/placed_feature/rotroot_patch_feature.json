@@ -45,20 +45,8 @@
     },
     {
       "type": "minecraft:random_offset",
-      "xz_spread": {
-        "type": "uniform",
-        "value": {
-          "min_inclusive": -3,
-          "max_inclusive": 3
-        }
-      },
-      "y_spread": {
-        "type": "uniform",
-        "value": {
-          "min_inclusive": -2,
-          "max_inclusive": 2
-        }
-      }
+      "xz_spread": 3,
+      "y_spread": 2
     }
   ]
 }

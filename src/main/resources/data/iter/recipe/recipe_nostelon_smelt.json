@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "experience": 0.8,
+  "cookingtime": 200,
+  "ingredient": {
+    "item": "iter:nostelon_ore"
+  },
+  "result": {
+    "id": "iter:nostelon"
+  }
+}

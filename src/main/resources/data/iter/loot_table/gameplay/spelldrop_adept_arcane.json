@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:generic",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "iter:spell_mend",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "iter:spell_leap",
+          "weight": 10
+        }
+      ]
+    }
+  ]
+}

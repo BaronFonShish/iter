@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "iter:gameplay/ancient_vase_common",
+          "weight": 1,
+          "neoforge:conditions": [],
+          "functions": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "iter:ancient_vase_feature",
+  "step": "underground_decoration"
+}
